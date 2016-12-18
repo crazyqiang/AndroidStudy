@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorCircleView">
+        <attr name="circle_color" format="color" />
+        <attr name="stroke_width" format="integer" />
+    </declare-styleable>
+</resources>

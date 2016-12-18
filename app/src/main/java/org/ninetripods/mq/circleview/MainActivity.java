@@ -1,50 +1,45 @@
 package org.ninetripods.mq.circleview;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import org.ninetripods.mq.circleview.customView.CakeBean;
-import org.ninetripods.mq.circleview.customView.CakeView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
-    private List<CakeBean> beans;
-    private String[] names = {"php", "object-c", "c", "c++", "java", "android", "linux"};
-    private float[] values = {2f, 2f, 3f, 4f, 5f, 6f, 7f};
-    private int[] colArrs = {Color.RED, Color.parseColor("#4ebcd3"), Color.MAGENTA, Color.YELLOW, Color.GREEN, Color.parseColor("#f68b2b"), Color.parseColor("#6fb30d")};//圆弧颜色
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button btn_view, btn_view_group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initData();
+        setContentView(R.layout.activity_main2);
         initViews();
+        initEvents();
     }
 
-    /**
-     * 初始化数据
-     */
-    private void initData() {
-        beans = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            CakeBean bean = new CakeBean();
-            bean.name = names[i];
-            bean.value = values[i];
-            bean.mColor = colArrs[i];
-            beans.add(bean);
+    private void initViews() {
+        btn_view = (Button) findViewById(R.id.btn_view);
+        btn_view_group = (Button) findViewById(R.id.btn_view_group);
+    }
+
+    private void initEvents() {
+        btn_view.setOnClickListener(this);
+        btn_view_group.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_view:
+                //跳转到自定义View
+                startActivity(new Intent(this, ViewActivity.class));
+                break;
+            case R.id.btn_view_group:
+                //跳转到自定义ViewGroup
+                startActivity(new Intent(this, ViewGroupActivity.class));
+                break;
+            default:
+                break;
         }
     }
-
-    /**
-     * 初始化视图
-     */
-    private void initViews() {
-        CakeView cake_view = (CakeView) findViewById(R.id.cake_view);
-        cake_view.setData(beans);
-    }
-
-
 }
