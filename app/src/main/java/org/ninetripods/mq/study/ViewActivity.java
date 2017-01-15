@@ -1,11 +1,11 @@
-package org.ninetripods.mq.circleview;
+package org.ninetripods.mq.study;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import org.ninetripods.mq.circleview.customView.CakeBean;
-import org.ninetripods.mq.circleview.customView.CakeView;
+import org.ninetripods.mq.study.CustomView.CakeBean;
+import org.ninetripods.mq.study.CustomView.CakeView;
 
 import java.util.ArrayList;
 import java.util.List;

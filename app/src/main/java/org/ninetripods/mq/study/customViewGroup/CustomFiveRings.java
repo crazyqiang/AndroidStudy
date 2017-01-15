@@ -1,15 +1,14 @@
-package org.ninetripods.mq.circleview.customViewGroup;
+package org.ninetripods.mq.study.CustomViewGroup;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.ninetripods.mq.circleview.DpUtil;
+import org.ninetripods.mq.study.DpUtil;
 
 /**
  * Created by MQ on 2016/12/16.

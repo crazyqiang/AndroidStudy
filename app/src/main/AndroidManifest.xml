@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.ninetripods.mq.circleview">
+    package="org.ninetripods.mq.study">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="org.ninetripods.mq.study.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,10 +16,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewGroupActivity"
+            android:name="org.ninetripods.mq.study.ViewGroupActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ViewActivity"
+            android:name="org.ninetripods.mq.study.ViewActivity"
             android:screenOrientation="portrait" />
     </application>
 

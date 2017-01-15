@@ -1,4 +1,4 @@
-package org.ninetripods.mq.circleview.customView;
+package org.ninetripods.mq.study.CustomView;
 
 import java.io.Serializable;
 

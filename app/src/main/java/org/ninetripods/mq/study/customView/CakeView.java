@@ -1,4 +1,4 @@
-package org.ninetripods.mq.circleview.customView;
+package org.ninetripods.mq.study.CustomView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 
-import org.ninetripods.mq.circleview.DpUtil;
+import org.ninetripods.mq.study.DpUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

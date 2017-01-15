@@ -1,4 +1,4 @@
-package org.ninetripods.mq.circleview;
+package org.ninetripods.mq.study;
 
 import org.junit.Test;
 

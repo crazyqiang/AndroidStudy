@@ -1,4 +1,4 @@
-package org.ninetripods.mq.circleview.customViewGroup;
+package org.ninetripods.mq.study.CustomViewGroup;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,10 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
-import org.ninetripods.mq.circleview.R;
+import org.ninetripods.mq.study.R;
 
 /**
  * Created by MQ on 2016/12/17.

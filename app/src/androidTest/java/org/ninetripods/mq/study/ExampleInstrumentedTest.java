@@ -1,4 +1,4 @@
-package org.ninetripods.mq.circleview;
+package org.ninetripods.mq.study;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,8 +1,7 @@
-package org.ninetripods.mq.circleview;
+package org.ninetripods.mq.study;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 /**

@@ -1,4 +1,4 @@
-package org.ninetripods.mq.circleview;
+package org.ninetripods.mq.study;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
