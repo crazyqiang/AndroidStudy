@@ -3,43 +3,47 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_view_group"
     android:layout_width="match_parent"
-    android:background="@color/transparent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
 
-    <org.ninetripods.mq.study.CustomViewGroup.CustomFiveRings
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <org.ninetripods.mq.study.customViewGroup.CustomFiveRings
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_centerInParent="true">
 
-        <org.ninetripods.mq.study.CustomViewGroup.ColorCircleView
+        <org.ninetripods.mq.study.customViewGroup.ColorCircleView
             android:layout_width="90dp"
             android:layout_height="90dp"
             custom:circle_color="#3F51B5"
             custom:stroke_width="20" />
 
-        <org.ninetripods.mq.study.CustomViewGroup.ColorCircleView
+        <org.ninetripods.mq.study.customViewGroup.ColorCircleView
             android:layout_width="90dp"
             android:layout_height="90dp"
             custom:circle_color="#000000"
             custom:stroke_width="20" />
 
-        <org.ninetripods.mq.study.CustomViewGroup.ColorCircleView
+        <org.ninetripods.mq.study.customViewGroup.ColorCircleView
             android:layout_width="90dp"
             android:layout_height="90dp"
             custom:circle_color="#ff3c00"
             custom:stroke_width="20" />
 
-        <org.ninetripods.mq.study.CustomViewGroup.ColorCircleView
+        <org.ninetripods.mq.study.customViewGroup.ColorCircleView
             android:layout_width="90dp"
             android:layout_height="90dp"
             custom:circle_color="#fcb840"
             custom:stroke_width="20" />
 
-        <org.ninetripods.mq.study.CustomViewGroup.ColorCircleView
+        <org.ninetripods.mq.study.customViewGroup.ColorCircleView
             android:layout_width="90dp"
             android:layout_height="90dp"
             custom:circle_color="#24ff00"
             custom:stroke_width="20" />
-    </org.ninetripods.mq.study.CustomViewGroup.CustomFiveRings>
+    </org.ninetripods.mq.study.customViewGroup.CustomFiveRings>
 
 </RelativeLayout>

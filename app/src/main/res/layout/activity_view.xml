@@ -4,9 +4,13 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ninetripods.mq.study.ViewActivity">
+    tools:context="org.ninetripods.mq.study.customView.cakeView.ViewActivity">
 
-    <org.ninetripods.mq.study.CustomView.CakeView
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <org.ninetripods.mq.study.customView.cakeView.CakeView
         android:id="@+id/cake_view"
         android:layout_width="400dp"
         android:layout_height="200dp"

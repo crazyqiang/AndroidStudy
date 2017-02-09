@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.CustomView;
+package org.ninetripods.mq.study.customView.cakeView;
 
 import java.io.Serializable;
 

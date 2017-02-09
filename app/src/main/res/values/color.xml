@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="holo_blue_light">#ff33b5e5</color>
     <color name="praised_num">#ff5b0f</color>
     <color name="btn_blue_pressed">#0066FF</color>
     <color name="orange">#FFA500</color>
