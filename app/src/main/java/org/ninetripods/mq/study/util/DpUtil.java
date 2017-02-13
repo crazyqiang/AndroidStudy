@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study;
+package org.ninetripods.mq.study.util;
 
 import android.app.Activity;
 import android.content.Context;

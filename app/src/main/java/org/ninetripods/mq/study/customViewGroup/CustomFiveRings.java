@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.ninetripods.mq.study.DpUtil;
+import org.ninetripods.mq.study.util.DpUtil;
 
 /**
  * Created by MQ on 2016/12/16.

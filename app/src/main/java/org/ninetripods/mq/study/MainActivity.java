@@ -11,9 +11,10 @@ import org.ninetripods.mq.study.bezier.BezierActivity;
 import org.ninetripods.mq.study.customView.CustomViewActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
 import org.ninetripods.mq.study.customViewGroup.ViewGroupActivity;
+import org.ninetripods.mq.study.path.PathMeasureActivity;
 
 public class MainActivity extends BaseActivity {
-    private Button btn_view, btn_view_group, btn_bezier;
+    private Button btn_view, btn_view_group, btn_bezier, btn_path;
 
 
     @Override
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity {
         btn_view = (Button) findViewById(R.id.btn_view);
         btn_view_group = (Button) findViewById(R.id.btn_view_group);
         btn_bezier = (Button) findViewById(R.id.btn_bezier);
+        btn_path = (Button) findViewById(R.id.btn_path);
     }
 
     @Override
@@ -35,6 +37,7 @@ public class MainActivity extends BaseActivity {
         btn_view.setOnClickListener(this);
         btn_view_group.setOnClickListener(this);
         btn_bezier.setOnClickListener(this);
+        btn_path.setOnClickListener(this);
     }
 
     @Override
@@ -50,6 +53,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_bezier:
                 startActivity(new Intent(this, BezierActivity.class));
+                break;
+            case R.id.btn_path:
+                startActivity(new Intent(this, PathMeasureActivity.class));
                 break;
             default:
                 break;

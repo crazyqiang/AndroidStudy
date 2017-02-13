@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 
-import org.ninetripods.mq.study.DpUtil;
+import org.ninetripods.mq.study.util.DpUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

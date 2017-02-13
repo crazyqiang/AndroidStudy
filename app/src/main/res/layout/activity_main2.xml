@@ -13,7 +13,7 @@
         android:id="@+id/btn_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="自定义View" />
 
     <Button
@@ -31,5 +31,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="贝塞尔曲线" />
+
+    <Button
+        android:id="@+id/btn_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="PathMeasure" />
 
 </LinearLayout>
