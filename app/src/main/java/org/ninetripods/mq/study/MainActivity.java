@@ -11,6 +11,7 @@ import org.ninetripods.mq.study.bezier.BezierActivity;
 import org.ninetripods.mq.study.customView.CustomViewActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
 import org.ninetripods.mq.study.customViewGroup.ViewGroupActivity;
+import org.ninetripods.mq.study.path.PathActivity;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
 
 public class MainActivity extends BaseActivity {
@@ -55,7 +56,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(this, BezierActivity.class));
                 break;
             case R.id.btn_path:
-                startActivity(new Intent(this, PathMeasureActivity.class));
+                startActivity(new Intent(this, PathActivity.class));
                 break;
             default:
                 break;

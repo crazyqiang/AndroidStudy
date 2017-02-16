@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.path;
+package org.ninetripods.mq.study.path.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

@@ -44,6 +44,12 @@
         <activity
             android:name=".path.PathMeasureActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".path.PathVectorActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".path.PathActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

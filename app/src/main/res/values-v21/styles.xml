@@ -2,9 +2,7 @@
 <resources>
 
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="windowActionBar">false</item>
         <item name="android:windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@color/colorAccent</item>

@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.path.view.PathMeasureView;
 
 public class PathMeasureActivity extends BaseActivity {
     private Toolbar toolbar;
