@@ -22,7 +22,7 @@ public class PathVectorActivity extends BaseActivity {
     @Override
     public void initViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        initToolBar(toolbar, "Vector", true);
+        initToolBar(toolbar, "AnimatedVectorDrawable", true);
         iv_anim = (ImageView) findViewById(R.id.iv_anim);
 //        AnimatedVectorDrawableCompat animatedVectorDrawableCompat = AnimatedVectorDrawableCompat.create(this, R.drawable.icon_vector_anim);
 //        if (animatedVectorDrawableCompat != null) {
