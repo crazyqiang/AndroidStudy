@@ -9,35 +9,42 @@
         android:id="@+id/toolbar"
         layout="@layout/m_toolbar" />
 
-    <Button
-        android:id="@+id/btn_view"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="自定义View" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="vertical" />
 
-    <Button
-        android:id="@+id/btn_view_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="自定义ViewGroup(五环图)" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:text="自定义View" />-->
 
-    <Button
-        android:id="@+id/btn_bezier"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="贝塞尔曲线" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_view_group"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="自定义ViewGroup(五环图)" />-->
 
-    <Button
-        android:id="@+id/btn_path"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="Path" />
+    <!--<Button-->
+        <!--android:id="@+id/btn_bezier"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="贝塞尔曲线" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_path"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="Path" />-->
 
 </LinearLayout>

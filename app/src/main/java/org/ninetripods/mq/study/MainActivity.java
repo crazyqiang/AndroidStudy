@@ -1,21 +1,28 @@
 package org.ninetripods.mq.study;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
+import org.ninetripods.mq.study.adapter.MainAdapter;
+import org.ninetripods.mq.study.bean.NameBean;
 import org.ninetripods.mq.study.bezier.BezierActivity;
-import org.ninetripods.mq.study.customView.CustomViewActivity;
+import org.ninetripods.mq.study.customView.alipayView.ALiPayActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
 import org.ninetripods.mq.study.customViewGroup.ViewGroupActivity;
-import org.ninetripods.mq.study.path.PathActivity;
+import org.ninetripods.mq.study.interf.MyOnclickListener;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
+import org.ninetripods.mq.study.path.PathVectorActivity;
+import org.ninetripods.mq.study.util.NavitateUtil;
 
-public class MainActivity extends BaseActivity {
-    private Button btn_view, btn_view_group, btn_bezier, btn_path;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends BaseActivity implements MyOnclickListener {
+    private RecyclerView recycle_view;
+    private MainAdapter mAdapter;
 
 
     @Override
@@ -27,39 +34,84 @@ public class MainActivity extends BaseActivity {
     public void initViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         initToolBar(toolbar, getResources().getString(R.string.app_name), false);
-        btn_view = (Button) findViewById(R.id.btn_view);
-        btn_view_group = (Button) findViewById(R.id.btn_view_group);
-        btn_bezier = (Button) findViewById(R.id.btn_bezier);
-        btn_path = (Button) findViewById(R.id.btn_path);
+        recycle_view = (RecyclerView) findViewById(R.id.recycle_view);
+        recycle_view.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new MainAdapter(this);
+        mAdapter.setOnItemClickListener(this);
+        initBeans();
+        recycle_view.setAdapter(mAdapter);
+    }
+
+    private void initBeans() {
+        List<NameBean> beans = new ArrayList<>();
+        String[][] array = {
+                {"自定义View", "饼形图", "AliPay", "", ""},
+                {"自定义ViewGroup", "五环图", "", "", ""},
+                {"属性动画+Path", "PathMeasure", "Path+SVG", "", ""},
+                {"贝塞尔曲线", "基本用法示例", "", "", ""},
+                {"进程间通信", "Intent", "AIDL", "Messager", "ContentProvider"},
+                {"JNI", "", "", "", ""}};
+        for (String[] anArray : array) {
+            beans.add(new NameBean(anArray[0], anArray[1], anArray[2], anArray[3], anArray[4]));
+        }
+        mAdapter.addAll(beans);
     }
 
     @Override
-    public void initEvents() {
-        btn_view.setOnClickListener(this);
-        btn_view_group.setOnClickListener(this);
-        btn_bezier.setOnClickListener(this);
-        btn_path.setOnClickListener(this);
-    }
+    public void onItemClick(View view, int position) {
+        switch (position) {
+            case 0:
+                //自定义View
+                switch (view.getId()) {
+                    case R.id.tv_title:
+                        break;
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(this, ViewActivity.class);
+                        break;
+                    case R.id.tv_view_two:
+                        NavitateUtil.startActivity(this, ALiPayActivity.class);
+                        break;
+                    case R.id.tv_view_three:
+                        break;
+                    case R.id.tv_view_four:
+                        break;
+                }
+                break;
+            case 1:
+                //自定义ViewGroup
+                switch (view.getId()) {
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(this, ViewGroupActivity.class);
+                        break;
+                }
+                break;
+            case 2:
+                //属性动画+Path
+                switch (view.getId()) {
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(this, PathMeasureActivity.class);
+                        break;
+                    case R.id.tv_view_two:
+                        NavitateUtil.startActivity(this, PathVectorActivity.class);
+                        break;
+                }
+                break;
+            case 3:
+                //贝塞尔曲线
+                switch (view.getId()) {
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(this, BezierActivity.class);
+                        break;
+                }
+                break;
+            case 4:
+                switch (view.getId()) {
+                    case R.id.tv_view_one:
+                        Toast.makeText(this, "position is " + position, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                break;
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_view:
-                //跳转到自定义View
-                startActivity(new Intent(this, CustomViewActivity.class));
-                break;
-            case R.id.btn_view_group:
-                //跳转到自定义ViewGroup
-                startActivity(new Intent(this, ViewGroupActivity.class));
-                break;
-            case R.id.btn_bezier:
-                startActivity(new Intent(this, BezierActivity.class));
-                break;
-            case R.id.btn_path:
-                startActivity(new Intent(this, PathActivity.class));
-                break;
-            default:
-                break;
         }
     }
 }
