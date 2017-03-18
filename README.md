@@ -1,4 +1,8 @@
-# CustomView
-自定义view饼形图 自定义ViewGroup五环图
+# AndroidStudy
 
+
+# 更新日志：
+ **2017/03/18**
+ 添加进程间通信Demo (AIDL、Messager)
+ 
 ![image](https://github.com/crazyqiang/CustomView/blob/master/initpintu.jpg) 
