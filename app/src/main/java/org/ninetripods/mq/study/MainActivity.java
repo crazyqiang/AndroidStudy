@@ -4,7 +4,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import org.ninetripods.mq.study.adapter.MainAdapter;
 import org.ninetripods.mq.study.bean.NameBean;
@@ -13,6 +12,7 @@ import org.ninetripods.mq.study.customView.alipayView.ALiPayActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
 import org.ninetripods.mq.study.customViewGroup.ViewGroupActivity;
 import org.ninetripods.mq.study.interf.MyOnclickListener;
+import org.ninetripods.mq.study.multiprocess_client.IpcAidlActivity;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
 import org.ninetripods.mq.study.path.PathVectorActivity;
 import org.ninetripods.mq.study.util.NavitateUtil;
@@ -106,8 +106,9 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 break;
             case 4:
                 switch (view.getId()) {
-                    case R.id.tv_view_one:
-                        Toast.makeText(this, "position is " + position, Toast.LENGTH_SHORT).show();
+                    case R.id.tv_view_two:
+                        //AIDL
+                        NavitateUtil.startActivity(this, IpcAidlActivity.class);
                         break;
                 }
                 break;

@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 /**
- * Created by haohao on 2017/1/16.
+ * Created by MQ on 2017/1/16.
  */
 
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {

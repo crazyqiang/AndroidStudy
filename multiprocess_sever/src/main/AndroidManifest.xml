@@ -18,9 +18,23 @@
         </activity>
 
         <service
+            android:name=".RemoteObserverService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.mq.observer.service" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service
             android:name=".RemoteService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.mq.common.service" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidStudy</string>
+    <string name="mode_observer">绑定远程服务并注册观察者，有变化立即通知客户端:</string>
+    <string name="mode_common">绑定远程服务端：</string>
 </resources>
