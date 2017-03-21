@@ -110,6 +110,10 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                         //AIDL
                         NavitateUtil.startActivity(this, IpcAidlActivity.class);
                         break;
+                    case R.id.tv_view_three:
+                        //Messager
+                        NavitateUtil.startActivity(this, IpcAidlActivity.class);
+                        break;
                 }
                 break;
 

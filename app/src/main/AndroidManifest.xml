@@ -47,6 +47,7 @@
         <activity
             android:name=".multiprocess_client.IpcAidlActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".multiprocess_client.MessagerActivity"></activity>
     </application>
 
 </manifest>
