@@ -2,7 +2,7 @@
 
 
 # 更新日志：
- **2017/03/18**
- 添加进程间通信Demo (AIDL、Messager)
+ **2017/03/24**
+ 添加进程间通信Demo (Intent、AIDL、Messager、自定义Binder)
  
-![image](https://github.com/crazyqiang/CustomView/blob/master/initpintu.jpg) 
+![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/aidl.gif) 
