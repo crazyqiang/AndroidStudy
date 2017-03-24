@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="green_f">#ff66ccff</color>
+    <color name="gray_pure">#eeeeee</color>
     <color name="orange_salmon">#EC5745</color>
     <color name="red_f">#ff3c00</color>
     <color name="btn_answer_pressed">#4ebcd3</color>

@@ -29,7 +29,6 @@ public class RemoteObserverService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("TTT", "启动服务");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -55,13 +54,10 @@ public class RemoteObserverService extends Service {
                     Apple apple = (Apple) msg.obj;
                     //观察者模式，通知所有客户端
                     final int clientNum = mCallbacks.beginBroadcast();
-                    Log.e("TTT", "clientNum is " + clientNum);
                     for (int i = 0; i < clientNum; i++) {
-                        Log.e("TTT", "000000");
                         IRemoteServiceCallBack callBack = mCallbacks.getBroadcastItem(i);
                         if (callBack != null && apple != null) {
                             try {
-                                Log.e("TTT", "111111");
                                 callBack.noticeAppleInfo(apple);
                             } catch (RemoteException e) {
                                 e.printStackTrace();

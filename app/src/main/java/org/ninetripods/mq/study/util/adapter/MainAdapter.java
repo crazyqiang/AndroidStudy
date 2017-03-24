@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.adapter;
+package org.ninetripods.mq.study.util.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.ninetripods.mq.study.R;
-import org.ninetripods.mq.study.bean.NameBean;
-import org.ninetripods.mq.study.interf.MyOnclickListener;
+import org.ninetripods.mq.study.util.bean.NameBean;
+import org.ninetripods.mq.study.util.interf.MyOnclickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +62,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
                 break;
             case 5:
                 setBackGroundColor(holder, R.color.light_black);
+                break;
+            case 6:
+                setBackGroundColor(holder, R.color.light_yellow);
                 break;
         }
         if (list.size() <= 0) return;

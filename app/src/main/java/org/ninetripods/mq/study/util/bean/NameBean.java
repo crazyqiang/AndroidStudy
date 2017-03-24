@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.bean;
+package org.ninetripods.mq.study.util.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;

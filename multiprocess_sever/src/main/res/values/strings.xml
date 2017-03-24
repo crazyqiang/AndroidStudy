@@ -2,4 +2,5 @@
     <string name="app_name">MultiProcess_Sever</string>
     <string name="notice_info">啦啦啦~我是来自服务器的消息，主动推送到客户端的哟~</string>
     <string name="respose_info">啦啦啦~我是来自服务器的消息，客户端请求后，服务端返回的结果~</string>
+    <string name="response_binder_info">啦啦啦~我是来自服务器的消息，通过自定义Binder实现进程间通信，客户端请求后，服务端返回结果~</string>
 </resources>

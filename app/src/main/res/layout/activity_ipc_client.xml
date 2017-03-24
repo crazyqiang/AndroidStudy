@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ninetripods.mq.study.multiprocess_client.IpcAidlActivity">
+    tools:context="org.ninetripods.mq.study.multiprocess_client.AidlActivity">
 
     <include
         android:id="@+id/toolbar"

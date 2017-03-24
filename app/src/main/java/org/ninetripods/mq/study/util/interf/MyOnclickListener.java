@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.interf;
+package org.ninetripods.mq.study.util.interf;
 
 import android.view.View;
 

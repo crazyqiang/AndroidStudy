@@ -45,9 +45,17 @@
             android:name=".path.PathVectorActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".multiprocess_client.IpcAidlActivity"
+            android:name=".multiprocess_client.AidlActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".multiprocess_client.MessagerActivity"></activity>
+        <activity
+            android:name=".multiprocess_client.MessengerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiprocess_client.BinderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiprocess_client.IntentActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

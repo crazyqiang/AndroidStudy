@@ -8,15 +8,8 @@ import android.os.RemoteException;
 public class RemoteService extends Service {
     public RemoteService() {
     }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         return mBinder;
     }
 

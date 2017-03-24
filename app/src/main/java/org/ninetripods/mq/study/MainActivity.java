@@ -5,14 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import org.ninetripods.mq.study.adapter.MainAdapter;
-import org.ninetripods.mq.study.bean.NameBean;
+import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
+import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
+import org.ninetripods.mq.study.util.adapter.MainAdapter;
+import org.ninetripods.mq.study.util.bean.NameBean;
 import org.ninetripods.mq.study.bezier.BezierActivity;
 import org.ninetripods.mq.study.customView.alipayView.ALiPayActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
 import org.ninetripods.mq.study.customViewGroup.ViewGroupActivity;
-import org.ninetripods.mq.study.interf.MyOnclickListener;
-import org.ninetripods.mq.study.multiprocess_client.IpcAidlActivity;
+import org.ninetripods.mq.study.util.interf.MyOnclickListener;
+import org.ninetripods.mq.study.multiprocess_client.AidlActivity;
+import org.ninetripods.mq.study.multiprocess_client.MessengerActivity;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
 import org.ninetripods.mq.study.path.PathVectorActivity;
 import org.ninetripods.mq.study.util.NavitateUtil;
@@ -49,8 +52,10 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 {"自定义ViewGroup", "五环图", "", "", ""},
                 {"属性动画+Path", "PathMeasure", "Path+SVG", "", ""},
                 {"贝塞尔曲线", "基本用法示例", "", "", ""},
-                {"进程间通信", "Intent", "AIDL", "Messager", "ContentProvider"},
-                {"JNI", "", "", "", ""}};
+                {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
+                {"网络通信", "OkHttp(TODO)", "", "", ""},
+                {"JNI", "", "", "", ""}
+        };
         for (String[] anArray : array) {
             beans.add(new NameBean(anArray[0], anArray[1], anArray[2], anArray[3], anArray[4]));
         }
@@ -106,13 +111,21 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 break;
             case 4:
                 switch (view.getId()) {
+                    case R.id.tv_view_one:
+                        //Intent
+                        NavitateUtil.startActivity(this, IntentActivity.class);
+                        break;
                     case R.id.tv_view_two:
                         //AIDL
-                        NavitateUtil.startActivity(this, IpcAidlActivity.class);
+                        NavitateUtil.startActivity(this, AidlActivity.class);
                         break;
                     case R.id.tv_view_three:
                         //Messager
-                        NavitateUtil.startActivity(this, IpcAidlActivity.class);
+                        NavitateUtil.startActivity(this, MessengerActivity.class);
+                        break;
+                    case R.id.tv_view_four:
+                        //Binder
+                        NavitateUtil.startActivity(this, BinderActivity.class);
                         break;
                 }
                 break;

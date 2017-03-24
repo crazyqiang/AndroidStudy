@@ -25,7 +25,7 @@ import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.DisplayUtil;
 
 
-public class IpcAidlActivity extends BaseActivity {
+public class AidlActivity extends BaseActivity {
     private Button btn_bind, btn_unbind;
     private Button btn_bind_common, btn_unbind_common;
     private TextView tv_info;

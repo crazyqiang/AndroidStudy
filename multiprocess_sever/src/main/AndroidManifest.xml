@@ -23,6 +23,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.mq.observer.service" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
@@ -32,9 +33,39 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.mq.common.service" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+        <service
+            android:name=".MessengerService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.mq.messenger.service" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".BinderService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.mq.binder.service" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".ReceiveActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.mq.intent" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

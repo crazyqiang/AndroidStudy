@@ -10,6 +10,15 @@ import android.os.Parcelable;
 public class Apple implements Parcelable {
     private String name;
     private float price;
+
+    public String getNoticeInfo() {
+        return noticeInfo;
+    }
+
+    public void setNoticeInfo(String noticeInfo) {
+        this.noticeInfo = noticeInfo;
+    }
+
     private String noticeInfo;
 
     public String getName() {
