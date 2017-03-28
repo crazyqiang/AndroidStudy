@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
 
     @Override
     public void initViews() {
+        toast("" + BuildConfig.IS_SHOW_LOG);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         initToolBar(toolbar, getResources().getString(R.string.app_name), false);
         recycle_view = (RecyclerView) findViewById(R.id.recycle_view);
@@ -53,7 +54,7 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 {"属性动画+Path", "PathMeasure", "Path+SVG", "", ""},
                 {"贝塞尔曲线", "基本用法示例", "", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
-                {"图片加载", "Volley(TODO)","Glide(TODO)", "", "", ""},
+                {"图片加载", "Volley(TODO)", "Glide(TODO)", "", "", ""},
                 {"JNI", "", "", "", ""}
         };
         for (String[] anArray : array) {

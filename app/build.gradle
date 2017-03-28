@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
 
+//获取时间戳
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}
+
 android {
-    signingConfigs {
-        config {
-            keyPassword '124357'
-            storeFile file('D:/keystore/songyun.jks')
-            storePassword '124357'
-            keyAlias 'songyun'
-        }
-    }
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
@@ -18,6 +17,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         vectorDrawables.useSupportLibrary = true
+        buildConfigField "boolean", "IS_SHOW_LOG", "false"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
@@ -28,28 +28,51 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField "boolean", "IS_SHOW_LOG", NOT_SHOW_LOG
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        beta {
-            debuggable true
-            minifyEnabled false
         }
         debug {
             minifyEnabled false
+            buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
+        }
+        preview {
+            minifyEnabled false
+            buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
         }
     }
     productFlavors {
         market_meizu {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "meizu"]
         }
         market_xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "meizu"]
         }
         market_huawei {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
         }
         market_wandoujia {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
         }
         market_yingyongbao {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
         }
         market_360 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
+        }
+    }
+
+    //修改APK生成名字  通过android.applicationVariants索引来遍历所有的 build variant
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+
+            def timeNow = getDate()
+            def newName
+            if (variant.buildType.name.equals('debug')) {
+                newName = "android-" + timeNow + "_v${variant.versionName}-debug.apk"
+            } else {
+                newName = "android_${variant.flavorName}_" + timeNow + "_v${variant.versionName}_${variant.buildType.name}.apk"
+            }
+            output.outputFile = new File(output.outputFile.parent, newName)
         }
     }
 }
