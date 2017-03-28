@@ -3,7 +3,7 @@
 
 # 更新日志：
  **2017/03/28**
- 添加buid.gradle配置信息，支持多渠道打包（http://www.jianshu.com/p/11484fddda23）
+ 添加buid.gradle配置信息，支持多渠道打包（ http://www.jianshu.com/p/11484fddda23 ）
  
  **2017/03/24**
  添加进程间通信Demo (Intent、AIDL、Messager、自定义Binder)
