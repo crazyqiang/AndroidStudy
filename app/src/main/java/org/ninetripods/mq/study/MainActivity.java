@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 {"属性动画+Path", "PathMeasure", "Path+SVG", "", ""},
                 {"贝塞尔曲线", "基本用法示例", "", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
-                {"网络通信", "OkHttp(TODO)", "", "", ""},
+                {"图片加载", "Volley(TODO)","Glide(TODO)", "", "", ""},
                 {"JNI", "", "", "", ""}
         };
         for (String[] anArray : array) {

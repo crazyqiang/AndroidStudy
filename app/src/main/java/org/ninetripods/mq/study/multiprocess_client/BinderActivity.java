@@ -51,7 +51,7 @@ public class BinderActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bind:
-                //绑定服务 利用Messenger进行通信
+                //绑定服务
                 if (!isBound) {
                     Intent intent = new Intent();
                     intent.setAction("android.mq.binder.service");

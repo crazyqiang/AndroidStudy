@@ -1,25 +1,55 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    signingConfigs {
+        config {
+            keyPassword '124357'
+            storeFile file('D:/keystore/songyun.jks')
+            storePassword '124357'
+            keyAlias 'songyun'
+        }
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "org.ninetripods.mq.circleview"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         vectorDrawables.useSupportLibrary = true
-//        generatedDensities = []
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-//    aaptOptions {
-//        additionalParameters "--no-version-vectors"
-//    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        beta {
+            debuggable true
+            minifyEnabled false
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    productFlavors {
+        market_meizu {
+        }
+        market_xiaomi {
+        }
+        market_huawei {
+        }
+        market_wandoujia {
+        }
+        market_yingyongbao {
+        }
+        market_360 {
         }
     }
 }
