@@ -7,6 +7,7 @@ import android.view.View;
 
 import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
+import org.ninetripods.mq.study.util.Constant;
 import org.ninetripods.mq.study.util.adapter.MainAdapter;
 import org.ninetripods.mq.study.util.bean.NameBean;
 import org.ninetripods.mq.study.bezier.BezierActivity;
@@ -26,6 +27,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity implements MyOnclickListener {
     private RecyclerView recycle_view;
     private MainAdapter mAdapter;
+    private long back_pressed;
 
 
     @Override
@@ -35,7 +37,6 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
 
     @Override
     public void initViews() {
-        toast("" + BuildConfig.IS_SHOW_LOG);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         initToolBar(toolbar, getResources().getString(R.string.app_name), false);
         recycle_view = (RecyclerView) findViewById(R.id.recycle_view);
@@ -69,8 +70,6 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
             case 0:
                 //自定义View
                 switch (view.getId()) {
-                    case R.id.tv_title:
-                        break;
                     case R.id.tv_view_one:
                         NavitateUtil.startActivity(this, ViewActivity.class);
                         break;
@@ -112,6 +111,9 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 break;
             case 4:
                 switch (view.getId()) {
+                    case R.id.tv_title:
+                        CommonWebviewActivity.webviewEntrance(this, Constant.PROCESS_URL);
+                        break;
                     case R.id.tv_view_one:
                         //Intent
                         NavitateUtil.startActivity(this, IntentActivity.class);
@@ -132,5 +134,15 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            toast("再点一次退出应用");
+        }
+        back_pressed = System.currentTimeMillis();
     }
 }
