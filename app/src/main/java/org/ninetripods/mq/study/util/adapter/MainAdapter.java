@@ -44,7 +44,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        switch (position) {
+        int pos = position % 7;
+        switch (pos) {
             case 0:
                 setBackGroundColor(holder, R.color.orange_salmon);
                 break;

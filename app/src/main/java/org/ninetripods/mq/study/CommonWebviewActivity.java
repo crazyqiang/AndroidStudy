@@ -41,7 +41,7 @@ public class CommonWebviewActivity extends BaseActivity {
     public void initViews() {
         init();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        initToolBar(toolbar, "ProgressWebview", true);
+        initToolBar(toolbar, "AndroidStudy", true);
         h5_webview = (Html5Webview) findViewById(R.id.h5_webview);
         if (TextUtils.isEmpty(url)) {
             toast("url不能为空");
@@ -50,6 +50,19 @@ public class CommonWebviewActivity extends BaseActivity {
         h5_webview.loadUrl(url);
     }
 
+    @Override
+    protected void onPause() {
+        h5_webview.onPause();
+        h5_webview.pauseTimers();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        h5_webview.onResume();
+        h5_webview.resumeTimers();
+        super.onResume();
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

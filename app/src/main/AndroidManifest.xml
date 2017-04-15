@@ -62,7 +62,15 @@
         <activity
             android:name=".multiprocess_client.IntentActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".CommonWebviewActivity"></activity>
+        <activity
+            android:name=".CommonWebviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".popup.PopupWindowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".designMode.DesignModeActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

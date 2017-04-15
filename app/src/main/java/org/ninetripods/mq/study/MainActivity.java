@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import org.ninetripods.mq.study.designMode.DesignModeActivity;
 import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
+import org.ninetripods.mq.study.popup.PopupWindowActivity;
 import org.ninetripods.mq.study.util.Constant;
 import org.ninetripods.mq.study.util.adapter.MainAdapter;
 import org.ninetripods.mq.study.util.bean.NameBean;
@@ -56,7 +58,9 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                 {"贝塞尔曲线", "基本用法示例", "", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
                 {"图片加载", "Volley(TODO)", "Glide(TODO)", "", "", ""},
-                {"JNI", "", "", "", ""}
+                {"弹窗", "PopupWindow", "", "", "", ""},
+                {"设计模式", "装饰者模式", "", "", "", ""},
+                {"JNI", "", "", "", "",}
         };
         for (String[] anArray : array) {
             beans.add(new NameBean(anArray[0], anArray[1], anArray[2], anArray[3], anArray[4]));
@@ -132,7 +136,28 @@ public class MainActivity extends BaseActivity implements MyOnclickListener {
                         break;
                 }
                 break;
-
+            case 6:
+                //弹窗
+                switch (view.getId()) {
+                    case R.id.tv_title:
+                        break;
+                    case R.id.tv_view_one:
+                        //PopupWindow
+                        NavitateUtil.startActivity(this, PopupWindowActivity.class);
+                        break;
+                }
+                break;
+            case 7:
+                //设计模式
+                switch (view.getId()) {
+                    case R.id.tv_title:
+                        break;
+                    case R.id.tv_view_one:
+                        //装饰者模式
+                        NavitateUtil.startActivity(this, DesignModeActivity.class);
+                        break;
+                }
+                break;
         }
     }
 
