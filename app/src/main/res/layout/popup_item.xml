@@ -12,7 +12,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/popup_item_bg"
-        android:text="一家优选"
+        android:text="王者农药"
         android:textColor="@color/popup_color" />
 
 </RelativeLayout>
