@@ -7,6 +7,8 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
+
 public class BinderService extends Service {
     private static final java.lang.String DESCRIPTOR = "org.ninetripods.mq.multiprocess_sever.IAidlCallBack";
     private static final int KEY_FLAG = 0x110;

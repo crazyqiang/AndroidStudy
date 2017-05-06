@@ -3,8 +3,7 @@
 
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="android:windowActionBar">false</item>
-        <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/orange_salmon</item>
     </style>
 </resources>

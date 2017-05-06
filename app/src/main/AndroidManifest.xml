@@ -71,6 +71,13 @@
         <activity
             android:name=".designMode.DesignModeActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".jni.JNIActivity" />
+        <activity
+            android:name=".materialDesign.ViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".propertyAnimator.ViewPropertyAnimatorActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

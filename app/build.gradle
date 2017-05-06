@@ -19,6 +19,10 @@ android {
         vectorDrawables.useSupportLibrary = true
         buildConfigField "boolean", "IS_SHOW_LOG", "false"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk {
+//            abiFilters 'armeabi-v7a', 'armeabi'
+//        }
+
     }
     sourceSets {
         main {
@@ -58,6 +62,9 @@ android {
         }
         market_360 {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
+//            ndk {
+//                abiFilters 'armeabi'
+//            }
         }
     }
 
@@ -75,6 +82,11 @@ android {
             output.outputFile = new File(output.outputFile.parent, newName)
         }
     }
+//    externalNativeBuild {
+//        cmake {
+//            path 'CMakeLists.txt'
+//        }
+//    }
 }
 
 dependencies {
@@ -82,8 +94,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
 }

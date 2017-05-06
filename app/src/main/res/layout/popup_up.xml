@@ -14,40 +14,41 @@
 
         <Button
             android:id="@+id/btn_take_photo"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/popup_corner_top"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="拍照"
             android:textColor="#282828"
             android:textSize="16sp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_holo_light" />
+
         <Button
             android:id="@+id/btn_select_photo"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/popup_corner_down"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="相册选取"
             android:textColor="#282828"
             android:textSize="16sp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/gray_holo_light" />
+
         <Button
             android:id="@+id/btn_cancel"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dip"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="8dip"
-            android:background="@drawable/popup_corner"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="取消"

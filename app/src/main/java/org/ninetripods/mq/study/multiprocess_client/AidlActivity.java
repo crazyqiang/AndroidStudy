@@ -16,10 +16,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.ninetripods.mq.multiprocess_sever.Apple;
-import org.ninetripods.mq.multiprocess_sever.IAidlCallBack;
-import org.ninetripods.mq.multiprocess_sever.IRemoteService;
-import org.ninetripods.mq.multiprocess_sever.IRemoteServiceCallBack;
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
+import org.ninetripods.mq.multiprocess_sever_i.IAidlCallBack;
+import org.ninetripods.mq.multiprocess_sever_i.IRemoteService;
+import org.ninetripods.mq.multiprocess_sever_i.IRemoteServiceCallBack;
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.DisplayUtil;

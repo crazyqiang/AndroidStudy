@@ -5,25 +5,31 @@
     android:layout_height="match_parent"
     tools:context="org.ninetripods.mq.study.popup.PopupWindowActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
         android:onClick="showDownPop"
         android:text="向下弹出" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="150dp"
         android:onClick="showRightPop"
         android:text="向右弹出" />
 
     <Button
-        android:layout_width="264px"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="200dp"
         android:onClick="showLeftPop"
         android:text="向左弹出" />
 
@@ -38,8 +44,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
         android:onClick="showUpPop"
         android:text="向上弹出" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="40dp"
+        android:onClick="showReminder"
+        android:src="@mipmap/query_icon_normal" />
 
 </RelativeLayout>

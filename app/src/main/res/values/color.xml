@@ -3,7 +3,9 @@
     <color name="green_f">#ff66ccff</color>
     <color name="gray_pure">#eeeeee</color>
     <color name="orange_salmon">#EC5745</color>
+    <color name="time_color">#ff5a00</color>
     <color name="red_f">#ff3c00</color>
+    <color name="red_deep">#ea2226</color>
     <color name="btn_answer_pressed">#4ebcd3</color>
     <color name="holo_blue_light">#ff33b5e5</color>
     <color name="purple_p">#F49092</color>
@@ -21,7 +23,7 @@
     <color name="light_black">#666666</color>
     <color name="line_color">#505050</color>
     <color name="light_gray">#ffececec</color>
-    <color name="time_color">#ff5a00</color>
+
     <color name="province_line_border">#C7C7C7</color>
     <color name="green_pure">#a2e542</color>
     <color name="blue_color">#377caf</color>

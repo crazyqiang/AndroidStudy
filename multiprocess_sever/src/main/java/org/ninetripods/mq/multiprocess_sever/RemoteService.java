@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
+import org.ninetripods.mq.multiprocess_sever_i.IAidlCallBack;
+
 public class RemoteService extends Service {
     public RemoteService() {
     }

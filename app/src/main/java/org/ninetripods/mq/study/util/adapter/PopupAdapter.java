@@ -49,7 +49,7 @@ public class PopupAdapter extends RecyclerView.Adapter<PopupAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return 14;
+        return 15;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

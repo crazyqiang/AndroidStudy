@@ -1,6 +1,8 @@
 package org.ninetripods.mq.study.designMode;
 
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.PopupWindow;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;

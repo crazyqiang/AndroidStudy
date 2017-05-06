@@ -10,6 +10,10 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
 
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
+import org.ninetripods.mq.multiprocess_sever_i.IRemoteService;
+import org.ninetripods.mq.multiprocess_sever_i.IRemoteServiceCallBack;
+
 public class RemoteObserverService extends Service {
     private final int APPLE_INFO = 0x0706;
     final RemoteCallbackList<IRemoteServiceCallBack> mCallbacks = new RemoteCallbackList<>();

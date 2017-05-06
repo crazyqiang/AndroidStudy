@@ -1,7 +1,7 @@
 // IRemoteService.aidl
-package org.ninetripods.mq.multiprocess_sever;
+package org.ninetripods.mq.multiprocess_sever_i;
 
-import org.ninetripods.mq.multiprocess_sever.IRemoteServiceCallBack;
+import org.ninetripods.mq.multiprocess_sever_i.IRemoteServiceCallBack;
 // Declare any non-default types here with import statements
 
 interface IRemoteService {

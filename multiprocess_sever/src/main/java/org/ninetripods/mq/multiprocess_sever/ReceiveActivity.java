@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.ninetripods.mq.multiprocess_sever_i.MultiProcess;
+
 public class ReceiveActivity extends AppCompatActivity {
     private TextView tv_text;
     private static final String INTENT_ACTION = "android.mq.intent";

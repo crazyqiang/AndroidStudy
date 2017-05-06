@@ -18,8 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.ninetripods.mq.multiprocess_sever.Apple;
-import org.ninetripods.mq.multiprocess_sever.MultiProcess;
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
+import org.ninetripods.mq.multiprocess_sever_i.MultiProcess;
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.DisplayUtil;

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.ninetripods.mq.multiprocess_sever.Apple;
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.DisplayUtil;
@@ -137,9 +137,10 @@ public class BinderActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (binderConnection != null) {
+        if (binderConnection != null && isBound) {
             unbindService(binderConnection);
             binderConnection = null;
+            isBound = false;
         }
     }
 }

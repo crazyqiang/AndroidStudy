@@ -44,4 +44,6 @@ public class DpUtil {
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metric);
         return metric.widthPixels;
     }
+
+
 }

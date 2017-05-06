@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import org.ninetripods.mq.multiprocess_sever.Apple;
-import org.ninetripods.mq.multiprocess_sever.MultiProcess;
+import org.ninetripods.mq.multiprocess_sever_i.Apple;
+import org.ninetripods.mq.multiprocess_sever_i.MultiProcess;
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 

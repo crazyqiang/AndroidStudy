@@ -4,4 +4,9 @@
     <string name="mode_common">绑定远程服务端：</string>
     <string name="mode_messenger">绑定远程服务并利用Messenger传递信息:</string>
     <string name="mode_binder">绑定远程服务并利用Binder传递信息:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="load_apk">运行前请确保项目中的服务端已启动！\n点我下载服务端APK</string>
+
 </resources>

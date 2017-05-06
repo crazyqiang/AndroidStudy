@@ -1,4 +1,4 @@
-package org.ninetripods.mq.multiprocess_sever;
+package org.ninetripods.mq.multiprocess_sever_i;
 
 import android.os.Parcel;
 import android.os.Parcelable;
