@@ -1,5 +1,7 @@
 # AndroidStudy
 
+# 扫描二维码下载APK示例：
+https://github.com/crazyqiang/AndroidStudy/blob/master/qrcode.png
 
 # 更新日志：
 
