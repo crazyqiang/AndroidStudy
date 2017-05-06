@@ -21,7 +21,6 @@ public class MainActivity extends BaseActivity {
 
 
     private DrawerLayout drawer_layout;
-    private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
     private Fragment currentFragment;
     private int currentPos = -1;
