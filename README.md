@@ -21,7 +21,7 @@
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
  # 通用PopupWindow：
- ![image](http://upload-images.jianshu.io/upload_images/587163-cce3032661d22575.gif) 
+ ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/PopupWindow.gif) 
  
  # Bundle、AIDL、Messenger、Binder：
 ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/intent.gif) 
