@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 
-public class ViewGroupActivity extends BaseActivity {
+public class FiveRingsActivity extends BaseActivity {
     private Toolbar toolbar;
 
     @Override

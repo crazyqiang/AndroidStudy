@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.customViewGroup;
+package org.ninetripods.mq.study.customViewGroup.fiveRings;
 
 import android.content.Context;
 import android.graphics.Canvas;

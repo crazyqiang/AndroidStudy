@@ -14,8 +14,10 @@ import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.bezier.BezierActivity;
 import org.ninetripods.mq.study.customView.alipayView.ALiPayActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
-import org.ninetripods.mq.study.customViewGroup.ViewGroupActivity;
+import org.ninetripods.mq.study.customViewGroup.FiveRingsActivity;
+import org.ninetripods.mq.study.customViewGroup.FlowLayoutActivity;
 import org.ninetripods.mq.study.designMode.DesignModeActivity;
+import org.ninetripods.mq.study.recycle.ContactsActivity;
 import org.ninetripods.mq.study.multiprocess_client.AidlActivity;
 import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
@@ -69,7 +71,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
         List<NameBean> beans = new ArrayList<>();
         String[][] array = {
                 {"自定义View", "饼形图", "AliPay", "", ""},
-                {"自定义ViewGroup", "五环图", "", "", ""},
+                {"自定义ViewGroup", "五环图", "流式布局", "", ""},
                 {"属性动画+Path", "PathMeasure", "Path+SVG", "ViewPropertyAnimator", ""},
                 {"贝塞尔曲线", "基本用法示例", "", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
@@ -106,7 +108,12 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                 //自定义ViewGroup
                 switch (view.getId()) {
                     case R.id.tv_view_one:
-                        NavitateUtil.startActivity(getActivity(), ViewGroupActivity.class);
+                        //五环图
+                        NavitateUtil.startActivity(getActivity(), FiveRingsActivity.class);
+                        break;
+                    case R.id.tv_view_two:
+                        //流式布局
+                        NavitateUtil.startActivity(getActivity(), FlowLayoutActivity.class);
                         break;
                 }
                 break;

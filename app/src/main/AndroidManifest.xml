@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".customViewGroup.ViewGroupActivity"
+            android:name=".customViewGroup.FiveRingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".customView.cakeView.ViewActivity"
@@ -73,10 +73,16 @@
             android:screenOrientation="portrait" />
         <activity android:name=".jni.JNIActivity" />
         <activity
-            android:name=".materialDesign.ViewPagerActivity"
+            android:name=".recycle.ViewPagerActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".propertyAnimator.ViewPropertyAnimatorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".recycle.ContactsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customViewGroup.FlowLayoutActivity"
             android:screenOrientation="portrait" />
     </application>
 

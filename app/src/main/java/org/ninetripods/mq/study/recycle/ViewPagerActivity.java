@@ -1,11 +1,10 @@
-package org.ninetripods.mq.study.materialDesign;
+package org.ninetripods.mq.study.recycle;
 
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.recycle.view_pager.DepthPageTransformer;
 import org.ninetripods.mq.study.util.adapter.CardAdapter;
 
 public class ViewPagerActivity extends BaseActivity {

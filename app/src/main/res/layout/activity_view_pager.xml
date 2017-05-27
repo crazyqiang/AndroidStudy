@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.ninetripods.mq.study.materialDesign.ViewPagerActivity">
+    tools:context="org.ninetripods.mq.study.recycle.ViewPagerActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_viewpager"

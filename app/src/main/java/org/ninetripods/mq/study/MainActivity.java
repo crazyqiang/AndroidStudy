@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
 import org.ninetripods.mq.study.util.fragment.PopFragment;
 import org.ninetripods.mq.study.util.fragment.ProcessFragment;
+import org.ninetripods.mq.study.util.fragment.RecycleFragment;
 
 public class MainActivity extends BaseActivity {
     private long back_pressed;
@@ -56,6 +57,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.my_navigation_2:
                         selectItem(2);
+                        break;
+                    case R.id.my_navigation_3:
+                        selectItem(3);
                         break;
                 }
                 drawer_layout.closeDrawer(Gravity.START);
@@ -99,6 +103,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case 2:
                 currentFragment = new ProcessFragment();
+                break;
+            case 3:
+                currentFragment = new RecycleFragment();
                 break;
             default:
                 currentFragment = new HomeFragment();

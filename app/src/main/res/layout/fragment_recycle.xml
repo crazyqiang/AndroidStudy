@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp">
+
+    <TextView
+        android:id="@+id/tv_contacts"
+        style="@style/btn_style_done"
+        android:layout_marginTop="100dp"
+        android:text="仿魅族手机通讯录" />
+
+    <TextView
+        android:id="@+id/tv_alert_dialog"
+        style="@style/btn_style_undo"
+        android:layout_below="@+id/tv_popup"
+        android:layout_marginTop="30dp"
+        android:text="AlertDialog"
+        android:visibility="gone" />
+
+</RelativeLayout>
+

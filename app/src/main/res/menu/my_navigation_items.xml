@@ -16,5 +16,9 @@
         android:enabled="true"
         android:title="多进程通信" />
 
-
+    <item
+        android:id="@+id/my_navigation_3"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="RecycleView系列" />
 </menu>
