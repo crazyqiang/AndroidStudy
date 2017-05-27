@@ -23,7 +23,7 @@
   **2017/01/20**
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
-  #仿魅族通讯录：
+  # 仿魅族通讯录：
   ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Contacts.gif) 
  
  # 通用PopupWindow：
