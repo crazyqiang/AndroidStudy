@@ -5,6 +5,9 @@
 
 # 更新日志：
 
+**2017/06/12**
+ Android仿QQ侧滑菜单( http://www.jianshu.com/p/1834ce7a2ce7 )
+
 **2017/05/27**
  仿魅族通讯录( http://www.jianshu.com/p/7b7b7ee80c44 )
 
@@ -24,8 +27,10 @@
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
  
-  # 仿魅族通讯录：
-  
+  # 仿QQ侧滑菜单：
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Swipe_menu.gif) 
+ 
+  # 仿魅族通讯录： 
   ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Contacts.gif) 
  
  # 通用PopupWindow：
