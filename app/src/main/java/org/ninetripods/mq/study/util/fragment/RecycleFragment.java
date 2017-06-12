@@ -11,15 +11,16 @@ import android.widget.TextView;
 
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.ContactsActivity;
+import org.ninetripods.mq.study.recycle.SwipeMenuActivity;
+import org.ninetripods.mq.study.recycle.PullToRefresh.PullToRefreshActivity;
 import org.ninetripods.mq.study.util.NavitateUtil;
 
-public class RecycleFragment extends Fragment {
-    private TextView tv_contacts;
+public class RecycleFragment extends Fragment implements View.OnClickListener {
+    private TextView tv_contacts, tv_swipe_menu, tv_touch_helper, tv_refresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recycle, container, false);
     }
 
@@ -27,11 +28,29 @@ public class RecycleFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tv_contacts = (TextView) view.findViewById(R.id.tv_contacts);
-        tv_contacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        tv_swipe_menu = (TextView) view.findViewById(R.id.tv_swipe_menu);
+        tv_touch_helper = (TextView) view.findViewById(R.id.tv_touch_helper);
+        tv_refresh = (TextView) view.findViewById(R.id.tv_refresh);
+        tv_contacts.setOnClickListener(this);
+        tv_swipe_menu.setOnClickListener(this);
+        tv_touch_helper.setOnClickListener(this);
+        tv_refresh.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_contacts:
                 NavitateUtil.startActivity(getActivity(), ContactsActivity.class);
-            }
-        });
+                break;
+            case R.id.tv_swipe_menu:
+                NavitateUtil.startActivity(getActivity(), SwipeMenuActivity.class);
+                break;
+            case R.id.tv_touch_helper:
+                break;
+            case R.id.tv_refresh:
+                NavitateUtil.startActivity(getActivity(), PullToRefreshActivity.class);
+                break;
+        }
     }
 }

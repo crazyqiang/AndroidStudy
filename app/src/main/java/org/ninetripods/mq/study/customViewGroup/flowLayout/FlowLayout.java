@@ -2,8 +2,11 @@ package org.ninetripods.mq.study.customViewGroup.flowLayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.ninetripods.mq.study.util.MyLog;
 
 /**
  * 流式布局
@@ -33,6 +36,7 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        MyLog.e("TTT", "onMeasure");
         int wMode = MeasureSpec.getMode(widthMeasureSpec);
         int wSize = MeasureSpec.getSize(widthMeasureSpec);
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
@@ -82,6 +86,7 @@ public class FlowLayout extends ViewGroup {
                 mWidth = maxWidthLength + getPaddingLeft() + getPaddingRight();
                 break;
             case MeasureSpec.UNSPECIFIED:
+                mHeight = totalHeight + getPaddingTop() + getPaddingBottom();
                 break;
         }
         switch (hMode) {
@@ -92,6 +97,7 @@ public class FlowLayout extends ViewGroup {
                 mHeight = totalHeight + getPaddingTop() + getPaddingBottom();
                 break;
             case MeasureSpec.UNSPECIFIED:
+                mHeight = totalHeight + getPaddingTop() + getPaddingBottom();
                 break;
         }
         setMeasuredDimension(mWidth, mHeight);
@@ -99,6 +105,7 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        MyLog.e("TTT", "onLayout");
         int childCount = getChildCount();
 
         int curWidthLength = 0;
@@ -162,4 +169,25 @@ public class FlowLayout extends ViewGroup {
         return super.generateDefaultLayoutParams();
     }
 
+//    float mLastY, y = 0;
+//    float distance = 0;
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        y = event.getY();
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                MyLog.e("TTT", "event.getY() is " + event.getY() + ",y is " + y);
+//                distance = mLastY - y;
+//                MyLog.e("TTT", "distance is " + distance);
+//                scrollBy(0, (int) distance);
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                break;
+//        }
+//        mLastY = y;
+//        return true;
+//    }
 }

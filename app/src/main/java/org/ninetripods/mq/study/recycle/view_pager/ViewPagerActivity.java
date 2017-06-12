@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.recycle;
+package org.ninetripods.mq.study.recycle.view_pager;
 
 import android.support.v4.view.ViewPager;
 

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.ninetripods.mq.study.recycle.swipe_menu.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_menu"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_centerInParent="true"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    app:content_id="@+id/ll_layout"
+    app:right_id="@+id/ll_right_menu">
+
+    <LinearLayout
+        android:id="@+id/ll_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="HelloWorld"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical|end"
+            android:text="左滑←←←"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_right_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_to_top"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray_holo_light"
+            android:gravity="center"
+            android:text="置顶"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_to_unread"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="@color/yellow"
+            android:gravity="center"
+            android:text="标为未读"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_to_delete"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:background="@color/red_f"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</org.ninetripods.mq.study.recycle.swipe_menu.SwipeMenuLayout>

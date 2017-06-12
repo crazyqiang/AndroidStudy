@@ -21,4 +21,10 @@
         android:checkable="false"
         android:enabled="true"
         android:title="RecycleView系列" />
+    <item
+        android:id="@+id/my_navigation_4"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="其他"
+        android:visible="false" />
 </menu>

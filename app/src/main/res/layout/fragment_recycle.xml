@@ -11,12 +11,26 @@
         android:text="仿魅族手机通讯录" />
 
     <TextView
-        android:id="@+id/tv_alert_dialog"
-        style="@style/btn_style_undo"
-        android:layout_below="@+id/tv_popup"
-        android:layout_marginTop="30dp"
-        android:text="AlertDialog"
+        android:id="@+id/tv_swipe_menu"
+        style="@style/btn_style_done"
+        android:layout_below="@+id/tv_contacts"
+        android:layout_marginTop="25dp"
+        android:text="仿QQ侧滑菜单" />
+
+    <TextView
+        android:id="@+id/tv_touch_helper"
+        style="@style/btn_style_done"
+        android:layout_below="@+id/tv_swipe_menu"
+        android:layout_marginTop="25dp"
+        android:text="ItemTouchHelper "
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/tv_refresh"
+        style="@style/btn_style_done"
+        android:layout_below="@+id/tv_touch_helper"
+        android:layout_marginTop="25dp"
+        android:text="下拉刷新，上拉加载 "
+        android:visibility="gone" />
 </RelativeLayout>
 

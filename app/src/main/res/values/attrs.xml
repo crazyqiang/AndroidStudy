@@ -4,4 +4,10 @@
         <attr name="circle_color" format="color" />
         <attr name="stroke_width" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <!-- format="reference"意为参考某一资源ID -->
+        <attr name="content_id" format="reference" />
+        <attr name="right_id" format="reference" />
+    </declare-styleable>
 </resources>

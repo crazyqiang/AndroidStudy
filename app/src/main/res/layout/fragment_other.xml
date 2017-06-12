@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    tools:context="org.ninetripods.mq.study.util.fragment.OtherFragment">
+
+    <TextView
+        android:id="@+id/tv_suspend"
+        style="@style/btn_style_done"
+        android:layout_marginTop="100dp"
+        android:text="悬浮框" />
+
+</RelativeLayout>

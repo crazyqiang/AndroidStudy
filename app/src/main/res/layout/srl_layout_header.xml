@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_holo_light"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/srl_tv_pull_down"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:text="srl_keep_pull_down" />
+
+    <org.ninetripods.mq.study.recycle.PullToRefresh.GhostLoadingView
+        android:id="@+id/srl_glv_pull_down"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+</RelativeLayout>

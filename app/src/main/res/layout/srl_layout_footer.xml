@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="5dp">
+
+    <TextView
+        android:id="@+id/srl_tv_pull_up"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:text="继续往上拉" />
+
+    <org.ninetripods.mq.study.recycle.PullToRefresh.EatBeanLoadingView
+        android:id="@+id/srl_elv_pull_up"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+</RelativeLayout>
