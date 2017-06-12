@@ -27,11 +27,11 @@
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
  
-  # 仿QQ侧滑菜单：
+ # 仿QQ侧滑菜单：
  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Swipe_menu.gif) 
  
-  # 仿魅族通讯录： 
-  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Contacts.gif) 
+ # 仿魅族通讯录： 
+  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Contacts.gif) 
  
  # 通用PopupWindow：
  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/PopupWindow.gif) 
