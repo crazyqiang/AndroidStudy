@@ -15,7 +15,7 @@
         style="@style/btn_style_done"
         android:layout_below="@+id/tv_contacts"
         android:layout_marginTop="25dp"
-        android:text="仿QQ侧滑菜单" />
+        android:text="仿QQ侧滑菜单、小红点" />
 
     <TextView
         android:id="@+id/tv_touch_helper"
