@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.bezier;
+package org.ninetripods.mq.study.bezier.view.BeaierDemo;
 
 import android.support.v7.widget.Toolbar;
 

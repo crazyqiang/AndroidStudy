@@ -9,23 +9,42 @@
         android:id="@+id/toolbar"
         layout="@layout/m_toolbar" />
 
-    <Button
+    <!--<Button-->
+    <!--android:id="@+id/bezier1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:text="一阶贝塞尔曲线" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/bezier2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="二阶贝塞尔曲线" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/bezier3"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="三阶贝塞尔曲线" />-->
+    <TextView
         android:id="@+id/bezier1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_style_done_new"
         android:layout_marginTop="30dp"
         android:text="一阶贝塞尔曲线" />
 
-    <Button
+    <TextView
         android:id="@+id/bezier2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_style_done_new"
+        android:layout_below="@+id/tv_contacts"
+        android:layout_marginTop="25dp"
         android:text="二阶贝塞尔曲线" />
 
-    <Button
+    <TextView
         android:id="@+id/bezier3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_style_done_new"
+        android:layout_marginTop="25dp"
         android:text="三阶贝塞尔曲线" />
+
 
 </LinearLayout>

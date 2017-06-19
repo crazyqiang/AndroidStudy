@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.recycle;
+package org.ninetripods.mq.study.bezier;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -7,14 +7,14 @@ import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.swipe_menu.MyDividerDecoration;
 import org.ninetripods.mq.study.recycle.swipe_menu.SwipeRecycleView;
-import org.ninetripods.mq.study.util.MyLog;
 import org.ninetripods.mq.study.util.adapter.SwipeAdapter;
 import org.ninetripods.mq.study.util.bean.QQPointBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SwipeMenuActivity extends BaseActivity {
+public class QQTrackPointActivity extends BaseActivity {
+
     private List<QQPointBean> list;
 
     @Override
@@ -26,11 +26,11 @@ public class SwipeMenuActivity extends BaseActivity {
     public void initViews() {
         initDatas();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        initToolBar(toolbar, "滑动菜单", true, false);
+        initToolBar(toolbar, "仿QQ小红点", true, false);
         SwipeRecycleView swipe_recycleview = (SwipeRecycleView) findViewById(R.id.swipe_recycleview);
         swipe_recycleview.setLayoutManager(new LinearLayoutManager(this));
         swipe_recycleview.addItemDecoration(new MyDividerDecoration());
-        SwipeAdapter swipeAdapter = new SwipeAdapter(this,list);
+        SwipeAdapter swipeAdapter = new SwipeAdapter(this, list);
         swipe_recycleview.setAdapter(swipeAdapter);
     }
 

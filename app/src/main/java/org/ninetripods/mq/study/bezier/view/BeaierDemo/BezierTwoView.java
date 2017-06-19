@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.bezier.view;
+package org.ninetripods.mq.study.bezier.view.BeaierDemo;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,24 +15,24 @@ import android.view.View;
  * Created by MQ on 2017/1/17.
  */
 
-public class BezierThreeView extends View {
-    private Paint mPaint;
+public class BezierTwoView extends View {
     private Paint textPaint;
+    private Paint mPaint;
     private Path mPath;
     private int mCenterX, mCenterY;
-    private PointF dataPoint1, dataPoint2, controlPoint1, controlPoint2;
+    private PointF dataPoint1, dataPoint2, controlPoint;
     private float radius = 8f;
     private float region_diff = 100f;
 
-    public BezierThreeView(Context context) {
+    public BezierTwoView(Context context) {
         this(context, null);
     }
 
-    public BezierThreeView(Context context, AttributeSet attrs) {
+    public BezierTwoView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BezierThreeView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BezierTwoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -58,8 +58,7 @@ public class BezierThreeView extends View {
         //初始化数据点和控制点
         dataPoint1 = new PointF();
         dataPoint2 = new PointF();
-        controlPoint1 = new PointF();
-        controlPoint2 = new PointF();
+        controlPoint = new PointF();
     }
 
     @Override
@@ -71,10 +70,8 @@ public class BezierThreeView extends View {
         dataPoint1.y = mCenterY;
         dataPoint2.x = mCenterX + 300;
         dataPoint2.y = mCenterY;
-        controlPoint1.x = mCenterX - 300;
-        controlPoint1.y = mCenterY - 300;
-        controlPoint2.x = mCenterX + 300;
-        controlPoint2.y = mCenterY - 300;
+        controlPoint.x = mCenterX;
+        controlPoint.y = mCenterY - 300;
     }
 
     @Override
@@ -83,33 +80,25 @@ public class BezierThreeView extends View {
         //绘制点
         canvas.drawCircle(dataPoint1.x, dataPoint1.y, radius, textPaint);
         canvas.drawCircle(dataPoint2.x, dataPoint2.y, radius, textPaint);
-        canvas.drawCircle(controlPoint1.x, controlPoint1.y, radius, textPaint);
-        canvas.drawCircle(controlPoint2.x, controlPoint2.y, radius, textPaint);
+        canvas.drawCircle(controlPoint.x, controlPoint.y, radius, textPaint);
         //绘制文字
         canvas.drawText("数据点1", dataPoint1.x + 10, dataPoint1.y + 10, textPaint);
         canvas.drawText("数据点2", dataPoint2.x + 10, dataPoint2.y + 10, textPaint);
-        canvas.drawText("控制点1", controlPoint1.x + 10, controlPoint1.y + 10, textPaint);
-        canvas.drawText("控制点2", controlPoint2.x + 10, controlPoint2.y + 10, textPaint);
+        canvas.drawText("控制点", controlPoint.x + 10, controlPoint.y + 10, textPaint);
         //绘制辅助线
-        canvas.drawLine(dataPoint1.x, dataPoint1.y, controlPoint1.x, controlPoint1.y, textPaint);
-        canvas.drawLine(controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, textPaint);
-        canvas.drawLine(controlPoint2.x, controlPoint2.y, dataPoint2.x, dataPoint2.y, textPaint);
-        //绘制三阶贝塞尔曲线
+        canvas.drawLine(dataPoint1.x, dataPoint1.y, controlPoint.x, controlPoint.y, textPaint);
+        canvas.drawLine(controlPoint.x, controlPoint.y, dataPoint2.x, dataPoint2.y, textPaint);
+        //绘制二阶贝塞尔曲线
         mPath.moveTo(dataPoint1.x, dataPoint1.y);
-        mPath.cubicTo(controlPoint1.x, controlPoint1.y, controlPoint2.x,
-                controlPoint2.y, dataPoint2.x, dataPoint2.y);
+        mPath.quadTo(controlPoint.x, controlPoint.y, dataPoint2.x, dataPoint2.y);
         canvas.drawPath(mPath, mPaint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isPointChoice(controlPoint1, event.getX(), event.getY())) {
-            controlPoint1.x = event.getX();
-            controlPoint1.y = event.getY();
-            invalidate();
-        } else if (isPointChoice(controlPoint2, event.getX(), event.getY())) {
-            controlPoint2.x = event.getX();
-            controlPoint2.y = event.getY();
+        if (isPointChoice(controlPoint, event.getX(), event.getY())) {
+            controlPoint.x = event.getX();
+            controlPoint.y = event.getY();
             invalidate();
         }
         return true;

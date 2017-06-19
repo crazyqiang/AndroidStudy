@@ -30,16 +30,16 @@
             android:name=".customView.cakeView.ViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".bezier.BezierActivity"
+            android:name=".bezier.BezierDemoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".bezier.BezierTwoActivity"
+            android:name=".bezier.view.BeaierDemo.BezierTwoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".bezier.BezierOneActivity"
+            android:name=".bezier.view.BeaierDemo.BezierOneActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".bezier.BezierThreeActivity"
+            android:name=".bezier.view.BeaierDemo.BezierThreeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".customView.alipayView.ALiPayActivity"
@@ -68,9 +68,6 @@
         <activity
             android:name=".popup.PopupWindowActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".designMode.DesignModeActivity"
-            android:screenOrientation="portrait" />
         <activity android:name=".jni.JNIActivity" />
         <activity
             android:name=".recycle.view_pager.ViewPagerActivity"
@@ -90,7 +87,12 @@
         <activity
             android:name=".recycle.PullToRefresh.PullToRefreshActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".other.SuspendActivity"></activity>
+        <activity
+            android:name=".other.SuspendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".bezier.QQTrackPointActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

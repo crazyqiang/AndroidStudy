@@ -9,19 +9,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.bezier.view.QQPoint.QQBezierView;
 import org.ninetripods.mq.study.recycle.swipe_menu.SwipeMenuLayout;
 import org.ninetripods.mq.study.recycle.swipe_menu.SwipeRecycleView;
 import org.ninetripods.mq.study.util.MyLog;
+import org.ninetripods.mq.study.util.bean.QQPointBean;
+
+import java.util.List;
 
 /**
- * Created by hello-world on 2017/6/9.
+ * Created by MQ on 2017/6/9.
  */
 
 public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeHolder> {
     private Context mContext;
+    private List<QQPointBean> mList;
 
-    public SwipeAdapter(Context mContext) {
+    public SwipeAdapter(Context mContext, List<QQPointBean> mList) {
         this.mContext = mContext;
+        this.mList = mList;
     }
 
     @Override
@@ -32,6 +38,31 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeHolder>
 
     @Override
     public void onBindViewHolder(final SwipeHolder holder, final int position) {
+        final QQPointBean bean = mList.get(position);
+        if (bean != null) {
+            holder.qq_point.setVisibility(bean.redNum != 0 ? View.VISIBLE : View.INVISIBLE);
+            holder.qq_point.setText(String.valueOf((bean.redNum)));
+            holder.qq_point.setOnDragListener(new QQBezierView.onDragStatusListener() {
+                @Override
+                public void onDrag() {
+                }
+
+                @Override
+                public void onMove() {
+
+                }
+
+                @Override
+                public void onRestore() {
+
+                }
+
+                @Override
+                public void onDismiss() {
+                    bean.redNum = 0;
+                }
+            });
+        }
         holder.tv_content.setText("这是第" + (position + 1) + "条数据");
         holder.tv_to_unread.setVisibility(position % 2 == 0 ? View.VISIBLE : View.GONE);
         holder.tv_to_top.setOnClickListener(new View.OnClickListener() {
@@ -71,12 +102,13 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeHolder>
 
     @Override
     public int getItemCount() {
-        return 30;
+        return mList.size();
     }
 
     public class SwipeHolder extends RecyclerView.ViewHolder {
         private TextView tv_to_top, tv_to_unread, tv_to_delete, tv_content;
         private SwipeMenuLayout swipe_menu;
+        private QQBezierView qq_point;
 
         public SwipeHolder(View itemView) {
             super(itemView);
@@ -85,6 +117,7 @@ public class SwipeAdapter extends RecyclerView.Adapter<SwipeAdapter.SwipeHolder>
             tv_to_unread = (TextView) itemView.findViewById(R.id.tv_to_unread);
             tv_to_delete = (TextView) itemView.findViewById(R.id.tv_to_delete);
             tv_content = (TextView) itemView.findViewById(R.id.tv_content);
+            qq_point = (QQBezierView) itemView.findViewById(R.id.qq_point);
         }
     }
 }

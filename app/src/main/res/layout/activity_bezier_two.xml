@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         layout="@layout/m_toolbar" />
 
-    <org.ninetripods.mq.study.bezier.view.BezierTwoView
+    <org.ninetripods.mq.study.bezier.view.BeaierDemo.BezierTwoView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />

@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.bezier.view;
+package org.ninetripods.mq.study.bezier.view.BeaierDemo;
 
 import android.content.Context;
 import android.graphics.Canvas;

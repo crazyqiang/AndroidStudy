@@ -11,13 +11,12 @@ import android.view.ViewGroup;
 
 import org.ninetripods.mq.study.CommonWebviewActivity;
 import org.ninetripods.mq.study.R;
-import org.ninetripods.mq.study.bezier.BezierActivity;
+import org.ninetripods.mq.study.bezier.BezierDemoActivity;
+import org.ninetripods.mq.study.bezier.QQTrackPointActivity;
 import org.ninetripods.mq.study.customView.alipayView.ALiPayActivity;
 import org.ninetripods.mq.study.customView.cakeView.ViewActivity;
 import org.ninetripods.mq.study.customViewGroup.FiveRingsActivity;
 import org.ninetripods.mq.study.customViewGroup.FlowLayoutActivity;
-import org.ninetripods.mq.study.designMode.DesignModeActivity;
-import org.ninetripods.mq.study.recycle.ContactsActivity;
 import org.ninetripods.mq.study.multiprocess_client.AidlActivity;
 import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
@@ -73,12 +72,10 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                 {"自定义View", "饼形图", "AliPay", "", ""},
                 {"自定义ViewGroup", "五环图", "流式布局", "", ""},
                 {"属性动画+Path", "PathMeasure", "Path+SVG", "ViewPropertyAnimator", ""},
-                {"贝塞尔曲线", "基本用法示例", "", "", ""},
+                {"贝塞尔曲线", "基本用法示例", "仿QQ小红点", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
                 {"图片加载", "Volley(TODO)", "Glide(TODO)", "", "", ""},
-                {"弹窗", "PopupWindow", "", "", "", ""},
-                {"设计模式", "装饰者模式", "", "", "", ""},
-                {"JNI", "", "", "", "",}
+                {"弹窗", "PopupWindow", "", "", "", ""}
         };
         for (String[] anArray : array) {
             beans.add(new NameBean(anArray[0], anArray[1], anArray[2], anArray[3], anArray[4]));
@@ -135,7 +132,12 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                 //贝塞尔曲线
                 switch (view.getId()) {
                     case R.id.tv_view_one:
-                        NavitateUtil.startActivity(getActivity(), BezierActivity.class);
+                        //基本用法示例
+                        NavitateUtil.startActivity(getActivity(), BezierDemoActivity.class);
+                        break;
+                    case R.id.tv_view_two:
+                        //仿QQ小红点
+                        NavitateUtil.startActivity(getActivity(), QQTrackPointActivity.class);
                         break;
                 }
                 break;
@@ -170,17 +172,6 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                     case R.id.tv_view_one:
                         //PopupWindow
                         NavitateUtil.startActivity(getActivity(), PopupWindowActivity.class);
-                        break;
-                }
-                break;
-            case 7:
-                //设计模式
-                switch (view.getId()) {
-                    case R.id.tv_title:
-                        break;
-                    case R.id.tv_view_one:
-                        //装饰者模式
-                        NavitateUtil.startActivity(getActivity(), DesignModeActivity.class);
                         break;
                 }
                 break;

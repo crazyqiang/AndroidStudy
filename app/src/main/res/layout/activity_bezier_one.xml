@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         layout="@layout/m_toolbar" />
 
-    <org.ninetripods.mq.study.bezier.view.BezierOneView
+    <org.ninetripods.mq.study.bezier.view.BeaierDemo.BezierOneView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
