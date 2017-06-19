@@ -12,7 +12,6 @@ import android.widget.TextView;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.ContactsActivity;
 import org.ninetripods.mq.study.recycle.SwipeMenuActivity;
-import org.ninetripods.mq.study.recycle.PullToRefresh.PullToRefreshActivity;
 import org.ninetripods.mq.study.util.NavitateUtil;
 
 public class RecycleFragment extends Fragment implements View.OnClickListener {
@@ -48,9 +47,9 @@ public class RecycleFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_touch_helper:
                 break;
-            case R.id.tv_refresh:
-                NavitateUtil.startActivity(getActivity(), PullToRefreshActivity.class);
-                break;
+//            case R.id.tv_refresh:
+//                NavitateUtil.startActivity(getActivity(), PullToRefreshActivity.class);
+//                break;
         }
     }
 }

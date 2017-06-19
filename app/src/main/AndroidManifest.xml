@@ -70,9 +70,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".jni.JNIActivity" />
         <activity
-            android:name=".recycle.view_pager.ViewPagerActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".propertyAnimator.ViewPropertyAnimatorActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -83,9 +80,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".recycle.SwipeMenuActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".recycle.PullToRefresh.PullToRefreshActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".other.SuspendActivity"
