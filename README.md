@@ -17,9 +17,6 @@
 **2017/05/06**
  封装一个通用的PopupWindow( http://www.jianshu.com/p/799dbb86f908 )
  
- **2017/04/16**
- 添加装饰者模式DEMO（ http://www.jianshu.com/p/c26b9b4a9d9e ）
-
  **2017/03/28**
  添加buid.gradle配置信息，支持多渠道打包（ http://www.jianshu.com/p/11484fddda23 ）
  
