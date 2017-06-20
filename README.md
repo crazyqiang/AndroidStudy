@@ -6,7 +6,7 @@
 # 更新日志：
 
 **2017/06/19**
- Android仿QQ小红点
+ Android仿QQ小红点 （ http://www.jianshu.com/p/9f0736c24029 ）
 
 **2017/06/12**
  Android仿QQ侧滑菜单( http://www.jianshu.com/p/1834ce7a2ce7 )
