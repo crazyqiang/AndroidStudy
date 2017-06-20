@@ -30,7 +30,6 @@ import org.ninetripods.mq.study.util.MyLog;
 public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
     public DragView dragView;
     private float mWidth, mHeight;//View的宽和高
-    private PointF dragPoint;//分别为拖动点和固定点
     private onDragStatusListener onDragListener;
 
     public QQBezierView(Context context) {
@@ -43,7 +42,6 @@ public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
 
     public QQBezierView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        dragPoint = new PointF();
     }
 
     @Override
@@ -55,38 +53,46 @@ public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        //获得根View
         View rootView = getRootView();
+        //获得触摸位置在全屏所在位置
         float mRawX = event.getRawX();
         float mRawY = event.getRawY();
-        dragPoint.set(event.getX(), event.getY());
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                //请求父View不拦截
                 getParent().requestDisallowInterceptTouchEvent(true);
                 //获得当前View在屏幕上的位置
                 int[] cLocation = new int[2];
                 getLocationOnScreen(cLocation);
                 if (rootView instanceof ViewGroup) {
+                    //初始化拖拽时显示的View
                     dragView = new DragView(getContext());
                     //设置固定圆的圆心坐标
                     dragView.setStickyPoint(cLocation[0] + mWidth / 2, cLocation[1] + mHeight / 2, mRawX, mRawY);
+                    //获得缓存的bitmap，滑动时直接通过drawBitmap绘制出来
                     setDrawingCacheEnabled(true);
                     Bitmap bitmap = getDrawingCache();
                     if (bitmap != null) {
                         dragView.setCacheBitmap(bitmap);
+                        //将DragView添加到RootView中，这样就可以全屏滑动了
                         ((ViewGroup) rootView).addView(dragView);
                         setVisibility(INVISIBLE);
                     }
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
+                //请求父View不拦截
                 getParent().requestDisallowInterceptTouchEvent(true);
                 if (dragView != null) {
+                    //更新DragView的位置
                     dragView.setDragViewLocation(mRawX, mRawY);
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 getParent().requestDisallowInterceptTouchEvent(false);
                 if (dragView != null) {
+                    //手抬起时来判断各种情况
                     dragView.setDragUp();
                 }
                 break;
@@ -163,21 +169,24 @@ public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
             for (int i = 0; i < explode_res.length; i++) {
                 bitmaps[i] = BitmapFactory.decodeResource(getResources(), explode_res[i]);
             }
-
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
             if (isInsideRange() && mState == STATE_DRAG) {
                 mPaint.setColor(Color.RED);
+                //绘制固定的小圆
                 canvas.drawCircle(stickyPointF.x, stickyPointF.y, stickRadius, mPaint);
-                //绘制贝塞尔曲线
+                //首先获得两圆心之间的斜率
                 Float linK = MathUtil.getLineSlope(dragPointF, stickyPointF);
+                //然后通过两个圆心和半径、斜率来获得外切线的切点
                 PointF[] stickyPoints = MathUtil.getIntersectionPoints(stickyPointF, stickRadius, linK);
                 dragRadius = (int) Math.min(mWidth, mHeight) / 2;
                 PointF[] dragPoints = MathUtil.getIntersectionPoints(dragPointF, dragRadius, linK);
                 mPaint.setColor(Color.RED);
+                //二阶贝塞尔曲线的控制点取得两圆心的中点
                 controlPoint = MathUtil.getMiddlePoint(dragPointF, stickyPointF);
+                //绘制贝塞尔曲线
                 mPath.reset();
                 mPath.moveTo(stickyPoints[0].x, stickyPoints[0].y);
                 mPath.quadTo(controlPoint.x, controlPoint.y, dragPoints[0].x, dragPoints[0].y);
@@ -187,10 +196,12 @@ public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
                 canvas.drawPath(mPath, mPaint);
             }
             if (mCacheBitmap != null && mState != STATE_DISMISS) {
+                //绘制缓存的Bitmap
                 canvas.drawBitmap(mCacheBitmap, dragPointF.x - mWidth / 2,
                         dragPointF.y - mHeight / 2, mPaint);
             }
             if (mState == STATE_DISMISS && explodeIndex < explode_res.length) {
+                //绘制小红点消失时的爆炸动画
                 canvas.drawBitmap(bitmaps[explodeIndex], dragPointF.x - mWidth / 2, dragPointF.y - mHeight / 2, mPaint);
             }
         }
@@ -208,14 +219,19 @@ public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
 
 
         /**
+         * 设置固定圆的圆心和半径
+         *
          * @param stickyX 固定圆的X坐标
          * @param stickyY 固定圆的Y坐标
          */
         public void setStickyPoint(float stickyX, float stickyY, float touchX, float touchY) {
+            //分别设置固定圆和拖拽圆的坐标
             stickyPointF.set(stickyX, stickyY);
             dragPointF.set(touchX, touchY);
+            //通过两个圆点算出圆心距，也是拖拽的距离
             dragDistance = MathUtil.getTwoPointDistance(dragPointF, stickyPointF);
             if (dragDistance <= maxDistance) {
+                //如果拖拽距离小于规定最大距离，则固定的圆应该越来越小，这样看着才符合实际
                 stickRadius = (int) (defaultRadius - dragDistance / 10) < 10 ? 10 : (int) (defaultRadius - dragDistance / 10);
                 mState = STATE_DRAG;
             } else {
@@ -231,6 +247,7 @@ public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
          */
         public void setDragViewLocation(float touchX, float touchY) {
             dragPointF.set(touchX, touchY);
+            //随时更改圆心距
             dragDistance = MathUtil.getTwoPointDistance(dragPointF, stickyPointF);
             if (mState == STATE_DRAG) {
                 if (isInsideRange()) {

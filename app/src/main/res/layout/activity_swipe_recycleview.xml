@@ -11,6 +11,5 @@
         android:id="@+id/swipe_recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:clipChildren="false" />
+        android:layout_below="@id/toolbar" />
 </RelativeLayout>
