@@ -30,7 +30,7 @@
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
  # LruCache、DiskLruCache实现图片缓存，瀑布流：
- ![ImgCache.gif](http://upload-images.jianshu.io/upload_images/587163-875ccce20eb291d4.gif)
+ ![image]( http://upload-images.jianshu.io/upload_images/587163-875ccce20eb291d4.gif?imageMogr2/auto-orient/strip) 
  
  # 仿QQ侧滑菜单、小红点：
   ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Swipe_menu.gif) 
