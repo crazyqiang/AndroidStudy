@@ -5,6 +5,9 @@
 
 # 更新日志：
 
+**2017/07/14**
+ LruCache、DiskLruCache实现图片缓存，瀑布流 （ http://www.jianshu.com/p/e6631d2319a6 ）
+
 **2017/06/19**
  Android仿QQ小红点 （ http://www.jianshu.com/p/9f0736c24029 ）
 
@@ -26,6 +29,8 @@
   **2017/01/20**
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
+ # LruCache、DiskLruCache实现图片缓存，瀑布流：
+ ![ImgCache.gif](http://upload-images.jianshu.io/upload_images/587163-875ccce20eb291d4.gif?imageMogr2/auto-orient/strip)
  
  # 仿QQ侧滑菜单、小红点：
   ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Swipe_menu.gif) 
