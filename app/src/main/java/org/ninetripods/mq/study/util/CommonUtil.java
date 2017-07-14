@@ -21,9 +21,9 @@ public class CommonUtil {
      * @param view View
      */
     public static void measureWidthAndHeight(View view) {
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        view.measure(w, h);
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec((1 << 30) - 1, View.MeasureSpec.AT_MOST);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec((1 << 30) - 1, View.MeasureSpec.AT_MOST);
+        view.measure(widthMeasureSpec, heightMeasureSpec);
     }
 
     /**

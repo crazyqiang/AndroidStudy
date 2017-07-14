@@ -45,5 +45,15 @@ public class DpUtil {
         return metric.widthPixels;
     }
 
-
+    /**
+     * 获得屏幕高度
+     *
+     * @param context Context
+     * @return 屏幕高度（像素）
+     */
+    public static int getScreenSizeHeight(Context context) {
+        DisplayMetrics metric = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metric);
+        return metric.heightPixels;
+    }
 }

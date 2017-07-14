@@ -12,10 +12,11 @@ import android.widget.TextView;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.ContactsActivity;
 import org.ninetripods.mq.study.recycle.SwipeMenuActivity;
+import org.ninetripods.mq.study.recycle.WaterFallActivity;
 import org.ninetripods.mq.study.util.NavitateUtil;
 
 public class RecycleFragment extends Fragment implements View.OnClickListener {
-    private TextView tv_contacts, tv_swipe_menu, tv_touch_helper, tv_refresh;
+    private TextView tv_contacts, tv_swipe_menu, tv_water_fall, tv_touch_helper, tv_refresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,10 +29,12 @@ public class RecycleFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         tv_contacts = (TextView) view.findViewById(R.id.tv_contacts);
         tv_swipe_menu = (TextView) view.findViewById(R.id.tv_swipe_menu);
+        tv_water_fall = (TextView) view.findViewById(R.id.tv_water_fall);
         tv_touch_helper = (TextView) view.findViewById(R.id.tv_touch_helper);
         tv_refresh = (TextView) view.findViewById(R.id.tv_refresh);
         tv_contacts.setOnClickListener(this);
         tv_swipe_menu.setOnClickListener(this);
+        tv_water_fall.setOnClickListener(this);
         tv_touch_helper.setOnClickListener(this);
         tv_refresh.setOnClickListener(this);
     }
@@ -44,6 +47,9 @@ public class RecycleFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_swipe_menu:
                 NavitateUtil.startActivity(getActivity(), SwipeMenuActivity.class);
+                break;
+            case R.id.tv_water_fall:
+                NavitateUtil.startActivity(getActivity(), WaterFallActivity.class);
                 break;
             case R.id.tv_touch_helper:
                 break;

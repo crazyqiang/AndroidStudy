@@ -3,10 +3,12 @@
     package="org.ninetripods.mq.study">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/study"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -86,6 +88,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".bezier.QQTrackPointActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".recycle.WaterFallActivity"
             android:screenOrientation="portrait" />
     </application>
 

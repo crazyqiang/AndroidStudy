@@ -1,6 +1,7 @@
 package org.ninetripods.mq.study.customViewGroup.flowLayout;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -162,6 +163,19 @@ public class FlowLayout extends ViewGroup {
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        MyLog.e("TTT","onDraw");
+        super.onDraw(canvas);
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        MyLog.e("TTT","onDraw");
+        super.dispatchDraw(canvas);
     }
 
     @Override
