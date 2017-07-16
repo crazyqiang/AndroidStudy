@@ -1,7 +1,8 @@
 # AndroidStudy
 
 # 扫描二维码下载APK示例：
-![image](http://upload-images.jianshu.io/upload_images/587163-5cb2deb1fc640ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)) 
+![image](http://upload-images.jianshu.io/upload_images/587163-5cb2deb1fc640ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+或者 [点击此处链接下载APK](https://www.pgyer.com/G7G9)
 
 # 更新日志：
 
