@@ -1,7 +1,8 @@
 # AndroidStudy
 
 # 扫描二维码下载APK示例：
-![image](http://upload-images.jianshu.io/upload_images/587163-f258a65074ff6b36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+![image](http://upload-images.jianshu.io/upload_images/587163-5cb2deb1fc640ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+或者 [点击此处链接下载APK](https://www.pgyer.com/G7G9)
 
 # 更新日志：
 
@@ -30,7 +31,7 @@
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
  # LruCache、DiskLruCache实现图片缓存，瀑布流：
- ![image]( http://upload-images.jianshu.io/upload_images/587163-875ccce20eb291d4.gif) 
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/ImgCache.gif) 
  
  # 仿QQ侧滑菜单、小红点：
   ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Swipe_menu.gif) 
