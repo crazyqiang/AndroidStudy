@@ -6,6 +6,15 @@
 
 # 更新日志：
 
+**2017/07/30**
+ Android多线程之HandlerThread （ http://www.jianshu.com/p/6110d1e9c428 ）
+ 
+ **2017/07/30**
+ Android多线程之IntentService （ http://www.jianshu.com/p/643de16c9eef ）
+ 
+ **2017/07/30**
+ Android中Callable、Future、FutureTask的概念以及几种线程池的使用 （ http://www.jianshu.com/p/fcefeea80171 ）
+
 **2017/07/14**
  LruCache、DiskLruCache实现图片缓存，瀑布流 （ http://www.jianshu.com/p/e6631d2319a6 ）
 
