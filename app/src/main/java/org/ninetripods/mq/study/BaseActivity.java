@@ -64,6 +64,10 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                     //清除缓存
                     menuItem.setTitle("清除缓存");
                     break;
+                case 2:
+                    //清除缓存
+                    menuItem.setTitle("BLOG");
+                    break;
             }
         }
         return super.onCreateOptionsMenu(menu);
@@ -90,11 +94,19 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
                         //清除缓存
                         clearCache();
                         break;
+                    case 2:
+                        //打开webview
+                        openWebview();
+                        break;
                 }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void openWebview() {
+
     }
 
     @Override

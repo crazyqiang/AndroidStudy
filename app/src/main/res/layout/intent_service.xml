@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:text="同一个线程顺序执行传入的任务：" />
+
+    <TextView
+        android:id="@+id/tv_progress_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="0%" />
+
+    <ProgressBar
+        android:id="@+id/pb_one"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/progress_drawable" />
+
+    <TextView
+        android:id="@+id/tv_progress_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="end"
+        android:text="0%" />
+
+    <ProgressBar
+        android:id="@+id/pb_two"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/progress_drawable" />
+
+</LinearLayout>

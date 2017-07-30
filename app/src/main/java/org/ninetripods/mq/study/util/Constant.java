@@ -8,6 +8,11 @@ public class Constant {
     public static final String BLOG_URL = "http://www.jianshu.com/u/185028550381";
     public static final String PROCESS_URL = "http://www.jianshu.com/p/ab3f6a2d8486";
     public static final String SERVER_APK_URL = "https://www.pgyer.com/pvxH";
+    //多线程
+    public static final String HANDLER_THREAD_BLOG = "http://www.jianshu.com/p/6110d1e9c428";
+    public static final String INTENT_SERVICE_BLOG = "http://www.jianshu.com/p/643de16c9eef";
+    public static final String THREAD_POOL_BLOG = "http://www.jianshu.com/p/fcefeea80171";
+
 
 
     //Image URL

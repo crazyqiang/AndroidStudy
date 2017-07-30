@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    tools:context="org.ninetripods.mq.study.util.fragment.MultiThreadFragment">
+
+    <TextView
+        android:id="@+id/tv_handler_thread"
+        style="@style/btn_style_done"
+        android:layout_marginTop="100dp"
+        android:text="HandlerThread" />
+
+    <TextView
+        android:id="@+id/tv_intent_service"
+        style="@style/btn_style_done"
+        android:layout_below="@id/tv_handler_thread"
+        android:layout_marginTop="25dp"
+        android:text="IntentService" />
+
+    <TextView
+        android:id="@+id/tv_asynctask"
+        style="@style/btn_style_done"
+        android:layout_below="@id/tv_intent_service"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:text="AsyncTask" />
+
+    <TextView
+        android:id="@+id/tv_thread_pool"
+        style="@style/btn_style_done"
+        android:layout_below="@id/tv_asynctask"
+        android:layout_marginTop="25dp"
+        android:text="线程池" />
+
+</RelativeLayout>

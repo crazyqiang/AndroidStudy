@@ -6,14 +6,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
 
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
-import org.ninetripods.mq.study.util.fragment.OtherFragment;
+import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
 import org.ninetripods.mq.study.util.fragment.PopFragment;
 import org.ninetripods.mq.study.util.fragment.ProcessFragment;
 import org.ninetripods.mq.study.util.fragment.RecycleFragment;
@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
-        selectItem(3);
+        selectItem(4);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class MainActivity extends BaseActivity {
                         selectItem(4);
                         break;
                 }
-                drawer_layout.closeDrawer(Gravity.START);
+                drawer_layout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
                 currentFragment = new RecycleFragment();
                 break;
             case 4:
-                currentFragment = new OtherFragment();
+                currentFragment = new MultiThreadFragment();
                 break;
             default:
                 currentFragment = new HomeFragment();

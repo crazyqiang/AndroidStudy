@@ -92,6 +92,19 @@
         <activity
             android:name=".recycle.WaterFallActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiThread.ThreadPoolActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiThread.HandlerThreadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiThread.IntentServiceActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".multiThread.intentService.MyIntentService"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

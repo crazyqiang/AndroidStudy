@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.ninetripods.mq.study.multiThread.HandlerThreadActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="每2秒更新一次验证码："
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_random"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="3698"
+        android:textColor="@color/red_f"
+        android:textSize="50sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_random"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_start"
+            style="@style/btn_style_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始获得验证码" />
+
+        <TextView
+            android:id="@+id/tv_pause"
+            style="@style/btn_style_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="暂停获取验证码" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -4,17 +4,22 @@
         android:id="@+id/my_navigation_0"
         android:checkable="false"
         android:enabled="true"
-        android:title="全部" />
+        android:title="首页" />
     <item
         android:id="@+id/my_navigation_1"
         android:checkable="false"
         android:enabled="true"
         android:title="PopupWindow" />
     <item
+        android:id="@+id/my_navigation_4"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="Android多线程" />
+    <item
         android:id="@+id/my_navigation_2"
         android:checkable="false"
         android:enabled="true"
-        android:title="多进程通信" />
+        android:title="Android多进程" />
 
     <item
         android:id="@+id/my_navigation_3"
@@ -22,7 +27,7 @@
         android:enabled="true"
         android:title="RecycleView系列" />
     <item
-        android:id="@+id/my_navigation_4"
+        android:id="@+id/my_navigation_5"
         android:checkable="false"
         android:enabled="true"
         android:title="其他"

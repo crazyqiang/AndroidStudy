@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_blog"
+        android:title="Blog"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/item_pool_1"
+        android:title="newScheduledThreadPool(4)"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_pool_2"
+        android:title="newSingleThreadExecutor"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_pool_3"
+        android:title="newCachedThreadPool"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/item_pool_4"
+        android:title="newFixedThreadPool(4)"
+        app:showAsAction="never" />
+</menu>
