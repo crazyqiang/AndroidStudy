@@ -13,7 +13,7 @@
  Android多线程之IntentService （ http://www.jianshu.com/p/643de16c9eef ）
  
  **2017/07/30**
- Android中Callable、Future、FutureTask的概念以及几种线程池的使用 （ http://www.jianshu.com/p/fcefeea80171 ）
+ Android中Callable、Future、FutureTask的概念以及几种线程池的使用（ http://www.jianshu.com/p/fcefeea80171 ）
 
 **2017/07/14**
  LruCache、DiskLruCache实现图片缓存，瀑布流 （ http://www.jianshu.com/p/e6631d2319a6 ）
@@ -38,6 +38,16 @@
  
   **2017/01/20**
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
+ 
+  # Android多线程之HandlerThread、IntentService：
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/HandlerThread.gif) 
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/IntentService.gif) 
+ 
+  # Android中几种线程池的使用：
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/CachedThreadPool.gif) 
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/FixedThreadPool.gif) 
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/SingleThreadExecutor.gif) 
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Schedule.gif) 
  
  # LruCache、DiskLruCache实现图片缓存，瀑布流：
  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/ImgCache.gif) 
