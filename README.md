@@ -39,11 +39,12 @@
   **2017/01/20**
  添加自定义View（饼形图）、自定义ViewGroup（五环图）
  
-  # Android多线程之HandlerThread、IntentService：
-  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/HandlerThread.gif) 
-  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/IntentService.gif) 
  
-  # Android中几种线程池的使用：
+ # Android多线程之HandlerThread、IntentService：
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/HandlerThread.gif) 
+ ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/IntentService.gif) 
+ 
+ # Android中几种线程池的使用：
  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/CachedThreadPool.gif) 
  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/FixedThreadPool.gif) 
  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/SingleThreadExecutor.gif) 
