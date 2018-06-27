@@ -30,6 +30,5 @@
         android:id="@+id/my_navigation_5"
         android:checkable="false"
         android:enabled="true"
-        android:title="其他"
-        android:visible="false" />
+        android:title="嵌套滑动" />
 </menu>

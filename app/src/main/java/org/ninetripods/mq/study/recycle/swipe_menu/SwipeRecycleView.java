@@ -35,6 +35,11 @@ public class SwipeRecycleView extends RecyclerView {
     private int mDownX, mDownY;
 
     @Override
+    protected void onMeasure(int widthSpec, int heightSpec) {
+        super.onMeasure(widthSpec, heightSpec);
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         boolean isIntercepted = super.onInterceptTouchEvent(event);
         switch (event.getAction()) {

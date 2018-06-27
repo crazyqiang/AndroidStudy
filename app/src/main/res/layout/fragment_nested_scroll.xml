@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="org.ninetripods.mq.study.NestedScroll.NavigationActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="传统嵌套滑动冲突" />
+
+    <TextView
+        android:id="@+id/tv_scroll_listView"
+        style="@style/btn_style_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="ScrollView+ListView" />
+
+    <TextView
+        android:id="@+id/tv_scroll_viewpager"
+        style="@style/btn_style_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="ScrollView+viewpager" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="NestedScroll" />
+
+    <TextView
+        android:id="@+id/tv_coordinate_toolbar"
+        style="@style/btn_style_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="CoordinatorLayout+Toolbar" />
+
+    <TextView
+        android:id="@+id/tv_nested_child_parent"
+        style="@style/btn_style_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="NestedChild+NestedParent" />
+
+
+</LinearLayout>

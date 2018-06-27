@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="id_nested_consume_top" type="id" />
+    <item name="id_nested_layout_top" type="id" />
+    <item name="id_nested_layout_viewpager" type="id" />
+    <item name="id_nested_layout_indicator" type="id" />
+    <item name="id_nested_layout_content" type="id" />
+    <item name="id_stickynavlayout_innerscrollview" type="id" />
+
+</resources>

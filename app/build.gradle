@@ -69,19 +69,19 @@ android {
     }
 
     //修改APK生成名字  通过android.applicationVariants索引来遍历所有的 build variant
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-
-            def timeNow = getDate()
-            def newName
-            if (variant.buildType.name.equals('debug')) {
-                newName = "android-" + timeNow + "_v${variant.versionName}-debug.apk"
-            } else {
-                newName = "android_${variant.flavorName}_" + timeNow + "_v${variant.versionName}_${variant.buildType.name}.apk"
-            }
-            output.outputFile = new File(output.outputFile.parent, newName)
-        }
-    }
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//
+//            def timeNow = getDate()
+//            def newName
+//            if (variant.buildType.name.equals('debug')) {
+//                newName = "android-" + timeNow + "_v${variant.versionName}-debug.apk"
+//            } else {
+//                newName = "android_${variant.flavorName}_" + timeNow + "_v${variant.versionName}_${variant.buildType.name}.apk"
+//            }
+//            output.outputFile = new File(output.outputFile.parent, newName)
+//        }
+//    }
 //    externalNativeBuild {
 //        cmake {
 //            path 'CMakeLists.txt'

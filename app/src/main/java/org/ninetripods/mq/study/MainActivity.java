@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
 import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
+import org.ninetripods.mq.study.util.fragment.NestedScrollFragment;
 import org.ninetripods.mq.study.util.fragment.PopFragment;
 import org.ninetripods.mq.study.util.fragment.ProcessFragment;
 import org.ninetripods.mq.study.util.fragment.RecycleFragment;
@@ -41,7 +42,7 @@ public class MainActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
-        selectItem(4);
+        selectItem(5);
     }
 
     @Override
@@ -64,6 +65,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.my_navigation_4:
                         selectItem(4);
+                        break;
+                    case R.id.my_navigation_5:
+                        selectItem(5);
                         break;
                 }
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -113,6 +117,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case 4:
                 currentFragment = new MultiThreadFragment();
+                break;
+            case 5:
+                currentFragment = new NestedScrollFragment();
                 break;
             default:
                 currentFragment = new HomeFragment();

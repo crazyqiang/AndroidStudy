@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.ninetripods.mq.study.CommonWebviewActivity;
+import org.ninetripods.mq.study.NestedScroll.tradition.ScrollListViewActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.bezier.BezierDemoActivity;
 import org.ninetripods.mq.study.bezier.QQTrackPointActivity;
@@ -21,6 +22,7 @@ import org.ninetripods.mq.study.multiprocess_client.AidlActivity;
 import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
 import org.ninetripods.mq.study.multiprocess_client.MessengerActivity;
+import org.ninetripods.mq.study.NestedScroll.NestedScrollingActivity;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
 import org.ninetripods.mq.study.path.PathVectorActivity;
 import org.ninetripods.mq.study.popup.PopupWindowActivity;
@@ -74,7 +76,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                 {"属性动画+Path", "PathMeasure", "Path+SVG", "ViewPropertyAnimator", ""},
                 {"贝塞尔曲线", "基本用法示例", "仿QQ小红点", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
-                {"图片加载", "Volley(TODO)", "Glide(TODO)", "", "", ""},
+                {"事件滑动", "NestedScroll", "ScrollView+ListView", "", "", ""},
                 {"弹窗", "PopupWindow", "", "", "", ""}
         };
         for (String[] anArray : array) {
@@ -161,6 +163,17 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                     case R.id.tv_view_four:
                         //Binder
                         NavitateUtil.startActivity(getActivity(), BinderActivity.class);
+                        break;
+                }
+                break;
+            case 5:
+                //嵌套滑动
+                switch (view.getId()) {
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(getActivity(), NestedScrollingActivity.class);
+                        break;
+                    case R.id.tv_view_two:
+                        NavitateUtil.startActivity(getActivity(), ScrollListViewActivity.class);
                         break;
                 }
                 break;

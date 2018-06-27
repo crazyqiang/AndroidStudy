@@ -105,6 +105,26 @@
         <service
             android:name=".multiThread.intentService.MyIntentService"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".NestedScroll.NestedScrollingActivity"
+            android:label="@string/title_activity_nested_scrolling"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".NestedScroll.tradition.ScrollListViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NestedScroll.NavigationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NestedScroll.tradition.ScrollViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NestedScroll.nested.CoordinatorLayoutToolbarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NestedScroll.nested.NestedScrollActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
