@@ -10,6 +10,9 @@
 **2018/08/26**
  Android使用WindowManger实现桌面悬浮窗 （ https://www.jianshu.com/p/5cacdb0d2246 ）
  
+ **2018/03/30**
+  Android嵌套滑动的分析与实践（ https://blog.csdn.net/u013700502/article/details/80834819 ）
+ 
 **2017/07/30**
  Android多线程之HandlerThread （ http://www.jianshu.com/p/6110d1e9c428 ）
  
