@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+
+    <TextView
+        style="@style/btn_style_done_new"
+        android:layout_marginTop="50dp"
+        android:onClick="start_window"
+        android:text="开启悬浮窗" />
+
+    <TextView
+        style="@style/btn_style_done_new"
+        android:layout_marginTop="50dp"
+        android:onClick="close_window"
+        android:text="关闭悬浮窗" />
+
+</LinearLayout>

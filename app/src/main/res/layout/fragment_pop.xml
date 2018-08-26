@@ -13,10 +13,10 @@
         android:text="CommonPopupWindow" />
 
     <TextView
-        android:id="@+id/tv_alert_dialog"
-        style="@style/btn_style_undo"
+        android:id="@+id/tv_floating_window"
+        style="@style/btn_style_done"
         android:layout_below="@+id/tv_popup"
         android:layout_marginTop="30dp"
-        android:text="AlertDialog" />
+        android:text="FloatingWindow" />
 
 </RelativeLayout>
