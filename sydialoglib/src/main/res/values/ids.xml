@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btn_ok" type="id" />
+    <item name="btn_cancel" type="id" />
+    <item name="dialog_title" type="id" />
+    <item name="dialog_content" type="id" />
+</resources>

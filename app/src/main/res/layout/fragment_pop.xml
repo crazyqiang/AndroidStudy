@@ -19,4 +19,11 @@
         android:layout_marginTop="30dp"
         android:text="FloatingWindow" />
 
+    <TextView
+        android:id="@+id/tv_dialog"
+        style="@style/btn_style_done"
+        android:layout_below="@+id/tv_floating_window"
+        android:layout_marginTop="30dp"
+        android:text="CommonDialog" />
+
 </RelativeLayout>

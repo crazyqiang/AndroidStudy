@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="----------默认内置Dialog,可自行修改内置样式----------"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showDefaultDialog"
+                android:text="1、默认Dialog：一个Button" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="showDefaultDialogTwo"
+                android:text="2、默认Dialog：二个Button" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="----------自定义Dialog----------"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showBaseUseDialog"
+                android:text="3、自定义Dialog:基本使用" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="showLoadingDialog"
+                android:text="4、展示进度条(5秒后自动消失)" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="showAdDialog"
+                android:text="5、全屏广告弹窗" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="showBottomDialog"
+                android:text="6、底部选择窗" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="showDialogShare"
+                android:text="7、底部分享功能" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="----------全局管理Dialog----------"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showGlobalDialog"
+                android:text="8、全局管理Dialog（管理多个依次弹出）" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

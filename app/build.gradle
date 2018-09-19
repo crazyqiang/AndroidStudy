@@ -104,5 +104,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.github.promeg:tinypinyin:2.0.3'
     compile 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
-    testCompile 'junit:junit:4.12'
+//    testCompile 'junit:junit:4.12'
+    compile project(':sydialoglib')
 }

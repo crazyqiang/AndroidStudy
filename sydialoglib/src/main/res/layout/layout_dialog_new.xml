@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/roundlayout"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_havemsg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@id/dialog_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="6dp"
+                android:text="订单提交成功"
+                android:textColor="#292d33"
+                android:textSize="18sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@id/dialog_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="6dp"
+                android:text="我们将在30分钟处理，稍后通知您订单结果！感谢您选择"
+                android:textColor="#525a66"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_onlytitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:minHeight="106dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="订单提交成功"
+            android:textColor="#292d33"
+            android:textSize="17sp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@id/btn_cancel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_cancel_border_bg"
+                android:gravity="center"
+                android:minHeight="44dp"
+                android:text="取消"
+                android:textColor="#f7595a"
+                android:textSize="17sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@id/btn_ok"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_btn_assuere_border_bg"
+                android:gravity="center"
+                android:minHeight="44dp"
+                android:text="确定"
+                android:textColor="#f7595a"
+                android:textSize="17sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

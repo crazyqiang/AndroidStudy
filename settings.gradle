@@ -1,1 +1,1 @@
-include ':app', ':multiprocess_sever'
+include ':app', ':multiprocess_sever', ':sydialoglib'

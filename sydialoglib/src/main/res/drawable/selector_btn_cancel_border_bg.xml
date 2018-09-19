@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- created by lianyuchen on 2015/12/29 -->
+    <!-- 未按下按钮状态 -->
+    <item android:drawable="@drawable/btn_cancel_border_bg_nol" android:state_pressed="false" />
+
+    <!-- 按下按钮状态 -->
+    <item android:drawable="@drawable/btn_cancel_border_bg_sel" android:state_pressed="true" />
+
+</selector>

@@ -1,0 +1,17 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<style name="translate_style" parent="android:Animation">-->
+    <!--<item name="@android:window">@anim/view_fade_in</item>-->
+    <!--<item name="@android:windowExitAnimation">@anim/view_fade_out</item>-->
+    <!--</style>-->
+
+    <style name="translate_style" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/view_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/view_fade_out</item>
+    </style>
+
+    <style name="AnimUp" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+</resources>
