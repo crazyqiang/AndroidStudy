@@ -6,6 +6,8 @@
 
 # 更新日志：
 
+**2018/09/20**
+ Android基于DialogFragment封装一个通用的Dialog （ https://blog.csdn.net/u013700502/article/details/82777402 ）
 
 **2018/08/26**
  Android使用WindowManger实现桌面悬浮窗 （ https://www.jianshu.com/p/5cacdb0d2246 ）
