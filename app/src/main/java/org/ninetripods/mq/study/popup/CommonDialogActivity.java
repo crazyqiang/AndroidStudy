@@ -25,7 +25,7 @@ import org.ninetripods.mq.study.MyApplication;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.popup.dialog.DialogUtil;
 
-public class CommonDialogActivity extends BaseActivity implements IDialog.OnBuildListener {
+public class CommonDialogActivity extends BaseActivity {
     private SYDialog dialog;
 
     @Override
@@ -54,7 +54,7 @@ public class CommonDialogActivity extends BaseActivity implements IDialog.OnBuil
         DialogUtil.createDefaultDialog(this, "我是标题", "你好,我们将在30分钟处理，稍后通知您订单结果！",
                 "", new IDialog.OnClickListener() {
                     @Override
-                    public void onClick(IDialog dialog) {
+                    public void onClick(IDialog dialog)      {
                         dialog.dismiss();
                     }
                 });
@@ -91,38 +91,36 @@ public class CommonDialogActivity extends BaseActivity implements IDialog.OnBuil
      * @param view View
      */
     public void showBaseUseDialog(View view) {
-        view.setId(R.id.btn_ok);
         new SYDialog.Builder(this)
-                .setDialogView(R.layout.dialog_phone_login)
-                .setAnimStyle(R.style.translate_style)
-                .setScreenWidthP(0.8f)
-                .setGravity(Gravity.CENTER)
-                .setWindowBackgroundP(0.2f)
-                .setCancelable(true)
-                .setCancelableOutSide(true)
-                .setBuildChildListener(this)
-                .show();
-    }
-
-    @Override
-    public void onBuildChildView(final IDialog dialog, View view, int layoutRes) {
-        switch (layoutRes) {
-            case R.layout.layout_dialog:
-                final EditText editText = view.findViewById(R.id.et_content);
-                Button btn_ok = view.findViewById(R.id.btn_ok);
-                btn_ok.setOnClickListener(new View.OnClickListener() {
+                .setDialogView(R.layout.layout_dialog)//设置dialog布局
+                .setAnimStyle(R.style.translate_style)//设置动画 默认没有动画
+                .setScreenWidthP(0.85f) //设置屏幕宽度比例 0.0f-1.0f
+                .setGravity(Gravity.CENTER)//设置Gravity
+                .setWindowBackgroundP(0.2f)//设置背景透明度 0.0f-1.0f 1.0f完全不透明
+                .setCancelable(true)//设置是否屏蔽物理返回键 true不屏蔽  false屏蔽
+                .setCancelableOutSide(true)//设置dialog外点击是否可以让dialog消失
+                .setBuildChildListener(new IDialog.OnBuildListener() {
+                    //设置子View
                     @Override
-                    public void onClick(View v) {
-                        String editTextStr = null;
-                        if (!TextUtils.isEmpty(editText.getText())) {
-                            editTextStr = editText.getText().toString();
-                        }
-                        dialog.dismiss();
-                        Toast.makeText(MyApplication.getApplication(), editTextStr, Toast.LENGTH_SHORT).show();
+                    public void onBuildChildView(final IDialog dialog, View view, int layoutRes) {
+                        //dialog: IDialog
+                        //view： DialogView
+                        //layoutRes :Dialog的资源文件 如果一个Activity里有多个dialog 可以通过layoutRes来区分
+                        final EditText editText = view.findViewById(R.id.et_content);
+                        Button btn_ok = view.findViewById(R.id.btn_ok);
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String editTextStr = null;
+                                if (!TextUtils.isEmpty(editText.getText())) {
+                                    editTextStr = editText.getText().toString();
+                                }
+                                dialog.dismiss();
+                                Toast.makeText(MyApplication.getApplication(), editTextStr, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
-                });
-                break;
-        }
+                }).show();
     }
 
     /**
@@ -130,6 +128,7 @@ public class CommonDialogActivity extends BaseActivity implements IDialog.OnBuil
      *
      * @param view View
      */
+
     public void showLoadingDialog(View view) {
         DialogUtil.createLoadingDialog(this);
         new Handler().postDelayed(new Runnable() {
@@ -362,6 +361,7 @@ public class CommonDialogActivity extends BaseActivity implements IDialog.OnBuil
                 ll_share = itemView.findViewById(R.id.ll_share);
             }
         }
+
     }
 
 

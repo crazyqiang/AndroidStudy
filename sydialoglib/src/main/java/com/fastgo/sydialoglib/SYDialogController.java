@@ -148,7 +148,7 @@ public class SYDialogController {
         int dialogHeight;
         float dimAmount = 0.2f;
         public int gravity = Gravity.CENTER;
-        boolean isCancelableOutside = false;
+        boolean isCancelableOutside = true;
         boolean cancelable = false;
         View dialogView;
         Context context;

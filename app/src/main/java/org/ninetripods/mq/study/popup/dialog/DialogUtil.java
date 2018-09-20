@@ -60,7 +60,7 @@ public class DialogUtil {
                 builder.setNegativeButton(btn2Str, negativeClickListener);
             }
         }
-        builder.showDefault();
+        builder.show();
     }
 
     private static HashMap<String, SYDialog> hashMap = new HashMap<>();

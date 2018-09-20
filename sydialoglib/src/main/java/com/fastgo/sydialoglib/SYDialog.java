@@ -317,24 +317,15 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         }
 
         /**
-         * 展示自定义布局的Dialog
+         * 展示Dialog
          *
          * @return SYDialog
          */
         public SYDialog show() {
-            SYDialog dialog = create();
-            removePreDialog();
-            dialog.show(params.fragmentManager, FTag);
-            return dialog;
-        }
-
-        /**
-         * 展示默认的dialog
-         *
-         * @return SYDialog
-         */
-        public SYDialog showDefault() {
-            setDefaultOption();
+            if (params.layoutRes <= 0 && params.dialogView == null) {
+                //如果没有设置布局 提供默认设置
+                setDefaultOption();
+            }
             SYDialog dialog = create();
             removePreDialog();
             dialog.show(params.fragmentManager, FTag);
