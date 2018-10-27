@@ -1,15 +1,12 @@
 package com.fastgo.sydialoglib;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -120,39 +117,6 @@ public abstract class SYBaseDialog extends DialogFragment {
     }
 
     protected int getAnimRes() {
-        return 0;
-    }
-
-    private static Point point = new Point();
-
-
-    /**
-     * 获取屏幕宽度
-     *
-     * @param activity Activity
-     * @return ScreenWidth
-     */
-    public static int getScreenWidth(Activity activity) {
-        Display display = activity.getWindowManager().getDefaultDisplay();
-        if (display != null) {
-            display.getSize(point);
-            return point.x;
-        }
-        return 0;
-    }
-
-    /**
-     * 获取屏幕高度
-     *
-     * @param activity Activity
-     * @return ScreenHeight
-     */
-    public static int getScreenHeight(Activity activity) {
-        Display display = activity.getWindowManager().getDefaultDisplay();
-        if (display != null) {
-            display.getSize(point);
-            return point.y;
-        }
         return 0;
     }
 

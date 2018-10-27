@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.fastgo.driver.dialog.sydialoglib.R;
+import com.fastgo.sydialoglib.manager.ScreenUtil;
 
 
 /**
@@ -24,6 +25,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
     private SYDialogController controller;
     private IDialog.OnBuildListener buildListener;
     private static final String FTag = "dialogTag";
+    private IDialog.OnDismissListener dismissListener;
 
     public SYDialog() {
         controller = new SYDialogController(this);
@@ -93,9 +95,19 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        //监听dialog的dismiss
+        if (dismissListener != null) {
+            dismissListener.onDismiss(this);
+        }
+        super.onDestroy();
+    }
+
     public static class Builder {
         private SYDialogController.SYParams params;
         private IDialog.OnBuildListener buildListener;
+        private IDialog.OnDismissListener dismissListener;
 
         public Builder(Context context) {
             if (!(context instanceof Activity)) {
@@ -135,7 +147,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
          * @return Builder
          */
         public Builder setScreenWidthP(float percentage) {
-            params.dialogWidth = (int) (getScreenWidth((Activity) params.context) * percentage);
+            params.dialogWidth = (int) (ScreenUtil.getScreenWidth((Activity) params.context) * percentage);
             return this;
         }
 
@@ -146,7 +158,18 @@ public class SYDialog extends SYBaseDialog implements IDialog {
          * @return Builder
          */
         public Builder setScreenHeightP(float percentage) {
-            params.dialogHeight = (int) (getScreenHeight((Activity) params.context) * percentage);
+            params.dialogHeight = (int) (ScreenUtil.getScreenHeight((Activity) params.context) * percentage);
+            return this;
+        }
+
+        /**
+         * 监听dialog的dismiss
+         *
+         * @param dismissListener IDialog.OnDismissListener
+         * @return Builder
+         */
+        public Builder setOnDismissListener(IDialog.OnDismissListener dismissListener) {
+            this.dismissListener = dismissListener;
             return this;
         }
 
@@ -313,6 +336,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             SYDialog dialog = new SYDialog();
             params.apply(dialog.controller);
             dialog.buildListener = buildListener;
+            dialog.dismissListener = dismissListener;
             return dialog;
         }
 
@@ -341,7 +365,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             params.gravity = Gravity.CENTER;
             params.layoutRes = R.layout.layout_dialog_new;
             params.dimAmount = 0.5f;
-            params.dialogWidth = (int) (getScreenWidth((Activity) params.context) * 0.85f);
+            params.dialogWidth = (int) (ScreenUtil.getScreenWidth((Activity) params.context) * 0.85f);
             params.dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT;
         }
 

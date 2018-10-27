@@ -99,6 +99,13 @@ public class CommonDialogActivity extends BaseActivity {
                 .setWindowBackgroundP(0.2f)//设置背景透明度 0.0f-1.0f 1.0f完全不透明
                 .setCancelable(true)//设置是否屏蔽物理返回键 true不屏蔽  false屏蔽
                 .setCancelableOutSide(true)//设置dialog外点击是否可以让dialog消失
+                .setOnDismissListener(new IDialog.OnDismissListener() {
+                    @Override
+                    public void onDismiss(IDialog dialog) {
+                        //监听dialog dismiss的回调
+                        toast("dismiss回调");
+                    }
+                })
                 .setBuildChildListener(new IDialog.OnBuildListener() {
                     //设置子View
                     @Override
