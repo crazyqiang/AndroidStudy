@@ -351,6 +351,11 @@ public class SYDialog extends SYBaseDialog implements IDialog {
                 setDefaultOption();
             }
             SYDialog dialog = create();
+            if (params.context == null) return dialog;
+            if (params.context instanceof Activity) {
+                Activity activity = (Activity) params.context;
+                if (activity.isFinishing()) return dialog;
+            }
             removePreDialog();
             dialog.show(params.fragmentManager, FTag);
             return dialog;
