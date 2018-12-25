@@ -14,9 +14,9 @@ Gradle理论与实践二：Groovy介绍 （ https://blog.csdn.net/u013700502/art
 
 Gradle理论与实践三：Gradle构建脚本基础 （ https://blog.csdn.net/u013700502/article/details/85231661 ）
 
-Gradle理论与实践四：自定义Gradle插件：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85232032 ）
+Gradle理论与实践四：自定义Gradle插件（ https://blog.csdn.net/u013700502/article/details/85232032 ）
 
-Gradle配置中subprojects 和 allprojects 的区别：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85231687 ）
+Gradle配置中subprojects和allprojects的区别:（ https://blog.csdn.net/u013700502/article/details/85231687 ）
 
 **2018/09/20**
  Android基于DialogFragment封装一个通用的Dialog （ https://blog.csdn.net/u013700502/article/details/82777402 ）
@@ -26,7 +26,7 @@ Gradle配置中subprojects 和 allprojects 的区别：Gradle入门 （ https://
  
  **2018/03/30**
   Android嵌套滑动的分析与实践（ https://blog.csdn.net/u013700502/article/details/80834819 ）
- 
+ 入门
 **2017/07/30**
  Android多线程之HandlerThread （ http://www.jianshu.com/p/6110d1e9c428 ）
  
