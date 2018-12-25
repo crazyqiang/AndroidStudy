@@ -7,10 +7,15 @@
 # 更新日志：
 
 **2018/12/25**
+
 Gradle理论与实践一：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85231505 ）
+
 Gradle理论与实践二：Groovy介绍 （ https://blog.csdn.net/u013700502/article/details/85231600 ）
+
 Gradle理论与实践三：Gradle构建脚本基础 （ https://blog.csdn.net/u013700502/article/details/85231661 ）
+
 Gradle理论与实践四：自定义Gradle插件：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85232032 ）
+
 Gradle配置中subprojects 和 allprojects 的区别：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85231687 ）
 
 **2018/09/20**
