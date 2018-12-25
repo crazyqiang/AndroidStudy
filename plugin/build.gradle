@@ -1,0 +1,29 @@
+plugins {
+    id 'groovy'
+    id 'maven-publish'
+    id 'maven'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = 'com.fastgo'
+version = '1.0-test'
+publishing {
+    repositories {
+        maven {
+            url = uri("$rootDir/repo")
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}

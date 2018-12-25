@@ -1,22 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
 
     defaultConfig {
-        applicationId "org.ninetripods.mq.multiprocess_sever"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
     }
-    sourceSets{
-        main{
-            java.srcDirs=['src/main/java','src/main/aidl']
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
         }
     }
     buildTypes {
@@ -34,5 +31,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+//    testCompile 'junit:junit:4.12'
 }

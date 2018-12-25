@@ -44,6 +44,7 @@ android {
             buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
         }
     }
+
     productFlavors {
         market_meizu {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "meizu"]
@@ -62,9 +63,6 @@ android {
         }
         market_360 {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
-//            ndk {
-//                abiFilters 'armeabi'
-//            }
         }
     }
 
