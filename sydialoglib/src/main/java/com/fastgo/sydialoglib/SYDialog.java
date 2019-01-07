@@ -79,6 +79,9 @@ public class SYDialog extends SYBaseDialog implements IDialog {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (controller == null) {
+            controller = new SYDialogController(this);
+        }
         //设置默认子View布局
         controller.setChildView(view);
         //回调给调用者，用来设置子View及点击事件等
@@ -88,8 +91,8 @@ public class SYDialog extends SYBaseDialog implements IDialog {
     }
 
     @Override
-    public void dismiss() {
-        super.dismiss();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (controller != null) {
             controller = null;
         }

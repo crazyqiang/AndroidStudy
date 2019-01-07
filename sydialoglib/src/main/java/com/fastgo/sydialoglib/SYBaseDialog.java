@@ -61,7 +61,9 @@ public abstract class SYBaseDialog extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        Window window = getDialog().getWindow();
+        Dialog dialog = getDialog();
+        if (dialog == null) return;
+        Window window = dialog.getWindow();
         if (window == null) return;
         //设置背景色透明
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
