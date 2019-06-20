@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="red">#fa5650</color>
+    <color name="white">#ffffffff</color>
+    <color name="orderitemstatus">#525a66</color>
+
+    <color name="bg_loading">#B3000000</color>
+    <color name="c999999">#999999</color>
+    <color name="c666666">#666666</color>
+    <color name="c333333">#333333</color>
+    <color name="ce0e0e0">#e0e0e0</color>
+    <color name="CE6454A">#E6454A</color>
+    <color name="ce6454a">#e6454a</color>
+    <color name="backgroud_gray">#F2F0EA</color>
+    <color name="cff9c03">#ff9c03</color>
+    <color name="cffd28c">#ffd28c</color>
+    <color name="rippelColor">#33FF9C03</color>
+    <color name="strokeColor">#66FF9C03</color>
+</resources>

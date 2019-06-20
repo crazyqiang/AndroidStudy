@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.fastgo.sydialoglib.IDialog;
-import com.fastgo.sydialoglib.SYDialog;
-import com.fastgo.sydialoglib.manager.DialogWrapper;
-import com.fastgo.sydialoglib.manager.SYDialogsManager;
+import com.ninetripods.sydialoglib.IDialog;
+import com.ninetripods.sydialoglib.SYDialog;
+import com.ninetripods.sydialoglib.manager.DialogWrapper;
+import com.ninetripods.sydialoglib.manager.SYDialogsManager;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.MyApplication;
@@ -54,7 +54,7 @@ public class CommonDialogActivity extends BaseActivity {
         DialogUtil.createDefaultDialog(this, "我是标题", "你好,我们将在30分钟处理，稍后通知您订单结果！",
                 "", new IDialog.OnClickListener() {
                     @Override
-                    public void onClick(IDialog dialog)      {
+                    public void onClick(IDialog dialog) {
                         dialog.dismiss();
                     }
                 });
@@ -121,6 +121,8 @@ public class CommonDialogActivity extends BaseActivity {
                                 String editTextStr = null;
                                 if (!TextUtils.isEmpty(editText.getText())) {
                                     editTextStr = editText.getText().toString();
+                                } else {
+                                    editTextStr = "EditText输入为空";
                                 }
                                 dialog.dismiss();
                                 Toast.makeText(MyApplication.getApplication(), editTextStr, Toast.LENGTH_SHORT).show();
@@ -155,6 +157,7 @@ public class CommonDialogActivity extends BaseActivity {
         new SYDialog.Builder(this)
                 .setDialogView(R.layout.layout_ad_dialog)
                 .setWindowBackgroundP(0.5f)
+                .setAnimStyle(0)
                 .setBuildChildListener(new IDialog.OnBuildListener() {
                     @Override
                     public void onBuildChildView(final IDialog dialog, View view, int layoutRes) {

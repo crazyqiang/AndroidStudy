@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/layout_content"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:background="@drawable/toast_bg"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="15dp">
 
         <ProgressBar
-            style="@android:style/Widget.ProgressBar.Inverse"
+            android:id="@+id/RequestLoadingProgress"
+            style="@style/customloadingProgressStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            tools:visibility="visible" />
 
-        <TextView
+        <org.ninetripods.mq.study.popup.dialog.AnimTextView
             android:id="@+id/txt_msg"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:text="正在加载中..."
-            android:textColor="#ffffff"
+            android:gravity="start"
+            android:layout_marginLeft="13dp"
+            android:text="努力加载中"
+            android:textColor="@color/white"
             android:textSize="17sp" />
     </LinearLayout>
+
 </LinearLayout>

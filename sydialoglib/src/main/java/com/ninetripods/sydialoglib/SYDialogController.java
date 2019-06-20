@@ -1,14 +1,17 @@
-package com.fastgo.sydialoglib;
+package com.ninetripods.sydialoglib;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.fastgo.driver.dialog.sydialoglib.R;
+import com.ninetripods.sydialoglib.manager.ScreenUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -36,7 +39,6 @@ public class SYDialogController {
     private String positiveStr;//右边按钮文字
     private String negativeStr;//左边按钮文字
     private boolean showBtnLeft, showBtnRight;
-
 
     private Button btn_ok, btn_cancel;
 
@@ -94,32 +96,86 @@ public class SYDialogController {
                 contentStr, showBtnLeft, negativeStr, showBtnRight, positiveStr);
     }
 
-    void dealDefaultDialog(IDialog.OnClickListener positiveBtnListener, IDialog.OnClickListener negativeBtnListener, String titleStr, String contentStr,
-                           boolean showBtnLeft, String negativeStr, boolean showBtnRight, String positiveStr) {
+    private void dealDefaultDialog(IDialog.OnClickListener positiveBtnListener, IDialog.OnClickListener negativeBtnListener, final String titleStr, final String contentStr,
+                                   boolean showBtnLeft, String negativeStr, boolean showBtnRight, String positiveStr) {
         if (dialogView == null) return;
         this.mNegativeButtonListener = negativeBtnListener;
         this.mPositiveButtonListener = positiveBtnListener;
         btn_ok = (Button) dialogView.findViewById(R.id.btn_ok);
         btn_cancel = (Button) dialogView.findViewById(R.id.btn_cancel);
-        if (btn_ok != null && !TextUtils.isEmpty(positiveStr)) {
-            btn_ok.setVisibility(showBtnRight ? View.VISIBLE : View.GONE);
-            btn_ok.setText(positiveStr);
-            btn_ok.setOnClickListener(mButtonHandler);
+
+        if (showBtnRight && showBtnLeft) {
+            //左右两个按钮都存在
+            if (btn_ok != null) {
+                btn_ok.setVisibility(View.VISIBLE);
+                btn_ok.setText(Html.fromHtml(TextUtils.isEmpty(positiveStr) ? "确定" : positiveStr));
+                btn_ok.setOnClickListener(mButtonHandler);
+            }
+            if (btn_cancel != null) {
+                btn_cancel.setVisibility(View.VISIBLE);
+                btn_cancel.setText(Html.fromHtml(TextUtils.isEmpty(negativeStr) ? "取消" : negativeStr));
+                btn_cancel.setOnClickListener(mButtonHandler);
+            }
+        } else if (showBtnRight) {
+            //只有右边的按钮
+            if (btn_ok != null) {
+                btn_ok.setVisibility(View.VISIBLE);
+                btn_ok.setBackgroundResource(R.drawable.lib_ui_selector_btn_border_bg);
+                btn_ok.setText(Html.fromHtml(TextUtils.isEmpty(positiveStr) ? "确定" : positiveStr));
+                btn_ok.setOnClickListener(mButtonHandler);
+            }
+        } else if (showBtnLeft) {
+            //只有左边的按钮
+            if (btn_cancel != null) {
+                btn_cancel.setVisibility(View.VISIBLE);
+                btn_cancel.setBackgroundResource(R.drawable.lib_ui_selector_btn_border_bg);
+                btn_cancel.setText(Html.fromHtml(TextUtils.isEmpty(negativeStr) ? "取消" : negativeStr));
+                btn_cancel.setOnClickListener(mButtonHandler);
+            }
         }
-        if (btn_cancel != null) {
-            btn_cancel.setVisibility(showBtnLeft ? View.VISIBLE : View.GONE);
-            btn_cancel.setText(negativeStr);
-            btn_cancel.setOnClickListener(mButtonHandler);
-        }
+
         TextView tv_title = (TextView) dialogView.findViewById(R.id.dialog_title);
-        TextView tv_content = (TextView) dialogView.findViewById(R.id.dialog_content);
+        final TextView tv_content = (TextView) dialogView.findViewById(R.id.dialog_content);
+
         if (tv_title != null) {
             tv_title.setVisibility(TextUtils.isEmpty(titleStr) ? View.GONE : View.VISIBLE);
-            tv_title.setText(titleStr);
+            tv_title.setText(Html.fromHtml(!TextUtils.isEmpty(titleStr) ? titleStr : "Title"));
+            if (TextUtils.isEmpty(contentStr) && mDialog.get() != null && mDialog.get().getContext() != null) {
+                tv_title.setMinHeight(ScreenUtil.dp2px(mDialog.get().getContext(), 100));
+                tv_title.setGravity(Gravity.CENTER);
+                tv_title.setPadding(0, 10, 0, 0);
+            }
         }
         if (tv_content != null) {
             tv_content.setVisibility(TextUtils.isEmpty(contentStr) ? View.GONE : View.VISIBLE);
             tv_content.setText(contentStr);
+            tv_content.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+
+                    int lineCount = tv_content.getLineCount();
+                    if (lineCount >= 3) {
+                        //超过三行居左显示
+                        tv_content.setGravity(Gravity.START);
+                    } else {
+                        //默认居中
+                        tv_content.setGravity(Gravity.CENTER_HORIZONTAL);
+                        if (TextUtils.isEmpty(titleStr)) {
+                            tv_content.setPadding(0, 50, 0, 50);
+                        }
+                    }
+
+                    if (TextUtils.isEmpty(titleStr)) {
+                        //没有title，只有content
+                        tv_content.setTextSize(18);
+                        if (mDialog.get() == null || mDialog.get().getContext() == null || mDialog.get().getContext().getResources() == null)
+                            return true;
+                        tv_content.setTextColor(mDialog.get().getContext().getResources().getColor(R.color.c333333));
+                    }
+                    return true;
+                }
+            });
+
         }
 
     }
@@ -146,7 +202,7 @@ public class SYDialogController {
         int layoutRes;
         int dialogWidth;
         int dialogHeight;
-        float dimAmount = 0.2f;
+        float dimAmount = 0.4f;
         public int gravity = Gravity.CENTER;
         boolean isCancelableOutside = true;
         boolean cancelable = false;
@@ -159,7 +215,7 @@ public class SYDialogController {
         String positiveStr;//右边按钮文字
         String negativeStr;//左边按钮文字
         boolean showBtnLeft, showBtnRight;
-        int animRes;//Dialog动画style
+        int animRes = R.style.translate_style;//Dialog动画style
 
         void apply(SYDialogController controller) {
             controller.dimAmount = dimAmount;

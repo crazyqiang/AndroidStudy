@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -14,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@drawable/roundlayout"
+        android:background="@drawable/lib_ui_roundlayout"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -30,25 +29,25 @@
                 android:id="@id/dialog_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
                 android:lineSpacingExtra="6dp"
-                android:text="订单提交成功"
-                android:textColor="#292d33"
+                android:paddingTop="15dp"
+                android:textColor="#333333"
                 android:textSize="18sp"
-                android:visibility="visible" />
+                android:visibility="visible"
+                tools:text="订单提交成功" />
 
             <TextView
                 android:id="@id/dialog_content"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:layout_marginTop="15dp"
-                android:gravity="center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
                 android:lineSpacingExtra="6dp"
-                android:text="我们将在30分钟处理，稍后通知您订单结果！感谢您选择"
-                android:textColor="#525a66"
-                android:textSize="15sp" />
+                android:textColor="#666666"
+                android:textSize="16sp"
+                tools:text="我们将在30分钟处理，稍后通知您订单结果！感谢您选择" />
         </LinearLayout>
 
         <TextView
@@ -60,11 +59,12 @@
             android:minHeight="106dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="订单提交成功"
             android:textColor="#292d33"
             android:textSize="17sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:text="订单提交成功" />
 
+        <!--下面的button-->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

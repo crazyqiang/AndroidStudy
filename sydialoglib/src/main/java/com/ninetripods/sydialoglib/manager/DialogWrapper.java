@@ -1,6 +1,7 @@
-package com.fastgo.sydialoglib.manager;
+package com.ninetripods.sydialoglib.manager;
 
-import com.fastgo.sydialoglib.SYDialog;
+
+import com.ninetripods.sydialoglib.SYDialog;
 
 /**
  * 管理多个dialog 按照dialog的优先级依次弹出

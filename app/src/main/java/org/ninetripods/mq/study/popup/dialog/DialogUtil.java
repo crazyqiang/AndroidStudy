@@ -2,9 +2,10 @@ package org.ninetripods.mq.study.popup.dialog;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 
-import com.fastgo.sydialoglib.IDialog;
-import com.fastgo.sydialoglib.SYDialog;
+import com.ninetripods.sydialoglib.IDialog;
+import com.ninetripods.sydialoglib.SYDialog;
 
 import org.ninetripods.mq.study.R;
 
@@ -74,8 +75,17 @@ public class DialogUtil {
         closeLoadingDialog(context);
         SYDialog.Builder builder = new SYDialog.Builder(context);
         SYDialog dialog = builder.setDialogView(R.layout.loading_dialog)
-                .setWindowBackgroundP(0.5f)
+                .setWindowBackgroundP(0.2f)
+                .setBuildChildListener(new IDialog.OnBuildListener() {
+                    @Override
+                    public void onBuildChildView(IDialog dialog, View view, int layoutRes) {
+                        AnimTextView txt_msg = view.findViewById(R.id.txt_msg);
+                        //默认文字(努力加载中...)
+                        txt_msg.startAnim();
+                    }
+                })
                 .setCancelableOutSide(false)
+                .setAnimStyle(0)
                 .setCancelable(false)
                 .show();
         hashMap.put(context.getClass().getSimpleName(), dialog);

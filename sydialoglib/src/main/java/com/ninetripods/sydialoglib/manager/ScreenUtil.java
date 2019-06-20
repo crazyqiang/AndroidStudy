@@ -1,6 +1,7 @@
-package com.fastgo.sydialoglib.manager;
+package com.ninetripods.sydialoglib.manager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
@@ -17,8 +18,17 @@ import android.view.ViewConfiguration;
 public class ScreenUtil {
 
 
-    private static Point point = new Point();
+    public static int dp2px(Context context, float dpValue) {
+        return (int) ((float) ((int) context.getResources().getDisplayMetrics().density) * dpValue + 0.5F);
+    }
 
+    public static int sp2px(Context context, float spValue) {
+        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5F);
+    }
+
+
+    private static Point point = new Point();
 
     /**
      * 获取屏幕宽度

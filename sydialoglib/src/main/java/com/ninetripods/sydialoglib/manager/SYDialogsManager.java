@@ -1,6 +1,6 @@
-package com.fastgo.sydialoglib.manager;
+package com.ninetripods.sydialoglib.manager;
 
-import com.fastgo.sydialoglib.SYDialog;
+import com.ninetripods.sydialoglib.SYDialog;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

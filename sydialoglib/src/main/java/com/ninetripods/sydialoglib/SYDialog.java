@@ -1,9 +1,12 @@
-package com.fastgo.sydialoglib;
+package com.ninetripods.sydialoglib;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
@@ -12,8 +15,8 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.fastgo.driver.dialog.sydialoglib.R;
-import com.fastgo.sydialoglib.manager.ScreenUtil;
 
+import java.lang.reflect.Field;
 
 /**
  * Created by mq on 2018/9/1 上午10:57
@@ -22,13 +25,32 @@ import com.fastgo.sydialoglib.manager.ScreenUtil;
 
 public class SYDialog extends SYBaseDialog implements IDialog {
 
+    private Context context;
     private SYDialogController controller;
     private IDialog.OnBuildListener buildListener;
-    private static final String FTag = "dialogTag";
     private IDialog.OnDismissListener dismissListener;
+    private static final String FTag = "dialogTag";
 
     public SYDialog() {
         controller = new SYDialogController(this);
+    }
+
+    /**
+     * 兼容6.0以下的某些版本 如（vivo x7、5.1.1系统）不走{@link #onAttach(Context)}方法，
+     * 这里的Fragment用的不是v4包里面的
+     *
+     * @param activity Activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.context = activity;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
@@ -77,25 +99,61 @@ public class SYDialog extends SYBaseDialog implements IDialog {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (controller == null) {
             controller = new SYDialogController(this);
-        }
-        //设置默认子View布局
-        controller.setChildView(view);
-        //回调给调用者，用来设置子View及点击事件等
-        if (buildListener != null && getLayoutRes() != 0 && getBaseView() != null) {
-            buildListener.onBuildChildView(this, getBaseView(), getLayoutRes());
         }
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (controller != null) {
-            controller = null;
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //设置默认Dialog的View布局
+        controller.setChildView(view);
+        //回调给调用者，用来设置子View及点击事件等
+        if (buildListener != null && getBaseView() != null) {
+            buildListener.onBuildChildView(this, getBaseView(), getLayoutRes());
         }
+    }
+
+    /**
+     * 解决 Can not perform this action after onSaveInstanceState问题
+     *
+     * @param manager FragmentManager
+     * @param tag     tag
+     */
+    public void showAllowingLoss(FragmentManager manager, String tag) {
+        try {
+            Class cls = DialogFragment.class;
+            Field mDismissed = cls.getDeclaredField("mDismissed");
+            mDismissed.setAccessible(true);
+            mDismissed.set(this, false);
+            Field mShownByMe = cls.getDeclaredField("mShownByMe");
+            mShownByMe.setAccessible(true);
+            mShownByMe.set(this, true);
+        } catch (Exception e) {
+            //调系统的show()方法
+            show(manager, tag);
+            return;
+        }
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.add(this, tag);
+        ft.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void dismiss() {
+        //防止横竖屏切换时 getFragmentManager置空引起的问题：
+        //Attempt to invoke virtual method 'android.app.FragmentTransaction
+        //android.app.FragmentManager.beginTransaction()' on a null object reference
+        if (getFragmentManager() == null) return;
+        super.dismissAllowingStateLoss();
     }
 
     @Override
@@ -103,6 +161,9 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         //监听dialog的dismiss
         if (dismissListener != null) {
             dismissListener.onDismiss(this);
+        }
+        if (controller != null) {
+            controller = null;
         }
         super.onDestroy();
     }
@@ -113,6 +174,9 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         private IDialog.OnDismissListener dismissListener;
 
         public Builder(Context context) {
+            if (context == null) {
+                throw new IllegalArgumentException("Context can't be null");
+            }
             if (!(context instanceof Activity)) {
                 throw new IllegalArgumentException("Context must be Activity");
             }
@@ -150,7 +214,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
          * @return Builder
          */
         public Builder setScreenWidthP(float percentage) {
-            params.dialogWidth = (int) (ScreenUtil.getScreenWidth((Activity) params.context) * percentage);
+            params.dialogWidth = (int) (getScreenWidth((Activity) params.context) * percentage);
             return this;
         }
 
@@ -161,18 +225,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
          * @return Builder
          */
         public Builder setScreenHeightP(float percentage) {
-            params.dialogHeight = (int) (ScreenUtil.getScreenHeight((Activity) params.context) * percentage);
-            return this;
-        }
-
-        /**
-         * 监听dialog的dismiss
-         *
-         * @param dismissListener IDialog.OnDismissListener
-         * @return Builder
-         */
-        public Builder setOnDismissListener(IDialog.OnDismissListener dismissListener) {
-            this.dismissListener = dismissListener;
+            params.dialogHeight = (int) (getScreenHeight((Activity) params.context) * percentage);
             return this;
         }
 
@@ -254,6 +307,17 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         }
 
         /**
+         * 监听dialog的dismiss
+         *
+         * @param dismissListener IDialog.OnDismissListener
+         * @return Builder
+         */
+        public Builder setOnDismissListener(IDialog.OnDismissListener dismissListener) {
+            this.dismissListener = dismissListener;
+            return this;
+        }
+
+        /**
          * 设置dialog的动画效果
          *
          * @param animStyle 动画资源文件
@@ -263,7 +327,6 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             params.animRes = animStyle;
             return this;
         }
-
 
         /**
          * 设置默认右侧点击按钮
@@ -278,11 +341,10 @@ public class SYDialog extends SYBaseDialog implements IDialog {
         /**
          * 设置默认右侧点击按钮及文字
          *
-         * @param btnStr          右侧文字
          * @param onclickListener IDialog.OnClickListener
          * @return Builder
          */
-        public Builder setPositiveButton(String btnStr, com.fastgo.sydialoglib.IDialog.OnClickListener onclickListener) {
+        public Builder setPositiveButton(String btnStr, IDialog.OnClickListener onclickListener) {
             params.positiveBtnListener = onclickListener;
             params.positiveStr = btnStr;
             params.showBtnRight = true;
@@ -354,13 +416,19 @@ public class SYDialog extends SYBaseDialog implements IDialog {
                 setDefaultOption();
             }
             SYDialog dialog = create();
+            //判空
             if (params.context == null) return dialog;
             if (params.context instanceof Activity) {
                 Activity activity = (Activity) params.context;
-                if (activity.isFinishing()) return dialog;
+                //如果Activity正在关闭或者已经销毁 直接返回
+                boolean isRefuse = Build.VERSION.SDK_INT >= 17
+                        ? activity.isFinishing() || activity.isDestroyed()
+                        : activity.isFinishing();
+
+                if (isRefuse) return dialog;
             }
             removePreDialog();
-            dialog.show(params.fragmentManager, FTag);
+            dialog.showAllowingLoss(params.fragmentManager, FTag);
             return dialog;
         }
 
@@ -371,9 +439,9 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             params.cancelable = false;
             params.isCancelableOutside = false;
             params.gravity = Gravity.CENTER;
-            params.layoutRes = R.layout.layout_dialog_new;
+            params.layoutRes = R.layout.lib_ui_layout_dialog_default;
             params.dimAmount = 0.5f;
-            params.dialogWidth = (int) (ScreenUtil.getScreenWidth((Activity) params.context) * 0.85f);
+            params.dialogWidth = (int) (getScreenWidth((Activity) params.context) * 0.85f);
             params.dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT;
         }
 

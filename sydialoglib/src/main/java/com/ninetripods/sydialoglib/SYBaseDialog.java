@@ -1,12 +1,17 @@
-package com.fastgo.sydialoglib;
+package com.ninetripods.sydialoglib;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,7 +20,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.fastgo.sydialoglib.manager.SYDialogsManager;
+import com.ninetripods.sydialoglib.manager.SYDialogsManager;
+
 
 /**
  * Created by mq on 2018/8/31 上午11:39
@@ -120,6 +126,59 @@ public abstract class SYBaseDialog extends DialogFragment {
 
     protected int getAnimRes() {
         return 0;
+    }
+
+    private static Point point = new Point();
+
+
+    /**
+     * 获取屏幕宽度
+     *
+     * @param activity Activity
+     * @return ScreenWidth
+     */
+    public static int getScreenWidth(Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        if (display != null) {
+            display.getSize(point);
+            return point.x;
+        }
+        return 0;
+    }
+
+    /**
+     * 获取屏幕高度
+     *
+     * @param activity Activity
+     * @return ScreenHeight
+     */
+    public static int getScreenHeight(Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        if (display != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                //api 大于17才有
+                display.getRealSize(point);
+            } else {
+                display.getSize(point);
+            }
+
+            //需要减去statusBar的高度  不用考虑navigationBar Display已经自动减去了
+            return point.y - getStatusBarHeight(activity);
+        }
+        return 0;
+    }
+
+    public static int getStatusBarHeight(Activity activity) {
+        Resources resources = activity.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
+    }
+
+    public static int getNavigationBarHeight(Activity activity) {
+        Resources resources = activity.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
     }
 
     @Override

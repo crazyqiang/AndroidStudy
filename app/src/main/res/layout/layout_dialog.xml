@@ -3,7 +3,7 @@
     android:id="@+id/layout_content"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/roundlayout"
+    android:background="@drawable/lib_ui_roundlayout"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
