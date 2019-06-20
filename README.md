@@ -1,10 +1,22 @@
-# AndroidStudy
-
-# 扫描二维码下载APK示例：
+# 扫描二维码下载APK示例
 ![image](http://upload-images.jianshu.io/upload_images/587163-5cb2deb1fc640ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
 或者 [点击此处链接下载APK](https://www.pgyer.com/G7G9)
 
-# 更新日志：
+# 更新日志
+- 2019-06-20
+
+```
+发布lib-dialog库，引入方式：compile 'com.ninetripods:lib-dialog:1.1.0'
+
+优化内容：
+1、优化dialog默认布局
+2、修复Activity横竖屏切换导致空指针问题
+3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题
+
+更详细移步：https://www.jianshu.com/p/ea70ba200b38
+```
+
+# 发布日志
 
 **2018/12/25**
 
@@ -88,5 +100,7 @@ Gradle配置中subprojects和allprojects的区别:（ https://blog.csdn.net/u013
  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/messenger.gif) 
  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/binder.gif) 
 
-# 自定义View、ViewGroup：
+ # 自定义View、ViewGroup
  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/initpintu.jpg) 
+
+
