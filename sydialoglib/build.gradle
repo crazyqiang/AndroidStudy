@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -19,14 +20,22 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.3.1'
+}
 
-    compile 'com.android.support:appcompat-v7:25.2.0'
-//    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+publish {
+    userOrg = 'crazyqiang'//bintray.com用户名
+    groupId = 'com.ninetripods'//jCenter上的路径
+    artifactId = 'lib-dialog'//项目名称
+    publishVersion = '1.1.0'//修改版本号
+    desc = 'a common dialog library'//描述，不重要
+    website = 'https://github.com/crazyqiang/AndroidStudy/tree/master/sydialoglib'
 }

@@ -15,6 +15,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.novoda:bintray-release:0.9.1'
 //        classpath 'com.fastgo:plugin:1.0-test'
     }
 }
@@ -28,6 +29,11 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+    }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
     }
 }
 

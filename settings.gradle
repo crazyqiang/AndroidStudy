@@ -1,3 +1,4 @@
-include ':app', ':multiprocess_sever', ':sydialoglib'
+include ':app', ':multiprocess_sever'
+include ':sydialoglib'
 include ':plugin'
 include ':buildSrc'
