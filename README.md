@@ -76,32 +76,32 @@ Gradle配置中subprojects和allprojects的区别:（ https://blog.csdn.net/u013
  
  # Android多线程之HandlerThread、IntentService：
  ![HandlerThread.gif](https://upload-images.jianshu.io/upload_images/587163-8fcc2d6dcdbc7757.gif?imageMogr2/auto-orient/strip)
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/IntentService.gif) 
+ ![IntentService.gif](https://upload-images.jianshu.io/upload_images/587163-d36f126c6b0483ff.gif?imageMogr2/auto-orient/strip)
  
  # Android中几种线程池的使用：
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/CachedThreadPool.gif) 
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/FixedThreadPool.gif) 
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/SingleThreadExecutor.gif) 
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Schedule.gif) 
+ ![CachedThreadPool.gif](https://upload-images.jianshu.io/upload_images/587163-a7fab256e4437799.gif?imageMogr2/auto-orient/strip)
+ ![FixedThreadPool.gif](https://upload-images.jianshu.io/upload_images/587163-81b5fc189abec641.gif?imageMogr2/auto-orient/strip)
+ ![SingleThreadExecutor.gif](https://upload-images.jianshu.io/upload_images/587163-3e6c003fa7e4278c.gif?imageMogr2/auto-orient/strip)
+ ![Schedule.gif](https://upload-images.jianshu.io/upload_images/587163-b3a74b1e234a25a5.gif?imageMogr2/auto-orient/strip)
  
  # LruCache、DiskLruCache实现图片缓存，瀑布流：
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/ImgCache.gif) 
+ ![ImgCache.gif](https://upload-images.jianshu.io/upload_images/587163-a2fd6c97ab4a7811.gif?imageMogr2/auto-orient/strip)
  
  # 仿QQ侧滑菜单、小红点：
-  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Swipe_menu.gif) 
-  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/qq_point.gif) 
+ ![Swipe_menu.gif](https://upload-images.jianshu.io/upload_images/587163-43f6b3f6c0964189.gif?imageMogr2/auto-orient/strip)
+ ![qq_point.gif](https://upload-images.jianshu.io/upload_images/587163-7e35275bb608ad32.gif?imageMogr2/auto-orient/strip)
  
  # 仿魅族通讯录、通用PopupWindow： 
-  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/Contacts.gif) 
-  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/PopupWindow.gif) 
+ ![Contacts.gif](https://upload-images.jianshu.io/upload_images/587163-988a21a91ec89901.gif?imageMogr2/auto-orient/strip)
+ ![PopupWindow.gif](https://upload-images.jianshu.io/upload_images/587163-2ed25095367ed1b8.gif?imageMogr2/auto-orient/strip)
  
  # Bundle、AIDL、Messenger、Binder：
- ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/intent.gif) 
- ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/aidl.gif) 
- ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/messenger.gif) 
- ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/binder.gif) 
+ ![intent.gif](https://upload-images.jianshu.io/upload_images/587163-d125bd779e8fb671.gif?imageMogr2/auto-orient/strip)
+ ![aidl.gif](https://upload-images.jianshu.io/upload_images/587163-6766165772f98949.gif?imageMogr2/auto-orient/strip)
+ ![messenger.gif](https://upload-images.jianshu.io/upload_images/587163-7a26a5bf1c1516f9.gif?imageMogr2/auto-orient/strip)
+ ![binder.gif](https://upload-images.jianshu.io/upload_images/587163-d22a95846aafe521.gif?imageMogr2/auto-orient/strip)
 
  # 自定义View、ViewGroup
- ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/initpintu.jpg) 
+ ![initpintu.jpg](https://upload-images.jianshu.io/upload_images/587163-4ee28b9c0754217f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
