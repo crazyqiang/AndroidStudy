@@ -75,7 +75,7 @@ Gradle配置中subprojects和allprojects的区别:（ https://blog.csdn.net/u013
  
  
  # Android多线程之HandlerThread、IntentService：
- ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/HandlerThread.gif) 
+ ![HandlerThread.gif](https://upload-images.jianshu.io/upload_images/587163-8fcc2d6dcdbc7757.gif?imageMogr2/auto-orient/strip)
  ![image]( https://github.com/crazyqiang/AndroidStudy/blob/master/pic/IntentService.gif) 
  
  # Android中几种线程池的使用：
