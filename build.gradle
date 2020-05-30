@@ -14,7 +14,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.novoda:bintray-release:0.9.1'
 //        classpath 'com.fastgo:plugin:1.0-test'
     }

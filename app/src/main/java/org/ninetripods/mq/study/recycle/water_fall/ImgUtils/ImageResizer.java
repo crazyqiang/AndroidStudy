@@ -6,8 +6,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.support.compat.BuildConfig;
 import android.util.Log;
+
+import org.ninetripods.mq.study.BuildConfig;
 
 import java.io.FileDescriptor;
 

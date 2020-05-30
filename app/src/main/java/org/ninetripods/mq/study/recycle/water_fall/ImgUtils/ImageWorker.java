@@ -8,9 +8,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.support.compat.BuildConfig;
 import android.util.Log;
 import android.widget.ImageView;
+
+import org.ninetripods.mq.study.BuildConfig;
 
 import java.lang.ref.WeakReference;
 

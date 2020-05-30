@@ -20,7 +20,6 @@ package org.ninetripods.mq.study.recycle.contacts_recycle.itemAnimator;
  */
 
 
-import android.support.v4.animation.AnimatorCompatHelper;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
@@ -495,7 +494,8 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
 
     private void resetAnimation(RecyclerView.ViewHolder holder) {
-        AnimatorCompatHelper.clearInterpolator(holder.itemView);
+        //TODO 暂时注释这里 后续把这里整体梳理一下
+//        AnimatorCompatHelper.clearInterpolator(holder.itemView);
         endAnimation(holder);
     }
 

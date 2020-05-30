@@ -5,11 +5,10 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.compat.BuildConfig;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.BuildConfig;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
