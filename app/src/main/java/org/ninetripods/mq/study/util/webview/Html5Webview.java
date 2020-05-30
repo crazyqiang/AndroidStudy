@@ -5,13 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
@@ -160,15 +156,15 @@ public class Html5Webview extends WebView {
                 return true;
             } else if (scheme.equals("http") || scheme.equals("https")) {
                 //处理http协议
-                if (Uri.parse(url).getHost().equals("www.example.com")) {
-                    // 内部网址，不拦截，用自己的webview加载
+//                if (Uri.parse(url).getHost().equals("www.example.com")) {
+                    // 内部网址，不拦截，用自己的 webview加载
                     return false;
-                } else {
-                    //跳转外部浏览器
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    context.startActivity(intent);
-                    return true;
-                }
+//                } else {
+//                    //跳转外部浏览器
+//                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                    context.startActivity(intent);
+//                    return true;
+//                }
             }
             return super.shouldOverrideUrlLoading(view, url);
         }
@@ -187,7 +183,6 @@ public class Html5Webview extends WebView {
             return super.shouldInterceptRequest(view, url);
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
             MyLog.e("TTT", "shouldInterceptRequest 1 request url is " + request.getUrl().toString());
