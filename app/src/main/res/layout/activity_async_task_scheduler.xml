@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".multiThread.AsyncTaskActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_pool_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="线程池类型：newScheduledThreadPool(4)"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/progress_bar1"
+                layout="@layout/progress_item" />
+
+            <include
+                android:id="@+id/progress_bar2"
+                layout="@layout/progress_item" />
+
+            <include
+                android:id="@+id/progress_bar3"
+                layout="@layout/progress_item" />
+
+            <include
+                android:id="@+id/progress_bar4"
+                layout="@layout/progress_item" />
+
+            <include
+                android:id="@+id/progress_bar5"
+                layout="@layout/progress_item" />
+
+            <include
+                android:id="@+id/progress_bar6"
+                layout="@layout/progress_item" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <TextView
+                    android:id="@+id/tv_executor_serial"
+                    style="@style/btn_style_cl_done"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="AsyncTask串行"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/tv_executor_pool"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_executor_pool"
+                    style="@style/btn_style_cl_done"
+                    android:layout_margin="5dp"
+                    android:text="AsyncTask并行"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_executor_serial"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>

@@ -24,7 +24,6 @@
         style="@style/btn_style_done"
         android:layout_below="@id/tv_intent_service"
         android:layout_marginTop="25dp"
-        android:visibility="gone"
         android:text="AsyncTask" />
 
     <TextView

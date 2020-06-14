@@ -2,7 +2,6 @@ package org.ninetripods.mq.study.util.fragment;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.multiThread.AsyncTaskActivity;
 import org.ninetripods.mq.study.multiThread.HandlerThreadActivity;
 import org.ninetripods.mq.study.multiThread.IntentServiceActivity;
 import org.ninetripods.mq.study.multiThread.ThreadPoolActivity;
@@ -27,7 +27,7 @@ public class MultiThreadFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         tv_handler_thread = (TextView) view.findViewById(R.id.tv_handler_thread);
         tv_intent_service = (TextView) view.findViewById(R.id.tv_intent_service);
         tv_asynctask = (TextView) view.findViewById(R.id.tv_asynctask);
@@ -48,12 +48,12 @@ public class MultiThreadFragment extends Fragment implements View.OnClickListene
             case R.id.tv_intent_service:
                 NavitateUtil.startActivity(getActivity(), IntentServiceActivity.class);
                 break;
+            case R.id.tv_asynctask:
+                NavitateUtil.startActivity(getActivity(), AsyncTaskActivity.class);
+                break;
             case R.id.tv_thread_pool:
                 NavitateUtil.startActivity(getActivity(), ThreadPoolActivity.class);
                 break;
-//            case R.id.tv_asynctask:
-//                NavitateUtil.startActivity(getActivity(), AsyncTaskActivity.class);
-//                break;
         }
     }
 }
