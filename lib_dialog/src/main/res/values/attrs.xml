@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DialogLoadingView">
+        <!--reference表示引用某一资源id-->
+        <attr name="loadingLayoutId" format="reference" />
+        <attr name="emptyLayoutId" format="reference" />
+        <attr name="errorLayoutId" format="reference" />
+        <attr name="backgroundColorId" format="color" />
+        <attr name="emptyTextStr" format="string" />
+        <attr name="errorTextStr" format="string" />
+    </declare-styleable>
+</resources>

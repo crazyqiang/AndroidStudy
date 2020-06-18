@@ -4,4 +4,10 @@
     <item name="btn_cancel" type="id" />
     <item name="dialog_title" type="id" />
     <item name="dialog_content" type="id" />
+
+    <item name="dialog_loading_layout_id" type="id" />
+    <item name="dialog_empty_layout_id" type="id" />
+    <item name="dialog_error_layout_id" type="id" />
+    <item name="dialog_empty_tv_id" type="id" />
+    <item name="dialog_error_tv_id" type="id" />
 </resources>

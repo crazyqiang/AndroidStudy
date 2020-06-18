@@ -21,10 +21,10 @@ public interface IDialog {
     interface OnBuildListener {
         /**
          * @param dialog    IDialog
-         * @param view      Dialog整体View
+         * @param parent      Dialog整体View
          * @param layoutRes Dialog的布局 如果没有传入 默认是0
          */
-        void onBuildChildView(IDialog dialog, View view, int layoutRes);
+        void onBuildChildView(IDialog dialog, View parent, int layoutRes);
     }
 
     /***

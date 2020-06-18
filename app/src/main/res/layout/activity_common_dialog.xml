@@ -21,8 +21,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:text="----------默认内置Dialog,可自行修改内置样式----------"
                 android:textColor="@color/colorAccent" />
@@ -45,8 +45,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:text="----------自定义Dialog----------"
                 android:textColor="@color/colorAccent" />
@@ -93,8 +93,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:text="----------自定义Dialog----------"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                style="@style/btn_style_done_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showRetryDialog"
+                android:text="8、支持失败重试(如网络请求失败)" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:text="----------全局管理Dialog----------"
                 android:textColor="@color/colorAccent" />
@@ -104,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="showGlobalDialog"
-                android:text="8、全局管理Dialog（管理多个依次弹出）" />
+                android:text="9、全局管理Dialog（管理多个依次弹出）" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

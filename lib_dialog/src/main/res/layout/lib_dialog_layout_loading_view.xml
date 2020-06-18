@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ViewStub
+        android:id="@+id/vb_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ViewStub
+        android:id="@+id/vb_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ViewStub
+        android:id="@+id/vb_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</merge>

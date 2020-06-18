@@ -19,6 +19,7 @@ import com.ninetripods.sydialoglib.IDialog;
 import com.ninetripods.sydialoglib.SYDialog;
 import com.ninetripods.sydialoglib.manager.DialogWrapper;
 import com.ninetripods.sydialoglib.manager.SYDialogsManager;
+import com.ninetripods.sydialoglib.widget.DialogLoadingView;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.MyApplication;
@@ -263,7 +264,52 @@ public class CommonDialogActivity extends BaseActivity {
     }
 
     /**
-     * 8、全局管理dialog
+     * 8、支持空视图 错误视图 失败重试
+     */
+    public void showRetryDialog(View view) {
+        new SYDialog.Builder(this)
+                .setDialogView(R.layout.layout_dialog_retry)
+                .setAnimStyle(0)
+                .setScreenHeightP(0.7f)
+                .setCancelableOutSide(true)
+                .setBuildChildListener(new IDialog.OnBuildListener() {
+                    @Override
+                    public void onBuildChildView(final IDialog dialog, final View parent, int layoutRes) {
+                        final DialogLoadingView loadingView = parent.findViewById(R.id.loading_view);
+                        //展示加载中
+                        loadingView.showLoading();
+                        //支持失败重试
+                        loadingView.setRetryListener(new DialogLoadingView.OnRetryListener() {
+                            @Override
+                            public void onRetry() {
+                                //模拟成功
+                                loadingView.hide();
+                            }
+                        });
+
+                        ImageView iv_close = parent.findViewById(R.id.iv_close);
+                        iv_close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        //模拟请求失败
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadingView.showError();
+                            }
+                        }, 1500);
+
+                    }
+                })
+                .show();
+    }
+
+    /**
+     * 9、全局管理dialog
      *
      * @param view View
      */
@@ -337,7 +383,6 @@ public class CommonDialogActivity extends BaseActivity {
         //添加第二个Dialog
         SYDialogsManager.getInstance().requestShow(new DialogWrapper(builder2));
     }
-
 
     class ShareAdapter extends RecyclerView.Adapter<ShareAdapter.ShareHolder> {
 

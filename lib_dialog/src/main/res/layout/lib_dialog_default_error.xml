@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/sy_dialog_img_error" />
+
+    <TextView
+        android:id="@id/dialog_error_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/sy_dialog_error"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/sy_dialog_error_reload"
+        android:textSize="14sp" />
+
+</LinearLayout>
