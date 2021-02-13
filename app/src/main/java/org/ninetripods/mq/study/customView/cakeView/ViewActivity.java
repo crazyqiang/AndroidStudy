@@ -2,13 +2,11 @@ package org.ninetripods.mq.study.customView.cakeView;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
-import org.ninetripods.mq.study.customView.cakeView.CakeBean;
-import org.ninetripods.mq.study.customView.cakeView.CakeView;
 
 import java.util.ArrayList;
 import java.util.List;

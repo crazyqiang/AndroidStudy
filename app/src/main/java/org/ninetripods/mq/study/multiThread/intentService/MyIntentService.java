@@ -2,9 +2,7 @@ package org.ninetripods.mq.study.multiThread.intentService;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-
-import org.ninetripods.mq.study.util.MyLog;
+import androidx.annotation.Nullable;
 
 /**
  * Created by MQ on 2017/7/28.

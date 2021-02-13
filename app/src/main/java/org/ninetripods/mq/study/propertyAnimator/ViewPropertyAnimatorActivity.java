@@ -1,15 +1,9 @@
 package org.ninetripods.mq.study.propertyAnimator;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;

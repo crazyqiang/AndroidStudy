@@ -1,17 +1,15 @@
 package org.ninetripods.mq.study.recycle;
 
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.Toast;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.water_fall.ImgUtils.ImageCache;
 import org.ninetripods.mq.study.recycle.water_fall.ImgUtils.ImageFetcher;
-import org.ninetripods.mq.study.recycle.water_fall.ImgUtils.Utils;
 import org.ninetripods.mq.study.recycle.water_fall.MyDividerDecoration;
 import org.ninetripods.mq.study.util.DpUtil;
 import org.ninetripods.mq.study.util.adapter.WaterFallAdapter;

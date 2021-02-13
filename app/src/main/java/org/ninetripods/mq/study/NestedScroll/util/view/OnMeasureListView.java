@@ -1,11 +1,12 @@
 package org.ninetripods.mq.study.NestedScroll.util.view;
 
 import android.content.Context;
-import android.support.v4.view.NestedScrollingChild;
-import android.support.v4.view.NestedScrollingChildHelper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ListView;
+
+import androidx.core.view.NestedScrollingChild;
+import androidx.core.view.NestedScrollingChildHelper;
 
 /**
  * Created by mq on 2018/6/9 下午3:18

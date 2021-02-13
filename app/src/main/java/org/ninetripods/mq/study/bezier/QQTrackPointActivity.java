@@ -1,7 +1,7 @@
 package org.ninetripods.mq.study.bezier;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;

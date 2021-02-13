@@ -1,8 +1,8 @@
 package org.ninetripods.mq.study.NestedScroll.nested;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.NestedScroll.util.view.ItemFragment;

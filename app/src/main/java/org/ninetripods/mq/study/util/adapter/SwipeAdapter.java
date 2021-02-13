@@ -1,7 +1,7 @@
 package org.ninetripods.mq.study.util.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +11,6 @@ import android.widget.Toast;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.bezier.view.QQPoint.QQBezierView;
 import org.ninetripods.mq.study.recycle.swipe_menu.SwipeMenuLayout;
-import org.ninetripods.mq.study.recycle.swipe_menu.SwipeRecycleView;
-import org.ninetripods.mq.study.util.MyLog;
 import org.ninetripods.mq.study.util.bean.QQPointBean;
 
 import java.util.List;

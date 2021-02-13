@@ -1,11 +1,10 @@
 package org.ninetripods.mq.multiprocess_sever;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.TextView;
 
 import org.ninetripods.mq.multiprocess_sever_i.MultiProcess;

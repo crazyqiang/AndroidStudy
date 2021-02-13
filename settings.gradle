@@ -1,4 +1,4 @@
 include ':app', ':multiprocess_sever'
 include ':lib_dialog'
 include ':plugin'
-include ':buildSrc'
+//include ':buildSrc'

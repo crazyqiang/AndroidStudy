@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.multiprocess_sever_i.Apple;
 import org.ninetripods.mq.multiprocess_sever_i.IAidlCallBack;

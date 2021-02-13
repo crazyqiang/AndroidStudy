@@ -12,22 +12,21 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.MathUtil;
-import org.ninetripods.mq.study.util.MyLog;
 
 /**
  * Created by MQ on 2017/6/15.
  */
 
-public class QQBezierView extends android.support.v7.widget.AppCompatTextView {
+public class QQBezierView extends androidx.appcompat.widget.AppCompatTextView {
     public DragView dragView;
     private float mWidth, mHeight;//View的宽和高
     private onDragStatusListener onDragListener;

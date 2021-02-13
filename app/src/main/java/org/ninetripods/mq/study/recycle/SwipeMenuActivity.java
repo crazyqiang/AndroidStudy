@@ -1,13 +1,12 @@
 package org.ninetripods.mq.study.recycle;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.swipe_menu.MyDividerDecoration;
 import org.ninetripods.mq.study.recycle.swipe_menu.SwipeRecycleView;
-import org.ninetripods.mq.study.util.MyLog;
 import org.ninetripods.mq.study.util.adapter.SwipeAdapter;
 import org.ninetripods.mq.study.util.bean.QQPointBean;
 

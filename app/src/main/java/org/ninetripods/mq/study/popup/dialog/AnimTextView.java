@@ -10,7 +10,7 @@ import android.util.AttributeSet;
  * Created by mq on 2019/4/16 下午8:20
  * mqcoder90@gmail.com
  */
-public class AnimTextView extends android.support.v7.widget.AppCompatTextView {
+public class AnimTextView extends androidx.appcompat.widget.AppCompatTextView {
     private static final String showText = "努力加载中";
     private int number;
     private StringBuilder builder = new StringBuilder();

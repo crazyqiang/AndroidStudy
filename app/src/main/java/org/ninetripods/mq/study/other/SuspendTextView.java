@@ -2,12 +2,12 @@ package org.ninetripods.mq.study.other;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.BounceInterpolator;
-import android.widget.OverScroller;
 import android.widget.Scroller;
+
+import androidx.annotation.Nullable;
 
 import org.ninetripods.mq.study.util.MyLog;
 
@@ -15,7 +15,7 @@ import org.ninetripods.mq.study.util.MyLog;
  * Created by MQ on 2017/6/2.
  */
 
-public class SuspendTextView extends android.support.v7.widget.AppCompatTextView {
+public class SuspendTextView extends androidx.appcompat.widget.AppCompatTextView {
     private Context mContext;
     //    private OverScroller mScroller;
     private Scroller mScroller;

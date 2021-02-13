@@ -1,12 +1,11 @@
 package org.ninetripods.mq.study.util.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.recycle.water_fall.ImgUtils.ImageFetcher;
 import org.ninetripods.mq.study.util.Constant;
 import org.ninetripods.mq.study.util.DpUtil;

@@ -2,17 +2,15 @@ package org.ninetripods.mq.study.recycle.swipe_menu;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
 import org.ninetripods.mq.study.R;
-import org.ninetripods.mq.study.util.MyLog;
 
 /**
  * Created by MQ on 2017/6/6.

@@ -20,22 +20,22 @@ package org.ninetripods.mq.study.recycle.contacts_recycle.itemAnimator;
  */
 
 
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This implementation of {@link android.support.v7.widget.RecyclerView.ItemAnimator} provides basic
+ * This implementation of {@link RecyclerView.ItemAnimator} provides basic
  * animations on remove, add, and move events that happen to the items in
  * a RecyclerView.
  *
- * @see android.support.v7.widget.RecyclerView#setItemAnimator(android.support.v7.widget.RecyclerView.ItemAnimator)
+ * @see RecyclerView#setItemAnimator(RecyclerView.ItemAnimator)
  */
 public abstract class BaseItemAnimator extends SimpleItemAnimator {
 

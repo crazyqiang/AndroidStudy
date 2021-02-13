@@ -3,12 +3,13 @@ package org.ninetripods.mq.study.multiThread;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.CommonWebviewActivity;

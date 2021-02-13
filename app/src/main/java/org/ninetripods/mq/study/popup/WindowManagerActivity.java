@@ -2,7 +2,7 @@ package org.ninetripods.mq.study.popup;
 
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import org.ninetripods.mq.study.BaseActivity;

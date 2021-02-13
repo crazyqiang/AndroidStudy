@@ -2,10 +2,11 @@ package org.ninetripods.mq.study.popup.WindowManager.view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
 
 import org.ninetripods.mq.study.R;
 
@@ -14,7 +15,7 @@ import org.ninetripods.mq.study.R;
  * mqcoder90@gmail.com
  */
 
-public class SmallWindowView extends android.support.v7.widget.AppCompatTextView {
+public class SmallWindowView extends androidx.appcompat.widget.AppCompatTextView {
 
     public SmallWindowView(Context context) {
         this(context, null);

@@ -1,9 +1,9 @@
 package org.ninetripods.mq.study.customView.alipayView;
 
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;

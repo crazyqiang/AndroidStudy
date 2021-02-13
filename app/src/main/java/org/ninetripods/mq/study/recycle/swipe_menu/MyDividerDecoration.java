@@ -1,7 +1,7 @@
 package org.ninetripods.mq.study.recycle.swipe_menu;
 
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 /**

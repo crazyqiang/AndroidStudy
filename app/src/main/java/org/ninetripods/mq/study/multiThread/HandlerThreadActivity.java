@@ -5,9 +5,10 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.CommonWebviewActivity;
@@ -16,7 +17,6 @@ import org.ninetripods.mq.study.util.Constant;
 
 import java.util.Random;
 
-import static android.os.Build.VERSION.SDK;
 import static android.os.Build.VERSION.SDK_INT;
 
 public class HandlerThreadActivity extends BaseActivity {

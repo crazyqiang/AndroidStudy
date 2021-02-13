@@ -2,10 +2,11 @@ package org.ninetripods.mq.study.path;
 
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;

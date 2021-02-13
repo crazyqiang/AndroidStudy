@@ -32,7 +32,7 @@
         android:layout_centerInParent="true"
         android:visibility="gone"
         app:emptyTextStr="空数据"
-        app:errorTextStr="错误数据"
+        app:errorTextStr="请求错误"
         tools:visibility="gone" />
 
 </RelativeLayout>

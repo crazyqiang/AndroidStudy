@@ -13,11 +13,11 @@
         android:text="@string/app_name"
         android:textColor="@color/white" />
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 android:layout_height="250dp"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize" />
@@ -51,7 +51,7 @@
             </LinearLayout>
 
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 app:tabIndicatorColor="@color/colorAccent"
                 app:tabIndicatorHeight="4dp"
@@ -63,11 +63,11 @@
                 android:background="?attr/colorPrimary" />
 
             <!--</android.support.design.widget.CollapsingToolbarLayout>-->
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_nested_scrolling" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|end"
@@ -76,5 +76,5 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

@@ -1,6 +1,6 @@
 package org.ninetripods.mq.study.bezier.view.BeaierDemo;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;

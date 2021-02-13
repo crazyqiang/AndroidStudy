@@ -3,23 +3,20 @@ package org.ninetripods.mq.study.multiprocess_client;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.ninetripods.mq.multiprocess_sever_i.Apple;
-import org.ninetripods.mq.multiprocess_sever_i.MultiProcess;
+import androidx.appcompat.widget.Toolbar;
+
 import org.ninetripods.mq.study.BaseActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.DisplayUtil;
