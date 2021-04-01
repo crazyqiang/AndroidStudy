@@ -35,7 +35,7 @@ publish {
     userOrg = 'crazyqiang'//bintray.com用户名
     groupId = 'com.ninetripods'//jCenter上的路径
     artifactId = 'lib-dialog'//项目名称
-    publishVersion = '1.1.0'//修改版本号
+    publishVersion = '1.2.0'//修改版本号
     desc = 'a common dialog library'//描述，不重要
     website = 'https://github.com/crazyqiang/AndroidStudy/tree/master/sydialoglib'
 }

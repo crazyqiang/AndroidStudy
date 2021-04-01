@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.util.Log;
 
 import org.ninetripods.mq.multiprocess_sever_i.Apple;
 import org.ninetripods.mq.multiprocess_sever_i.IRemoteService;
@@ -78,10 +77,5 @@ public class RemoteObserverService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 }
