@@ -1,6 +1,5 @@
 apply from: 'config.gradle'
 
-
 buildscript {
     repositories {
         maven {
@@ -14,7 +13,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath Deps.kotlinPlugin
         classpath 'com.novoda:bintray-release:0.9.1'
 //        classpath 'com.fastgo:plugin:1.0-test'
     }

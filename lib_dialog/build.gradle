@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
+//apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -31,11 +31,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 }
 
-publish {
-    userOrg = 'crazyqiang'//bintray.com用户名
-    groupId = 'com.ninetripods'//jCenter上的路径
-    artifactId = 'lib-dialog'//项目名称
-    publishVersion = '1.2.0'//修改版本号
-    desc = 'a common dialog library'//描述，不重要
-    website = 'https://github.com/crazyqiang/AndroidStudy/tree/master/sydialoglib'
-}
+//publish {
+//    userOrg = 'crazyqiang'//bintray.com用户名
+//    groupId = 'com.ninetripods'//jCenter上的路径
+//    artifactId = 'lib-dialog'//项目名称
+//    publishVersion = '1.2.0'//修改版本号
+//    desc = 'a common dialog library'//描述，不重要
+//    website = 'https://github.com/crazyqiang/AndroidStudy/tree/master/sydialoglib'
+//}

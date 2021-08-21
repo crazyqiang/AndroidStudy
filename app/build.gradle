@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 //获取时间戳
 def getDate() {
@@ -8,14 +9,14 @@ def getDate() {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion App.compileSdkVersion
+    buildToolsVersion App.buildToolsVersion
     defaultConfig {
-        applicationId "org.ninetripods.mq.study"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        applicationId App.appId
+        minSdkVersion App.minSdkVersion
+        targetSdkVersion App.targetSdkVersion
+        versionCode App.versionCode
+        versionName App.versionName
         vectorDrawables.useSupportLibrary = true
         buildConfigField "boolean", "IS_SHOW_LOG", "false"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -96,10 +97,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation Deps.kotlinStdlib
+    implementation Deps.androidx_material
+    implementation Deps.androidx_appcompat
+    implementation Deps.androidx_recyclerView
+    implementation Deps.androidx_constraintLayout
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //汉字转拼音，通讯录 https://github.com/promeG/TinyPinyin
@@ -108,5 +110,6 @@ dependencies {
     implementation 'com.github.promeg:tinypinyin:2.0.3'
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
     api project(':lib_dialog')
+//    implementation 'com.ninetripods:lib-dialog:1.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
