@@ -2,6 +2,7 @@ import LibsVersion.Companion.appcompat_version
 import LibsVersion.Companion.arouter_api_version
 import LibsVersion.Companion.arouter_compiler_version
 import LibsVersion.Companion.constraintlayout_version
+import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.material_version
 import LibsVersion.Companion.recyclerview_version
@@ -26,6 +27,9 @@ object Deps {
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     //AndroidX相关
+    const val jetpack_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$jetpack_version"
+    const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
+
     const val androidx_material = "com.google.android.material:material:$material_version"
     const val androidx_appcompat = "androidx.appcompat:appcompat:$appcompat_version"
     const val androidx_recyclerView = "androidx.recyclerview:recyclerview:$recyclerview_version"
@@ -39,6 +43,7 @@ object Deps {
 internal class LibsVersion {
 
     companion object {
+        const val jetpack_version = "2.2.0"
         const val kotlin_version = "1.4.32"
         const val arouter_api_version = "1.5.1"
         const val arouter_compiler_version = "1.5.1"

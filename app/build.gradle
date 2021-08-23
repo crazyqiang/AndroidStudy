@@ -104,6 +104,9 @@ dependencies {
     implementation Deps.androidx_constraintLayout
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation Deps.jetpack_livedata //livedata
+    implementation Deps.jetpack_viewmodel //viewmodel
+
     //汉字转拼音，通讯录 https://github.com/promeG/TinyPinyin
     // TinyPinyin核心包，约80KB
     // 可选，适用于Android的中国地区词典
