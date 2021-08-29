@@ -14,7 +14,7 @@ import LibsVersion.Companion.recyclerview_version
 object App {
     const val targetSdkVersion = 30
     const val compileSdkVersion = 30
-    const val buildToolsVersion = "30.0.0"
+    const val buildToolsVersion = "30.0.3"
     const val minSdkVersion = 19
     const val appId = "org.ninetripods.mq.study"
     const val versionCode = 20210506
