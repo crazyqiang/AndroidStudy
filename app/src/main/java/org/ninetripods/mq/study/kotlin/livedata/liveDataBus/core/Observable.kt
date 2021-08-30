@@ -9,7 +9,7 @@ interface Observable<T> {
      *
      * @param value 发送的消息
      */
-    fun postValue(value: T)
+    fun post(value: T)
 
     /**
      * 进程内发送消息，延迟发送
