@@ -14,7 +14,10 @@ import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.utils.ThreadUtils
  */
 class LiveDataBusCore {
     companion object {
-        val instance: LiveDataBusCore by lazy { LiveDataBusCore() }
+        private val mainHandler = Handler(Looper.getMainLooper())
+        val instance: LiveDataBusCore by lazy {
+            LiveDataBusCore()
+        }
     }
 
     private val bus: HashMap<String, LiveEvent<Any>> = HashMap()
@@ -34,11 +37,11 @@ class LiveDataBusCore {
         return observableConfigs[key]
     }
 
+
     private class LiveEvent<T>(key: String) : Observable<T> {
         private var liveData: LifecycleLiveData<T> = LifecycleLiveData(key)
-        private val mainHandler = Handler(Looper.getMainLooper())
 
-        override fun postValue(value: T) {
+        override fun post(value: T) {
             if (ThreadUtils.isMainThread()) {
                 postInternal(value)
             } else {
@@ -85,6 +88,8 @@ class LiveDataBusCore {
         @MainThread
         private fun observeInternal(owner: LifecycleOwner, observer: Observer<T>) {
             val observerWrapper = ObserverWrapper(observer)
+            //liveData.version > ExternalLiveData.START_VERSION 说明liveData里发送过消息，version值已经不是初始值，
+            //如果是后注册的观察者，则屏蔽当前消息，观察者不执行；如果是先注册的观察者，则不受影响
             observerWrapper.preventNextEvent = liveData.version > ExternalLiveData.START_VERSION
             liveData.observe(owner, observerWrapper)
         }
@@ -141,8 +146,8 @@ class LiveDataBusCore {
      * Observer装饰者模式
      */
     class ObserverWrapper<T>(
-        private val observer: Observer<T>,
-        var preventNextEvent: Boolean = false
+            private val observer: Observer<T>,
+            var preventNextEvent: Boolean = false
     ) : Observer<T> {
         override fun onChanged(t: T) {
             if (preventNextEvent) {

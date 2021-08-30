@@ -5,7 +5,6 @@ import java.lang.Exception
 /**
  * fork from: https://github.com/JeremyLiao/LiveEventBus
  */
-//TODO
 open class ExternalLiveData<T> : MutableLiveData<T>() {
 
     companion object {
@@ -38,7 +37,6 @@ open class ExternalLiveData<T> : MutableLiveData<T>() {
         return super.getVersion()
     }
 
-    //TODO internal inner 使用方式
     internal inner class ExternalLifecycleBoundObserver(
         owner: LifecycleOwner,
         observer: Observer<in T>?
