@@ -1,3 +1,5 @@
+[TOC]
+
 # 扫描二维码下载APK示例
 ![image.png](https://upload-images.jianshu.io/upload_images/587163-8e7d686c71a0e002.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -19,7 +21,18 @@
 
 # 发布日志
 
-**2018/12/25**
+## Android Jetpack系列
+
+- Lifecycle： [Android Jetpack系列之Lifecycle](https://blog.csdn.net/u013700502/article/details/118469311)
+- LiveData ：[Android Jetpack系列之LiveData](https://blog.csdn.net/u013700502/article/details/118866217)
+- ViewModel：[Android Jetpack系列之ViewModel](https://blog.csdn.net/u013700502/article/details/118962560)
+- TODO:
+- LiveDataBus
+- Jetpack MVVM
+- DataStore
+- Navigation
+
+## 往期博客(待整理)
 
 Gradle理论与实践一：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85231505 ）
 
