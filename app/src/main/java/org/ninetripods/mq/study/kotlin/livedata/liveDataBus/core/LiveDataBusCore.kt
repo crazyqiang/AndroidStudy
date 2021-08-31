@@ -12,7 +12,7 @@ import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.utils.ThreadUtils
 /**
  * fork from: https://github.com/JeremyLiao/LiveEventBus
  */
-class LiveDataBusCore {
+class LiveDataBusCore private constructor(){
     companion object {
         private val mainHandler = Handler(Looper.getMainLooper())
         val instance: LiveDataBusCore by lazy {
