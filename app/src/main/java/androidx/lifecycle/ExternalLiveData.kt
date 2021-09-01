@@ -13,7 +13,6 @@ open class ExternalLiveData<T> : MutableLiveData<T>() {
     }
 
     override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
-        super.observe(owner, observer)
         if (owner.lifecycle.currentState == Lifecycle.State.DESTROYED) {
             // ignore
             return
@@ -53,7 +52,7 @@ open class ExternalLiveData<T> : MutableLiveData<T>() {
         return Lifecycle.State.STARTED
     }
 
-    //TODO  每次都是反射去拿 是否可以优化
+    //反射获取LiveData.mObservers
     private val fieldObservers: Any
         get() {
             val fieldObservers = LiveData::class.java.getDeclaredField("mObservers")
