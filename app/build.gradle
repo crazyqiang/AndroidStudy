@@ -102,8 +102,10 @@ dependencies {
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_recyclerView
     implementation Deps.androidx_constraintLayout
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation Deps.androidx_legacy
 
+    implementation Deps.jetpack_lifecycle_process //lifecycle_process
+    implementation Deps.jetpack_lifecycle_service //lifecycle_service
     implementation Deps.jetpack_livedata //livedata
     implementation Deps.jetpack_viewmodel //viewmodel
 

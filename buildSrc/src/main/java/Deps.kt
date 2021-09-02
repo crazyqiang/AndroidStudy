@@ -4,6 +4,7 @@ import LibsVersion.Companion.arouter_compiler_version
 import LibsVersion.Companion.constraintlayout_version
 import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
+import LibsVersion.Companion.legacy_version
 import LibsVersion.Companion.material_version
 import LibsVersion.Companion.recyclerview_version
 
@@ -29,11 +30,16 @@ object Deps {
     //AndroidX相关
     const val jetpack_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$jetpack_version"
     const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
+    //ProcessLifecycleOwner给整个 app进程 提供一个lifecycle
+    const val jetpack_lifecycle_process = "androidx.lifecycle:lifecycle-process:$jetpack_version"
+    //帮助实现Service的LifecycleOwner
+    const val jetpack_lifecycle_service = "androidx.lifecycle:lifecycle-service:$jetpack_version"
 
     const val androidx_material = "com.google.android.material:material:$material_version"
     const val androidx_appcompat = "androidx.appcompat:appcompat:$appcompat_version"
     const val androidx_recyclerView = "androidx.recyclerview:recyclerview:$recyclerview_version"
     const val androidx_constraintLayout = "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    const val androidx_legacy = "androidx.legacy:legacy-support-v4:$legacy_version"
 
     //ARouter
     const val arouter_api = "com.alibaba:arouter-api:$arouter_api_version"
@@ -43,6 +49,7 @@ object Deps {
 internal class LibsVersion {
 
     companion object {
+        const val legacy_version = "1.0.0"
         const val jetpack_version = "2.2.0"
         const val kotlin_version = "1.4.32"
         const val arouter_api_version = "1.5.1"
