@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.utils.ThreadUtils
 
+
 /**
  * fork from: https://github.com/JeremyLiao/LiveEventBus
  */
@@ -23,11 +24,11 @@ class LiveDataBusCore {
     private val bus: HashMap<String, LiveEvent<Any>> = HashMap()
     private val observableConfigs: HashMap<String, ObservableConfig> = HashMap()
 
-    fun <T> with(key: String): Observable<T>? {
+    fun <T> with(key: String): Observable<T> {
         if (!bus.containsKey(key)) {
             bus[key] = LiveEvent(key)
         }
-        return bus[key] as? Observable<T>
+        return bus[key] as Observable<T>
     }
 
     fun config(key: String): ObservableConfig? {
@@ -40,6 +41,7 @@ class LiveDataBusCore {
 
     private class LiveEvent<T>(key: String) : Observable<T> {
         private var liveData: LifecycleLiveData<T> = LifecycleLiveData(key)
+        private val observeMap: HashMap<Observer<*>, ObserverWrapper<T>> = HashMap()
 
         override fun post(value: T) {
             if (ThreadUtils.isMainThread()) {
@@ -77,6 +79,51 @@ class LiveDataBusCore {
             }
         }
 
+        override fun observeForever(observer: Observer<T>) {
+            if (ThreadUtils.isMainThread()) {
+                observeForeverInternal(observer)
+            } else {
+                mainHandler.post {
+                    observeForeverInternal(observer)
+                }
+            }
+        }
+
+        override fun observeStickyForever(observer: Observer<T>) {
+            if (ThreadUtils.isMainThread()) {
+                observeStickyForeverInternal(observer)
+            } else {
+                mainHandler.post {
+                    observeStickyForeverInternal(observer)
+                }
+            }
+        }
+
+        override fun removeObserver(observer: Observer<T>) {
+            if (ThreadUtils.isMainThread()) {
+                removeObserverInternal(observer)
+            } else {
+                mainHandler.post {
+                    removeObserverInternal(observer)
+                }
+            }
+        }
+
+        @MainThread
+        private fun observeForeverInternal(observer: Observer<T>) {
+            val observerWrapper = ObserverWrapper(observer)
+            observerWrapper.preventNextEvent = liveData.version > ExternalLiveData.START_VERSION
+            observeMap.put(observer, observerWrapper)
+            liveData.observeForever(observerWrapper)
+        }
+
+        @MainThread
+        private fun observeStickyForeverInternal(observer: Observer<T>) {
+            val observerWrapper = ObserverWrapper(observer)
+            observeMap.put(observer, observerWrapper)
+            liveData.observeForever(observerWrapper)
+        }
+
         @MainThread
         private fun postInternal(value: T) {
             liveData.value = value
@@ -101,6 +148,16 @@ class LiveDataBusCore {
         private fun observeStickyInternal(owner: LifecycleOwner, observer: Observer<T>) {
             val observerWrapper = ObserverWrapper(observer)
             liveData.observe(owner, observerWrapper)
+        }
+
+        @MainThread
+        private fun removeObserverInternal(observer: Observer<T>) {
+            val realObserver = if (observeMap.containsKey(observer)) {
+                observeMap.remove(observer)
+            } else {
+                observer
+            }
+            liveData.removeObserver(realObserver)
         }
 
         inner class LifecycleLiveData<T>(val key: String) : ExternalLiveData<T>() {

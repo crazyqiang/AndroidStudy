@@ -45,4 +45,20 @@ interface Observable<T> {
      * @param observer 观察者
      */
     fun observeSticky(owner: LifecycleOwner, observer: Observer<T>)
+
+    /**
+     * 注册一个Observer，需手动解除绑定
+     */
+    fun observeForever(observer: Observer<T>)
+
+    /**
+     * 注册一个Observer，需手动解除绑定
+     * 如果之前有消息发送，可以在注册时收到消息（消息同步）
+     */
+    fun observeStickyForever(observer: Observer<T>)
+
+    /**
+     * 通过observeForever或observeStickyForever注册的，需要调用该方法取消订阅
+     */
+    fun removeObserver(observer: Observer<T>)
 }

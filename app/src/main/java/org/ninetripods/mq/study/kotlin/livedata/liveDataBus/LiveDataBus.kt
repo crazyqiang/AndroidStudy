@@ -17,7 +17,7 @@ class LiveDataBus {
      * @param <T> T
      * @return Observable
      */
-    operator fun <T> get(key: String, type: Class<T>): Observable<T>? {
+    operator fun <T> get(key: String, type: Class<T>): Observable<T> {
         return LiveDataBusCore.instance.with(key)
     }
 
@@ -28,8 +28,8 @@ class LiveDataBus {
      * @param <T> T
      * @return Observable
      */
-    operator fun <T> get(key: String): Observable<T>? {
-        return get(key, Any::class.java) as? Observable<T>
+    operator fun <T> get(key: String): Observable<T> {
+        return get(key, Any::class.java) as Observable<T>
     }
 
     /**
