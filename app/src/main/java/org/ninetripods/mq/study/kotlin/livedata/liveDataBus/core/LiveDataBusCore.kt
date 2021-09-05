@@ -113,14 +113,14 @@ class LiveDataBusCore {
         private fun observeForeverInternal(observer: Observer<T>) {
             val observerWrapper = ObserverWrapper(observer)
             observerWrapper.preventNextEvent = liveData.version > ExternalLiveData.START_VERSION
-            observeMap.put(observer, observerWrapper)
+            observeMap[observer] = observerWrapper
             liveData.observeForever(observerWrapper)
         }
 
         @MainThread
         private fun observeStickyForeverInternal(observer: Observer<T>) {
             val observerWrapper = ObserverWrapper(observer)
-            observeMap.put(observer, observerWrapper)
+            observeMap[observer] = observerWrapper
             liveData.observeForever(observerWrapper)
         }
 
@@ -157,7 +157,7 @@ class LiveDataBusCore {
             } else {
                 observer
             }
-            liveData.removeObserver(realObserver)
+            realObserver?.let { liveData.removeObserver(it) }
         }
 
         inner class LifecycleLiveData<T>(val key: String) : ExternalLiveData<T>() {
