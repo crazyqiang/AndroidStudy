@@ -26,8 +26,9 @@
 - Lifecycle： [Android Jetpack系列之Lifecycle](https://blog.csdn.net/u013700502/article/details/118469311)
 - LiveData ：[Android Jetpack系列之LiveData](https://blog.csdn.net/u013700502/article/details/118866217)
 - ViewModel：[Android Jetpack系列之ViewModel](https://blog.csdn.net/u013700502/article/details/118962560)
+- LiveDataBus：[Android基于LiveData实现消息总线](https://blog.csdn.net/u013700502/article/details/120170790)
+
 - TODO:
-- LiveDataBus
 - Jetpack MVVM
 - DataStore
 - Navigation

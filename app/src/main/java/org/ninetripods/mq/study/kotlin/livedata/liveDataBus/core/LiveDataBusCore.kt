@@ -213,6 +213,5 @@ class LiveDataBusCore {
             }
             observer.onChanged(t)
         }
-
     }
 }

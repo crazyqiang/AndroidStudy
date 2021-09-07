@@ -70,6 +70,4 @@ open class ExternalLiveData<T> : MutableLiveData<T>() {
         putIfAbsent.isAccessible = true
         return putIfAbsent.invoke(mObservers, observer, wrapper)
     }
-
-
 }
