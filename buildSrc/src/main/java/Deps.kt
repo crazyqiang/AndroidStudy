@@ -27,14 +27,17 @@ object Deps {
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    //AndroidX相关
+    //Jetpack相关
     const val jetpack_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$jetpack_version"
     const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
+    //LifecycleScope协程
+    const val jetpack_lifecycle_runtime =  "androidx.lifecycle:lifecycle-runtime-ktx:$jetpack_version"
     //ProcessLifecycleOwner给整个 app进程 提供一个lifecycle
     const val jetpack_lifecycle_process = "androidx.lifecycle:lifecycle-process:$jetpack_version"
     //帮助实现Service的LifecycleOwner
     const val jetpack_lifecycle_service = "androidx.lifecycle:lifecycle-service:$jetpack_version"
 
+    //AndroidX相关
     const val androidx_material = "com.google.android.material:material:$material_version"
     const val androidx_appcompat = "androidx.appcompat:appcompat:$appcompat_version"
     const val androidx_recyclerView = "androidx.recyclerview:recyclerview:$recyclerview_version"
