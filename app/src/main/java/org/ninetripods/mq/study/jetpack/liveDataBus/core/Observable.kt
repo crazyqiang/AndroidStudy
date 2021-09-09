@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.kotlin.livedata.liveDataBus.core
+package org.ninetripods.mq.study.jetpack.liveDataBus.core
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer

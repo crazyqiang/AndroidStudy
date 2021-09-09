@@ -1,13 +1,13 @@
-package org.ninetripods.mq.study.kotlin.livedata.liveDataBus
+package org.ninetripods.mq.study.jetpack.liveDataBus
 
-import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.core.LiveDataBusCore
-import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.core.Observable
-import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.core.ObservableConfig
+import org.ninetripods.mq.study.jetpack.liveDataBus.core.LiveDataBusCore
+import org.ninetripods.mq.study.jetpack.liveDataBus.core.Observable
+import org.ninetripods.mq.study.jetpack.liveDataBus.core.ObservableConfig
 
 /**
  * fork from: https://github.com/JeremyLiao/LiveEventBus
  */
-class LiveDataBus {
+object LiveDataBus {
 
     /**
      * get observable by key with type

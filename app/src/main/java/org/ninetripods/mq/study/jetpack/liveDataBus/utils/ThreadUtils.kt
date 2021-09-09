@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.kotlin.livedata.liveDataBus.utils
+package org.ninetripods.mq.study.jetpack.liveDataBus.utils
 
 import android.os.Looper
 

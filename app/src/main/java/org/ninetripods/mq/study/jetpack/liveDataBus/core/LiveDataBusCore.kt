@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.kotlin.livedata.liveDataBus.core
+package org.ninetripods.mq.study.jetpack.liveDataBus.core
 
 import android.os.Handler
 import android.os.Looper
@@ -7,13 +7,13 @@ import androidx.lifecycle.ExternalLiveData
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import org.ninetripods.mq.study.kotlin.livedata.liveDataBus.utils.ThreadUtils
+import org.ninetripods.mq.study.jetpack.liveDataBus.utils.ThreadUtils
 
 
 /**
  * fork from: https://github.com/JeremyLiao/LiveEventBus
  */
-class LiveDataBusCore {
+class LiveDataBusCore private constructor(){
     companion object {
         private val mainHandler = Handler(Looper.getMainLooper())
         val instance: LiveDataBusCore by lazy {
