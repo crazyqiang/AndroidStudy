@@ -1,6 +1,5 @@
-[TOC]
+## 扫描二维码下载APK示例
 
-# 扫描二维码下载APK示例
 ![image.png](https://upload-images.jianshu.io/upload_images/587163-8e7d686c71a0e002.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
@@ -9,7 +8,7 @@
 - 2019-06-20
 
 ```
-发布lib-dialog库，引入方式：compile 'com.ninetripods:lib-dialog:1.1.0'
+发布lib-dialog库，引入方式：implementation 'com.ninetripods:lib-dialog:1.1.0'
 
 优化内容：
 1、优化dialog默认布局
@@ -19,31 +18,14 @@
 更详细移步：https://www.jianshu.com/p/ea70ba200b38
 ```
 
-# 发布日志
+# Blog发布
 
-## Android Jetpack系列
-
-- Lifecycle： [Android Jetpack系列之Lifecycle](https://blog.csdn.net/u013700502/article/details/118469311)
-- LiveData ：[Android Jetpack系列之LiveData](https://blog.csdn.net/u013700502/article/details/118866217)
-- ViewModel：[Android Jetpack系列之ViewModel](https://blog.csdn.net/u013700502/article/details/118962560)
-- LiveDataBus：[Android基于LiveData实现消息总线](https://blog.csdn.net/u013700502/article/details/120170790)
-
-- TODO:
-- Jetpack MVVM
-- DataStore
-- Navigation
+系列 | 备注
+:----|:----
+Jetpack系列 | Lifecycle： [Android Jetpack系列之Lifecycle](https://blog.csdn.net/u013700502/article/details/118469311)<br>LiveData ：[Android Jetpack系列之LiveData](https://blog.csdn.net/u013700502/article/details/118866217)<br>ViewModel：[Android Jetpack系列之ViewModel](https://blog.csdn.net/u013700502/article/details/118962560)<br>LiveDataBus：[Android基于LiveData实现消息总线](https://blog.csdn.net/u013700502/article/details/120170790)<br>TODO:<br>Jetpack MVVM<br>DataStore<br>Navigation
+Gradle系列 | Gradle理论与实践一：[Gradle入门](https://blog.csdn.net/u013700502/article/details/85231505 )<br>Gradle理论与实践二：[Groovy介绍 ](https://blog.csdn.net/u013700502/article/details/85231600)<br>Gradle理论与实践三：[Gradle构建脚本基础](https://blog.csdn.net/u013700502/article/details/85231661)<br>Gradle理论与实践四：[自定义Gradle插件](https://blog.csdn.net/u013700502/article/details/85232032)<br>[Gradle配置中subprojects和allprojects的区别](https://blog.csdn.net/u013700502/article/details/85231687)
 
 ## 往期博客(待整理)
-
-Gradle理论与实践一：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85231505 ）
-
-Gradle理论与实践二：Groovy介绍 （ https://blog.csdn.net/u013700502/article/details/85231600 ）
-
-Gradle理论与实践三：Gradle构建脚本基础 （ https://blog.csdn.net/u013700502/article/details/85231661 ）
-
-Gradle理论与实践四：自定义Gradle插件（ https://blog.csdn.net/u013700502/article/details/85232032 ）
-
-Gradle配置中subprojects和allprojects的区别:（ https://blog.csdn.net/u013700502/article/details/85231687 ）
 
 **2018/09/20**
  Android基于DialogFragment封装一个通用的Dialog （ https://blog.csdn.net/u013700502/article/details/82777402 ）
