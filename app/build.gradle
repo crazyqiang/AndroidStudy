@@ -97,17 +97,22 @@ android {
 }
 
 dependencies {
+    //AndroidX相关
     implementation Deps.kotlinStdlib
     implementation Deps.androidx_material
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_recyclerView
     implementation Deps.androidx_constraintLayout
     implementation Deps.androidx_legacy
-
+    //引入协程
+    implementation Deps.coroutines_core
+    implementation Deps.coroutines_android
+    //Jetpack相关
     implementation Deps.jetpack_lifecycle_process //lifecycle_process
     implementation Deps.jetpack_lifecycle_service //lifecycle_service
     implementation Deps.jetpack_livedata //livedata
     implementation Deps.jetpack_viewmodel //viewmodel
+    implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
 
     //汉字转拼音，通讯录 https://github.com/promeG/TinyPinyin
     // TinyPinyin核心包，约80KB

@@ -2,6 +2,7 @@ import LibsVersion.Companion.appcompat_version
 import LibsVersion.Companion.arouter_api_version
 import LibsVersion.Companion.arouter_compiler_version
 import LibsVersion.Companion.constraintlayout_version
+import LibsVersion.Companion.coroutines_version
 import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.legacy_version
@@ -26,7 +27,11 @@ object Deps {
     //Kotlin
     const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    //引入协程
+    const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    const val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
+    //ktx扩展列表：https://developer.android.com/kotlin/ktx/extensions-list
     //Jetpack相关
     const val jetpack_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$jetpack_version"
     const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
@@ -55,6 +60,7 @@ internal class LibsVersion {
         const val legacy_version = "1.0.0"
         const val jetpack_version = "2.2.0"
         const val kotlin_version = "1.4.32"
+        const val coroutines_version = "1.4.3"
         const val arouter_api_version = "1.5.1"
         const val arouter_compiler_version = "1.5.1"
         const val material_version = "1.2.1"
