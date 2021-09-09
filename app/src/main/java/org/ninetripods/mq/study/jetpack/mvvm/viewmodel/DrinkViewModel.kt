@@ -1,11 +1,11 @@
-package org.ninetripods.mq.study.jetpack.viewmodel
+package org.ninetripods.mq.study.jetpack.mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.example.jetpackstudy.mvvm.model.Drink
-import org.ninetripods.mq.study.jetpack.repo.DrinkRepository
-import org.ninetripods.mq.study.jetpack.base.BaseViewModel
-import org.ninetripods.mq.study.jetpack.base.Constants
-import org.ninetripods.mq.study.jetpack.base.State
+import org.ninetripods.mq.study.jetpack.mvvm.repo.DrinkRepository
+import org.ninetripods.mq.study.jetpack.mvvm.base.BaseViewModel
+import org.ninetripods.mq.study.jetpack.mvvm.base.Constants
+import org.ninetripods.mq.study.jetpack.mvvm.base.State
 
 class DrinkViewModel : BaseViewModel() {
 
