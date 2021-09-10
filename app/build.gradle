@@ -23,6 +23,12 @@ android {
             java.srcDirs = ['src/main/java', 'src/main/aidl']
         }
     }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -121,4 +127,5 @@ dependencies {
     api project(':lib_dialog')
     //implementation 'com.ninetripods:lib-dialog:1.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

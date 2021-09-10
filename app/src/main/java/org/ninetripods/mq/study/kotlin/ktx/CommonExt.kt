@@ -1,41 +1,28 @@
 package org.ninetripods.mq.study.kotlin.ktx
 
-import android.app.Activity
-import android.app.Dialog
-import android.view.View
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.jetpackstudy.util.ScreenUtil
 import org.ninetripods.mq.study.MyApplication
 
-fun <T : View> Activity.bind(id: Int): T {
-    return this.findViewById(id) as T
+/**
+ * Toast扩展函数
+ */
+fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }
 
-fun <T : View> View.bind(id: Int): T {
-    return this.findViewById(id) as T
+fun Context.log(message: String) {
+    Log.e("TTT", message)
 }
 
-fun <T : View> Dialog.bind(id: Int): T {
-    return this.findViewById(id) as T
-}
-
-fun <T : View> IRootView.bind(id: Int): T {
-    return this.rootView().bind(id)
-}
-
-fun <T : View> Activity.id(id: Int) = lazy {
-    findViewById<T>(id)
-}
-
-fun <T : View> View.id(id: Int) = lazy {
-    findViewById<T>(id)
-}
-
-fun <T : View> IRootView.id(id: Int) = lazy {
-    this.rootView().findViewById<T>(id)
-}
-
-fun <T : View> Dialog.id(id: Int) = lazy {
-    findViewById<T>(id)
+/**
+ * Fragment中Toast扩展函数
+ */
+fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(activity, message, duration).show()
 }
 
 fun Number.dp2px(): Int {

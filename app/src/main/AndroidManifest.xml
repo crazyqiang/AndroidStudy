@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".jetpack.mvvm.DrinkActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -29,8 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".multiThread.AsyncTaskActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".multiThread.AsyncTaskActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".customViewGroup.FiveRingsActivity"
             android:screenOrientation="portrait" />

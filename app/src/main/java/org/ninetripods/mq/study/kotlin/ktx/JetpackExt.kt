@@ -13,21 +13,3 @@ import androidx.lifecycle.LiveData
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (t: T) -> Unit) {
     liveData.observe(this, { observer(it) })
 }
-
-/**
- * Toast扩展函数
- */
-fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, message, duration).show()
-}
-
-fun Context.log(message: String) {
-    Log.e("TTT", message)
-}
-
-/**
- * Fragment中Toast扩展函数
- */
-fun Fragment.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(activity, message, duration).show()
-}

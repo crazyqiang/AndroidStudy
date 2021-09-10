@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.kotlin.ktx
+package org.ninetripods.mq.study.jetpack.mvvm.base.interf
 
 import android.view.View
 

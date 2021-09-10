@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp"
+    tools:context=".jetpack.JetpackFragment">
+
+    <TextView
+        android:id="@+id/tv_lifecycle"
+        style="@style/btn_style_undo"
+        android:layout_marginTop="100dp"
+        android:text="Lifecycle" />
+
+    <TextView
+        android:id="@+id/tv_livedata"
+        style="@style/btn_style_undo"
+        android:layout_below="@+id/tv_lifecycle"
+        android:layout_marginTop="30dp"
+        android:text="LiveData" />
+
+    <TextView
+        android:id="@+id/tv_viewmodel"
+        style="@style/btn_style_undo"
+        android:layout_below="@+id/tv_livedata"
+        android:layout_marginTop="30dp"
+        android:text="ViewModel" />
+
+    <TextView
+        android:id="@+id/tv_mvvm"
+        style="@style/btn_style_undo"
+        android:layout_below="@+id/tv_viewmodel"
+        android:layout_marginTop="30dp"
+        android:text="MVVM" />
+
+</RelativeLayout>

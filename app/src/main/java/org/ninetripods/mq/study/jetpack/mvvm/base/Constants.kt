@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.base
+package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import androidx.annotation.IntDef
 
