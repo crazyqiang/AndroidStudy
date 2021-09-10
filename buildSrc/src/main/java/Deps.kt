@@ -7,7 +7,9 @@ import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.legacy_version
 import LibsVersion.Companion.material_version
+import LibsVersion.Companion.okhttp_version
 import LibsVersion.Companion.recyclerview_version
+import LibsVersion.Companion.retrofit_version
 
 /**
  * Created by mq on 2021/8/22
@@ -52,11 +54,19 @@ object Deps {
     //ARouter
     const val arouter_api = "com.alibaba:arouter-api:$arouter_api_version"
     const val arouter_compiler = "com.alibaba:arouter-compiler:$arouter_compiler_version"
+    //okhttp
+    const val okhttp = "com.squareup.okhttp3:okhttp:$okhttp_version"
+    const val okhttp_log_interceptor = "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    //retrofit
+    const val retrofit = "com.squareup.retrofit2:retrofit:$retrofit_version"
+    const val retrofit_converter_gson = "com.squareup.retrofit2:converter-gson:$retrofit_version"
 }
 
 internal class LibsVersion {
 
     companion object {
+        const val okhttp_version = "4.9.0"
+        const val retrofit_version = "2.9.0"
         const val legacy_version = "1.0.0"
         const val jetpack_version = "2.2.0"
         const val kotlin_version = "1.4.32"
