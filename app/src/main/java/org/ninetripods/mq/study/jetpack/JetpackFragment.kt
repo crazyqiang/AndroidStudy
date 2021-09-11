@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.jetpack.mvvm.DrinkActivity
+import org.ninetripods.mq.study.jetpack.mvvm.DrinkMvvmActivity
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.NavitateUtil
@@ -39,7 +39,7 @@ class JetpackFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mTvMvvm.setOnClickListener {
-            NavitateUtil.startActivity(activity, DrinkActivity::class.java)
+            NavitateUtil.startActivity(activity, DrinkMvvmActivity::class.java)
         }
     }
 

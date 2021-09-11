@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
- * 多个观察者存在时，只有一个能够收到数据更新
+ * 非粘性事件 且 多个观察者存在时，只有一个Observer能够收到数据更新
  * https://github.com/android/architecture-samples/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/SingleLiveEvent.java
  */
 class SingleLiveData<T> : MutableLiveData<T>() {

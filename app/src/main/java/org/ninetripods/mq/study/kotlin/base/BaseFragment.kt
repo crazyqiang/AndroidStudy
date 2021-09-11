@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import org.ninetripods.mq.study.jetpack.mvvm.base.interf.IRootView
+import org.ninetripods.mq.study.jetpack.mvvm.base.widget.IRootView
 
 abstract class BaseFragment : Fragment(), IRootView {
 

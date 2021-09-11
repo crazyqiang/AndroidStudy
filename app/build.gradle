@@ -127,5 +127,4 @@ dependencies {
     api project(':lib_dialog')
     //implementation 'com.ninetripods:lib-dialog:1.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

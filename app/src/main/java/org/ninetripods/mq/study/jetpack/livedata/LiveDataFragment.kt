@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.jetpack.JConsts
+import org.ninetripods.mq.study.jetpack.KConsts
 
 class LiveDataFragment : Fragment() {
 
@@ -20,14 +20,14 @@ class LiveDataFragment : Fragment() {
     //数据观察者 数据改变时在onChange()中进行刷新
     private val changeObserver = Observer<String> { value ->
         value?.let {
-            Log.e(JConsts.LIVE_DATA, "observer:$value")
+            Log.e(KConsts.LIVE_DATA, "observer:$value")
             mTvObserveView.text = value
         }
     }
 
     private val changeObserverTransform = Observer<String> { value ->
         value?.let {
-            Log.e(JConsts.LIVE_DATA, "transform observer:$value")
+            Log.e(KConsts.LIVE_DATA, "transform observer:$value")
             mTvObserveTransform.text = value
         }
     }

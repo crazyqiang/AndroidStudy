@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.jetpack.JConsts
+import org.ninetripods.mq.study.jetpack.KConsts
 
 class LiveDataActivity : AppCompatActivity() {
 
@@ -34,7 +34,7 @@ class LiveDataActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         val data = produceData(true)
-        Log.e(JConsts.LIVE_DATA, "onStop():$data")
+        Log.e(KConsts.LIVE_DATA, "onStop():$data")
         sendData(data, true)
     }
 

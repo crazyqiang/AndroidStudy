@@ -1,13 +1,11 @@
-package org.ninetripods.mq.study.jetpack.base
+package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -15,30 +13,32 @@ abstract class BaseViewModel : ViewModel() {
     val loadingLiveData = MutableLiveData<Boolean>()
 
     //异常
-    val emptyOrErrorLiveData = MutableLiveData<Int>()
+    val errorLiveData = MutableLiveData<String>()
+
+    open fun init(arguments: Bundle?) {}
 
     /**
-     * @param block 正常逻辑
+     * @param request 正常逻辑
      * @param error 异常处理
      * @param showLoading 请求网络时是否展示Loading
      */
-    fun launch(
-        block: suspend () -> Unit,
-        error: suspend (Throwable) -> Unit = { e ->
+    fun launchRequest(
+        showLoading: Boolean = true,
+        error: suspend (String) -> Unit = { errMsg ->
             //默认异常处理，子类可以进行覆写
-            emptyOrErrorLiveData.postValue(Constants.StateError)
-        }, showLoading: Boolean = true
+            errorLiveData.postValue(errMsg)
+        }, request: suspend () -> Unit
     ) {
+        //是否展示Loading
         if (showLoading) {
             loadStart()
         }
-        //TODO  是否能用Flow优化
+        //TODO  是否能用Flow代替
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                block()
+                request()
             } catch (e: Exception) {
-                Log.e("TTT", "e is : $e")
-                error(e)
+                error(e.message ?: "")
             } finally {
                 if (showLoading) {
                     loadFinish()
@@ -46,8 +46,6 @@ abstract class BaseViewModel : ViewModel() {
             }
         }
     }
-
-    open fun init(arguments: Bundle?) {}
 
     private fun loadStart() {
         loadingLiveData.postValue(true)

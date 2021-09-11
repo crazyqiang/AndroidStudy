@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackstudy.mvvm.model.User
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.jetpack.JConsts
-import org.ninetripods.mq.study.jetpack.JConsts.ACTIVITY
-import org.ninetripods.mq.study.jetpack.mvvm.NameViewModel
+import org.ninetripods.mq.study.jetpack.KConsts
+import org.ninetripods.mq.study.jetpack.KConsts.ACTIVITY
+import org.ninetripods.mq.study.jetpack.mvvm.viewmodel.NameViewModel
 
 class LifecycleActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class LifecycleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jetpack_lifecycle_layout)
-        Log.e(JConsts.LIFE_TAG, "$ACTIVITY:onCreate")
+        Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onCreate")
 
         //1、添加生命周期观察者
         //lifecycle.addObserver(MyLifeCycleObserver())
@@ -47,31 +47,31 @@ class LifecycleActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        Log.e(JConsts.LIFE_TAG, "$ACTIVITY:onStart")
+        Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onStart")
         super.onStart()
         owner.onStart()
     }
 
     override fun onResume() {
-        Log.e(JConsts.LIFE_TAG, "$ACTIVITY:onResume")
+        Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onResume")
         super.onResume()
         owner.onResume()
     }
 
     override fun onPause() {
-        Log.e(JConsts.LIFE_TAG, "$ACTIVITY:onPause")
+        Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onPause")
         super.onPause()
         owner.onPause()
     }
 
     override fun onStop() {
-        Log.e(JConsts.LIFE_TAG, "$ACTIVITY:onStop")
+        Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onStop")
         super.onStop()
         owner.onStop()
     }
 
     override fun onDestroy() {
-        Log.e(JConsts.LIFE_TAG, "$ACTIVITY:onDestroy")
+        Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onDestroy")
         super.onDestroy()
         owner.onDestroy()
     }

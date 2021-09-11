@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.kotlin.http.api
+package org.ninetripods.mq.study.jetpack.mvvm.base.http.api
 
 /**
  * Created by mq on 2021/8/11 上午12:39

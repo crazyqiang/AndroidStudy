@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".jetpack.mvvm.DrinkActivity"
+            android:name=".jetpack.mvvm.DrinkMvvmActivity"
             android:exported="true" />
 
         <meta-data

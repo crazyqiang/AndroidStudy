@@ -1,8 +1,8 @@
-package org.ninetripods.mq.study.jetpack.mvvm
+package org.ninetripods.mq.study.jetpack.mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.example.jetpackstudy.mvvm.model.User
-import org.ninetripods.mq.study.jetpack.base.BaseViewModel
+import org.ninetripods.mq.study.jetpack.mvvm.base.BaseViewModel
 import org.ninetripods.mq.study.jetpack.mvvm.repo.NameRepository
 
 class NameViewModel : BaseViewModel() {
