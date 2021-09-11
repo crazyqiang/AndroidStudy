@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,16 +15,24 @@ import androidx.appcompat.widget.Toolbar;
  * Created by MQ on 2017/1/16.
  */
 
-public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean isShowRight;
     private int rightType;
 
+    @LayoutRes
+    public int getLayoutId() {
+        return 0;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView();
+        if (getLayoutId() != 0) {
+            setContentView(getLayoutId());
+        } else {
+            setContentView();
+        }
         initViews();
         initEvents();
     }

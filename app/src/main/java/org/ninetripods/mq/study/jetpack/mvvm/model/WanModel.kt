@@ -1,6 +1,6 @@
-package com.example.jetpackstudy.mvvm.model
+package org.ninetripods.mq.study.jetpack.mvvm.model
 
-data class Drink(
+data class WanModel(
     var desc: String,
     var imagePath: String,
     var title: String,

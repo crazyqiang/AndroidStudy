@@ -29,9 +29,9 @@
 
     <TextView
         android:id="@+id/tv_mvvm"
-        style="@style/btn_style_undo"
+        style="@style/btn_style_done"
         android:layout_below="@+id/tv_viewmodel"
         android:layout_marginTop="30dp"
-        android:text="MVVM" />
+        android:text="Jetpack MVVM" />
 
 </RelativeLayout>

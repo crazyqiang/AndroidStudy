@@ -1,24 +1,24 @@
 package org.ninetripods.mq.study.jetpack.mvvm.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.example.jetpackstudy.mvvm.model.Drink
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseViewModel
 import org.ninetripods.mq.study.jetpack.mvvm.base.State
-import org.ninetripods.mq.study.jetpack.mvvm.repo.DrinkRepository
+import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
+import org.ninetripods.mq.study.jetpack.mvvm.repo.WanRepository
 
-class DrinkViewModel : BaseViewModel() {
+class WanViewModel : BaseViewModel() {
 
     //LiveData
-    val drinkLiveData = MutableLiveData<List<Drink>>()
+    val mWanLiveData = MutableLiveData<List<WanModel>>()
 
     //Repository中间层 管理所有数据来源 包括本地的及网络的
-    private val drinkRepo = DrinkRepository()
+    private val mWanRepo = WanRepository()
 
-    fun getDrinkInfo(drinkId: String = "") {
+    fun getWanInfo(wanId: String = "") {
         launchRequest {
-            val result = drinkRepo.requestDrinkData(drinkId)
+            val result = mWanRepo.requestWanData(wanId)
             when (result.state) {
-                State.Success -> drinkLiveData.postValue(result.data)
+                State.Success -> mWanLiveData.postValue(result.data)
                 State.Error -> errorLiveData.postValue(result.msg)
             }
         }

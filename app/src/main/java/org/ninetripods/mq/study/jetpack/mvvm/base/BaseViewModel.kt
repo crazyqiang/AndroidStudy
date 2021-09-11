@@ -1,19 +1,19 @@
 package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.ninetripods.mq.study.jetpack.mvvm.base.singleEvent.SingleLiveData
 
 abstract class BaseViewModel : ViewModel() {
 
     //loading
-    val loadingLiveData = MutableLiveData<Boolean>()
+    val loadingLiveData = SingleLiveData<Boolean>()
 
     //异常
-    val errorLiveData = MutableLiveData<String>()
+    val errorLiveData = SingleLiveData<String>()
 
     open fun init(arguments: Bundle?) {}
 

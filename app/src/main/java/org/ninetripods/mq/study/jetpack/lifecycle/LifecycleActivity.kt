@@ -1,18 +1,16 @@
 package org.ninetripods.mq.study.jetpack.lifecycle
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackstudy.mvvm.model.User
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
 import org.ninetripods.mq.study.jetpack.KConsts.ACTIVITY
-import org.ninetripods.mq.study.jetpack.mvvm.viewmodel.NameViewModel
 
 class LifecycleActivity : AppCompatActivity() {
 

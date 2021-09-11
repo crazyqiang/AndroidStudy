@@ -18,6 +18,10 @@ fun Context.log(message: String) {
     Log.e("TTT", message)
 }
 
+fun log(message: String) {
+    Log.e("TTT", message)
+}
+
 /**
  * Fragment中Toast扩展函数
  */

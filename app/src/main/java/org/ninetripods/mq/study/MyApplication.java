@@ -2,7 +2,7 @@ package org.ninetripods.mq.study;
 
 import android.app.Application;
 
-import org.ninetripods.mq.study.jetpack.mvvm.base.http.RetrofitManager;
+import org.ninetripods.mq.study.jetpack.mvvm.base.http.RetrofitUtil;
 
 /**
  * Created by mq on 2018/8/19 下午9:17
@@ -18,7 +18,7 @@ public class MyApplication extends Application {
         super.onCreate();
         application = this;
         //初始化Retrofit
-        RetrofitManager.INSTANCE.initRetrofit();
+        RetrofitUtil.INSTANCE.initRetrofit();
     }
 
     public static MyApplication getApplication() {

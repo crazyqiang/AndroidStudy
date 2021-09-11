@@ -1,6 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvvm.repo
-
-import com.example.jetpackstudy.mvvm.model.User
+package org.ninetripods.mq.study.jetpack.lifecycle
 
 
 class NameRepository {
