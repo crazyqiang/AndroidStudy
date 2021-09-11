@@ -29,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getLayoutId() != 0) {
+            //暂时给MVVM架构使用的
             setContentView(getLayoutId());
         } else {
             setContentView();
