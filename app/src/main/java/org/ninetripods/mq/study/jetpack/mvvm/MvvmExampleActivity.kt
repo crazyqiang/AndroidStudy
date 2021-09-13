@@ -32,7 +32,7 @@ class MvvmExampleActivity : BaseMvvmActivity<WanViewModel>() {
             mViewModel.getWanInfo()
         }
         /**
-         * 这里使用了扩展函数，等同于mViewModel.drinkLiveData.observe(this) {}
+         * 这里使用了扩展函数，等同于mViewModel.mWanLiveData.observe(this) {}
          */
         observe(mViewModel.mWanLiveData) { list ->
             val builder = StringBuilder()
