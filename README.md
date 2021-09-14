@@ -5,18 +5,11 @@
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
 # 更新日志
-- 2019-06-20
 
-```
-发布lib-dialog库，引入方式：implementation 'com.ninetripods:lib-dialog:1.1.0'
+库 | 更新日志
+:----|:----
+lib-dialog | 引入方式：implementation 'com.ninetripods:lib-dialog:1.1.0' <br><br> 优化内容：<br>2019-06-20<br>1、优化dialog默认布局<br>2、修复Activity横竖屏切换导致空指针问题<br>3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题<br>更详细移步：https://www.jianshu.com/p/ea70ba200b38
 
-优化内容：
-1、优化dialog默认布局
-2、修复Activity横竖屏切换导致空指针问题
-3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题
-
-更详细移步：https://www.jianshu.com/p/ea70ba200b38
-```
 
 # Blog发布
 
