@@ -54,5 +54,4 @@ abstract class BaseViewModel : ViewModel() {
     private fun loadFinish() {
         loadingLiveData.postValue(false)
     }
-
 }

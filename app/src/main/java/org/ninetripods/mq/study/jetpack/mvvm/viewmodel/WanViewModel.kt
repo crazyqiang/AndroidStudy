@@ -7,7 +7,6 @@ import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
 import org.ninetripods.mq.study.jetpack.mvvm.repo.WanRepository
 
 class WanViewModel : BaseViewModel() {
-
     //LiveData
     val mWanLiveData = MutableLiveData<List<WanModel>>()
 

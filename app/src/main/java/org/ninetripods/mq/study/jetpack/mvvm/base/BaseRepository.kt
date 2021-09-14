@@ -1,7 +1,6 @@
 package org.ninetripods.mq.study.jetpack.mvvm.base
 
 open class BaseRepository {
-
     suspend fun <T : Any> executeRequest(
         block: suspend () -> BaseData<T>
     ): BaseData<T> {

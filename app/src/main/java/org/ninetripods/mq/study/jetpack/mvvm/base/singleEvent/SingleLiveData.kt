@@ -13,11 +13,9 @@ import java.util.concurrent.atomic.AtomicBoolean
  * https://github.com/android/architecture-samples/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/SingleLiveEvent.java
  */
 class SingleLiveData<T> : MutableLiveData<T>() {
-
     companion object {
         private const val TAG = "SingleLiveEvent"
     }
-
     private val mPending = AtomicBoolean(false)
 
     @MainThread
@@ -25,7 +23,6 @@ class SingleLiveData<T> : MutableLiveData<T>() {
         if (hasActiveObservers()) {
             Log.w(TAG, "Multiple observers registered but only one will be notified of changes.")
         }
-
         // Observe the internal MutableLiveData
         super.observe(owner) { t ->
             //如果expect为true，那么将值update为false，方法整体返回true，

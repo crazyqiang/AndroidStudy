@@ -59,9 +59,11 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity(), IStatusVie
     }
 
     private fun registerEvent() {
+        //接收错误信息
         mViewModel.errorLiveData.observe(this) { errMsg ->
             showErrorView(errMsg)
         }
+        //接收Loading信息
         mViewModel.loadingLiveData.observe(this, { isShow ->
             showLoadingView(isShow)
         })
