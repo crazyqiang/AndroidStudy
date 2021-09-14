@@ -26,6 +26,8 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity(), IStatusVie
 
     /**
      * 获取ViewModel 子类可以复写，自行初始化
+     * 注：初始化ViewModel，还可以通过activity-ktx、fragment-ktx扩展库
+     * 初始化方式：val model: VM by viewModels()
      */
     protected open fun getViewModel(): VM? {
         //当前对象超类的Type
