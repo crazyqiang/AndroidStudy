@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import org.ninetripods.mq.study.R
+import org.ninetripods.mq.study.jetpack.lifecycle.LifecycleActivity
 import org.ninetripods.mq.study.jetpack.mvvm.MvvmExampleActivity
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
@@ -14,6 +15,7 @@ private const val ARG_PARAM1 = "param1"
 class JetpackFragment : BaseFragment() {
 
     private var param1: String? = null
+    private val mTvLifecycle: TextView by id(R.id.tv_lifecycle)
     private val mTvMvvm: TextView by id(R.id.tv_mvvm)
 
     companion object {
@@ -38,6 +40,9 @@ class JetpackFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mTvLifecycle.setOnClickListener {
+            NavitateUtil.startActivity(activity, LifecycleActivity::class.java)
+        }
         mTvMvvm.setOnClickListener {
             NavitateUtil.startActivity(activity, MvvmExampleActivity::class.java)
         }

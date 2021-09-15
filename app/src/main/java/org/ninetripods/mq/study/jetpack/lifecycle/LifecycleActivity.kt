@@ -1,97 +1,123 @@
 package org.ninetripods.mq.study.jetpack.lifecycle
 
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.widget.Toolbar
+import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
 import org.ninetripods.mq.study.jetpack.KConsts.ACTIVITY
+import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.util.NavitateUtil
 
-class LifecycleActivity : AppCompatActivity() {
+class LifecycleActivity : BaseActivity() {
 
-    private lateinit var mText: TextView
-    private lateinit var model: NameViewModel
-    val owner: CustomLifeCycleOwner = CustomLifeCycleOwner()
+    private val mToolBar: Toolbar by id(R.id.toolbar)
+    private val mTvResult: TextView by id(R.id.tv_result)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val mBuilder = StringBuilder()
+    private var mServiceAlive = false
+
+    //自定义LifecycleOwner 如果想让一个自定义类成为LifecycleOwner，可以直接实现LifecycleOwner
+    private val customOwner: MyLifecycleOwner = MyLifecycleOwner()
+
+    override fun setContentView() {
         setContentView(R.layout.activity_jetpack_lifecycle_layout)
+    }
+
+    override fun initViews() {
+        initToolBar(mToolBar, "Jetpack Lifecycle", true)
+    }
+
+    override fun initEvents() {
         Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onCreate")
 
         //1、添加生命周期观察者
         //lifecycle.addObserver(MyLifeCycleObserver())
 
         //2、自定义LifecycleOwner
-        owner.init()
-        //添加生命周期观察者
-        //owner.lifecycle.addObserver(MyLifeCycleObserver())
-
-        //3、启动Service
-        startLifecycleService()
-
-        model = ViewModelProvider(this).get(NameViewModel::class.java)
-
-        mText = findViewById(R.id.tv_text)
-
-        val nameObserver = Observer<User> { user ->
-            mText.text = user.name
-        }
-        model.nameLiveData.observe(this, nameObserver)
+        customOwner.init()
+        //添加生命周期观察者 在控制台查看日志
+        customOwner.lifecycle.addObserver(MyLifeCycleObserver())
     }
 
     override fun onStart() {
         Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onStart")
         super.onStart()
-        owner.onStart()
+        customOwner.onStart()
     }
 
     override fun onResume() {
         Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onResume")
         super.onResume()
-        owner.onResume()
+        customOwner.onResume()
     }
 
     override fun onPause() {
         Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onPause")
         super.onPause()
-        owner.onPause()
+        customOwner.onPause()
     }
 
     override fun onStop() {
         Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onStop")
         super.onStop()
-        owner.onStop()
+        customOwner.onStop()
     }
 
     override fun onDestroy() {
         Log.e(KConsts.LIFE_TAG, "$ACTIVITY:onDestroy")
         super.onDestroy()
-        owner.onDestroy()
+        customOwner.onDestroy()
     }
 
-    fun update(view: View) {
-        model.nameLiveData.value = User()
+    /**
+     * 启动Service
+     */
+    fun startLifecycleService(view: View) {
+        val intent = Intent(this, MyLifecycleService::class.java)
+        startService(intent)
+        getStartLogStr()
     }
 
     /**
      * 关闭Service
      */
     fun closeService(view: View) {
-        val intent = Intent(this, MyService::class.java)
+        val intent = Intent(this, MyLifecycleService::class.java)
         stopService(intent)
+        if (mServiceAlive) {
+            getCloseLogStr()
+        }
     }
 
     /**
-     * 启动Service
+     * 跳转到系统Home页面 用于展示应用前后台判断 {@link MyApplicationLifecycleObserver}
      */
-    private fun startLifecycleService() {
-        val intent = Intent(this, MyService::class.java)
-        startService(intent)
+    fun clickGoHome(view: View) {
+        NavitateUtil.goHome(this)
+    }
+
+    /**
+     * 模拟将日志输出到界面上
+     */
+    private fun getStartLogStr() {
+        mServiceAlive = true
+        mBuilder.clear()
+        mBuilder.append("Service:onCreate").append("\n")
+        mBuilder.append("Lifecycle.Event:ON_CREATE").append("\n").append("\n")
+        mBuilder.append("Service:onStart").append("\n")
+        mBuilder.append("Lifecycle.Event:ON_START").append("\n").append("\n")
+        mTvResult.text = mBuilder.toString()
+    }
+
+    private fun getCloseLogStr() {
+        mServiceAlive = false
+        mBuilder.append("Service:onDestroy").append("\n")
+        mBuilder.append("Lifecycle.Event:ON_DESTROY").append("\n")
+        mTvResult.text = mBuilder.toString()
     }
 
 }

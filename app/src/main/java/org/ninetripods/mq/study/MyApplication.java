@@ -2,6 +2,9 @@ package org.ninetripods.mq.study;
 
 import android.app.Application;
 
+import androidx.lifecycle.ProcessLifecycleOwner;
+
+import org.ninetripods.mq.study.jetpack.lifecycle.MyApplicationLifecycleObserver;
 import org.ninetripods.mq.study.jetpack.mvvm.base.http.RetrofitUtil;
 
 /**
@@ -19,6 +22,8 @@ public class MyApplication extends Application {
         application = this;
         //初始化Retrofit
         RetrofitUtil.INSTANCE.initRetrofit();
+        //基于Lifecycle，监听Application的生命周期
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyApplicationLifecycleObserver());
     }
 
     public static MyApplication getApplication() {

@@ -4,7 +4,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 
-class CustomLifeCycleOwner : LifecycleOwner {
+/**
+ * 自定义LifecycleOwner
+ */
+class MyLifecycleOwner : LifecycleOwner {
 
     private lateinit var registry: LifecycleRegistry
 

@@ -14,6 +14,10 @@ fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
 
+fun showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(MyApplication.getApplication(), message, duration).show()
+}
+
 fun Context.log(message: String) {
     Log.e("TTT", message)
 }

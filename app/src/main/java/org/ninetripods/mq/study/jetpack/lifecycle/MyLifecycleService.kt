@@ -5,10 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LifecycleService
 import org.ninetripods.mq.study.jetpack.KConsts
 
-class MyService : LifecycleService() {
+/**
+ * 自定义LifecycleService
+ */
+class MyLifecycleService : LifecycleService() {
+
     override fun onCreate() {
         Log.e(KConsts.SERVICE, "Service:onCreate")
         super.onCreate()
+        //通过getLifecycle()添加生命周期Observer
         lifecycle.addObserver(MyLifeCycleObserver())
     }
 

@@ -7,6 +7,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import org.ninetripods.mq.study.jetpack.KConsts
 
+/**
+ * 监听LifecycleOwner生命周期变化并作出响应
+ */
 open class MyLifeCycleObserver : LifecycleObserver {
 
     @OnLifecycleEvent(value = Lifecycle.Event.ON_START)

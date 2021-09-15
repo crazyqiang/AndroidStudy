@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tv_lifecycle"
-        style="@style/btn_style_undo"
+        style="@style/btn_style_done"
         android:layout_marginTop="100dp"
         android:text="Lifecycle" />
 
