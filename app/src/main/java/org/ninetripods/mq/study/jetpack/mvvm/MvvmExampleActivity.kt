@@ -3,11 +3,13 @@ package org.ninetripods.mq.study.jetpack.mvvm
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseMvvmActivity
 import org.ninetripods.mq.study.jetpack.mvvm.viewmodel.WanViewModel
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.observe
+import org.ninetripods.mq.study.util.Constant
 
 /**
  * Jetpack MVVM
@@ -23,7 +25,7 @@ class MvvmExampleActivity : BaseMvvmActivity<WanViewModel>() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "Jetpack MVVM", true)
+        initToolBar(mToolBar, "Jetpack MVVM", true, true, TYPE_BLOG)
     }
 
     override fun init() {
@@ -47,5 +49,9 @@ class MvvmExampleActivity : BaseMvvmActivity<WanViewModel>() {
             }
             mTvContent.text = builder.toString()
         }
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_MVVM)
     }
 }

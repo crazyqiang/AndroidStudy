@@ -5,9 +5,11 @@ import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.util.Constant
 
 class ViewModelActivity : BaseActivity() {
     private val mToolBar: Toolbar by id(R.id.toolbar)
@@ -18,7 +20,7 @@ class ViewModelActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "Jetpack LiveData", true)
+        initToolBar(mToolBar, "Jetpack LiveData", true, true, TYPE_BLOG)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -52,6 +54,10 @@ class ViewModelActivity : BaseActivity() {
     override fun onDestroy() {
         Log.e(KConsts.VIEW_MODEL, "onDestroy")
         super.onDestroy()
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_VIEW_MODEL)
     }
 
 }

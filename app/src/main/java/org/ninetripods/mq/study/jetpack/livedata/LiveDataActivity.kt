@@ -7,9 +7,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.util.Constant
 
 /**
  * LiveData示例
@@ -27,7 +29,7 @@ class LiveDataActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "Jetpack LiveData", true)
+        initToolBar(mToolBar, "Jetpack LiveData", true, true, TYPE_BLOG)
         mBtnSwitch.setOnCheckedChangeListener { _, isChecked ->
             //发送开关状态 用以在Transformations.switchMap中切换数据源
             LiveDataInstance.SWITCH.value = isChecked
@@ -103,5 +105,9 @@ class LiveDataActivity : BaseActivity() {
         supportFragmentManager.beginTransaction()
             .remove(fragment)
             .commitAllowingStateLoss()
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_LIVEDATA)
     }
 }

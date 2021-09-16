@@ -6,10 +6,12 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
 import org.ninetripods.mq.study.jetpack.KConsts.ACTIVITY
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.util.Constant
 import org.ninetripods.mq.study.util.NavitateUtil
 
 class LifecycleActivity : BaseActivity() {
@@ -28,7 +30,7 @@ class LifecycleActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "Jetpack Lifecycle", true)
+        initToolBar(mToolBar, "Jetpack Lifecycle", true, true, TYPE_BLOG)
     }
 
     override fun initEvents() {
@@ -118,6 +120,10 @@ class LifecycleActivity : BaseActivity() {
         mBuilder.append("Service:onDestroy").append("\n")
         mBuilder.append("Lifecycle.Event:ON_DESTROY").append("\n")
         mTvResult.text = mBuilder.toString()
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_LIFECYCLE)
     }
 
 }
