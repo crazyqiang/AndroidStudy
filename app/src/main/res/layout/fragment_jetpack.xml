@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/tv_viewmodel"
-        style="@style/btn_style_undo"
+        style="@style/btn_style_done"
         android:layout_below="@+id/tv_livedata"
         android:layout_marginTop="30dp"
         android:text="ViewModel" />

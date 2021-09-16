@@ -1,23 +1,24 @@
 package org.ninetripods.mq.study.jetpack.viewmodel
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import androidx.appcompat.widget.Toolbar
+import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
+import org.ninetripods.mq.study.kotlin.ktx.id
 
-class ViewModelActivity : AppCompatActivity() {
+class ViewModelActivity : BaseActivity() {
+    private val mToolBar: Toolbar by id(R.id.toolbar)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setContentView() {
         Log.e(KConsts.VIEW_MODEL, "onCreate")
         setContentView(R.layout.activity_view_model)
     }
 
-    override fun onDestroy() {
-        Log.e(KConsts.VIEW_MODEL, "onDestroy")
-        super.onDestroy()
+    override fun initViews() {
+        initToolBar(mToolBar, "Jetpack LiveData", true)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -46,6 +47,11 @@ class ViewModelActivity : AppCompatActivity() {
     ) {
         Log.e(KConsts.VIEW_MODEL, "onRestoreInstanceState1")
         super.onRestoreInstanceState(savedInstanceState, persistentState)
+    }
+
+    override fun onDestroy() {
+        Log.e(KConsts.VIEW_MODEL, "onDestroy")
+        super.onDestroy()
     }
 
 }
