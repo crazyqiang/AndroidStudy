@@ -21,8 +21,8 @@ object App {
     const val buildToolsVersion = "30.0.3"
     const val minSdkVersion = 19
     const val appId = "org.ninetripods.mq.study"
-    const val versionCode = 20210506
-    const val versionName = "1.3.0"
+    const val versionCode = 20210916
+    const val versionName = "1.4.0"
 }
 
 object Deps {
