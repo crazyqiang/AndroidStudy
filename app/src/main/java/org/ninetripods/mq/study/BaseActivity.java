@@ -75,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     menuItem.setTitle("清除缓存");
                     break;
                 case 2:
-                    //清除缓存
+                    //Blog
                     menuItem.setTitle("BLOG");
                     break;
             }

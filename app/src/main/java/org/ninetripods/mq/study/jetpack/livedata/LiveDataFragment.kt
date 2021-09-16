@@ -2,17 +2,17 @@ package org.ninetripods.mq.study.jetpack.livedata
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
 
-class LiveDataFragment : Fragment() {
+class LiveDataFragment private constructor() : Fragment() {
 
     lateinit var mTvObserveView: TextView
     lateinit var mTvObserveTransform: TextView
@@ -49,36 +49,34 @@ class LiveDataFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //通过LiveData.observe注册观察者，监听数据变化
-        //LiveDataInstance.INSTANCE.observe(this, changeObserverTransform)
-        //LiveDataInstance.INSTANCE2.observe(this, changeObserverTransform)
+        //LiveDataInstance.INSTANCE.observe(viewLifecycleOwner, changeObserverTransform)
+        //LiveDataInstance.INSTANCE2.observe(viewLifecycleOwner, changeObserverTransform)
 
         //1、Transformations.map()改变数据源
-        val transformMapLiveData =
-            Transformations.map(LiveDataInstance.INSTANCE) { "Transform:$it" }
-        //观察者监听的时候传入了LifecycleOwner 用以监听生命周期变化
-        transformMapLiveData.observe(viewLifecycleOwner, changeObserverTransform)
+//        val transformMapLiveData =
+//            Transformations.map(LiveDataInstance.INSTANCE) { "Transform:$it" }
+//        //观察者监听的时候传入了LifecycleOwner 用以监听生命周期变化
+//        transformMapLiveData.observe(viewLifecycleOwner, changeObserverTransform)
 
+        /**
+         * val switchmapLiveData1 = Transformations.switchMap(LiveDataInstance.INSTANCE,
+        object : Function<String, LiveData<String>> {
+        override fun apply(input: String?): LiveData<String> {
+        return LiveDataInstance.INSTANCE2
+        }
+        }
+        )
+         */
         //2、Transformations.switchMap()切换数据源
         val switchMapLiveData =
-            Transformations.switchMap(LiveDataInstance.SWITCH) { switchRight ->
-                if (switchRight) {
+            Transformations.switchMap(LiveDataInstance.SWITCH) { isSwitchOpen ->
+                if (isSwitchOpen) {
                     LiveDataInstance.INSTANCE2
                 } else {
                     LiveDataInstance.INSTANCE
                 }
             }
         switchMapLiveData.observe(viewLifecycleOwner, changeObserverTransform)
-
-
-//        val switchmapLiveData = Transformations.switchMap(LiveDataInstance.INSTANCE,
-//            object : Function<String, LiveData<String>> {
-//                override fun apply(input: String): LiveData<String> {
-//                    return LiveDataInstance.INSTANCE2
-//                }
-//            }
-//        )
-
-
     }
 
     override fun onDestroy() {

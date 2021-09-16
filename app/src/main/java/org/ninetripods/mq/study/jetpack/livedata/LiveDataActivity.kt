@@ -1,29 +1,33 @@
 package org.ninetripods.mq.study.jetpack.livedata
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
+import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.KConsts
+import org.ninetripods.mq.study.kotlin.ktx.id
 
-class LiveDataActivity : AppCompatActivity() {
+/**
+ * LiveData示例
+ */
+class LiveDataActivity : BaseActivity() {
 
-    lateinit var mTextView: TextView
-    lateinit var mTextViewRight: TextView
+    private val mToolBar: Toolbar by id(R.id.toolbar)
+    private val mTextView: TextView by id(R.id.tv_text)
+    private val mTextViewRight: TextView by id(R.id.tv_text1)
+    private val mBtnSwitch: SwitchCompat by id(R.id.btn_switch)
     var mFragment: LiveDataFragment? = null
-    lateinit var mBtnSwitch: SwitchCompat
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setContentView() {
         setContentView(R.layout.activity_live_data)
-        mTextView = findViewById(R.id.tv_text)
-        mTextViewRight = findViewById(R.id.tv_text1)
+    }
 
-        mBtnSwitch = findViewById(R.id.btn_switch)
+    override fun initViews() {
+        initToolBar(mToolBar, "Jetpack LiveData", true)
         mBtnSwitch.setOnCheckedChangeListener { _, isChecked ->
             //发送开关状态 用以在Transformations.switchMap中切换数据源
             LiveDataInstance.SWITCH.value = isChecked
@@ -73,11 +77,6 @@ class LiveDataActivity : AppCompatActivity() {
         addLiveDataFragment()
     }
 
-    //移除Fragment
-    fun removeFragment(view: View) {
-        delLiveDataFragment()
-    }
-
     private fun addLiveDataFragment() {
         val fragment = supportFragmentManager.findFragmentById(R.id.fl_content)
         if (fragment != null) {
@@ -94,13 +93,15 @@ class LiveDataActivity : AppCompatActivity() {
             .commitAllowingStateLoss()
     }
 
-    private fun delLiveDataFragment() {
+    //移除Fragment
+    fun removeFragment(view: View) {
         val fragment = supportFragmentManager.findFragmentById(R.id.fl_content)
         if (fragment == null) {
             Toast.makeText(this, "没有Fragment", Toast.LENGTH_SHORT).show()
             return
         }
-        supportFragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction()
+            .remove(fragment)
+            .commitAllowingStateLoss()
     }
-
 }
