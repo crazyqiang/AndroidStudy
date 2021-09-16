@@ -1,6 +1,6 @@
 ## 扫描二维码下载APK示例
 
-![image.png](https://upload-images.jianshu.io/upload_images/587163-8e7d686c71a0e002.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
 
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
