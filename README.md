@@ -19,6 +19,7 @@ Jetpack系列 | 1、Lifecycle： [Android Jetpack系列之Lifecycle](https://blo
 Kotlin | 1、[kotlin内联函数inline、noinline、crossinline](https://blog.csdn.net/u013700502/article/details/119923024)<br> TODO
 Gradle系列 | Gradle理论与实践一：[Gradle入门](https://blog.csdn.net/u013700502/article/details/85231505 )<br>Gradle理论与实践二：[Groovy介绍 ](https://blog.csdn.net/u013700502/article/details/85231600)<br>Gradle理论与实践三：[Gradle构建脚本基础](https://blog.csdn.net/u013700502/article/details/85231661)<br>Gradle理论与实践四：[自定义Gradle插件](https://blog.csdn.net/u013700502/article/details/85232032)<br>[Gradle配置中subprojects和allprojects的区别](https://blog.csdn.net/u013700502/article/details/85231687)
 多线程 | **Java & Android:**<br> 1、[Android多线程之HandlerThread](https://blog.csdn.net/u013700502/article/details/76421939) <br> 2、[Android多线程之IntentService](https://blog.csdn.net/u013700502/article/details/76421161) <br>3、[Android中Callable、Future、FutureTask的概念以及几种线程池的使用](https://blog.csdn.net/u013700502/article/details/76421956)<br>4、[Android异步消息处理机制之Handler、Looper、Message](https://blog.csdn.net/u013700502/article/details/62105858) <br>5、[Java多线程之ThreadLocal的使用及源码解析](https://blog.csdn.net/u013700502/article/details/105793313)<br>6、[Java线程基础知识点](https://blog.csdn.net/u013700502/article/details/112130839)<br>7、[JUC系列学习：AbstractQueuedSynchronizer同步器框架及相关实现类](https://blog.csdn.net/u013700502/article/details/112113248)<br>8、[JUC系列学习：线程池Executor框架及其实现ThreadPoolExecutor](https://blog.csdn.net/u013700502/article/details/111828418)<br>9、[JUC系列学习：阻塞队列BlockingQueue介绍及其相关实现ArrayBlockingQueue、LinkedBlockingQueue等的使用及源码分析](https://blog.csdn.net/u013700502/article/details/107478570)<br>10、[JUC系列学习：CountDownLatch、Semaphore、CyclicBarrier的使用及源码解析](https://blog.csdn.net/u013700502/article/details/107478545)<br>11、[JUC系列学习：ReentrantLock的使用、源码解析及与Synchronized的异同](https://blog.csdn.net/u013700502/article/details/107478281)<br>12、[JUC系列学习：ReentrantReadWriteLock的使用及源码解析](https://blog.csdn.net/u013700502/article/details/107478493)<br>13、[Java生产者、消费者模式的几种实现方式](https://blog.csdn.net/u013700502/article/details/107478721)<br>14、[Java多个线程顺序循环执行的几种实现方式](https://blog.csdn.net/u013700502/article/details/107478844)
+功能模仿 | 1、[Android使用RecycleView实现魅族手机通讯录界面](https://blog.csdn.net/u013700502/article/details/72818511)<br>2、[Android仿QQ侧滑菜单](https://blog.csdn.net/u013700502/article/details/73162684)<br>3、[Android高仿QQ小红点](https://blog.csdn.net/u013700502/article/details/73478560)
 
 
 ## 往期博客(待整理)
@@ -33,18 +34,8 @@ Gradle系列 | Gradle理论与实践一：[Gradle入门](https://blog.csdn.net/u
   Android嵌套滑动的分析与实践（ https://blog.csdn.net/u013700502/article/details/80834819 ）
  入门
 
-
 **2017/07/14**
  LruCache、DiskLruCache实现图片缓存，瀑布流 （ http://www.jianshu.com/p/e6631d2319a6 ）
-
-**2017/06/19**
- Android仿QQ小红点 （ http://www.jianshu.com/p/9f0736c24029 ）
-
-**2017/06/12**
- Android仿QQ侧滑菜单( http://www.jianshu.com/p/1834ce7a2ce7 )
-
-**2017/05/27**
- 仿魅族通讯录( http://www.jianshu.com/p/7b7b7ee80c44 )
 
 **2017/05/06**
  封装一个通用的PopupWindow( http://www.jianshu.com/p/799dbb86f908 )
