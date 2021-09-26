@@ -1,78 +1,39 @@
-[TOC]
+## 扫描二维码下载APK示例
 
-# 扫描二维码下载APK示例
-![image.png](https://upload-images.jianshu.io/upload_images/587163-8e7d686c71a0e002.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
 
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
 # 更新日志
-- 2019-06-20
 
-```
-发布lib-dialog库，引入方式：compile 'com.ninetripods:lib-dialog:1.1.0'
+库 | 更新日志
+:----|:----
+lib-dialog | 引入方式：implementation 'com.ninetripods:lib-dialog:1.1.0' <br><br> 优化内容：<br>2019-06-20<br>1、优化dialog默认布局<br>2、修复Activity横竖屏切换导致空指针问题<br>3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题<br>更详细移步：https://www.jianshu.com/p/ea70ba200b38
 
-优化内容：
-1、优化dialog默认布局
-2、修复Activity横竖屏切换导致空指针问题
-3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题
 
-更详细移步：https://www.jianshu.com/p/ea70ba200b38
-```
+# Blog发布
 
-# 发布日志
+系列 | 备注
+:----|:----
+Jetpack系列 | 1、Lifecycle： [Android Jetpack系列之Lifecycle](https://blog.csdn.net/u013700502/article/details/118469311)<br>2、LiveData ：[Android Jetpack系列之LiveData](https://blog.csdn.net/u013700502/article/details/118866217)<br>3、ViewModel：[Android Jetpack系列之ViewModel](https://blog.csdn.net/u013700502/article/details/118962560)<br>4、LiveDataBus：[Android基于LiveData实现消息总线](https://blog.csdn.net/u013700502/article/details/120170790)<br>5、Jetpack MVVM：[Android Jetpack系列之MVVM使用及封装](https://blog.csdn.net/u013700502/article/details/120263741)<br>TODO:<br>DataStore<br>Navigation
+Kotlin | 1、[kotlin内联函数inline、noinline、crossinline](https://blog.csdn.net/u013700502/article/details/119923024)<br> TODO
+Gradle系列 | Gradle理论与实践一：[Gradle入门](https://blog.csdn.net/u013700502/article/details/85231505 )<br>Gradle理论与实践二：[Groovy介绍 ](https://blog.csdn.net/u013700502/article/details/85231600)<br>Gradle理论与实践三：[Gradle构建脚本基础](https://blog.csdn.net/u013700502/article/details/85231661)<br>Gradle理论与实践四：[自定义Gradle插件](https://blog.csdn.net/u013700502/article/details/85232032)<br>[Gradle配置中subprojects和allprojects的区别](https://blog.csdn.net/u013700502/article/details/85231687)
+多线程 | **Java & Android:**<br> 1、[Android多线程之HandlerThread](https://blog.csdn.net/u013700502/article/details/76421939) <br> 2、[Android多线程之IntentService](https://blog.csdn.net/u013700502/article/details/76421161) <br>3、[Android中Callable、Future、FutureTask的概念以及几种线程池的使用](https://blog.csdn.net/u013700502/article/details/76421956)<br>4、[Android异步消息处理机制之Handler、Looper、Message](https://blog.csdn.net/u013700502/article/details/62105858) <br>5、[Java多线程之ThreadLocal的使用及源码解析](https://blog.csdn.net/u013700502/article/details/105793313)<br>6、[Java线程基础知识点](https://blog.csdn.net/u013700502/article/details/112130839)<br>7、[JUC系列学习：AbstractQueuedSynchronizer同步器框架及相关实现类](https://blog.csdn.net/u013700502/article/details/112113248)<br>8、[JUC系列学习：线程池Executor框架及其实现ThreadPoolExecutor](https://blog.csdn.net/u013700502/article/details/111828418)<br>9、[JUC系列学习：阻塞队列BlockingQueue介绍及其相关实现ArrayBlockingQueue、LinkedBlockingQueue等的使用及源码分析](https://blog.csdn.net/u013700502/article/details/107478570)<br>10、[JUC系列学习：CountDownLatch、Semaphore、CyclicBarrier的使用及源码解析](https://blog.csdn.net/u013700502/article/details/107478545)<br>11、[JUC系列学习：ReentrantLock的使用、源码解析及与Synchronized的异同](https://blog.csdn.net/u013700502/article/details/107478281)<br>12、[JUC系列学习：ReentrantReadWriteLock的使用及源码解析](https://blog.csdn.net/u013700502/article/details/107478493)<br>13、[Java生产者、消费者模式的几种实现方式](https://blog.csdn.net/u013700502/article/details/107478721)<br>14、[Java多个线程顺序循环执行的几种实现方式](https://blog.csdn.net/u013700502/article/details/107478844)
+功能模仿 | 1、[Android使用RecycleView实现魅族手机通讯录界面](https://blog.csdn.net/u013700502/article/details/72818511)<br>2、[Android仿QQ侧滑菜单](https://blog.csdn.net/u013700502/article/details/73162684)<br>3、[Android高仿QQ小红点](https://blog.csdn.net/u013700502/article/details/73478560)
+Android存储 | 1、[Android本地存储之SharedPreferences源码解析](https://blog.csdn.net/u013700502/article/details/53635499)<br>2、[Android内存缓存LruCache源码解析](https://blog.csdn.net/u013700502/article/details/75258325)<br>3、[Android使用磁盘缓存DiskLruCache](https://blog.csdn.net/u013700502/article/details/75258257)<br>4、[Android使用LruCache、DiskLruCache实现图片缓存+图片瀑布流](https://blog.csdn.net/u013700502/article/details/75258375)<br>5、[Android本地存储的几种方式](https://blog.csdn.net/u013700502/article/details/79067909)<br>6、[Android数据库Sqlite的基本用法及升级策略](https://blog.csdn.net/u013700502/article/details/78764917)
 
-## Android Jetpack系列
-
-- Lifecycle： [Android Jetpack系列之Lifecycle](https://blog.csdn.net/u013700502/article/details/118469311)
-- LiveData ：[Android Jetpack系列之LiveData](https://blog.csdn.net/u013700502/article/details/118866217)
-- ViewModel：[Android Jetpack系列之ViewModel](https://blog.csdn.net/u013700502/article/details/118962560)
-- TODO:
-- LiveDataBus
-- Jetpack MVVM
-- DataStore
-- Navigation
 
 ## 往期博客(待整理)
-
-Gradle理论与实践一：Gradle入门 （ https://blog.csdn.net/u013700502/article/details/85231505 ）
-
-Gradle理论与实践二：Groovy介绍 （ https://blog.csdn.net/u013700502/article/details/85231600 ）
-
-Gradle理论与实践三：Gradle构建脚本基础 （ https://blog.csdn.net/u013700502/article/details/85231661 ）
-
-Gradle理论与实践四：自定义Gradle插件（ https://blog.csdn.net/u013700502/article/details/85232032 ）
-
-Gradle配置中subprojects和allprojects的区别:（ https://blog.csdn.net/u013700502/article/details/85231687 ）
 
 **2018/09/20**
  Android基于DialogFragment封装一个通用的Dialog （ https://blog.csdn.net/u013700502/article/details/82777402 ）
 
 **2018/08/26**
  Android使用WindowManger实现桌面悬浮窗 （ https://www.jianshu.com/p/5cacdb0d2246 ）
- 
+
  **2018/03/30**
   Android嵌套滑动的分析与实践（ https://blog.csdn.net/u013700502/article/details/80834819 ）
  入门
-**2017/07/30**
- Android多线程之HandlerThread （ http://www.jianshu.com/p/6110d1e9c428 ）
- 
- **2017/07/30**
- Android多线程之IntentService （ http://www.jianshu.com/p/643de16c9eef ）
- 
- **2017/07/30**
- Android中Callable、Future、FutureTask的概念以及几种线程池的使用（ http://www.jianshu.com/p/fcefeea80171 ）
-
-**2017/07/14**
- LruCache、DiskLruCache实现图片缓存，瀑布流 （ http://www.jianshu.com/p/e6631d2319a6 ）
-
-**2017/06/19**
- Android仿QQ小红点 （ http://www.jianshu.com/p/9f0736c24029 ）
-
-**2017/06/12**
- Android仿QQ侧滑菜单( http://www.jianshu.com/p/1834ce7a2ce7 )
-
-**2017/05/27**
- 仿魅族通讯录( http://www.jianshu.com/p/7b7b7ee80c44 )
 
 **2017/05/06**
  封装一个通用的PopupWindow( http://www.jianshu.com/p/799dbb86f908 )

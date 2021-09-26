@@ -1,8 +1,11 @@
 package org.ninetripods.mq.study;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,8 +13,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 
+import org.ninetripods.mq.study.jetpack.JetpackFragment;
+import org.ninetripods.mq.study.jetpack.KConsts;
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
 import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
 import org.ninetripods.mq.study.util.fragment.NestedScrollFragment;
@@ -21,8 +27,6 @@ import org.ninetripods.mq.study.util.fragment.RecycleFragment;
 
 public class MainActivity extends BaseActivity {
     private long back_pressed;
-
-
     private DrawerLayout drawer_layout;
     private NavigationView navigationView;
     private Fragment currentFragment;
@@ -42,7 +46,7 @@ public class MainActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
-        selectItem(1);
+        selectItem(KConsts.FRAGMENT_JETPACK);
     }
 
     @Override
@@ -52,22 +56,25 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.my_navigation_0:
-                        selectItem(0);
+                        selectItem(KConsts.FRAGMENT_HOME);
+                        break;
+                    case R.id.my_navigation_6:
+                        selectItem(KConsts.FRAGMENT_JETPACK);
                         break;
                     case R.id.my_navigation_1:
-                        selectItem(1);
+                        selectItem(KConsts.FRAGMENT_POP);
                         break;
                     case R.id.my_navigation_2:
-                        selectItem(2);
+                        selectItem(KConsts.FRAGMENT_PROCESS);
                         break;
                     case R.id.my_navigation_3:
-                        selectItem(3);
+                        selectItem(KConsts.FRAGMENT_RECYCLERVIEW);
                         break;
                     case R.id.my_navigation_4:
-                        selectItem(4);
+                        selectItem(KConsts.FRAGMENT_MULTI_THREAD);
                         break;
                     case R.id.my_navigation_5:
-                        selectItem(5);
+                        selectItem(KConsts.FRAGMENT_NESTED_SCROLLER);
                         break;
                 }
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -103,22 +110,25 @@ public class MainActivity extends BaseActivity {
 
     private Fragment getFragment(int pos) {
         switch (pos) {
-            case 0:
+            case KConsts.FRAGMENT_HOME:
                 currentFragment = new HomeFragment();
                 break;
-            case 1:
+            case KConsts.FRAGMENT_JETPACK:
+                currentFragment = JetpackFragment.newInstance("");
+                break;
+            case KConsts.FRAGMENT_POP:
                 currentFragment = new PopFragment();
                 break;
-            case 2:
+            case KConsts.FRAGMENT_PROCESS:
                 currentFragment = new ProcessFragment();
                 break;
-            case 3:
+            case KConsts.FRAGMENT_RECYCLERVIEW:
                 currentFragment = new RecycleFragment();
                 break;
-            case 4:
+            case KConsts.FRAGMENT_MULTI_THREAD:
                 currentFragment = new MultiThreadFragment();
                 break;
-            case 5:
+            case KConsts.FRAGMENT_NESTED_SCROLLER:
                 currentFragment = new NestedScrollFragment();
                 break;
             default:
@@ -131,6 +141,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override

@@ -7,14 +7,18 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 全屏悬浮窗 需要申请此权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <application
+    <application xmlns:tool="http://schemas.android.com/tools"
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/android_study"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tool:ignore="LockedOrientationActivity">
+        <activity
+            android:name=".kotlin.flow.FlowStudyActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="UMENG_CHANNEL"
@@ -25,12 +29,25 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".multiThread.AsyncTaskActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".jetpack.lifecycle.LifecycleActivity"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".jetpack.lifecycle.MyLifecycleService" />
+
+        <activity
+            android:name=".jetpack.livedata.LiveDataActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".jetpack.viewmodel.ViewModelActivity" />
+        <activity
+            android:name=".jetpack.mvvm.MvvmExampleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".multiThread.AsyncTaskActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".customViewGroup.FiveRingsActivity"
             android:screenOrientation="portrait" />
@@ -76,7 +93,6 @@
         <activity
             android:name=".popup.PopupWindowActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".jni.JNIActivity" />
         <activity
             android:name=".propertyAnimator.ViewPropertyAnimatorActivity"
             android:screenOrientation="portrait" />

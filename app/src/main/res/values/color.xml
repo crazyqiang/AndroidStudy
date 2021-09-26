@@ -78,4 +78,11 @@
     <color name="camera_bottom_press_bg">#1b1c1f</color>
     <color name="title_background_color">#fcb840</color>
     <color name="light_yellow">#f68b2b</color>
+
+    <color name="purple_200">#FFFF86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
 </resources>

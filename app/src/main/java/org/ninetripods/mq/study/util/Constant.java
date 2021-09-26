@@ -13,7 +13,11 @@ public class Constant {
     public static final String INTENT_SERVICE_BLOG = "http://www.jianshu.com/p/643de16c9eef";
     public static final String THREAD_POOL_BLOG = "http://www.jianshu.com/p/fcefeea80171";
 
-
+    //Jetpack
+    public static final String BLOG_JETPACK_LIFECYCLE = "https://blog.csdn.net/u013700502/article/details/118469311";
+    public static final String BLOG_JETPACK_LIVEDATA = "https://blog.csdn.net/u013700502/article/details/118866217";
+    public static final String BLOG_JETPACK_VIEW_MODEL = "https://blog.csdn.net/u013700502/article/details/118962560";
+    public static final String BLOG_JETPACK_MVVM = "https://blog.csdn.net/u013700502/article/details/120263741";
 
     //Image URL
     public final static String[] imageUrls = new String[] {
