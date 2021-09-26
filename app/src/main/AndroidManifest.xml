@@ -16,6 +16,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity">
+        <activity
+            android:name=".kotlin.flow.FlowStudyActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="UMENG_CHANNEL"
