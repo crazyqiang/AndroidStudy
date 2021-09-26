@@ -18,7 +18,7 @@
         tool:ignore="LockedOrientationActivity">
         <activity
             android:name=".kotlin.flow.FlowStudyActivity"
-            android:exported="true" />
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="UMENG_CHANNEL"
