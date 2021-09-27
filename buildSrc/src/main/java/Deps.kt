@@ -71,7 +71,7 @@ internal class LibsVersion {
         const val legacy_version = "1.0.0"
         const val jetpack_version = "2.2.0"
         const val kotlin_version = "1.4.32"
-        const val coroutines_version = "1.4.3"
+        const val coroutines_version = "1.5.2"
         const val arouter_api_version = "1.5.1"
         const val arouter_compiler_version = "1.5.1"
         const val material_version = "1.2.1"

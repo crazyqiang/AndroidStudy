@@ -10,26 +10,51 @@
         android:id="@+id/toolbar"
         layout="@layout/m_toolbar" />
 
-    <Button
-        android:id="@+id/btn_flow"
+    <TextView
+        android:id="@+id/tv_flow_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:onClick="startFlow"
-        android:text="Flow"
+        android:layout_marginTop="30dp"
+        android:text="1、Flow默认是冷流,订阅者与发布者一一对应"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="0dp"
+        android:id="@+id/tv_flow"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:padding="10dp"
+        android:text="点击发送"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_flow" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_flow_info" />
+
+    <Button
+        android:id="@+id/btn_content1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="订阅者1"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_content2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_flow" />
+
+    <Button
+        android:id="@+id/btn_content2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="订阅者2"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toRightOf="@+id/btn_content1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_flow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
