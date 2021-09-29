@@ -39,7 +39,7 @@ object Deps {
     const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
     //将 Kotlin 协程与生命周期感知型组件一起使用: https://developer.android.com/topic/libraries/architecture/coroutines
     //LifecycleScope协程
-    const val jetpack_lifecycle_runtime =  "androidx.lifecycle:lifecycle-runtime-ktx:$jetpack_version"
+    const val jetpack_lifecycle_runtime =  "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01"
     //ProcessLifecycleOwner给整个 app进程 提供一个lifecycle
     const val jetpack_lifecycle_process = "androidx.lifecycle:lifecycle-process:$jetpack_version"
     //帮助实现Service的LifecycleOwner
