@@ -10,14 +10,15 @@ import org.ninetripods.mq.study.kotlin.ktx.log
 class FlowViewModel : ViewModel() {
     //MutableStateFlow 可读可写
     private val _stateFlow = MutableStateFlow(DataState.Success("default"))
+
     //StateFlow 只可读
     val mStateFlow: StateFlow<DataState> = _stateFlow
 
     //SharedFlow
     private val _sharedFlow = MutableSharedFlow<String>(
-        replay = 1,//重播给新订阅者的数量
+        replay = 0,//重播给新订阅者的数量
         extraBufferCapacity = 1,//当有剩余缓冲空间时，emit不会挂起
-        onBufferOverflow = BufferOverflow.DROP_LATEST //配置缓冲区的溢出操作
+        onBufferOverflow = BufferOverflow.SUSPEND //配置缓冲区的溢出操作
     )
     val mSharedFlow: SharedFlow<String> = _sharedFlow
 
@@ -34,10 +35,13 @@ class FlowViewModel : ViewModel() {
     }
 
     fun fetchSharedFlowData() {
-        log("tryEmit: sharedFlow1")
-        _sharedFlow.tryEmit("sharedFlow1")
-        log("tryEmit: sharedFlow2")
-        _sharedFlow.tryEmit("sharedFlow2")
+//        viewModelScope.launch {
+//            delay(5000)
+            log("tryEmit: sharedFlow1")
+            _sharedFlow.tryEmit("sharedFlow1")
+            log("tryEmit: sharedFlow2")
+            _sharedFlow.tryEmit("sharedFlow2")
+        //}
     }
 
 }

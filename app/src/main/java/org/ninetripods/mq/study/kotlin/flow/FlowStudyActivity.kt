@@ -5,10 +5,8 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
@@ -72,8 +70,6 @@ class FlowStudyActivity : BaseActivity() {
                 .catch { exception -> exception.message?.let { log(it) } }
         }
 
-        mFlowModel.fetchStateFlowData()
-
         //SharedFlow
         lifecycleScope.launch {
             mFlowModel.mSharedFlow.collect { value ->
@@ -81,6 +77,22 @@ class FlowStudyActivity : BaseActivity() {
                 mTvShareF.text = value
             }
         }
+
+        //TODO
+        val testSharedFlow = MutableSharedFlow<String>(extraBufferCapacity = 1)
+        runBlocking {
+            CoroutineScope(Job()).launch {
+                testSharedFlow
+                    .onStart { log("start") }
+                    .collect { log(it) }
+            }
+            delay(1000) // to give enough time for println to be executed before execution finishes
+        }
+        testSharedFlow.tryEmit("a")
+        testSharedFlow.tryEmit("b")
+        runBlocking { delay(100) } // to give enough time for println to be executed before execution finishes
+
+        // mFlowModel.fetchStateFlowData()
     }
 
     override fun initEvents() {
