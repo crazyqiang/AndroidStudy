@@ -5,8 +5,11 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
@@ -70,29 +73,20 @@ class FlowStudyActivity : BaseActivity() {
                 .catch { exception -> exception.message?.let { log(it) } }
         }
 
-        //SharedFlow
-        lifecycleScope.launch {
+        //StateFlow
+        mFlowModel.fetchStateFlowData()
+
+        //TODO SharedFlow
+        //extraBufferCapacity=1 缓存数量为1， onBufferOverflow = BufferOverflow.DROP_OLDEST丢弃的是最老的值
+        // 注意 这里设置的是Dispatchers.IO 即发送与接收不在一个线程中
+        lifecycleScope.launch(Dispatchers.IO) {
             mFlowModel.mSharedFlow.collect { value ->
                 log("collect: $value")
-                mTvShareF.text = value
+                withContext(Dispatchers.Main) {
+                    mTvShareF.text = value
+                }
             }
         }
-
-        //TODO
-        val testSharedFlow = MutableSharedFlow<String>(extraBufferCapacity = 1)
-        runBlocking {
-            CoroutineScope(Job()).launch {
-                testSharedFlow
-                    .onStart { log("start") }
-                    .collect { log(it) }
-            }
-            delay(1000) // to give enough time for println to be executed before execution finishes
-        }
-        testSharedFlow.tryEmit("a")
-        testSharedFlow.tryEmit("b")
-        runBlocking { delay(100) } // to give enough time for println to be executed before execution finishes
-
-        // mFlowModel.fetchStateFlowData()
     }
 
     override fun initEvents() {

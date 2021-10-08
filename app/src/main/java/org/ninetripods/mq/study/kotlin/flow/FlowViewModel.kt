@@ -18,7 +18,7 @@ class FlowViewModel : ViewModel() {
     private val _sharedFlow = MutableSharedFlow<String>(
         replay = 0,//重播给新订阅者的数量
         extraBufferCapacity = 1,//当有剩余缓冲空间时，emit不会挂起
-        onBufferOverflow = BufferOverflow.SUSPEND //配置缓冲区的溢出操作
+        onBufferOverflow = BufferOverflow.DROP_OLDEST //配置缓冲区的溢出操作
     )
     val mSharedFlow: SharedFlow<String> = _sharedFlow
 
@@ -35,13 +35,12 @@ class FlowViewModel : ViewModel() {
     }
 
     fun fetchSharedFlowData() {
-//        viewModelScope.launch {
-//            delay(5000)
-            log("tryEmit: sharedFlow1")
-            _sharedFlow.tryEmit("sharedFlow1")
-            log("tryEmit: sharedFlow2")
-            _sharedFlow.tryEmit("sharedFlow2")
-        //}
+        log("tryEmit: sharedFlow1")
+        _sharedFlow.tryEmit("sharedFlow1")
+        log("tryEmit: sharedFlow2")
+        _sharedFlow.tryEmit("sharedFlow2")
+        log("tryEmit: sharedFlow3")
+        _sharedFlow.tryEmit("sharedFlow3")
     }
 
 }
