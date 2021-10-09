@@ -30,6 +30,8 @@ class FlowStudyActivity : BaseActivity() {
 
     private val mBtnShareF: Button by id(R.id.btn_share_flow)
     private val mTvShareF: TextView by id(R.id.tv_share_flow)
+    private val mBtnConvertF: Button by id(R.id.btn_convert)
+    private val mTvConvertF: TextView by id(R.id.tv_convert)
 
     private lateinit var mFlowModel: FlowViewModel
     private lateinit var mSimpleFlow: Flow<String>
@@ -125,6 +127,20 @@ class FlowStudyActivity : BaseActivity() {
         //---------------SharedFlow---------------
         mBtnShareF.setOnClickListener {
             mFlowModel.fetchSharedFlowData()
+        }
+
+        /**
+         *
+         */
+        mBtnConvertF.setOnClickListener {
+            val builder: StringBuilder = StringBuilder()
+            lifecycleScope.launch {
+                mFlowModel.flowConvertSharedFlow.collect {
+                    log(it)
+                    builder.append(it).append("\n")
+                    mTvConvertF.text = builder.toString()
+                }
+            }
         }
     }
 

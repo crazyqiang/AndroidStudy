@@ -118,28 +118,61 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_share_flow"
+        <RelativeLayout
+            android:id="@+id/rl_shared_flow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="temp share flow"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_share_flow_info" />
+            app:layout_constraintRight_toLeftOf="@+id/rl_flow_convert"
+            app:layout_constraintTop_toBottomOf="@+id/tv_share_flow_info">
 
-        <Button
-            android:id="@+id/btn_share_flow"
+            <TextView
+                android:id="@+id/tv_share_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="temp share flow" />
+
+            <Button
+                android:id="@+id/btn_share_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_share_flow"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="SharedFlow"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_flow_convert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="SharedFlow"
-            android:textAllCaps="false"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/rl_shared_flow"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_share_flow" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_share_flow_info">
+
+            <TextView
+                android:id="@+id/tv_convert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:text="temp convert flow" />
+
+            <Button
+                android:id="@+id/btn_convert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_convert"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="shareIn"
+                android:textAllCaps="false" />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

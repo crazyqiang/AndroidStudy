@@ -22,6 +22,25 @@ class FlowViewModel : ViewModel() {
     )
     val mSharedFlow: SharedFlow<String> = _sharedFlow
 
+    //flow通过shareIn转化为SharedFlow
+    val flowConvertSharedFlow by lazy {
+        flow {
+            emit("1、flow")
+            emit("2、convert")
+            emit("3、SharedFlow")
+        }.shareIn(
+            viewModelScope, //协程作用域范围
+            //----SharingStarted:控制共享的开始、结束策略----
+            //1、SharingStarted.Eagerly, //Eagerly：马上开始，在scope作用域结束时终止
+            //2、SharingStarted.Lazily, //Lazily：当订阅者出现时开始，在scope作用域结束时终止
+            //3、SharingStarted.WhileSubscribed(stopTimeoutMillis: Long = 0,replayExpirationMillis: Long = Long.MAX_VALUE)
+            // stopTimeoutMillis：表示最后一个订阅者结束订阅与停止上游流的时间差，默认值为0（立即停止上游流）
+            // replayExpirationMillis：数据重播的超时时间。
+            SharingStarted.Eagerly,
+            replay = 3 //重播给新订阅者的数量
+        ).onStart { log("onStart") }
+    }
+
     fun fetchStateFlowData() {
         viewModelScope.launch {
             flow {
