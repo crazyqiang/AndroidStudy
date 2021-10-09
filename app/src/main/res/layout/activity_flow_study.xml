@@ -75,28 +75,60 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_state_flow"
+        <RelativeLayout
+            android:id="@+id/rl_state_flow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="temp state flow"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_state_flow_info" />
+            app:layout_constraintRight_toLeftOf="@+id/rl_convert_stateflow"
+            app:layout_constraintTop_toBottomOf="@+id/tv_state_flow_info">
 
-        <Button
-            android:id="@+id/btn_state_flow"
+            <TextView
+                android:id="@+id/tv_state_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="temp state flow" />
+
+            <Button
+                android:id="@+id/btn_state_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_state_flow"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="StateFlow"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_convert_stateflow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="StateFlow"
-            android:textAllCaps="false"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/rl_state_flow"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_state_flow" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_state_flow_info">
+
+            <TextView
+                android:id="@+id/tv_convert_state_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="temp convert flow" />
+
+            <Button
+                android:id="@+id/btn_convert_state_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_convert_state_flow"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="stateIn"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
