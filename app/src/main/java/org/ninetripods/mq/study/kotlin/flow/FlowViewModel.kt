@@ -5,7 +5,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.ninetripods.mq.study.kotlin.ktx.log
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 class FlowViewModel : ViewModel() {
     //MutableStateFlow 可读可写
@@ -22,7 +25,7 @@ class FlowViewModel : ViewModel() {
         }
             .stateIn(
                 viewModelScope, //协程作用域范围
-                //----SharingStarted:控制共享的开始、结束策略----
+                //----SharingStarted:控制共享的开始、结束策略---        -
                 //1、SharingStarted.Eagerly, //Eagerly：马上开始，在scope作用域结束时终止
                 //2、SharingStarted.Lazily, //Lazily：当订阅者出现时开始，在scope作用域结束时终止
                 //3、SharingStarted.WhileSubscribed(stopTimeoutMillis: Long = 0,replayExpirationMillis: Long = Long.MAX_VALUE)
@@ -79,6 +82,30 @@ class FlowViewModel : ViewModel() {
         _sharedFlow.tryEmit("sharedFlow2")
         log("tryEmit: sharedFlow3")
         _sharedFlow.tryEmit("sharedFlow3")
+    }
+
+    suspend fun suspendCancelableData(): String {
+        viewModelScope.launch {
+            //suspendCancellableCoroutine
+            suspendCancellableCoroutine<String> { continuation ->
+                val callback = object : ICallBack {
+                    override fun onSuccess(sucStr: String?) {
+                        continuation.resume("sucStr")
+                    }
+
+                    override fun onError(errorStr: String?) {
+                        continuation.resumeWithException(IllegalArgumentException("errorStr"))
+                    }
+                }
+                callback.onSuccess("onSuccess")
+                continuation.invokeOnCancellation {
+                    //协程取消时调用，可以在这里进行解注册
+                    log("invokeOnCancellation")
+                }
+                log("extraCode")
+            }
+        }
+        return "default"
     }
 
 }

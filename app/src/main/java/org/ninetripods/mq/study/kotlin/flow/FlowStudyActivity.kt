@@ -37,6 +37,9 @@ class FlowStudyActivity : BaseActivity() {
     private val mBtnConvertF: Button by id(R.id.btn_convert)
     private val mTvConvertF: TextView by id(R.id.tv_convert)
 
+    private val mBtnScc: Button by id(R.id.btn_scc)
+    private val mTvScc: TextView by id(R.id.tv_scc)
+
     private lateinit var mFlowModel: FlowViewModel
     private lateinit var mSimpleFlow: Flow<String>
 
@@ -168,6 +171,14 @@ class FlowStudyActivity : BaseActivity() {
                     builder.append(it).append("\n")
                     mTvConvertF.text = builder.toString()
                 }
+            }
+        }
+
+        mBtnScc.setOnClickListener {
+            lifecycleScope.launch {
+                val result = mFlowModel.suspendCancelableData()
+                log(result)
+                mTvScc.text = result
             }
         }
     }

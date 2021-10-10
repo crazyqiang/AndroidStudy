@@ -14,7 +14,7 @@
         android:id="@+id/tv_flow_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="1、Flow默认是冷流,订阅者与发布者一一对应"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -68,7 +68,7 @@
             android:id="@+id/tv_state_flow_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="2、StateFlow是热数据流,订阅者与发布者一对多关系"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -143,7 +143,7 @@
             android:id="@+id/tv_share_flow_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="3、ShareFlow是热数据流,订阅者与发布者一对多关系"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -203,6 +203,86 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="shareIn"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_callback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_share_flow">
+
+        <TextView
+            android:id="@+id/tv_callback_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="4、suspendCancellableCoroutine等待单次回调API的结果时挂起协程，并将结果返回给调用者；如果需要多次回调，可以使用callbackFlow"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_scc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/rl_callback_flow"
+            app:layout_constraintTop_toBottomOf="@+id/tv_callback_info">
+
+            <TextView
+                android:id="@+id/tv_scc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="temp" />
+
+            <Button
+                android:id="@+id/btn_scc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_scc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="suspendCancellableCoroutine"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_callback_flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@+id/rl_scc"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_callback_info">
+
+            <TextView
+                android:id="@+id/tv_callback_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="temp" />
+
+            <Button
+                android:id="@+id/btn_callback_flow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_callback_flow"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="callbackFlow"
                 android:textAllCaps="false" />
         </RelativeLayout>
 
