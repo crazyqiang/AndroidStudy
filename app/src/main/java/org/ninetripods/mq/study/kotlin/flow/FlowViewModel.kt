@@ -84,28 +84,49 @@ class FlowViewModel : ViewModel() {
         _sharedFlow.tryEmit("sharedFlow3")
     }
 
+    /**
+     * suspendCancellableCoroutine将回调转化为协程使用
+     */
     suspend fun suspendCancelableData(): String {
-        viewModelScope.launch {
-            //suspendCancellableCoroutine
-            suspendCancellableCoroutine<String> { continuation ->
-                val callback = object : ICallBack {
-                    override fun onSuccess(sucStr: String?) {
-                        continuation.resume("sucStr")
-                    }
+        return try {
+            getSccInfo()
+        } catch (e: Exception) {
+            "error: ${e.message}"
+        }
+    }
 
-                    override fun onError(errorStr: String?) {
-                        continuation.resumeWithException(IllegalArgumentException("errorStr"))
-                    }
-                }
-                callback.onSuccess("onSuccess")
-                continuation.invokeOnCancellation {
-                    //协程取消时调用，可以在这里进行解注册
-                    log("invokeOnCancellation")
-                }
-                log("extraCode")
+    /**
+     * suspendCancellableCoroutine将回调转化为协程使用
+     */
+    private suspend fun getSccInfo(): String = suspendCancellableCoroutine { continuation ->
+        val callback = object : ICallBack {
+            override fun onSuccess(sucStr: String?) {
+                //1、返回结果 将结果赋值给getSccInfo()挂起函数的返回值
+                //2、如果调用了continuation.cancel()，resume()的结果将不会返回了，因为协程取消了
+                continuation.resume(sucStr ?: "empty")
+            }
+
+            override fun onError(error: Exception) {
+                //这里会将异常抛给上层 需要上层进行处理
+                continuation.resumeWithException(error)
             }
         }
-        return "default"
+        continuation.invokeOnCancellation {
+            //协程取消时调用，可以在这里进行解注册
+            log("invokeOnCancellation")
+        }
+
+        //模拟网络请求 此时协程被suspendCancellableCoroutine挂起，直到触发回调
+        Thread {
+            Thread.sleep(500)
+            //模拟Server返回数据
+            callback.onSuccess("getServerInfo")
+            //模拟抛异常
+            //callback.onError(IllegalArgumentException("server error"))
+        }.start()
+
+        //模拟取消协程
+        //continuation.cancel()
     }
 
 }

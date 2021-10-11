@@ -174,6 +174,9 @@ class FlowStudyActivity : BaseActivity() {
             }
         }
 
+        /**
+         * suspendCancellableCoroutine将回调转化为协程使用
+         */
         mBtnScc.setOnClickListener {
             lifecycleScope.launch {
                 val result = mFlowModel.suspendCancelableData()
