@@ -7,11 +7,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
@@ -39,6 +36,8 @@ class FlowStudyActivity : BaseActivity() {
 
     private val mBtnScc: Button by id(R.id.btn_scc)
     private val mTvScc: TextView by id(R.id.tv_scc)
+    private val mBtnCallbackFlow: Button by id(R.id.btn_callback_flow)
+    private val mTvCallbackFlow: TextView by id(R.id.tv_callback_flow)
 
     private lateinit var mFlowModel: FlowViewModel
     private lateinit var mSimpleFlow: Flow<String>
@@ -52,21 +51,6 @@ class FlowStudyActivity : BaseActivity() {
         mFlowModel = ViewModelProvider(this).get(FlowViewModel::class.java)
         initFlow()
     }
-
-    @ExperimentalCoroutinesApi
-//    val mFlow: Flow<String?> = callbackFlow {
-//        val callback = object : ICallBack {
-//            override fun onSuccess(sucStr: String?) {
-//                offer(sucStr)
-//            }
-//
-//            override fun onError(errorStr: String?) {
-//                offer(errorStr)
-//            }
-//        }
-//        callback.onSuccess("onSuccess")
-//        awaitClose()
-//    }
 
     private fun initFlow() {
         var sendNum = 0
@@ -98,6 +82,8 @@ class FlowStudyActivity : BaseActivity() {
         }
     }
 
+    @FlowPreview
+    @ExperimentalCoroutinesApi
     override fun initEvents() {
         //---------------simpleFlow---------------
         mBtnContent1.setOnClickListener {
@@ -182,6 +168,22 @@ class FlowStudyActivity : BaseActivity() {
                 val result = mFlowModel.suspendCancelableData()
                 log(result)
                 mTvScc.text = result
+            }
+        }
+
+        /**
+         * callbackFlow使用举例
+         */
+        mBtnCallbackFlow.setOnClickListener {
+            lifecycleScope.launch {
+                //将两个callbackFlow串联起来 先搜索目的地，然后到达目的地
+                mFlowModel.getSearchCallbackFlow()
+                    .flatMapConcat {
+                        mFlowModel.goDesCallbackFlow(it)
+                    }.collect {
+                        mTvCallbackFlow.text = it ?: "error"
+                    }
+
             }
         }
     }

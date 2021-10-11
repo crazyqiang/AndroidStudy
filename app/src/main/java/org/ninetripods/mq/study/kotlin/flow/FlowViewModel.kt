@@ -2,7 +2,9 @@ package org.ninetripods.mq.study.kotlin.flow
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -127,6 +129,62 @@ class FlowViewModel : ViewModel() {
 
         //模拟取消协程
         //continuation.cancel()
+    }
+
+    /**
+     * callbackFlow使用举例
+     */
+    @ExperimentalCoroutinesApi
+    fun getSearchCallbackFlow(): Flow<Boolean> = callbackFlow {
+        val callback = object : ICallBack {
+            override fun onSuccess(sucStr: String?) {
+                trySend(true)
+            }
+
+            override fun onError(error: Exception) {
+                trySend(false)
+            }
+        }
+        //模拟网络请求
+        Thread {
+            Thread.sleep(500)
+            //模拟Server返回数据
+            callback.onSuccess("getServerInfo")
+            //模拟抛异常
+            //callback.onError(IllegalArgumentException("server error"))
+        }.start()
+
+        //这是一个挂起函数, 当 flow 被关闭的时候 block 中的代码会被执行 可以在这里取消接口的注册等
+        awaitClose { log("awaitClose") }
+    }
+
+    /**
+     * callbackFlow使用举例
+     */
+    @ExperimentalCoroutinesApi
+    fun goDesCallbackFlow(isSuc: Boolean): Flow<String?> = callbackFlow {
+        val callback = object : ICallBack {
+            override fun onSuccess(sucStr: String?) {
+                trySend(sucStr)
+            }
+
+            override fun onError(error: Exception) {
+                trySend(error.message)
+            }
+        }
+        //模拟网络请求
+        Thread {
+            Thread.sleep(500)
+            if (isSuc) {
+                //到达目的地
+                callback.onSuccess("arrive at the destination")
+            } else {
+                //发生了错误
+                callback.onError(IllegalArgumentException("Not at destination"))
+            }
+        }.start()
+
+        awaitClose { log("awaitClose") }
     }
 
 }
