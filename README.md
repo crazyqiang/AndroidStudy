@@ -22,6 +22,7 @@ Gradle系列 | 1、Gradle理论与实践一：[Gradle入门](https://blog.csdn.n
 Android存储 | 1、[Android本地存储之SharedPreferences源码解析](https://blog.csdn.net/u013700502/article/details/53635499)<br>2、[Android内存缓存LruCache源码解析](https://blog.csdn.net/u013700502/article/details/75258325)<br>3、[Android使用磁盘缓存DiskLruCache](https://blog.csdn.net/u013700502/article/details/75258257)<br>4、[Android使用LruCache、DiskLruCache实现图片缓存+图片瀑布流](https://blog.csdn.net/u013700502/article/details/75258375)<br>5、[Android本地存储的几种方式](https://blog.csdn.net/u013700502/article/details/79067909)<br>6、[Android数据库Sqlite的基本用法及升级策略](https://blog.csdn.net/u013700502/article/details/78764917)
 功能模仿 | 1、[Android使用RecycleView实现魅族手机通讯录界面](https://blog.csdn.net/u013700502/article/details/72818511)<br>2、[Android仿QQ侧滑菜单](https://blog.csdn.net/u013700502/article/details/73162684)<br>3、[Android高仿QQ小红点](https://blog.csdn.net/u013700502/article/details/73478560)
 字节码插桩 | 1、[自定义Annotation注解及解析](https://blog.csdn.net/u013700502/article/details/79729882)<br> 2、[Android 采用AOP方式封装6.0权限管理-待升级](https://blog.csdn.net/u013700502/article/details/79748829)
+Java基础 | 1、[Java内存结构 & GC回收](https://blog.csdn.net/u013700502/article/details/105352438)
 
 
 ## 往期博客(待整理)
