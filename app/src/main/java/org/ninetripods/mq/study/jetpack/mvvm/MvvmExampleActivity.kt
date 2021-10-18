@@ -31,12 +31,13 @@ class MvvmExampleActivity : BaseMvvmActivity<WanViewModel>() {
     override fun init() {
         mBtnQuest.setOnClickListener {
             //请求数据
-            mViewModel.getWanInfo()
+            mViewModel.getWanInfo("")
         }
         /**
          * 这里使用了扩展函数，等同于mViewModel.mWanLiveData.observe(this) {}
          */
         observe(mViewModel.mWanLiveData) { list ->
+            if (list == null) return@observe
             val builder = StringBuilder()
             for (index in list.indices) {
                 //每条数据进行折行显示

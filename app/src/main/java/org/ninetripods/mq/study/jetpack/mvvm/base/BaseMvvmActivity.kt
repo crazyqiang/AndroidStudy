@@ -1,6 +1,7 @@
 package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import org.ninetripods.mq.study.BaseActivity
@@ -63,7 +64,8 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity(), IStatusVie
     private fun registerEvent() {
         //接收错误信息
         mViewModel.errorLiveData.observe(this) { errMsg ->
-            showErrorView(errMsg)
+            val errStr = if (!TextUtils.isEmpty(errMsg)) errMsg else "出错了"
+            showErrorView(errStr)
         }
         //接收Loading信息
         mViewModel.loadingLiveData.observe(this, { isShow ->

@@ -81,7 +81,7 @@ class LiveDataFragment private constructor() : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        LiveDataInstance.INSTANCE.observeForever(changeObserver)
+        LiveDataInstance.INSTANCE.removeObserver(changeObserver)
     }
 
     companion object {
