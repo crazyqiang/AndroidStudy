@@ -131,7 +131,8 @@ class FlowStudyActivity : BaseActivity() {
                         mTvConvertSF.text = builder.toString()
                     }
                 }
-                //NOTE:跟Flow.flowWithLifecycle效果一致
+                //1、可以把这里通过扩展函数进行封装 如：mFlowModel.flowConvertStateFlow.launchAndCollectIn(this) {}
+                //2、NOTE:跟Flow.flowWithLifecycle效果一致
 //                mFlowModel.flowConvertStateFlow
 //                    .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
 //                    .collect {
