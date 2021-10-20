@@ -52,7 +52,15 @@ class MvvmExampleActivity : BaseMvvmActivity<WanViewModel>() {
         }
     }
 
+
     override fun openWebview() {
         CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_MVVM)
+    }
+
+    /**
+     * 发生错误时允许重新请求数据
+     */
+    override fun retryRequest() {
+        mViewModel.getWanInfo("")
     }
 }

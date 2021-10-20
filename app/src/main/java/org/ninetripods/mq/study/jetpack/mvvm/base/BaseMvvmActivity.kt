@@ -2,23 +2,21 @@ package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import org.ninetripods.mq.study.BaseActivity
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.IStatusView
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.LoadingDialog
-import org.ninetripods.mq.study.kotlin.ktx.showToast
+import org.ninetripods.mq.study.jetpack.mvvm.base.widget.StatusViewOwner
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity(), IStatusView {
+abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
 
     protected lateinit var mViewModel: VM
-    protected lateinit var mView: View
-    private lateinit var mLoadingDialog: LoadingDialog
+    private lateinit var mStatusViewUtil: StatusViewOwner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mLoadingDialog = LoadingDialog(this, false)
+        mStatusViewUtil = StatusViewOwner(this) {
+            retryRequest()
+        }
         mViewModel = getViewModel()!!
         mViewModel.init(if (intent != null) intent.extras else null)
         init()
@@ -43,35 +41,22 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity(), IStatusVie
         return null
     }
 
-    override fun showLoadingView(isShow: Boolean) {
-        if (isShow) {
-            mLoadingDialog.showDialog(this, false)
-        } else {
-            mLoadingDialog.dismissDialog()
-        }
-    }
-
-    //TODO 空视图
-    override fun showEmptyView() {
-        showToast("空视图")
-    }
-
-    //错误视图 并且可以重试
-    override fun showErrorView(errMsg: String) {
-        showToast(errMsg)
-    }
-
     private fun registerEvent() {
         //接收错误信息
         mViewModel.errorLiveData.observe(this) { errMsg ->
             val errStr = if (!TextUtils.isEmpty(errMsg)) errMsg else "出错了"
-            showErrorView(errStr)
+            mStatusViewUtil.showErrorView(errStr)
         }
         //接收Loading信息
         mViewModel.loadingLiveData.observe(this, { isShow ->
-            showLoadingView(isShow)
+            mStatusViewUtil.showLoadingView(isShow)
         })
     }
 
-    abstract fun init()
+    protected abstract fun init()
+
+    /**
+     * 重新请求
+     */
+    open fun retryRequest() {}
 }
