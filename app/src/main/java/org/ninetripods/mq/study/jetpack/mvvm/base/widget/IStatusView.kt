@@ -5,6 +5,7 @@ package org.ninetripods.mq.study.jetpack.mvvm.base.widget
  * mqcoder90@gmail.com
  */
 interface IStatusView {
+    fun showMainView() //正常视图
     fun showEmptyView() //空视图
     fun showErrorView(errMsg: String) //数据错误视图
     fun showNetErrorView() //网络错误视图

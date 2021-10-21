@@ -2,6 +2,7 @@ package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.jetpack.mvvm.base.widget.StatusViewOwner
@@ -14,7 +15,7 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mStatusViewUtil = StatusViewOwner(this) {
+        mStatusViewUtil = StatusViewOwner(this, getStatusOwnerView()) {
             retryRequest()
         }
         mViewModel = getViewModel()!!
@@ -51,6 +52,10 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
         mViewModel.loadingLiveData.observe(this, { isShow ->
             mStatusViewUtil.showLoadingView(isShow)
         })
+        //接收正常信息
+        mViewModel.normalLiveData.observe(this, {
+            mStatusViewUtil.showMainView()
+        })
     }
 
     protected abstract fun init()
@@ -59,4 +64,11 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
      * 重新请求
      */
     open fun retryRequest() {}
+
+    /**
+     * 展示Loading、Empty、Error视图等
+     */
+    open fun getStatusOwnerView(): View? {
+        return null
+    }
 }

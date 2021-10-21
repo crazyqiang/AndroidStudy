@@ -17,6 +17,9 @@ abstract class BaseViewModel : ViewModel() {
     //异常
     val errorLiveData = SingleLiveData<String>()
 
+    //正常
+    val normalLiveData = SingleLiveData<Boolean>()
+
     open fun init(arguments: Bundle?) {}
 
     /**
@@ -60,6 +63,7 @@ abstract class BaseViewModel : ViewModel() {
                     }
                 }
                 .collect {
+                    normalLiveData.postValue(true)
                     liveData?.postValue(baseData.data)
                 }
         }
@@ -88,7 +92,10 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 baseData = request()
                 when (baseData.state) {
-                    State.Success -> liveData?.postValue(baseData.data)
+                    State.Success -> {
+                        normalLiveData.postValue(true)
+                        liveData?.postValue(baseData.data)
+                    }
                     State.Error -> baseData.msg?.let { error(it) }
                 }
             } catch (e: Exception) {

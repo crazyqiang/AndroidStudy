@@ -18,11 +18,18 @@ class StatusViewOwner(
 
     init {
         if (mMainView == null) {
-            //TODO 待处理
             mMainView = context.findViewById(android.R.id.content)
         }
         mLoadingDialog = LoadingDialog(context, false)
         mChildViewIndex = mMainView?.let { getParentView(it)?.indexOfChild(it) } ?: 0
+    }
+
+    override fun showMainView() {
+        if (mLastShowView != null) {
+            removeView(mLastShowView)
+            mLastShowView = null
+        }
+        mMainView?.visibility = View.VISIBLE
     }
 
     override fun showEmptyView() {
