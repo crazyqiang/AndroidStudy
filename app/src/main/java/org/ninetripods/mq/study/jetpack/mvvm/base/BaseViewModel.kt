@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import org.ninetripods.mq.study.jetpack.mvvm.base.http.NetworkUtil
 import org.ninetripods.mq.study.jetpack.mvvm.base.singleEvent.SingleLiveData
 
 abstract class BaseViewModel : ViewModel() {
@@ -37,6 +38,10 @@ abstract class BaseViewModel : ViewModel() {
             errorLiveData.postValue(errMsg)
         }, request: suspend () -> BaseData<T>
     ) {
+        if (!NetworkUtil.isNetworkConnected()) {
+            errorLiveData.postValue("网络未连接")
+            return
+        }
         viewModelScope.launch {
             var baseData = BaseData<T>()
             flow {
@@ -83,6 +88,10 @@ abstract class BaseViewModel : ViewModel() {
             errorLiveData.postValue(errMsg)
         }, request: suspend () -> BaseData<T>
     ) {
+        if (!NetworkUtil.isNetworkConnected()) {
+            errorLiveData.postValue("网络未连接")
+            return
+        }
         //是否展示Loading
         if (showLoading) {
             loadStart()

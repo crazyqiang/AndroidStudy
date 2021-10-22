@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.ninetripods.mq.study.R
+import org.ninetripods.mq.study.kotlin.ktx.showToast
 
 class StatusViewOwner(
     var context: Activity,
@@ -42,15 +43,7 @@ class StatusViewOwner(
     }
 
     override fun showErrorView(errMsg: String) {
-        val errView = LayoutInflater.from(context).inflate(R.layout.lib_dialog_default_error, null)
-        if (mOnclickListener != null) {
-            errView.setOnClickListener(mOnclickListener)
-        }
-        showCustomView(errView)
-    }
-
-    override fun showNetErrorView() {
-        //TODO
+        showToast(errMsg)
         val errView = LayoutInflater.from(context).inflate(R.layout.lib_dialog_default_error, null)
         if (mOnclickListener != null) {
             errView.setOnClickListener(mOnclickListener)
