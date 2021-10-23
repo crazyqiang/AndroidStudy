@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.showToast
 
+/**
+ * 加载中、空视图、错误视图集合
+ */
 class StatusViewOwner(
     var context: Activity,
     private var mMainView: View? = null,
@@ -25,6 +28,9 @@ class StatusViewOwner(
         mChildViewIndex = mMainView?.let { getParentView(it)?.indexOfChild(it) } ?: 0
     }
 
+    /**
+     * 展示主视图
+     */
     override fun showMainView() {
         if (mLastShowView != null) {
             removeView(mLastShowView)
@@ -33,6 +39,9 @@ class StatusViewOwner(
         mMainView?.visibility = View.VISIBLE
     }
 
+    /**
+     * 空视图
+     */
     override fun showEmptyView() {
         val emptyView =
             LayoutInflater.from(context).inflate(R.layout.lib_dialog_default_empty, null)
@@ -42,6 +51,9 @@ class StatusViewOwner(
         showCustomView(emptyView)
     }
 
+    /**
+     * 错误视图
+     */
     override fun showErrorView(errMsg: String) {
         showToast(errMsg)
         val errView = LayoutInflater.from(context).inflate(R.layout.lib_dialog_default_error, null)
@@ -51,9 +63,12 @@ class StatusViewOwner(
         showCustomView(errView)
     }
 
+    /**
+     * 加载中
+     */
     override fun showLoadingView(isShow: Boolean) {
         if (isShow) {
-            mLoadingDialog.showDialog(context, false)
+            mLoadingDialog.showDialog()
         } else {
             mLoadingDialog.dismissDialog()
         }

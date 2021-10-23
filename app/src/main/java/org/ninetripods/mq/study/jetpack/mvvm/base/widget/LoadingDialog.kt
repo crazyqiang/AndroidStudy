@@ -4,20 +4,28 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.view.animation.Animation
+import android.view.animation.Animation.INFINITE
+import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import org.ninetripods.mq.study.R
 
-class LoadingDialog(context: Context, canNotCancel: Boolean) : Dialog(
-    context,
+class LoadingDialog(val mContext: Context, private val isCancelable: Boolean) : Dialog(
+    mContext,
     R.style.LoadingDialog
 ) {
-
-    private var loadingDialog: LoadingDialog? = null
+    private var imageView: ImageView
 
     init {
         setContentView(R.layout.layout_loading_view)
-        val imageView: ImageView = findViewById(R.id.iv_image)
+        imageView = findViewById(R.id.iv_image)
+    }
+
+    /**
+     * 展示Loading
+     */
+    fun showDialog() {
+        if (mContext is Activity && mContext.isFinishing) return
         val animation: Animation = RotateAnimation(
             0f,
             360f,
@@ -27,26 +35,19 @@ class LoadingDialog(context: Context, canNotCancel: Boolean) : Dialog(
             0.5f
         )
         animation.duration = 2000
-        animation.repeatCount = 10
+        animation.repeatCount = INFINITE
+        animation.interpolator = LinearInterpolator()
         animation.fillAfter = true
         imageView.startAnimation(animation)
+        setCancelable(isCancelable)
+        show()
     }
 
-    fun showDialog(context: Context, isCancel: Boolean) {
-        if (context is Activity) {
-            if (context.isFinishing) {
-                return
-            }
-        }
-
-        if (loadingDialog == null) {
-            loadingDialog = LoadingDialog(context, isCancel)
-        }
-        loadingDialog?.show()
-    }
-
+    /**
+     * 关闭Loading
+     */
     fun dismissDialog() {
-        loadingDialog?.dismiss()
+        dismiss()
     }
 
 }

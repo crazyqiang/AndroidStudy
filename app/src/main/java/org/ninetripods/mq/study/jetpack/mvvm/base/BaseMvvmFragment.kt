@@ -53,7 +53,7 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment(), IStatusVie
 
     override fun showLoadingView(isShow: Boolean) {
         if (isShow) {
-            mLoadingDialog.showDialog(requireContext(), false)
+            mLoadingDialog.showDialog()
         } else {
             mLoadingDialog.dismissDialog()
         }
