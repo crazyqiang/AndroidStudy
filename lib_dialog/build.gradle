@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+//apply from: 'dialog_publish.gradle'
 //apply plugin: 'com.novoda.bintray-release'//添加
 
 android {
