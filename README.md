@@ -8,7 +8,7 @@
 
 库 | 更新日志
 :----|:----
-lib-dialog | __NOTE:__ dialog库已迁移到maven仓库，引入方式：<br><br> __implementation 'io.github.mqcodedev:lib_dialog:1.2.0'__ <br><br>别忘了在根目录下的 __build.gradle__ 中声明 __mavenCentral()__，现在官方默认会自动引入<br><br> Jcenter引入方式：<br>implementation 'com.ninetripods:lib-dialog:1.1.0'<br>未来Jcenter不允许更新版本，墙裂建议使用maven方式引入 <br><br> 优化内容：<br>2019-06-20<br>1、优化dialog默认布局<br>2、修复Activity横竖屏切换导致空指针问题<br>3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题<br>更详细移步：https://www.jianshu.com/p/ea70ba200b38
+lib-dialog | __NOTE:__ dialog库已迁移到maven仓库，引入方式：<br> __implementation 'io.github.mqcodedev:lib_dialog:1.2.0'__ <br>别忘了在根目录下的build.gradle中声明 mavenCentral()，现在官方默认会自动引入<br><br> Jcenter引入方式：<br>implementation 'com.ninetripods:lib-dialog:1.1.0'<br>未来Jcenter不允许更新版本，墙裂建议使用maven方式引入 <br><br> 优化内容：<br>2019-06-20<br>1、优化dialog默认布局<br>2、修复Activity横竖屏切换导致空指针问题<br>3、优化DialogFragment在Activity onSaveInstanceState()之后调用导致的问题<br>更详细移步：[Android基于DialogFragment封装一个通用的Dialog](https://blog.csdn.net/u013700502/article/details/82777402)
 
 
 # Blog发布
