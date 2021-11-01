@@ -7,6 +7,7 @@ import org.ninetripods.mq.study.jetpack.mvvm.base.http.api.DrinkService
 import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
 
 class WanRepository : BaseRepository() {
+
     suspend fun requestWanData(drinkId: String): BaseData<List<WanModel>> {
         val service = RetrofitUtil.getService(DrinkService::class.java)
         return executeRequest {

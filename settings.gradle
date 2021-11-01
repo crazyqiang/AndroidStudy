@@ -1,3 +1,5 @@
 include ':app', ':multiprocess_sever'
-include ':lib_dialog'
 include ':plugin'
+if (compileDialogWithSource == "true") {
+    include ':lib_dialog'
+}

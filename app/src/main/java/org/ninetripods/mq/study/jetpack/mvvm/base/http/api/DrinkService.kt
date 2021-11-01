@@ -1,7 +1,7 @@
 package org.ninetripods.mq.study.jetpack.mvvm.base.http.api
 
-import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseData
+import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
 import retrofit2.http.GET
 
 interface DrinkService {

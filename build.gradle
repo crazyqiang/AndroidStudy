@@ -2,14 +2,15 @@ apply from: 'config.gradle'
 
 buildscript {
     repositories {
-        maven {
-            url = uri("$rootDir/repo")
-        }
-        jcenter()
         google()
+        mavenCentral()
+        jcenter()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
+        }
+        maven {
+            url = uri("$rootDir/repo")
         }
     }
     dependencies {
@@ -23,8 +24,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        mavenCentral()
+        jcenter()
         maven {
             url 'https://maven.google.com/'
             name 'Google'

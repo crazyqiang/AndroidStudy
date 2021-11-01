@@ -12,8 +12,7 @@ private const val TAG = "RetrofitUtil"
 
 object RetrofitUtil {
 
-    var mRetrofit: Retrofit? = null
-        private set
+    private var mRetrofit: Retrofit? = null
 
     private val mOkClient = OkHttpClient.Builder()
         .callTimeout(10, TimeUnit.SECONDS)

@@ -28,6 +28,10 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 
     buildTypes {
         release {
@@ -95,6 +99,14 @@ android {
 }
 
 dependencies {
+    if (compileDialogWithSource == "true") {
+        //源码方式集成
+        api project(':lib_dialog')
+    } else {
+        //aar方式集成
+        api 'io.github.mqcodedev:lib_dialog:1.2.0' //maven仓库
+        //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 建议迁移
+    }
     //AndroidX相关
     implementation Deps.kotlinStdlib
     implementation Deps.androidx_material
@@ -124,7 +136,5 @@ dependencies {
     // 可选，适用于Android的中国地区词典
     implementation 'com.github.promeg:tinypinyin:2.0.3'
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
-    api project(':lib_dialog')
-    //implementation 'com.ninetripods:lib-dialog:1.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
