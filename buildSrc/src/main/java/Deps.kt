@@ -46,6 +46,7 @@ object Deps {
     //帮助实现Service的LifecycleOwner
     const val jetpack_lifecycle_service = "androidx.lifecycle:lifecycle-service:$jetpack_version"
     const val jetpack_datastore = "androidx.datastore:datastore:$datastore_version"
+    const val jetpack_datastore_pf = "androidx.datastore:datastore-preferences:$datastore_version"
 
     //AndroidX相关
     const val androidx_material = "com.google.android.material:material:$material_version"

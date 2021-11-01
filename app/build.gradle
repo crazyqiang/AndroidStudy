@@ -124,6 +124,7 @@ dependencies {
     implementation Deps.jetpack_viewmodel //viewmodel
     implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
     implementation Deps.jetpack_datastore //datastore
+    implementation Deps.jetpack_datastore_pf //datastore_preferences
 
     //okhttp
     implementation Deps.okhttp
