@@ -41,4 +41,11 @@
         android:layout_marginTop="@dimen/margin_btn"
         android:text="Kotlin Flow" />
 
+    <TextView
+        android:id="@+id/tv_datastore"
+        style="@style/btn_style_undo"
+        android:layout_below="@+id/tv_kt_flow"
+        android:layout_marginTop="@dimen/margin_btn"
+        android:text="DataStore" />
+
 </RelativeLayout>

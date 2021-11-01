@@ -105,7 +105,7 @@ dependencies {
     } else {
         //aar方式集成
         api 'io.github.mqcodedev:lib_dialog:1.2.0' //maven仓库
-        //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 建议迁移
+        //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 后续不再更新 建议使用maven方式引入
     }
     //AndroidX相关
     implementation Deps.kotlinStdlib

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import org.ninetripods.mq.study.R
+import org.ninetripods.mq.study.jetpack.datastore.DataStoreActivity
 import org.ninetripods.mq.study.jetpack.lifecycle.LifecycleActivity
 import org.ninetripods.mq.study.jetpack.livedata.LiveDataActivity
 import org.ninetripods.mq.study.jetpack.mvvm.MvvmExampleActivity
@@ -23,15 +24,16 @@ class JetpackFragment : BaseFragment() {
     private val mTvViewModel: TextView by id(R.id.tv_viewmodel)
     private val mTvMvvm: TextView by id(R.id.tv_mvvm)
     private val mTvFlow: TextView by id(R.id.tv_kt_flow)
+    private val mTvDataStore: TextView by id(R.id.tv_datastore)
 
     companion object {
         @JvmStatic
         fun newInstance(param1: String = "") =
-                JetpackFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                    }
+            JetpackFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
                 }
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +62,9 @@ class JetpackFragment : BaseFragment() {
         }
         mTvFlow.setOnClickListener {
             NavitateUtil.startActivity(activity, FlowStudyActivity::class.java)
+        }
+        mTvDataStore.setOnClickListener {
+            NavitateUtil.startActivity(activity, DataStoreActivity::class.java)
         }
     }
 
