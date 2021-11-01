@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity">
         <activity
+            android:name=".jetpack.datastore.DataStoreActivity"
+            android:screenOrientation="portrait"  />
+        <activity
             android:name=".kotlin.flow.FlowStudyActivity"
             android:screenOrientation="portrait" />
 
