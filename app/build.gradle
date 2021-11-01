@@ -123,6 +123,7 @@ dependencies {
     implementation Deps.jetpack_livedata //livedata
     implementation Deps.jetpack_viewmodel //viewmodel
     implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
+    implementation Deps.jetpack_datastore //datastore
 
     //okhttp
     implementation Deps.okhttp

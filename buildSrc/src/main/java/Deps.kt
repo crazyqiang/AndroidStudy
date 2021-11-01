@@ -3,6 +3,7 @@ import LibsVersion.Companion.arouter_api_version
 import LibsVersion.Companion.arouter_compiler_version
 import LibsVersion.Companion.constraintlayout_version
 import LibsVersion.Companion.coroutines_version
+import LibsVersion.Companion.datastore_version
 import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.legacy_version
@@ -44,6 +45,7 @@ object Deps {
     const val jetpack_lifecycle_process = "androidx.lifecycle:lifecycle-process:$jetpack_version"
     //帮助实现Service的LifecycleOwner
     const val jetpack_lifecycle_service = "androidx.lifecycle:lifecycle-service:$jetpack_version"
+    const val jetpack_datastore = "androidx.datastore:datastore:$datastore_version"
 
     //AndroidX相关
     const val androidx_material = "com.google.android.material:material:$material_version"
@@ -70,6 +72,7 @@ internal class LibsVersion {
         const val retrofit_version = "2.9.0"
         const val legacy_version = "1.0.0"
         const val jetpack_version = "2.4.0-alpha01"
+        const val datastore_version = "1.0.0"
         const val kotlin_version = "1.4.32"
         const val coroutines_version = "1.5.2"
         const val arouter_api_version = "1.5.1"
