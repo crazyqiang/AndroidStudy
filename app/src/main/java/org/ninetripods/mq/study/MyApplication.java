@@ -3,6 +3,7 @@ package org.ninetripods.mq.study;
 import android.app.Application;
 
 import androidx.lifecycle.ProcessLifecycleOwner;
+import androidx.multidex.MultiDex;
 
 import org.ninetripods.mq.study.jetpack.lifecycle.MyApplicationLifecycleObserver;
 import org.ninetripods.mq.study.jetpack.mvvm.base.http.RetrofitUtil;
@@ -20,6 +21,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        //为方法数超过 64K 的应用启用 MultiDex
+        //https://developer.android.com/studio/build/multidex?hl=zh-cn
+        MultiDex.install(this);
         //初始化Retrofit
         RetrofitUtil.INSTANCE.initRetrofit();
         //基于Lifecycle，监听Application的生命周期

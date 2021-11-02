@@ -8,6 +8,7 @@ import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.legacy_version
 import LibsVersion.Companion.material_version
+import LibsVersion.Companion.multidex_version
 import LibsVersion.Companion.okhttp_version
 import LibsVersion.Companion.recyclerview_version
 import LibsVersion.Companion.retrofit_version
@@ -54,6 +55,7 @@ object Deps {
     const val androidx_recyclerView = "androidx.recyclerview:recyclerview:$recyclerview_version"
     const val androidx_constraintLayout = "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     const val androidx_legacy = "androidx.legacy:legacy-support-v4:$legacy_version"
+    const val androidx_multidex = "androidx.multidex:multidex:$multidex_version"
 
     //ARouter
     const val arouter_api = "com.alibaba:arouter-api:$arouter_api_version"
@@ -69,6 +71,8 @@ object Deps {
 internal class LibsVersion {
 
     companion object {
+
+        const val multidex_version = "2.0.1"
         const val okhttp_version = "4.9.0"
         const val retrofit_version = "2.9.0"
         const val legacy_version = "1.0.0"
