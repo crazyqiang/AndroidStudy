@@ -5,7 +5,6 @@ plugins {
 }
 
 android {
-
     compileSdkVersion App.compileSdkVersion
     buildToolsVersion App.buildToolsVersion
 
@@ -20,6 +19,7 @@ android {
         main {
             java.srcDirs = ['src/main/java']
             proto {
+                //指定proto源文件地址
                 srcDir 'src/main/protobuf'
                 include '**/*.protobuf'
             }
@@ -29,6 +29,7 @@ android {
     //proto buffer 协议缓冲区相关配置 用于DataStore
     protobuf {
         protoc {
+            //protoc版本参见：https://repo1.maven.org/maven2/com/google/protobuf/protoc/
             artifact = "com.google.protobuf:protoc:3.18.0"
         }
         generateProtoTasks {
@@ -54,5 +55,6 @@ android {
 }
 
 dependencies {
+    //proto文件编译依赖库
     implementation "com.google.protobuf:protobuf-javalite:3.18.0"
 }
