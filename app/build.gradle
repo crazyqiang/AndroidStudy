@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.protobuf'
 
 android {
     compileSdkVersion App.compileSdkVersion
@@ -10,6 +11,7 @@ android {
         targetSdkVersion App.targetSdkVersion
         versionCode App.versionCode
         versionName App.versionName
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         buildConfigField "boolean", "IS_SHOW_LOG", "false"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -21,6 +23,10 @@ android {
     sourceSets {
         main {
             java.srcDirs = ['src/main/java', 'src/main/aidl']
+            proto {
+                srcDir 'src/main/protobuf'
+                include '**/*.protobuf'
+            }
         }
     }
 
@@ -77,6 +83,24 @@ android {
         }
     }
 
+    //proto buffer 协议缓冲区相关配置 用于DataStore
+    protobuf {
+        protoc {
+            artifact = "com.google.protobuf:protoc:3.18.0"
+        }
+        generateProtoTasks {
+            all().each { task ->
+                task.builtins {
+                    java {
+                        option 'lite'
+                    }
+                }
+            }
+        }
+        //修改生成java类的位置 默认是 $buildDir/generated/source/proto
+        //generatedFilesBaseDir = "$projectDir/src/generated"
+    }
+
     //修改APK生成名字  通过android.applicationVariants索引来遍历所有的 build variant
 //    applicationVariants.all { variant ->
 //        variant.outputs.each { output ->
@@ -114,6 +138,7 @@ dependencies {
     implementation Deps.androidx_recyclerView
     implementation Deps.androidx_constraintLayout
     implementation Deps.androidx_legacy
+    implementation Deps.androidx_multidex
     //协程
     implementation Deps.coroutines_core
     implementation Deps.coroutines_android
@@ -139,4 +164,6 @@ dependencies {
     implementation 'com.github.promeg:tinypinyin:2.0.3'
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.google.protobuf:protobuf-javalite:3.18.0"
 }
