@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.protobuf'
 
 android {
     compileSdkVersion App.compileSdkVersion
@@ -23,10 +22,6 @@ android {
     sourceSets {
         main {
             java.srcDirs = ['src/main/java', 'src/main/aidl']
-            proto {
-                srcDir 'src/main/protobuf'
-                include '**/*.protobuf'
-            }
         }
     }
 
@@ -83,24 +78,6 @@ android {
         }
     }
 
-    //proto buffer 协议缓冲区相关配置 用于DataStore
-    protobuf {
-        protoc {
-            artifact = "com.google.protobuf:protoc:3.18.0"
-        }
-        generateProtoTasks {
-            all().each { task ->
-                task.builtins {
-                    java {
-                        option 'lite'
-                    }
-                }
-            }
-        }
-        //修改生成java类的位置 默认是 $buildDir/generated/source/proto
-        //generatedFilesBaseDir = "$projectDir/src/generated"
-    }
-
     //修改APK生成名字  通过android.applicationVariants索引来遍历所有的 build variant
 //    applicationVariants.all { variant ->
 //        variant.outputs.each { output ->
@@ -123,14 +100,6 @@ android {
 }
 
 dependencies {
-    if (compileDialogWithSource == "true") {
-        //源码方式集成
-        api project(':lib_dialog')
-    } else {
-        //aar方式集成
-        api 'io.github.mqcodedev:lib_dialog:1.2.0' //maven仓库
-        //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 后续不再更新 建议使用maven方式引入
-    }
     //AndroidX相关
     implementation Deps.kotlinStdlib
     implementation Deps.androidx_material
@@ -150,7 +119,6 @@ dependencies {
     implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
     implementation Deps.jetpack_datastore //datastore
     implementation Deps.jetpack_datastore_pf //datastore_preferences
-
     //okhttp
     implementation Deps.okhttp
     implementation Deps.okhttp_log_interceptor
@@ -165,5 +133,13 @@ dependencies {
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.google.protobuf:protobuf-javalite:3.18.0"
+    if (compileDialogWithSource == "true") {
+        //源码方式集成
+        api project(':lib_dialog')
+    } else {
+        //aar方式集成
+        api 'io.github.mqcodedev:lib_dialog:1.2.0' //maven仓库
+        //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 后续不再更新 建议使用maven方式引入
+    }
+    api project(':lib_protobuf')
 }

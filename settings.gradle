@@ -1,5 +1,7 @@
-include ':app', ':multiprocess_sever'
+include ':app'
+include ':multiprocess_sever'
 include ':plugin'
 if (compileDialogWithSource == "true") {
     include ':lib_dialog'
 }
+include ':lib_protobuf'
