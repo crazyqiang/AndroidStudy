@@ -115,6 +115,8 @@ dependencies {
     implementation Deps.jetpack_lifecycle_process //lifecycle_process
     implementation Deps.jetpack_lifecycle_service //lifecycle_service
     implementation Deps.jetpack_livedata //livedata
+    implementation Deps.jetpack_activity_ktx //activity_ktx
+    implementation Deps.jetpack_fragment_ktx //fragment_ktx
     implementation Deps.jetpack_viewmodel //viewmodel
     implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
     implementation Deps.jetpack_datastore //datastore

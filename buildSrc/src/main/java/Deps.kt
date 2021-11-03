@@ -1,9 +1,11 @@
+import LibsVersion.Companion.activity_ktx_version
 import LibsVersion.Companion.appcompat_version
 import LibsVersion.Companion.arouter_api_version
 import LibsVersion.Companion.arouter_compiler_version
 import LibsVersion.Companion.constraintlayout_version
 import LibsVersion.Companion.coroutines_version
 import LibsVersion.Companion.datastore_version
+import LibsVersion.Companion.fragment_ktx_version
 import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.legacy_version
@@ -39,6 +41,9 @@ object Deps {
     //Jetpack相关
     const val jetpack_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$jetpack_version"
     const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
+    const val jetpack_activity_ktx = "androidx.activity:activity-ktx:$activity_ktx_version"
+    const val jetpack_fragment_ktx = "androidx.fragment:fragment-ktx:$fragment_ktx_version"
+
     //将 Kotlin 协程与生命周期感知型组件一起使用: https://developer.android.com/topic/libraries/architecture/coroutines
     //LifecycleScope协程
     const val jetpack_lifecycle_runtime =  "androidx.lifecycle:lifecycle-runtime-ktx:$jetpack_version"
@@ -77,6 +82,8 @@ internal class LibsVersion {
         const val retrofit_version = "2.9.0"
         const val legacy_version = "1.0.0"
         const val jetpack_version = "2.4.0-alpha01"
+        const val activity_ktx_version = "1.3.1"
+        const val fragment_ktx_version = "1.3.6"
         const val datastore_version = "1.0.0"
         const val kotlin_version = "1.4.32"
         const val coroutines_version = "1.5.2"
