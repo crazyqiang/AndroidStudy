@@ -1,0 +1,31 @@
+//指定protobuf版本，没有指定默认使用proto2，必须在第一行进行指定
+syntax = "proto3";
+
+//option：可选字段
+//java_package：指定proto文件生成的java类所在的包名
+option java_package = "org.ninetripods.mq.study";
+//java_outer_classname：指定该proto文件生成的java类的名称
+option java_outer_classname = "BookProto";
+
+enum Season{
+  SPRING = 0;
+  SUMMER = 1;
+  AUTUMN = 2;
+  WINTER = 3;
+}
+
+message Book {
+  // 格式：类型 + 名称 + 编号
+  string bookName = 1; //书名
+  float price = 2; //价格
+  int32 serialNum = 3; //序列号
+  bool isSubject = 4; //是否是学科类
+  Owner owner = 5; //拥有者
+  Season season = 6; //季节
+}
+
+message Owner{
+  string pName = 1; //人名
+  int32 age = 2; //年龄
+}
+

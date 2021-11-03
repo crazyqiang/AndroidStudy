@@ -42,7 +42,7 @@ android {
             }
         }
         //修改生成java类的位置 默认是 $buildDir/generated/source/proto
-        //generatedFilesBaseDir = "$projectDir/src/generated"
+        generatedFilesBaseDir = "$projectDir/src/main/generated"
     }
 
     compileOptions {
