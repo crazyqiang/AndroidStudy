@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/tv_datastore"
-        style="@style/btn_style_undo"
+        style="@style/btn_style_done"
         android:layout_below="@+id/tv_kt_flow"
         android:layout_marginTop="@dimen/margin_btn"
         android:text="DataStore" />

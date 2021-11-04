@@ -56,5 +56,5 @@ android {
 
 dependencies {
     //proto文件编译依赖库
-    implementation "com.google.protobuf:protobuf-javalite:3.18.0"
+    api "com.google.protobuf:protobuf-javalite:3.18.0"
 }
