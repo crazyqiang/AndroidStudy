@@ -6,11 +6,7 @@ package org.ninetripods.mq.study.jetpack.datastore
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -20,7 +16,8 @@ import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.BookProto
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.datastore.preferences.PreferenceKeys
-import org.ninetripods.mq.study.jetpack.datastore.proto.BookSerializer
+import org.ninetripods.mq.study.kotlin.ktx.bookDataStorePf
+import org.ninetripods.mq.study.kotlin.ktx.bookDataStorePt
 import org.ninetripods.mq.study.kotlin.ktx.id
 
 class DataStoreActivity : BaseActivity() {
@@ -35,17 +32,6 @@ class DataStoreActivity : BaseActivity() {
     private val mBtnGetPt: Button by id(R.id.btn_pt_get)
     private val mTvContentPt: TextView by id(R.id.tv_pt_content)
     private val mBtnMigrationPt: Button by id(R.id.btn_migration_pt)
-
-    //构建Preferences DataStore
-    private val bookDataStorePf: DataStore<Preferences> by preferencesDataStore(
-        name = "ds_preference"
-    )
-
-    //构建Proto DataStore
-    private val bookDataStorePt: DataStore<BookProto.Book> by dataStore(
-        fileName = "Book.pb",
-        serializer = BookSerializer()
-    )
 
     override fun setContentView() {
         setContentView(R.layout.activity_data_store)
