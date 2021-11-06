@@ -11,4 +11,5 @@ object PreferenceKeys {
     val KEY_STRING = stringPreferencesKey("key_string")
     val KEY_INT = intPreferencesKey("key_int")
     val KEY_BOOLEAN = booleanPreferencesKey("key_boolean")
+    val KEY_BOOK_NAME = stringPreferencesKey("key_book_name")
 }

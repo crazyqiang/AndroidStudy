@@ -5,7 +5,7 @@ import org.ninetripods.mq.study.BookProto
 import java.io.InputStream
 import java.io.OutputStream
 
-class BookSerializer : Serializer<BookProto.Book> {
+object BookSerializer : Serializer<BookProto.Book> {
 
     override suspend fun readFrom(input: InputStream): BookProto.Book {
         return BookProto.Book.parseFrom(input)
@@ -15,7 +15,6 @@ class BookSerializer : Serializer<BookProto.Book> {
         t.writeTo(output)
     }
 
-    override val defaultValue: BookProto.Book
-        get() = BookProto.Book.getDefaultInstance()
+    override val defaultValue: BookProto.Book = BookProto.Book.getDefaultInstance()
 
 }
