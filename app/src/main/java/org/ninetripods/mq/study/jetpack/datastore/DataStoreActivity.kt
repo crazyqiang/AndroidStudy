@@ -6,18 +6,14 @@ package org.ninetripods.mq.study.jetpack.datastore
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.BookProto
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.jetpack.datastore.preferences.PreferenceKeys
-import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.BookSpModel
+import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.BookModel
 import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.Type
 import org.ninetripods.mq.study.kotlin.ktx.id
 
@@ -31,12 +27,10 @@ class DataStoreActivity : BaseActivity() {
     private val mBtnSavePf: Button by id(R.id.btn_pf_save)
     private val mBtnGetPf: Button by id(R.id.btn_pf_get)
     private val mTvContentPf: TextView by id(R.id.tv_pf_content)
-    private val mBtnMigrationPf: Button by id(R.id.btn_migration_pf)
 
     private val mBtnSavePt: Button by id(R.id.btn_pt_save)
     private val mBtnGetPt: Button by id(R.id.btn_pt_get)
     private val mTvContentPt: TextView by id(R.id.tv_pt_content)
-    private val mBtnMigrationPt: Button by id(R.id.btn_migration_pt)
 
     private lateinit var mBookViewModel: BookViewModel
 
@@ -57,8 +51,10 @@ class DataStoreActivity : BaseActivity() {
     override fun initEvents() {
         mBtnSaveSp.setOnClickListener { saveSpData() }
         mBtnGetSp.setOnClickListener { getSpData() }
+
         mBtnSavePf.setOnClickListener { savePfDataStore() }
         mBtnGetPf.setOnClickListener { getPfDataStore() }
+
         mBtnSavePt.setOnClickListener { saveProtoDataStore() }
         mBtnGetPt.setOnClickListener { getProtoDataStore() }
     }
@@ -67,7 +63,7 @@ class DataStoreActivity : BaseActivity() {
      * SP存数据
      */
     private fun saveSpData() {
-        val book = BookSpModel(
+        val book = BookModel(
             name = "The Avengers",
             price = (1..10).random().toFloat(), //这里价格每次点击都会变化，为了展示UI层能随时监听数据变化
             type = Type.ENGLISH
@@ -81,7 +77,7 @@ class DataStoreActivity : BaseActivity() {
      */
     private fun getSpData() {
         lifecycleScope.launch {
-            mBookViewModel.bookFlow.collect {
+            mBookViewModel.bookSpFlow.collect {
                 mTvContentSp.text = it.toString()
             }
         }
@@ -91,28 +87,22 @@ class DataStoreActivity : BaseActivity() {
      * Preferences DataStore存数据
      */
     private fun savePfDataStore() {
-        val savePfStr = "Hello Preferences DataStore"
-        lifecycleScope.launch {
-            bookDataStorePf.edit { preference ->
-                preference[PreferenceKeys.KEY_BOOK_NAME] = savePfStr
-            }
-            toast("${savePfStr}存入成功")
-        }
+        val book = BookModel(
+            name = "Hello Preferences DataStore",
+            price = (1..10).random().toFloat(), //这里价格每次点击都会变化，为了展示UI层能随时监听数据变化
+            type = Type.MATH
+        )
+        mBookViewModel.savePfData(book)
+        toast("${book}存入成功")
     }
 
     /**
      * Preferences DataStore取数据
      */
     private fun getPfDataStore() {
-        //Preferences.Key<T>
         lifecycleScope.launch {
-            val pfFlow: Flow<String> =
-                bookDataStorePf.data.map { preferences ->
-                    //preferences[PreferenceKeys.KEY_STRING] ?: "default"
-                    preferences[PreferenceKeys.KEY_BOOK_NAME] ?: "default"
-                }
-            pfFlow.collect {
-                mTvContentPf.text = it
+            mBookViewModel.bookPfFlow.collect {
+                mTvContentPf.text = it.toString()
             }
         }
     }
@@ -121,16 +111,14 @@ class DataStoreActivity : BaseActivity() {
      * 使用Proto DataStore存储数据
      */
     private fun saveProtoDataStore() {
-        //构建BookProto.BookSpModel
+        //构建BookProto.Book
         val bookInfo = BookProto.Book.getDefaultInstance().toBuilder()
-            .setBookName("Android BookSpModel")
-            .setPrice(10f)
-            .setSeason(BookProto.Season.AUTUMN)
+            .setName("Hello Proto DataStore")
+            .setPrice(20f)
+            .setType(BookProto.Type.ENGLISH)
             .build()
-        lifecycleScope.launch {
-            bookDataStorePt.updateData { bookInfo }
-            toast("${bookInfo}存入成功")
-        }
+        mBookViewModel.savePtData(bookInfo)
+        toast("${bookInfo}存入成功")
     }
 
     /**
@@ -138,9 +126,7 @@ class DataStoreActivity : BaseActivity() {
      */
     private fun getProtoDataStore() {
         lifecycleScope.launch {
-            //DataStore.data返回Flow<T>
-            val bookFlow: Flow<BookProto.Book> = bookDataStorePt.data
-            bookFlow.collect {
+            mBookViewModel.bookPtFlow.collect {
                 mTvContentPt.text = it.toString()
             }
         }

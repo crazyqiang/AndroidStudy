@@ -24,7 +24,7 @@
                 android:id="@+id/tv_sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center_horizontal"
                 android:text="SharedPreference"
                 android:textColor="@color/black"
@@ -70,7 +70,7 @@
                 android:id="@+id/tv_ds_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:text="------------------分割线------------------"
                 android:textColor="@color/red"
@@ -82,7 +82,7 @@
                 android:id="@+id/tv_pf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:text="Preferences DataStore"
                 android:textColor="@color/black"
@@ -124,34 +124,23 @@
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/btn_pf_get" />
 
-            <Button
-                android:id="@+id/btn_migration_pf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Preferences迁移到 Preferences DataStore"
-                android:textAllCaps="false"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pf_content" />
-
             <TextView
                 android:id="@+id/tv_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:text="------------------分割线------------------"
                 android:textColor="@color/red"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_migration_pf" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_pf_content" />
 
             <TextView
                 android:id="@+id/tv_pt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:text="Proto DataStore"
                 android:textColor="@color/black"
@@ -192,18 +181,6 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/btn_pt_get" />
-
-            <Button
-                android:id="@+id/btn_migration_pt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Preferences迁移到 Proto DataStore"
-                android:textAllCaps="false"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pt_content" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

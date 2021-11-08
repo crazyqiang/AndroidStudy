@@ -1,15 +1,16 @@
 package org.ninetripods.mq.study.jetpack.datastore.preferences
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import org.ninetripods.mq.study.jetpack.datastore.KEY_BOOK_NAME
+import org.ninetripods.mq.study.jetpack.datastore.KEY_BOOK_PRICE
+import org.ninetripods.mq.study.jetpack.datastore.KEY_BOOK_TYPE
 
 /**
  * 用来声明Preferences.Key<T>
  */
 object PreferenceKeys {
-    val KEY_STRING = stringPreferencesKey("key_string")
-    val KEY_INT = intPreferencesKey("key_int")
-    val KEY_BOOLEAN = booleanPreferencesKey("key_boolean")
-    val KEY_BOOK_NAME = stringPreferencesKey("key_book_name")
+    val P_KEY_BOOK_NAME = stringPreferencesKey(KEY_BOOK_NAME)
+    val P_KEY_BOOK_PRICE = floatPreferencesKey(KEY_BOOK_PRICE)
+    val P_KEY_BOOK_TYPE = stringPreferencesKey(KEY_BOOK_TYPE)
 }

@@ -7,25 +7,16 @@ option java_package = "org.ninetripods.mq.study";
 //java_outer_classname：指定该proto文件生成的java类的名称
 option java_outer_classname = "BookProto";
 
-enum Season{
-  SPRING = 0;
-  SUMMER = 1;
-  AUTUMN = 2;
-  WINTER = 3;
+enum  Type {
+  MATH = 0;
+  CHINESE = 1;
+  ENGLISH = 2;
 }
 
 message Book {
   // 格式：类型 + 名称 + 编号
-  string bookName = 1; //书名
+  string name = 1; //书名
   float price = 2; //价格
-  int32 serialNum = 3; //序列号
-  bool isSubject = 4; //是否是学科类
-  Owner owner = 5; //拥有者
-  Season season = 6; //季节
-}
-
-message Owner{
-  string pName = 1; //人名
-  int32 age = 2; //年龄
+  Type type = 3; //类型
 }
 
