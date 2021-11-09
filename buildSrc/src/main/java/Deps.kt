@@ -76,7 +76,6 @@ object Deps {
 internal class LibsVersion {
 
     companion object {
-
         const val multidex_version = "2.0.1"
         const val okhttp_version = "4.9.0"
         const val retrofit_version = "2.9.0"

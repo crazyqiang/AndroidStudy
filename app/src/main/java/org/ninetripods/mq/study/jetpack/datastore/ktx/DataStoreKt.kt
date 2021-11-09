@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.datastore
+package org.ninetripods.mq.study.jetpack.datastore.ktx
 
 import android.content.Context
 import androidx.datastore.core.DataStore

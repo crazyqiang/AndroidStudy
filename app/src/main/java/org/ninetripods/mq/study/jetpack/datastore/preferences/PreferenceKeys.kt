@@ -2,9 +2,9 @@ package org.ninetripods.mq.study.jetpack.datastore.preferences
 
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import org.ninetripods.mq.study.jetpack.datastore.KEY_BOOK_NAME
-import org.ninetripods.mq.study.jetpack.datastore.KEY_BOOK_PRICE
-import org.ninetripods.mq.study.jetpack.datastore.KEY_BOOK_TYPE
+import org.ninetripods.mq.study.jetpack.datastore.ktx.KEY_BOOK_NAME
+import org.ninetripods.mq.study.jetpack.datastore.ktx.KEY_BOOK_PRICE
+import org.ninetripods.mq.study.jetpack.datastore.ktx.KEY_BOOK_TYPE
 
 /**
  * 用来声明Preferences.Key<T>
