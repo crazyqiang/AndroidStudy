@@ -6,7 +6,6 @@ plugins {
 
 android {
     compileSdkVersion App.compileSdkVersion
-    buildToolsVersion App.buildToolsVersion
 
     defaultConfig {
         minSdkVersion App.minSdkVersion
