@@ -32,6 +32,9 @@ android {
             //protoc版本参见：https://repo1.maven.org/maven2/com/google/protobuf/protoc/
             artifact = "com.google.protobuf:protoc:3.18.0"
         }
+        // Generates the java Protobuf-lite code for the Protobufs in this project. See
+        // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+        // for more information.
         generateProtoTasks {
             all().each { task ->
                 task.builtins {

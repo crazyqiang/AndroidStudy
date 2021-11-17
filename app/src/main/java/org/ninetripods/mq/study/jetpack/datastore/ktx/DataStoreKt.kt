@@ -36,6 +36,7 @@ val Context.bookDataStorePt: DataStore<BookProto.Book> by dataStore(
                 context,
                 BOOK_PREFERENCES_NAME
             ) { sharedPrefs: SharedPreferencesView, currentData: BookProto.Book ->
+                //从SP中取出数据
                 val bookName: String = sharedPrefs.getString(KEY_BOOK_NAME, "") ?: ""
                 val bookPrice: Float = sharedPrefs.getFloat(KEY_BOOK_PRICE, 0f)
 
@@ -52,5 +53,4 @@ val Context.bookDataStorePt: DataStore<BookProto.Book> by dataStore(
             }
         )
     }
-
 )
