@@ -11,6 +11,9 @@ class BookViewModel(private val bookRepo: BookRepo) : ViewModel() {
 
     val bookSpFlow = bookRepo.bookFlow
 
+    /**
+     * SharedPreference存数据
+     */
     fun saveSpData(book: BookModel) {
         bookRepo.saveBookSp(book)
     }

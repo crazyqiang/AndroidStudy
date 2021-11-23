@@ -21,7 +21,6 @@ class BookRepo private constructor(val context: Context) {
     //获取SharedPreference
     private val mBookSp =
         context.applicationContext.getSharedPreferences(BOOK_PREFERENCES_NAME, Context.MODE_PRIVATE)
-
     /**
      * 将SP获取的对象构建成Flow，UI层可以监听该对象变化
      */
