@@ -18,6 +18,7 @@ public class Constant {
     public static final String BLOG_JETPACK_LIVEDATA = "https://blog.csdn.net/u013700502/article/details/118866217";
     public static final String BLOG_JETPACK_VIEW_MODEL = "https://blog.csdn.net/u013700502/article/details/118962560";
     public static final String BLOG_JETPACK_MVVM = "https://blog.csdn.net/u013700502/article/details/120263741";
+    public static final String BLOG_JETPACK_DATASTORE = "https://blog.csdn.net/u013700502/article/details/121076531";
 
     //Image URL
     public final static String[] imageUrls = new String[] {

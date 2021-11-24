@@ -12,10 +12,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.BookProto
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.BookModel
 import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.Type
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.util.Constant
 
 class DataStoreActivity : BaseActivity() {
 
@@ -39,7 +41,7 @@ class DataStoreActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "Jetpack DataStore", true)
+        initToolBar(mToolBar, "Jetpack DataStore", true, true, TYPE_BLOG)
 
         //创建ViewModel
         mBookViewModel = ViewModelProvider(
@@ -57,6 +59,10 @@ class DataStoreActivity : BaseActivity() {
 
         mBtnSavePt.setOnClickListener { saveProtoDataStore() }
         mBtnGetPt.setOnClickListener { getProtoDataStore() }
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_DATASTORE)
     }
 
     /**
