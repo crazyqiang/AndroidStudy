@@ -21,7 +21,7 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src/main/aidl']
+            java.srcDirs = ['src/main/java', 'src/main/aidl','src/main/kotlin']
         }
     }
 
@@ -144,4 +144,8 @@ dependencies {
         //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 后续不再更新 建议使用maven方式引入
     }
     api project(':lib_protobuf')
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
