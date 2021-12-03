@@ -10,9 +10,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.log
+import org.ninetripods.mq.study.util.Constant
 
 /**
  * Kotlin Flow用法
@@ -47,7 +49,7 @@ class FlowStudyActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "Kotlin Flow", true)
+        initToolBar(mToolBar, "Kotlin Flow", true, true, TYPE_BLOG)
         mFlowModel = ViewModelProvider(this).get(FlowViewModel::class.java)
         initFlow()
     }
@@ -187,6 +189,10 @@ class FlowStudyActivity : BaseActivity() {
 
             }
         }
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_FLOW)
     }
 
 }
