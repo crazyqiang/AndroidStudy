@@ -90,9 +90,9 @@ internal class LibsVersion {
         const val coroutines_version = "1.5.2"
         const val arouter_api_version = "1.5.1"
         const val arouter_compiler_version = "1.5.1"
-        const val material_version = "1.2.1"
-        const val appcompat_version = "1.3.0"
+        const val material_version = "1.4.0"
+        const val appcompat_version = "1.3.1"
         const val recyclerview_version = "1.1.0"
-        const val constraintlayout_version = "1.1.3"
+        const val constraintlayout_version = "2.1.2"
     }
 }
