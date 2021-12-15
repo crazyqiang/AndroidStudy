@@ -1,10 +1,5 @@
 package com.ninetripods.sydialoglib;
 
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +9,11 @@ import android.view.WindowManager;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.fastgo.driver.dialog.sydialoglib.R;
 
@@ -34,18 +34,6 @@ public class SYDialog extends SYBaseDialog implements IDialog {
 
     public SYDialog() {
         controller = new SYDialogController(this);
-    }
-
-    /**
-     * 兼容6.0以下的某些版本 如（vivo x7、5.1.1系统）不走{@link #onAttach(Context)}方法，
-     * 这里的Fragment用的不是v4包里面的
-     *
-     * @param activity Activity
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.context = activity;
     }
 
     @Override
@@ -178,11 +166,11 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             if (context == null) {
                 throw new IllegalArgumentException("Context can't be null");
             }
-            if (!(context instanceof Activity)) {
-                throw new IllegalArgumentException("Context must be Activity");
+            if (!(context instanceof FragmentActivity)) {
+                throw new IllegalArgumentException("Context must be FragmentActivity");
             }
             params = new SYDialogController.SYParams();
-            params.fragmentManager = ((Activity) context).getFragmentManager();
+            params.fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
             params.context = context;
         }
 
@@ -215,7 +203,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
          * @return Builder
          */
         public Builder setScreenWidthP(float percentage) {
-            params.dialogWidth = (int) (getScreenWidth((Activity) params.context) * percentage);
+            params.dialogWidth = (int) (getScreenWidth((FragmentActivity) params.context) * percentage);
             return this;
         }
 
@@ -226,7 +214,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
          * @return Builder
          */
         public Builder setScreenHeightP(float percentage) {
-            params.dialogHeight = (int) (getScreenHeight((Activity) params.context) * percentage);
+            params.dialogHeight = (int) (getScreenHeight((FragmentActivity) params.context) * percentage);
             return this;
         }
 
@@ -419,8 +407,8 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             SYDialog dialog = create();
             //判空
             if (params.context == null) return dialog;
-            if (params.context instanceof Activity) {
-                Activity activity = (Activity) params.context;
+            if (params.context instanceof FragmentActivity) {
+                FragmentActivity activity = (FragmentActivity) params.context;
                 //如果Activity正在关闭或者已经销毁 直接返回
                 boolean isRefuse = Build.VERSION.SDK_INT >= 17
                         ? activity.isFinishing() || activity.isDestroyed()
@@ -442,7 +430,7 @@ public class SYDialog extends SYBaseDialog implements IDialog {
             params.gravity = Gravity.CENTER;
             params.layoutRes = R.layout.lib_ui_layout_dialog_default;
             params.dimAmount = 0.5f;
-            params.dialogWidth = (int) (getScreenWidth((Activity) params.context) * 0.85f);
+            params.dialogWidth = (int) (getScreenWidth((FragmentActivity) params.context) * 0.85f);
             params.dialogHeight = WindowManager.LayoutParams.WRAP_CONTENT;
         }
 

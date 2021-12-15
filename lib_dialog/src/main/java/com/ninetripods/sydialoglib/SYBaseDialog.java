@@ -1,8 +1,6 @@
 package com.ninetripods.sydialoglib;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -20,6 +18,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.ninetripods.sydialoglib.manager.SYDialogsManager;
 
@@ -143,7 +143,7 @@ public abstract class SYBaseDialog extends DialogFragment {
      * @param activity Activity
      * @return ScreenWidth
      */
-    public static int getScreenWidth(Activity activity) {
+    public static int getScreenWidth(FragmentActivity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
         if (display != null) {
             display.getSize(point);
@@ -158,7 +158,7 @@ public abstract class SYBaseDialog extends DialogFragment {
      * @param activity Activity
      * @return ScreenHeight
      */
-    public static int getScreenHeight(Activity activity) {
+    public static int getScreenHeight(FragmentActivity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
         if (display != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -174,13 +174,13 @@ public abstract class SYBaseDialog extends DialogFragment {
         return 0;
     }
 
-    public static int getStatusBarHeight(Activity activity) {
+    public static int getStatusBarHeight(FragmentActivity activity) {
         Resources resources = activity.getResources();
         int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         return resources.getDimensionPixelSize(resourceId);
     }
 
-    public static int getNavigationBarHeight(Activity activity) {
+    public static int getNavigationBarHeight(FragmentActivity activity) {
         Resources resources = activity.getResources();
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
         int height = resources.getDimensionPixelSize(resourceId);

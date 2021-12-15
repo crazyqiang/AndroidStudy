@@ -1,6 +1,5 @@
 package com.ninetripods.sydialoglib;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.text.Html;
 import android.text.TextUtils;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.fastgo.driver.dialog.sydialoglib.R;
 import com.ninetripods.sydialoglib.manager.ScreenUtil;
