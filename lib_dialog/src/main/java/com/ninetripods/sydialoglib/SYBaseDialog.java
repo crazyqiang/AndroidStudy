@@ -35,7 +35,10 @@ public abstract class SYBaseDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
         if (getLayoutRes() > 0) {
             //调用方通过xml获取view
             view = inflater.inflate(getLayoutRes(), container, false);
@@ -50,7 +53,9 @@ public abstract class SYBaseDialog extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Dialog dialog = getDialog();
         if (dialog != null) {
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (Build.VERSION.SDK_INT >= 30 && dialog.getWindow() != null) {
+                dialog.getWindow().getDecorView().setPadding(0, 0, 0, 0);
+            }
             //如果isCancelable()是false 则会屏蔽物理返回键
             dialog.setCancelable(isCancelable());
             //如果isCancelableOutside()为false 点击屏幕外Dialog不会消失；反之会消失
