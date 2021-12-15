@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.util.fragment;
+package org.ninetripods.mq.study.recycle;
 
 
 import android.os.Bundle;
@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.ninetripods.mq.study.R;
-import org.ninetripods.mq.study.recycle.ContactsActivity;
-import org.ninetripods.mq.study.recycle.SwipeMenuActivity;
-import org.ninetripods.mq.study.recycle.WaterFallActivity;
 import org.ninetripods.mq.study.util.NavitateUtil;
+import org.ninetripods.mq.study.viewpager2.ViewPager2Activity;
 
 public class RecycleFragment extends Fragment implements View.OnClickListener {
     private TextView tv_contacts, tv_swipe_menu, tv_water_fall, tv_touch_helper, tv_refresh;
+    private TextView tv_view_pager2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,11 +31,13 @@ public class RecycleFragment extends Fragment implements View.OnClickListener {
         tv_water_fall = (TextView) view.findViewById(R.id.tv_water_fall);
         tv_touch_helper = (TextView) view.findViewById(R.id.tv_touch_helper);
         tv_refresh = (TextView) view.findViewById(R.id.tv_refresh);
+        tv_view_pager2 = view.findViewById(R.id.tv_view_pager2);
         tv_contacts.setOnClickListener(this);
         tv_swipe_menu.setOnClickListener(this);
         tv_water_fall.setOnClickListener(this);
         tv_touch_helper.setOnClickListener(this);
         tv_refresh.setOnClickListener(this);
+        tv_view_pager2.setOnClickListener(this);
     }
 
     @Override
@@ -50,6 +51,9 @@ public class RecycleFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_water_fall:
                 NavitateUtil.startActivity(getActivity(), WaterFallActivity.class);
+                break;
+            case R.id.tv_view_pager2:
+                NavitateUtil.startActivity(getActivity(), ViewPager2Activity.class);
                 break;
             case R.id.tv_touch_helper:
                 break;

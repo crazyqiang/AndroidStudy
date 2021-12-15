@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity">
         <activity
-            android:name=".ViewPager2Activity"
+            android:name=".viewpager2.ViewPager2Activity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

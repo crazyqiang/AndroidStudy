@@ -25,6 +25,13 @@
         android:text="瀑布流+图片墙 " />
 
     <TextView
+        android:id="@+id/tv_view_pager2"
+        style="@style/btn_style_done"
+        android:layout_below="@+id/tv_water_fall"
+        android:layout_marginTop="25dp"
+        android:text="ViewPager2 " />
+
+    <TextView
         android:id="@+id/tv_touch_helper"
         style="@style/btn_style_done"
         android:layout_below="@+id/tv_swipe_menu"

@@ -23,7 +23,7 @@ import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
 import org.ninetripods.mq.study.util.fragment.NestedScrollFragment;
 import org.ninetripods.mq.study.util.fragment.PopFragment;
 import org.ninetripods.mq.study.util.fragment.ProcessFragment;
-import org.ninetripods.mq.study.util.fragment.RecycleFragment;
+import org.ninetripods.mq.study.recycle.RecycleFragment;
 
 public class MainActivity extends BaseActivity {
     private long back_pressed;
