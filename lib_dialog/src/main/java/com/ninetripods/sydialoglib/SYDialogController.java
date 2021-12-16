@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.fastgo.driver.dialog.sydialoglib.R;
 import com.ninetripods.sydialoglib.manager.ScreenUtil;
 
 import java.lang.ref.WeakReference;

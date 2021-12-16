@@ -15,8 +15,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.fastgo.driver.dialog.sydialoglib.R;
-
 import java.lang.reflect.Field;
 
 /**

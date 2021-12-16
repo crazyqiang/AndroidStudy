@@ -140,7 +140,7 @@ dependencies {
         api project(':lib_dialog')
     } else {
         //aar方式集成
-        api 'io.github.mqcodedev:lib_dialog:1.2.0' //maven仓库
+        api 'io.github.mqcodedev:lib_dialog:1.3.0' //maven仓库
         //api 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 后续不再更新 建议使用maven方式引入
     }
     api project(':lib_protobuf')

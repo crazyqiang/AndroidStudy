@@ -14,7 +14,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.fastgo.driver.dialog.sydialoglib.R;
+import com.ninetripods.sydialoglib.R;
 
 /**
  * Dialog页面内Loading 包含Loading、Empty、Error三种
