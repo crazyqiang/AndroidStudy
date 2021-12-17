@@ -29,8 +29,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
+    api Deps.androidx_viewpager2
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_material
-    implementation Deps.androidx_viewpager2
+    implementation 'androidx.core:core-ktx:1.7.0'
 }

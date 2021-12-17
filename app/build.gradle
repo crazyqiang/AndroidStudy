@@ -135,6 +135,8 @@ dependencies {
     implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    api project(':lib_protobuf')
+    api project(':lib_viewpager2')
     if (compileDialogWithSource == "true") {
         //源码方式集成
         api project(':lib_dialog')
@@ -143,5 +145,4 @@ dependencies {
         implementation 'io.github.mqcodedev:lib_dialog:1.3.0' //maven仓库
         //implementation 'com.ninetripods:lib-dialog:1.1.0' //Jcenter仓库 后续不再更新 建议使用maven方式引入
     }
-    api project(':lib_protobuf')
 }
