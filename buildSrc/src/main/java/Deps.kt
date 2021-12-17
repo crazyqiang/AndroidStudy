@@ -14,7 +14,6 @@ import LibsVersion.Companion.multidex_version
 import LibsVersion.Companion.okhttp_version
 import LibsVersion.Companion.recyclerview_version
 import LibsVersion.Companion.retrofit_version
-import LibsVersion.Companion.viewpager2_version
 
 /**
  * Created by mq on 2021/8/22
@@ -61,7 +60,7 @@ object Deps {
     const val androidx_constraintLayout = "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     const val androidx_legacy = "androidx.legacy:legacy-support-v4:$legacy_version"
     const val androidx_multidex = "androidx.multidex:multidex:$multidex_version"
-    const val androidx_viewpager2 = "androidx.viewpager2:viewpager2:$viewpager2_version"
+    const val androidx_viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-beta01"
 
     //ARouter
     const val arouter_api = "com.alibaba:arouter-api:$arouter_api_version"
@@ -77,7 +76,6 @@ object Deps {
 internal class LibsVersion {
 
     companion object {
-        const val viewpager2_version = "1.1.0-beta01"
         const val multidex_version = "2.0.1"
         const val okhttp_version = "4.9.0"
         const val retrofit_version = "2.9.0"

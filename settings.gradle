@@ -5,3 +5,4 @@ if (compileDialogWithSource == "true") {
     include ':lib_dialog'
 }
 include ':lib_protobuf'
+include ':lib_viewpager2'
