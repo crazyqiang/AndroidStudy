@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.viewpager2.transformer
+package org.ninetripods.lib_viewpager2.transformer
 
 import android.os.Build
 import android.view.View

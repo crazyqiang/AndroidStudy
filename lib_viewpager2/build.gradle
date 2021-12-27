@@ -32,5 +32,7 @@ dependencies {
     api Deps.androidx_viewpager2
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_material
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 }

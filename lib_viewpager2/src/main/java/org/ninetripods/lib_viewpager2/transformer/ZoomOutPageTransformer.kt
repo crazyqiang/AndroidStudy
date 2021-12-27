@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.viewpager2.transformer
+package org.ninetripods.lib_viewpager2.transformer
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
