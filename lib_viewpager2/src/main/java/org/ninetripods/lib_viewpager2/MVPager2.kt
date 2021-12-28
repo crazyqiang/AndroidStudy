@@ -13,6 +13,7 @@ import org.ninetripods.lib_viewpager2.adapter.DELAY_INTERVAL_TIME
 import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
+import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 
 fun log(message: String) {
     Log.e("TTT", message)
@@ -33,6 +34,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mExtendModels: ArrayList<String> = ArrayList()
     private var isAutoPlay = true //自动轮播
     private var mCurPos = SIDE_NUM //当前滑动到的位置
+    private var mClickListener: IClickListener? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_mvpager2, this)
@@ -51,9 +53,15 @@ class MVPager2 @JvmOverloads constructor(
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter.setData(mExtendModels)
         mVP2Adapter.setImageLoader(DefaultLoader())
+        mVP2Adapter.setOnItemClickListener(mClickListener)
         mViewPager2.adapter = mVP2Adapter
         mViewPager2.setCurrentItem(SIDE_NUM, false)
         startAutoPlay()
+    }
+
+    fun setOnBannerClickListener(listener: IClickListener): MVPager2 {
+        this.mClickListener = listener
+        return this
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
