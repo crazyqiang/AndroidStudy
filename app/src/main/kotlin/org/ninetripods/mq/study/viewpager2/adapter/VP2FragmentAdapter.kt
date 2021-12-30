@@ -5,21 +5,21 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
-import org.ninetripods.mq.study.kotlin.ktx.log
 import org.ninetripods.mq.study.viewpager2.PageDiffUtil
 import org.ninetripods.mq.study.viewpager2.model.VP2Model
 
-const val PAGES_NUM = 10
+//const val PAGES_NUM = 4
+//const val EXTRA_TOTAL_NUM = 6
 
 class ViewPager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     private val mItems: ArrayList<VP2Model> = arrayListOf()
 
-    override fun getItemCount(): Int = PAGES_NUM
+    override fun getItemCount(): Int = mItems.size
 
     override fun createFragment(position: Int): Fragment {
-        log("pos:$position: createFragment()")
-        return VP2Fragment(position)
+//        log("pos:$position: createFragment()")
+        return VP2Fragment(mItems[position].id)
     }
 
     override fun onBindViewHolder(
@@ -28,7 +28,7 @@ class ViewPager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         payloads: MutableList<Any>
     ) {
         super.onBindViewHolder(holder, position, payloads)
-        log("pos:$position: onBindViewHolder()")
+//        log("pos:$position: onBindViewHolder()")
     }
 
     override fun getItemId(position: Int): Long {

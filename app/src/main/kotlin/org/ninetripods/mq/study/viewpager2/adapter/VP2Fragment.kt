@@ -7,7 +7,6 @@ import android.widget.TextView
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
-import org.ninetripods.mq.study.kotlin.ktx.log
 
 class VP2Fragment(val position: Int = 0) : BaseFragment() {
 
@@ -15,12 +14,12 @@ class VP2Fragment(val position: Int = 0) : BaseFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        log("pos$position: onAttach()")
+//        log("pos$position: onAttach()")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        log("pos$position: onCreate()")
+//        log("pos$position: onCreate()")
     }
 
     override fun getLayoutId(): Int {
@@ -29,42 +28,42 @@ class VP2Fragment(val position: Int = 0) : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mTvContent.text = position.toString()
-        log("pos$position: onViewCreated()")
+//        log("pos$position: onViewCreated()")
     }
 
     override fun onStart() {
         super.onStart()
-        log("pos$position: onStart()")
+//        log("pos$position: onStart()")
     }
 
     override fun onResume() {
         super.onResume()
-        log("pos$position: onResume()")
+//        log("pos$position: onResume()")
     }
 
     override fun onPause() {
         super.onPause()
-        log("pos$position: onPause()")
+//        log("pos$position: onPause()")
     }
 
     override fun onStop() {
         super.onStop()
-        log("pos$position: onStop()")
+//        log("pos$position: onStop()")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        log("pos$position: onDestroyView()")
+//        log("pos$position: onDestroyView()")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        log("pos$position: onDestroy()")
+//        log("pos$position: onDestroy()")
     }
 
     override fun onDetach() {
         super.onDetach()
-        log("pos$position: onDetach()")
+//        log("pos$position: onDetach()")
     }
 
 }
