@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
@@ -32,14 +33,18 @@ class MVPager2 @JvmOverloads constructor(
     private lateinit var mVP2Adapter: MVP2Adapter<String>
     private var mModels: ArrayList<String> = ArrayList()
     private var mExtendModels: ArrayList<String> = ArrayList()
-    private var isAutoPlay = true //自动轮播
+    private var mIsAutoPlay = true //自动轮播
     private var mCurPos = SIDE_NUM //当前滑动到的位置
     private var mClickListener: IClickListener? = null
+
+    private var mItemPaddingLeft: Int = 0 //Item之间的padding间隔
+    private var mItemPaddingRight: Int = 0
+    private var mItemPaddingTop: Int = 0
+    private var mItemPaddingBottom: Int = 0
 
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_mvpager2, this)
         mViewPager2 = findViewById(R.id.vp_pager2)
-        initMVPager2()
     }
 
     fun setDatas(list: ArrayList<String>): MVPager2 {
@@ -49,14 +54,20 @@ class MVPager2 @JvmOverloads constructor(
         return this
     }
 
+    fun setAutoPlay(isAutoPlay: Boolean): MVPager2 {
+        this.mIsAutoPlay = isAutoPlay
+        return this
+    }
+
     fun start() {
+        initMVPager2()
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter.setData(mExtendModels)
         mVP2Adapter.setImageLoader(DefaultLoader())
         mVP2Adapter.setOnItemClickListener(mClickListener)
         mViewPager2.adapter = mVP2Adapter
         mViewPager2.setCurrentItem(SIDE_NUM, false)
-        startAutoPlay()
+        if (mIsAutoPlay) startAutoPlay()
     }
 
     fun setOnBannerClickListener(listener: IClickListener): MVPager2 {
@@ -64,8 +75,25 @@ class MVPager2 @JvmOverloads constructor(
         return this
     }
 
+    fun setItemPadding(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0): MVPager2 {
+        this.mItemPaddingLeft = left
+        this.mItemPaddingTop = top
+        this.mItemPaddingRight = right
+        this.mItemPaddingBottom = bottom
+        return this
+    }
+
+    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        if (hasWindowFocus) {
+            if (mIsAutoPlay) startAutoPlay()
+        } else {
+            if (mIsAutoPlay) stopAutoPlay()
+        }
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        if (isAutoPlay) {
+        if (mIsAutoPlay) {
             val action = ev.action
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_OUTSIDE) {
                 startAutoPlay()
@@ -82,10 +110,11 @@ class MVPager2 @JvmOverloads constructor(
 
     private val autoRunnable: Runnable = object : Runnable {
         override fun run() {
-            if (mRealCount > 1 && isAutoPlay) {
+            if (mRealCount > 1 && mIsAutoPlay) {
                 mCurPos = mCurPos % mExtendModels.size + 1
                 when (mCurPos) {
                     1 -> {
+                        //TODO 待优化 自动轮播时会有一瞬间显得顿一下
                         //滑动到第2个时 自动滑动至倒数第3个
                         mViewPager2.setCurrentItem(exThreeLastPos(), false)
                     }
@@ -152,6 +181,20 @@ class MVPager2 @JvmOverloads constructor(
         multiTransformer.addTransformer(MarginPageTransformer(1))
         mViewPager2.setPageTransformer(multiTransformer)
 
+        /**
+         * ViewPager2源码第254行,RecyclerView固定索引为0：
+         * attachViewToParent(mRecyclerView, 0, mRecyclerView.getLayoutParams());
+         */
+        val innerRecyclerView = mViewPager2.getChildAt(0) as RecyclerView
+        innerRecyclerView.apply {
+            //这里会导致离屏预加载数+1
+            setPadding(mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom)
+            clipToPadding = false
+            clipChildren = false
+            //设置mCachedViews缓存大小 默认是2
+            //setItemViewCacheSize(2)
+        }
+
         mViewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
@@ -167,7 +210,7 @@ class MVPager2 @JvmOverloads constructor(
 
             override fun onPageScrollStateChanged(state: Int) {
                 mOnPageChangeCallback?.onPageScrollStateChanged(state)
-                if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_IDLE || state == ViewPager2.SCROLL_STATE_DRAGGING)) {
+                if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_IDLE)) {
                     if (mViewPager2.currentItem == exSecondPositive()) {
                         //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
                         mViewPager2.setCurrentItem(exThreeLastPos(), false)
