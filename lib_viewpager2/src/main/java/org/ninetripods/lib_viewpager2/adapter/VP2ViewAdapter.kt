@@ -4,21 +4,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import org.ninetripods.lib_viewpager2.consts.log
 import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
-import org.ninetripods.lib_viewpager2.log
 
 const val EXTRA_NUM = 4 //额外增加4条数据
 const val SIDE_NUM = 2 //左右两侧各增加2条
 const val DELAY_INTERVAL_TIME = 5 * 1000L//自动轮播时间间隔
 
 class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
-    private var mDatas: List<T> = ArrayList()
+    private var mModels: List<T> = ArrayList()
     private var mLoader: ILoader<ImageView>? = null
     private var mItemClickListener: IClickListener? = null
 
-    fun setData(datas: List<T>) {
-        this.mDatas = datas
+    fun setModels(models: List<T>) {
+        this.mModels = models
     }
 
     fun setImageLoader(loader: ILoader<ImageView>) {
@@ -47,14 +47,14 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         log("onBindViewHolder(): pos is $position")
-        val imgUrl = mDatas[position]
+        val imgUrl = mModels[position]
         mLoader?.display(holder.mIvImage.context, imgUrl, holder.mIvImage)
         holder.mIvImage.setOnClickListener {
             mItemClickListener?.onItemClick(getRealPosition(position))
         }
     }
 
-    override fun getItemCount(): Int = mDatas.size
+    override fun getItemCount(): Int = mModels.size
 
     class PageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mIvImage: ImageView = itemView as ImageView
