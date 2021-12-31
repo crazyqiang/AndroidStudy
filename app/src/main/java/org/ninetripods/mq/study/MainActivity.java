@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
-        selectItem(KConsts.FRAGMENT_JETPACK);
+        selectItem(KConsts.FRAGMENT_RECYCLERVIEW);
     }
 
     @Override

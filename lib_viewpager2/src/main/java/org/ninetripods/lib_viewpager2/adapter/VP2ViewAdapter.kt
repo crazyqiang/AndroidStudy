@@ -10,7 +10,6 @@ import org.ninetripods.lib_viewpager2.imageLoader.ILoader
 
 const val EXTRA_NUM = 4 //额外增加4条数据
 const val SIDE_NUM = 2 //左右两侧各增加2条
-const val DELAY_INTERVAL_TIME = 5 * 1000L//自动轮播时间间隔
 
 class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
     private var mModels: List<T> = ArrayList()

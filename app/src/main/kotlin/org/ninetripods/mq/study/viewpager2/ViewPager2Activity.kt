@@ -28,6 +28,7 @@ class ViewPager2Activity : BaseActivity() {
     private val mViewPager2: ViewPager2 by id(R.id.vp2_fragment)
 
     private val mViewVp2: MVPager2 by id(R.id.vp2_view)
+    private val mViewVp3: MVPager2 by id(R.id.vp2_view2)
     private val mTlIndicator: TabLayout by id(R.id.tl_indicator)
     private val mBtnSlide: Button by id(R.id.btn_slide)
 
@@ -54,7 +55,6 @@ class ViewPager2Activity : BaseActivity() {
         )
         val list = ArrayList<String>()
         for (i in colors.indices) {
-            //list.add(VP2Model(i, i.toString(), colors[i]))
             list.add(colors[i])
         }
 //        val viewAdapter = MVP2Adapter<String>()
@@ -75,12 +75,20 @@ class ViewPager2Activity : BaseActivity() {
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
             .setItemPadding(50, 0, 50, 0)
             .setAutoPlay(true)
+            .setAutoInterval(10 * 1000L)
+            .start()
+
+
+
+        mViewVp3.setModels(list)
+            .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
+            .setAutoInterval(3000)
             .start()
 
 //        mViewVp2.adapter = viewAdapter
 
         //VP2关联TabLayout
-//        TabLayoutMediator(mTlIndicator, mViewVp2) { tab, position ->
+//        TabLayoutMediator(mTlIndicator, mViewVp2.get()!!) { tab, position ->
 //            tab.text = position.toString()
 //        }.attach()
 

@@ -37,13 +37,22 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vp2_view" />
 
+    <org.ninetripods.lib_viewpager2.MVPager2
+        android:id="@+id/vp2_view2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_slide" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp2_fragment"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
-        android:clipToPadding="false"
         android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_slide" />

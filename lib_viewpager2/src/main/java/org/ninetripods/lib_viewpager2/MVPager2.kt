@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OffscreenPageLimit
-import org.ninetripods.lib_viewpager2.adapter.DELAY_INTERVAL_TIME
 import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
-import org.ninetripods.lib_viewpager2.consts.*
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 
@@ -28,9 +26,17 @@ class MVPager2 @JvmOverloads constructor(
     private lateinit var mVP2Adapter: MVP2Adapter<String>
     private var mModels: ArrayList<String> = ArrayList()
     private var mExtendModels: ArrayList<String> = ArrayList()
-    private var mIsAutoPlay = true //自动轮播
     private var mCurPos = SIDE_NUM //当前滑动到的位置
     private var mClickListener: IClickListener? = null
+    private var mOffScreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
+    private var mIsAutoPlay = true //自动轮播
+    private var AUTO_PLAY_INTERVAL = 5 * 1000L//自动轮播时间间隔
+    private var mOrientation = ViewPager2.ORIENTATION_HORIZONTAL
+    private var mPagerTransformer: CompositePageTransformer? = null
+    private var mItemPaddingLeft: Int = 0 //Item之间的padding间隔
+    private var mItemPaddingRight: Int = 0
+    private var mItemPaddingTop: Int = 0
+    private var mItemPaddingBottom: Int = 0
 
     private val autoRunnable: Runnable = object : Runnable {
         override fun run() {
@@ -49,7 +55,7 @@ class MVPager2 @JvmOverloads constructor(
                         mViewPager2?.currentItem = mCurPos
                     }
                 }
-                postDelayed(this, DELAY_INTERVAL_TIME)
+                postDelayed(this, AUTO_PLAY_INTERVAL)
             }
         }
 
@@ -76,7 +82,16 @@ class MVPager2 @JvmOverloads constructor(
      * @param isAutoPlay true-自动  false-手动
      */
     fun setAutoPlay(isAutoPlay: Boolean): MVPager2 {
-        this.mIsAutoPlay = isAutoPlay
+        mIsAutoPlay = isAutoPlay
+        return this
+    }
+
+    /**
+     * 设置自动轮播时间间隔
+     * @param autoInterval 时间间隔
+     */
+    fun setAutoInterval(autoInterval: Long): MVPager2 {
+        AUTO_PLAY_INTERVAL = autoInterval
         return this
     }
 
@@ -150,6 +165,10 @@ class MVPager2 @JvmOverloads constructor(
         if (mIsAutoPlay) startAutoPlay()
     }
 
+    fun get(): ViewPager2? {
+        return mViewPager2
+    }
+
     private fun initMVPager2() {
         mViewPager2?.offscreenPageLimit = mOffScreenPageLimit
         mViewPager2?.orientation = mOrientation
@@ -203,7 +222,7 @@ class MVPager2 @JvmOverloads constructor(
 
     private fun startAutoPlay() {
         removeCallbacks(autoRunnable)
-        postDelayed(autoRunnable, DELAY_INTERVAL_TIME)
+        postDelayed(autoRunnable, AUTO_PLAY_INTERVAL)
     }
 
     private fun stopAutoPlay() {
