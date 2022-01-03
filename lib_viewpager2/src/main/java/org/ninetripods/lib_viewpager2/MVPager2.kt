@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.View
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -13,6 +14,7 @@ import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
+import org.ninetripods.lib_viewpager2.imageLoader.ILoader
 
 class MVPager2 @JvmOverloads constructor(
     context: Context,
@@ -33,6 +35,7 @@ class MVPager2 @JvmOverloads constructor(
     private var AUTO_PLAY_INTERVAL = 5 * 1000L//自动轮播时间间隔
     private var mOrientation = ViewPager2.ORIENTATION_HORIZONTAL
     private var mPagerTransformer: CompositePageTransformer? = null
+    private var mLoader: ILoader<View>? = null
     private var mItemPaddingLeft: Int = 0 //Item之间的padding间隔
     private var mItemPaddingRight: Int = 0
     private var mItemPaddingTop: Int = 0
@@ -154,11 +157,20 @@ class MVPager2 @JvmOverloads constructor(
         return this
     }
 
+    /**
+     * 设置View
+     * @param loader View加载
+     */
+    fun setLoader(loader: ILoader<View>): MVPager2 {
+        this.mLoader = loader
+        return this
+    }
+
     fun start() {
         initMVPager2()
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter.setModels(mExtendModels)
-        mVP2Adapter.setImageLoader(DefaultLoader())
+        mVP2Adapter.setImageLoader(if (mLoader != null) mLoader else DefaultLoader())
         mVP2Adapter.setOnItemClickListener(mClickListener)
         mViewPager2?.adapter = mVP2Adapter
         mViewPager2?.setCurrentItem(SIDE_NUM, false)

@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
+import org.ninetripods.lib_viewpager2.imageLoader.TextLoader
 import org.ninetripods.lib_viewpager2.transformer.ScaleInTransformer
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
@@ -74,7 +75,7 @@ class ViewPager2Activity : BaseActivity() {
             .setPageTransformer(multiTransformer)
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
             .setItemPadding(50, 0, 50, 0)
-            .setAutoPlay(true)
+            .setAutoPlay(false)
             .setAutoInterval(10 * 1000L)
             .start()
 
@@ -82,7 +83,8 @@ class ViewPager2Activity : BaseActivity() {
 
         mViewVp3.setModels(list)
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
-            .setAutoInterval(3000)
+            .setAutoInterval(4000)
+            .setLoader(TextLoader())
             .start()
 
 //        mViewVp2.adapter = viewAdapter
