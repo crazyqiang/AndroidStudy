@@ -74,16 +74,22 @@ class ViewPager2Activity : BaseActivity() {
             }).setOffscreenPageLimit(1)
             .setPageTransformer(multiTransformer)
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
-            .setItemPadding(50, 0, 50, 0)
-            .setAutoPlay(false)
-            .setAutoInterval(10 * 1000L)
+            .setItemPadding(100, 0, 100, 0)
+            .setAutoPlay(true)
+            .setAutoInterval(5 * 1000L)
             .start()
 
 
 
         mViewVp3.setModels(list)
+            .setOnBannerClickListener(object : IClickListener {
+                override fun onItemClick(position: Int) {
+                    log("$position is click")
+                }
+            })
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
             .setAutoInterval(4000)
+            .setAutoPlay(false)
             .setLoader(TextLoader())
             .start()
 
@@ -107,7 +113,7 @@ class ViewPager2Activity : BaseActivity() {
 
         mViewVp2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                log("onPageSelected: $position")
+                //log("onPageSelected: $position")
             }
         })
 

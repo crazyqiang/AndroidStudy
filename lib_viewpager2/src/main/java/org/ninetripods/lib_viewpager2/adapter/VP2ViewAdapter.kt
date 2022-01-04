@@ -4,7 +4,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import org.ninetripods.lib_viewpager2.consts.log
 import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
 
@@ -29,7 +28,7 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
-        log("onCreateViewHolder()")
+        //log("onCreateViewHolder()")
         var itemShowView = mLoader?.createView(parent.context)
         if (itemShowView == null) {
             itemShowView = ImageView(parent.context)
@@ -45,7 +44,7 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
-        log("onBindViewHolder(): pos is $position")
+        //log("onBindViewHolder(): pos is $position")
         val imgUrl = mModels[position]
         mLoader?.display(holder.itemShowView.context, imgUrl, holder.itemShowView)
         holder.itemShowView.setOnClickListener {

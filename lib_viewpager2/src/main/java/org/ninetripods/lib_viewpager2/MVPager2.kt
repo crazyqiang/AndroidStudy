@@ -12,9 +12,11 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OffscreenPageLimit
 import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
+import org.ninetripods.lib_viewpager2.consts.log
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
+import java.util.*
 
 class MVPager2 @JvmOverloads constructor(
     context: Context,
@@ -36,6 +38,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mOrientation = ViewPager2.ORIENTATION_HORIZONTAL
     private var mPagerTransformer: CompositePageTransformer? = null
     private var mLoader: ILoader<View>? = null
+    private var mSelectedValid: Boolean = true //滑动回调是否有效 默认有效
     private var mItemPaddingLeft: Int = 0 //Item之间的padding间隔
     private var mItemPaddingRight: Int = 0
     private var mItemPaddingTop: Int = 0
@@ -45,20 +48,24 @@ class MVPager2 @JvmOverloads constructor(
         override fun run() {
             if (mRealCount > 1 && mIsAutoPlay) {
                 mCurPos = mCurPos % mExtendModels.size + 1
+                log("mCurPos:$mCurPos , total: ${exFirstLastPos()}")
                 when (mCurPos) {
-                    1 -> {
-                        //TODO 待优化 自动轮播时会有一瞬间显得顿一下
-                        //滑动到第2个时 自动滑动至倒数第3个
-                        mViewPager2?.setCurrentItem(exThreeLastPos(), false)
-                    }
-                    exSecondLastPos() -> {
+//                    exSecondLastPos() -> {
+//                        mSelectedValid = false
+//                        mViewPager2?.setCurrentItem(1, false)
+//                        post(this)
+//                    }
+                    exFirstLastPos() -> {
+                        mSelectedValid = false
                         mViewPager2?.setCurrentItem(SIDE_NUM, false)
+                        post(this)
                     }
                     else -> {
+                        mSelectedValid = true
                         mViewPager2?.currentItem = mCurPos
+                        postDelayed(this, AUTO_PLAY_INTERVAL)
                     }
                 }
-                postDelayed(this, AUTO_PLAY_INTERVAL)
             }
         }
 
@@ -213,21 +220,36 @@ class MVPager2 @JvmOverloads constructor(
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-                mOnPageChangeCallback?.onPageScrollStateChanged(state)
-                if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_IDLE)) {
-                    if (mViewPager2?.currentItem == exSecondPositive()) {
-                        //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
-                        mViewPager2?.setCurrentItem(exThreeLastPos(), false)
-                    } else if (mViewPager2?.currentItem == exSecondLastPos()) {
-                        //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第一个)
-                        mViewPager2?.setCurrentItem(SIDE_NUM, false)
+                log("onPageScrollStateChanged: $state")
+                //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
+                if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
+                    when (mViewPager2?.currentItem) {
+                        exSecondPositive() -> {
+                            //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
+                            mSelectedValid = false
+                            mViewPager2?.setCurrentItem(exThreeLastPos(), false)
+                        }
+                        exSecondLastPos() -> {
+                            //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第一个)
+                            mSelectedValid = false
+                            mViewPager2?.setCurrentItem(SIDE_NUM, false)
+                        }
+                        else -> {
+                            mSelectedValid = true
+                        }
                     }
+                }
+                if (mSelectedValid) {
+                    mOnPageChangeCallback?.onPageScrollStateChanged(state)
                 }
             }
 
             override fun onPageSelected(position: Int) {
+                log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
                 mCurPos = position
-                mOnPageChangeCallback?.onPageSelected(position)
+                if (mSelectedValid) {
+                    mOnPageChangeCallback?.onPageSelected(position)
+                }
             }
         })
     }
