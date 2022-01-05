@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorCircleView">
+        <attr name="circle_color" format="color" />
+        <attr name="stroke_width" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <!-- format="reference"意为参考某一资源ID -->
+        <attr name="right_id" format="reference" />
+    </declare-styleable>
+</resources>

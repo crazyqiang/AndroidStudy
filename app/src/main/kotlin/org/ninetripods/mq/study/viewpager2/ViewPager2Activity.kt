@@ -75,22 +75,24 @@ class ViewPager2Activity : BaseActivity() {
             .setPageTransformer(multiTransformer)
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
             .setItemPadding(100, 0, 100, 0)
-            .setAutoPlay(true)
+            .setAutoPlay(false)
             .setAutoInterval(5 * 1000L)
             .start()
 
 
-
-        mViewVp3.setModels(list)
+        val textArray = listOf("锄禾日当午", "汗滴禾下土", "谁知盘中餐", "粒粒皆辛苦")
+        mViewVp3.setModels(textArray)
             .setOnBannerClickListener(object : IClickListener {
                 override fun onItemClick(position: Int) {
                     log("$position is click")
                 }
             })
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
-            .setAutoInterval(4000)
-            .setAutoPlay(false)
-            .setLoader(TextLoader())
+            .setAutoInterval(3000)
+            .setAutoPlay(true)
+            .setLoader(
+                TextLoader().setBgColor(R.color.word_normal_color).setTextColor(R.color.white)
+            )
             .start()
 
 //        mViewVp2.adapter = viewAdapter

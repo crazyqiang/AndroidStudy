@@ -28,7 +28,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mOnPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var mRealCount: Int = 0 //VP2真实数量
     private lateinit var mVP2Adapter: MVP2Adapter<String>
-    private var mModels: ArrayList<String> = ArrayList()
+    private var mModels: List<String> = ArrayList()
     private var mExtendModels: ArrayList<String> = ArrayList()
     private var mCurPos = SIDE_NUM //当前滑动到的位置
     private var mClickListener: IClickListener? = null
@@ -50,14 +50,9 @@ class MVPager2 @JvmOverloads constructor(
                 mCurPos = mCurPos % mExtendModels.size + 1
                 log("mCurPos:$mCurPos , total: ${exFirstLastPos()}")
                 when (mCurPos) {
-//                    exSecondLastPos() -> {
-//                        mSelectedValid = false
-//                        mViewPager2?.setCurrentItem(1, false)
-//                        post(this)
-//                    }
-                    exFirstLastPos() -> {
+                    exSecondLastPos() -> {
                         mSelectedValid = false
-                        mViewPager2?.setCurrentItem(SIDE_NUM, false)
+                        mViewPager2?.setCurrentItem(1, false)
                         post(this)
                     }
                     else -> {
@@ -80,7 +75,7 @@ class MVPager2 @JvmOverloads constructor(
      * 设置数据
      * @param list 轮播数据Models
      */
-    fun setModels(list: ArrayList<String>): MVPager2 {
+    fun setModels(list: List<String>): MVPager2 {
         this.mModels = list
         mRealCount = mModels.size
         extendOriginModels()
@@ -220,7 +215,7 @@ class MVPager2 @JvmOverloads constructor(
             }
 
             override fun onPageScrollStateChanged(state: Int) {
-                log("onPageScrollStateChanged: $state")
+                //log("onPageScrollStateChanged: $state")
                 //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
                 if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
                     when (mViewPager2?.currentItem) {
@@ -245,7 +240,7 @@ class MVPager2 @JvmOverloads constructor(
             }
 
             override fun onPageSelected(position: Int) {
-                log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
+                //log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
                 mCurPos = position
                 if (mSelectedValid) {
                     mOnPageChangeCallback?.onPageSelected(position)
@@ -292,6 +287,7 @@ class MVPager2 @JvmOverloads constructor(
         } else {
             mExtendModels.add(mModels[0])
         }
+        log("mExtendModels:$mExtendModels")
     }
 
     //扩展之后的倒数第1条数据

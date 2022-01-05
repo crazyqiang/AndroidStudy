@@ -44,9 +44,9 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
-        //log("onBindViewHolder(): pos is $position")
-        val imgUrl = mModels[position]
-        mLoader?.display(holder.itemShowView.context, imgUrl, holder.itemShowView)
+        //log("onBindViewHolder(): pos is $position, model is ${mModels[position]}")
+        val contentStr = mModels[position]
+        mLoader?.display(holder.itemShowView.context, contentStr, holder.itemShowView)
         holder.itemShowView.setOnClickListener {
             mItemClickListener?.onItemClick(getRealPosition(position))
         }
