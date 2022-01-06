@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import org.ninetripods.lib_viewpager2.MVPager2
-import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
+import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.TextLoader
 import org.ninetripods.lib_viewpager2.transformer.ScaleInTransformer
 import org.ninetripods.mq.study.BaseActivity
@@ -67,14 +67,16 @@ class ViewPager2Activity : BaseActivity() {
         multiTransformer.addTransformer(MarginPageTransformer(20))
 
         mViewVp2.setModels(list)
-            .setOnBannerClickListener(object : IClickListener {
-                override fun onItemClick(position: Int) {
+            .setItemClickListener(object : OnBannerClickListener {
+                override fun OnItemClick(position: Int) {
                     log("$position is click")
                 }
-            }).setOffscreenPageLimit(1)
+            })
+            .setIndicatorShow(true)
+            .setOffscreenPageLimit(1)
             .setPageTransformer(multiTransformer)
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
-            .setItemPadding(100, 0, 100, 0)
+            .setPagePadding(100, 0, 100, 0)
             .setAutoPlay(false)
             .setAutoInterval(5 * 1000L)
             .start()
@@ -82,14 +84,19 @@ class ViewPager2Activity : BaseActivity() {
 
         val textArray = listOf("锄禾日当午", "汗滴禾下土", "谁知盘中餐", "粒粒皆辛苦")
         mViewVp3.setModels(textArray)
-            .setOnBannerClickListener(object : IClickListener {
-                override fun onItemClick(position: Int) {
+            .setItemClickListener(object : OnBannerClickListener {
+                override fun OnItemClick(position: Int) {
                     log("$position is click")
+                }
+            })
+            .registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    //log("onPageSelected: $position")
                 }
             })
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
             .setAutoInterval(3000)
-            .setAutoPlay(true)
+            .setAutoPlay(false)
             .setLoader(
                 TextLoader().setBgColor(R.color.word_normal_color).setTextColor(R.color.white)
             )
@@ -112,12 +119,6 @@ class ViewPager2Activity : BaseActivity() {
 //                mViewVp2.endFakeDrag()
 //            }
 //        }
-
-        mViewVp2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                //log("onPageSelected: $position")
-            }
-        })
 
     }
 

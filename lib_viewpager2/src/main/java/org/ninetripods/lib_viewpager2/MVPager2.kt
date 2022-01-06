@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
@@ -14,9 +16,8 @@ import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
 import org.ninetripods.lib_viewpager2.consts.log
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
-import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
-import java.util.*
+import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 
 class MVPager2 @JvmOverloads constructor(
     context: Context,
@@ -24,14 +25,24 @@ class MVPager2 @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
-    private var mViewPager2: ViewPager2? = null
+    //轮播指示器相关
+    private var mLlIndicator: LinearLayoutCompat
+    private var mIndicatorImgSelectedResId = R.drawable.circle_indicator_selected
+    private var mIndicatorUnselectedResId = R.drawable.circle_indicator_unseclected
+    private var mIndicatorImgs = ArrayList<ImageView>()
+    private var mIndicatorImgSize: Int = 0
+    private var mLastPosition: Int = 0
+    private var mShowIndicator: Boolean = false //是否展示轮播指示器
+
+    //ViewPager2
+    private lateinit var mViewPager2: ViewPager2
     private var mOnPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var mRealCount: Int = 0 //VP2真实数量
     private lateinit var mVP2Adapter: MVP2Adapter<String>
     private var mModels: List<String> = ArrayList()
     private var mExtendModels: ArrayList<String> = ArrayList()
     private var mCurPos = SIDE_NUM //当前滑动到的位置
-    private var mClickListener: IClickListener? = null
+    private var mClickListener: OnBannerClickListener? = null
     private var mOffScreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
     private var mIsAutoPlay = true //自动轮播
     private var AUTO_PLAY_INTERVAL = 5 * 1000L//自动轮播时间间隔
@@ -52,12 +63,12 @@ class MVPager2 @JvmOverloads constructor(
                 when (mCurPos) {
                     exSecondLastPos() -> {
                         mSelectedValid = false
-                        mViewPager2?.setCurrentItem(1, false)
+                        mViewPager2.setCurrentItem(1, false)
                         post(this)
                     }
                     else -> {
                         mSelectedValid = true
-                        mViewPager2?.currentItem = mCurPos
+                        mViewPager2.currentItem = mCurPos
                         postDelayed(this, AUTO_PLAY_INTERVAL)
                     }
                 }
@@ -69,6 +80,8 @@ class MVPager2 @JvmOverloads constructor(
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_mvpager2, this)
         mViewPager2 = findViewById(R.id.vp_pager2)
+        mLlIndicator = findViewById(R.id.ll_circle_indicator)
+        mIndicatorImgSize = context.resources.displayMetrics.widthPixels / 75
     }
 
     /**
@@ -77,7 +90,7 @@ class MVPager2 @JvmOverloads constructor(
      */
     fun setModels(list: List<String>): MVPager2 {
         this.mModels = list
-        mRealCount = mModels.size
+        this.mRealCount = mModels.size
         extendOriginModels()
         return this
     }
@@ -88,6 +101,14 @@ class MVPager2 @JvmOverloads constructor(
      */
     fun setAutoPlay(isAutoPlay: Boolean): MVPager2 {
         mIsAutoPlay = isAutoPlay
+        return this
+    }
+
+    /**
+     * 是否展示轮播指示器
+     */
+    fun setIndicatorShow(isIndicatorShow: Boolean): MVPager2 {
+        this.mShowIndicator = isIndicatorShow
         return this
     }
 
@@ -116,7 +137,7 @@ class MVPager2 @JvmOverloads constructor(
      * @param right
      * @param bottom
      */
-    fun setItemPadding(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0): MVPager2 {
+    fun setPagePadding(left: Int = 0, top: Int = 0, right: Int = 0, bottom: Int = 0): MVPager2 {
         mItemPaddingLeft = left
         mItemPaddingTop = top
         mItemPaddingRight = right
@@ -137,7 +158,7 @@ class MVPager2 @JvmOverloads constructor(
      * 设置Banner的Item点击
      * @param listener
      */
-    fun setOnBannerClickListener(listener: IClickListener): MVPager2 {
+    fun setItemClickListener(listener: OnBannerClickListener): MVPager2 {
         this.mClickListener = listener
         return this
     }
@@ -146,8 +167,9 @@ class MVPager2 @JvmOverloads constructor(
      * 设置页面改变时的回调
      * @param callback 回调
      */
-    fun registerOnPageChangeCallback(callback: ViewPager2.OnPageChangeCallback) {
+    fun registerOnPageChangeCallback(callback: ViewPager2.OnPageChangeCallback):MVPager2 {
         this.mOnPageChangeCallback = callback
+        return this
     }
 
     /**
@@ -170,28 +192,49 @@ class MVPager2 @JvmOverloads constructor(
 
     fun start() {
         initMVPager2()
+        initIndicator()
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter.setModels(mExtendModels)
         mVP2Adapter.setImageLoader(if (mLoader != null) mLoader else DefaultLoader())
         mVP2Adapter.setOnItemClickListener(mClickListener)
-        mViewPager2?.adapter = mVP2Adapter
-        mViewPager2?.setCurrentItem(SIDE_NUM, false)
+        mViewPager2.adapter = mVP2Adapter
+        mViewPager2.setCurrentItem(SIDE_NUM, false)
         if (mIsAutoPlay) startAutoPlay()
     }
 
-    fun get(): ViewPager2? {
+    fun get(): ViewPager2 {
         return mViewPager2
     }
 
+    /**
+     * 初始化轮播指示器
+     */
+    private fun initIndicator() {
+        mIndicatorImgs.clear()
+        mLlIndicator.removeAllViews()
+        for (i in 0 until mRealCount) {
+            val imageView = ImageView(context)
+            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            val params: LinearLayoutCompat.LayoutParams =
+                LinearLayoutCompat.LayoutParams(mIndicatorImgSize, mIndicatorImgSize)
+            params.leftMargin = 10
+            params.rightMargin = 10
+            imageView.setImageResource(if (i == 0) mIndicatorImgSelectedResId else mIndicatorUnselectedResId)
+            mIndicatorImgs.add(imageView)
+            mLlIndicator.addView(imageView, params)
+        }
+        mLlIndicator.visibility = if (mRealCount > 1 && mShowIndicator) View.VISIBLE else View.GONE
+    }
+
     private fun initMVPager2() {
-        mViewPager2?.offscreenPageLimit = mOffScreenPageLimit
-        mViewPager2?.orientation = mOrientation
+        mViewPager2.offscreenPageLimit = mOffScreenPageLimit
+        mViewPager2.orientation = mOrientation
         if (mPagerTransformer != null) {
-            mViewPager2?.setPageTransformer(mPagerTransformer)
+            mViewPager2.setPageTransformer(mPagerTransformer)
         }
         //ViewPager2源码第254行,RecyclerView固定索引为0：
         //attachViewToParent(mRecyclerView, 0, mRecyclerView.getLayoutParams());
-        val innerRecyclerView = mViewPager2?.getChildAt(0) as RecyclerView
+        val innerRecyclerView = mViewPager2.getChildAt(0) as RecyclerView
         innerRecyclerView.apply {
             //这里会导致离屏预加载数+1
             setPadding(mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom)
@@ -201,7 +244,7 @@ class MVPager2 @JvmOverloads constructor(
             //setItemViewCacheSize(2)
         }
 
-        mViewPager2?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        mViewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -218,16 +261,16 @@ class MVPager2 @JvmOverloads constructor(
                 //log("onPageScrollStateChanged: $state")
                 //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
                 if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
-                    when (mViewPager2?.currentItem) {
+                    when (mViewPager2.currentItem) {
                         exSecondPositive() -> {
                             //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
                             mSelectedValid = false
-                            mViewPager2?.setCurrentItem(exThreeLastPos(), false)
+                            mViewPager2.setCurrentItem(exThreeLastPos(), false)
                         }
                         exSecondLastPos() -> {
                             //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第一个)
                             mSelectedValid = false
-                            mViewPager2?.setCurrentItem(SIDE_NUM, false)
+                            mViewPager2.setCurrentItem(SIDE_NUM, false)
                         }
                         else -> {
                             mSelectedValid = true
@@ -240,13 +283,30 @@ class MVPager2 @JvmOverloads constructor(
             }
 
             override fun onPageSelected(position: Int) {
-                //log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
+                log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
                 mCurPos = position
                 if (mSelectedValid) {
                     mOnPageChangeCallback?.onPageSelected(position)
+                    mIndicatorImgs[getRealPosition(mLastPosition)].setImageResource(
+                        mIndicatorUnselectedResId
+                    )
+                    mIndicatorImgs[getRealPosition(position)].setImageResource(
+                        mIndicatorImgSelectedResId
+                    )
+                    mLastPosition = position
                 }
             }
         })
+    }
+
+    /**
+     * 获取数据对应的真实位置
+     * @param exPosition 扩展数据中的位置
+     */
+    private fun getRealPosition(exPosition: Int): Int {
+        var realPos = (exPosition - SIDE_NUM) % mRealCount
+        if (realPos < 0) realPos += mRealCount
+        return realPos
     }
 
     private fun startAutoPlay() {

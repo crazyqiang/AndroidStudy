@@ -4,8 +4,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import org.ninetripods.lib_viewpager2.imageLoader.IClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
+import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 
 const val EXTRA_NUM = 4 //额外增加4条数据
 const val SIDE_NUM = 2 //左右两侧各增加2条
@@ -13,7 +13,7 @@ const val SIDE_NUM = 2 //左右两侧各增加2条
 class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
     private var mModels: List<T> = ArrayList()
     private var mLoader: ILoader<View>? = null
-    private var mItemClickListener: IClickListener? = null
+    private var mItemClickListener: OnBannerClickListener? = null
 
     fun setModels(models: List<T>) {
         this.mModels = models
@@ -23,7 +23,7 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
         this.mLoader = loader
     }
 
-    fun setOnItemClickListener(listener: IClickListener?) {
+    fun setOnItemClickListener(listener: OnBannerClickListener?) {
         this.mItemClickListener = listener
     }
 
@@ -48,7 +48,7 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
         val contentStr = mModels[position]
         mLoader?.display(holder.itemShowView.context, contentStr, holder.itemShowView)
         holder.itemShowView.setOnClickListener {
-            mItemClickListener?.onItemClick(getRealPosition(position))
+            mItemClickListener?.OnItemClick(getRealPosition(position))
         }
     }
 
