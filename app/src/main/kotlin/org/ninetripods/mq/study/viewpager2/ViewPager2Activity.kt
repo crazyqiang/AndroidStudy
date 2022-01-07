@@ -77,7 +77,7 @@ class ViewPager2Activity : BaseActivity() {
             .setPageTransformer(multiTransformer)
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
             .setPagePadding(100, 0, 100, 0)
-            .setAutoPlay(false)
+            .setAutoPlay(true)
             .setAutoInterval(5 * 1000L)
             .start()
 
