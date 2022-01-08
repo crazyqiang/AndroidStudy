@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 
+var isCustomScrollTime: Boolean = true
+const val SCROLLER_INTERVAL = 1000
+
 /**
  * 自定义LinearLayoutManager，自定义轮播速率
  */
@@ -72,7 +75,7 @@ class LayoutManagerProxy(
          * 控制轮播切换速度
          */
         override fun calculateTimeForScrolling(dx: Int): Int {
-            return super.calculateTimeForScrolling(dx)
+            return if (isCustomScrollTime) SCROLLER_INTERVAL else super.calculateTimeForScrolling(dx)
         }
 
     }
