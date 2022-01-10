@@ -78,7 +78,7 @@ class ViewPager2Activity : BaseActivity() {
             .setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
             .setPagePadding(100, 0, 100, 0)
             .setAutoPlay(true)
-            .setAutoInterval(5 * 1000L)
+            .setPageInterval(5 * 1000L)
             .start()
 
 
@@ -95,8 +95,9 @@ class ViewPager2Activity : BaseActivity() {
                 }
             })
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
-            .setAutoInterval(3000)
-            .setAutoPlay(false)
+            .setPageInterval(5000)
+            .setAnimDuration(300)
+            .setAutoPlay(true)
             .setLoader(
                 TextLoader().setBgColor(R.color.word_normal_color).setTextColor(R.color.white)
             )

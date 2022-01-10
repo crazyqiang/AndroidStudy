@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +19,7 @@ import org.ninetripods.lib_viewpager2.consts.log
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
 import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
+import org.ninetripods.lib_viewpager2.proxy.LayoutManagerProxy
 
 class MVPager2 @JvmOverloads constructor(
     context: Context,
@@ -46,6 +48,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mOffScreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
     private var mIsAutoPlay = true //自动轮播
     private var AUTO_PLAY_INTERVAL = 5 * 1000L//自动轮播时间间隔
+    private var mCustomSwitchAnimDuration = 0 //自定义轮播切换持续时间
     private var mOrientation = ViewPager2.ORIENTATION_HORIZONTAL
     private var mPagerTransformer: CompositePageTransformer? = null
     private var mLoader: ILoader<View>? = null
@@ -114,10 +117,20 @@ class MVPager2 @JvmOverloads constructor(
 
     /**
      * 设置自动轮播时间间隔
-     * @param autoInterval 时间间隔
+     * @param autoInterval Page切换的时间间隔
      */
-    fun setAutoInterval(autoInterval: Long): MVPager2 {
+    fun setPageInterval(autoInterval: Long): MVPager2 {
         AUTO_PLAY_INTERVAL = autoInterval
+        return this
+    }
+
+    /**
+     * 设置轮播切换时的动画持续时间 通过反射改变系统自动切换的时间 注意：这里设置的switchDuration值需要小于
+     * @see MVPager2.setPageInterval()中设置的autoInterval值
+     * @param animDuration 动画切换持续时间
+     */
+    fun setAnimDuration(animDuration: Int): MVPager2 {
+        this.mCustomSwitchAnimDuration = animDuration
         return this
     }
 
@@ -167,7 +180,7 @@ class MVPager2 @JvmOverloads constructor(
      * 设置页面改变时的回调
      * @param callback 回调
      */
-    fun registerOnPageChangeCallback(callback: ViewPager2.OnPageChangeCallback):MVPager2 {
+    fun registerOnPageChangeCallback(callback: ViewPager2.OnPageChangeCallback): MVPager2 {
         this.mOnPageChangeCallback = callback
         return this
     }
@@ -192,6 +205,9 @@ class MVPager2 @JvmOverloads constructor(
 
     fun start() {
         initMVPager2()
+        if (mCustomSwitchAnimDuration != 0) {
+            initVP2LayoutManagerProxy()
+        }
         initIndicator()
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter.setModels(mExtendModels)
@@ -207,25 +223,8 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     * 初始化轮播指示器
+     * 初始化VP2
      */
-    private fun initIndicator() {
-        mIndicatorImgs.clear()
-        mLlIndicator.removeAllViews()
-        for (i in 0 until mRealCount) {
-            val imageView = ImageView(context)
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-            val params: LinearLayoutCompat.LayoutParams =
-                LinearLayoutCompat.LayoutParams(mIndicatorImgSize, mIndicatorImgSize)
-            params.leftMargin = 10
-            params.rightMargin = 10
-            imageView.setImageResource(if (i == 0) mIndicatorImgSelectedResId else mIndicatorUnselectedResId)
-            mIndicatorImgs.add(imageView)
-            mLlIndicator.addView(imageView, params)
-        }
-        mLlIndicator.visibility = if (mRealCount > 1 && mShowIndicator) View.VISIBLE else View.GONE
-    }
-
     private fun initMVPager2() {
         mViewPager2.offscreenPageLimit = mOffScreenPageLimit
         mViewPager2.orientation = mOrientation
@@ -297,6 +296,71 @@ class MVPager2 @JvmOverloads constructor(
                 }
             }
         })
+    }
+
+    /**
+     * 代理LayoutManager 用来自定义轮播动画时长
+     */
+    private fun initVP2LayoutManagerProxy() {
+        try {
+            val innerRV = mViewPager2.getChildAt(0) as RecyclerView
+            val originLManager = innerRV.layoutManager as LinearLayoutManager
+            val layoutManagerProxy =
+                LayoutManagerProxy(context, originLManager, mCustomSwitchAnimDuration)
+            innerRV.layoutManager = layoutManagerProxy
+
+            val mRecyclerView =
+                RecyclerView.LayoutManager::class.java.getDeclaredField("mRecyclerView")
+            mRecyclerView.isAccessible = true
+            mRecyclerView.set(originLManager, innerRV)
+
+            val layoutManagerField = ViewPager2::class.java.getDeclaredField("mLayoutManager")
+            layoutManagerField.isAccessible = true
+            layoutManagerField.set(mViewPager2, layoutManagerProxy)
+
+            val originTransformerAdapter =
+                ViewPager2::class.java.getDeclaredField("mPageTransformerAdapter")
+            originTransformerAdapter.isAccessible = true
+            val mPageTransformerAdapter = originTransformerAdapter[mViewPager2]
+            if (mPageTransformerAdapter != null) {
+                val originLayoutManager =
+                    mPageTransformerAdapter.javaClass.getDeclaredField("mLayoutManager")
+                originLayoutManager.isAccessible = true
+                originLayoutManager.set(mPageTransformerAdapter, layoutManagerProxy)
+            }
+
+            val originEventAdapter =
+                ViewPager2::class.java.getDeclaredField("mScrollEventAdapter")
+            originEventAdapter.isAccessible = true
+            val mScrollEventAdapter = originEventAdapter[mViewPager2]
+            if (mScrollEventAdapter != null) {
+                val originLayoutManager = mScrollEventAdapter.javaClass.getDeclaredField("mLayoutManager")
+                originLayoutManager.isAccessible = true
+                originLayoutManager.set(mScrollEventAdapter, layoutManagerProxy)
+            }
+        } catch (ex: Exception) {
+            log(ex.toString())
+        }
+    }
+
+    /**
+     * 初始化轮播指示器
+     */
+    private fun initIndicator() {
+        mIndicatorImgs.clear()
+        mLlIndicator.removeAllViews()
+        for (i in 0 until mRealCount) {
+            val imageView = ImageView(context)
+            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            val params: LinearLayoutCompat.LayoutParams =
+                LinearLayoutCompat.LayoutParams(mIndicatorImgSize, mIndicatorImgSize)
+            params.leftMargin = 10
+            params.rightMargin = 10
+            imageView.setImageResource(if (i == 0) mIndicatorImgSelectedResId else mIndicatorUnselectedResId)
+            mIndicatorImgs.add(imageView)
+            mLlIndicator.addView(imageView, params)
+        }
+        mLlIndicator.visibility = if (mRealCount > 1 && mShowIndicator) View.VISIBLE else View.GONE
     }
 
     /**
