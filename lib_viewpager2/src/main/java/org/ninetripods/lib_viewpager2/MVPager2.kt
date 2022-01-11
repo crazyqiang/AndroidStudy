@@ -53,6 +53,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mPagerTransformer: CompositePageTransformer? = null
     private var mLoader: ILoader<View>? = null
     private var mSelectedValid: Boolean = true //滑动回调是否有效 默认有效
+    private var mUserInputEnable: Boolean = true //设置VP2是否可以滑动
     private var mItemPaddingLeft: Int = 0 //Item之间的padding间隔
     private var mItemPaddingRight: Int = 0
     private var mItemPaddingTop: Int = 0
@@ -104,6 +105,14 @@ class MVPager2 @JvmOverloads constructor(
      */
     fun setAutoPlay(isAutoPlay: Boolean): MVPager2 {
         mIsAutoPlay = isAutoPlay
+        return this
+    }
+
+    /**
+     *设置ViewPager2是否可以滑动
+     */
+    fun setUserInputEnabled(inputEnable: Boolean): MVPager2 {
+        this.mUserInputEnable = inputEnable
         return this
     }
 
@@ -231,6 +240,7 @@ class MVPager2 @JvmOverloads constructor(
         if (mPagerTransformer != null) {
             mViewPager2.setPageTransformer(mPagerTransformer)
         }
+        mViewPager2.isUserInputEnabled = mUserInputEnable
         //ViewPager2源码第254行,RecyclerView固定索引为0：
         //attachViewToParent(mRecyclerView, 0, mRecyclerView.getLayoutParams());
         val innerRecyclerView = mViewPager2.getChildAt(0) as RecyclerView
@@ -334,7 +344,8 @@ class MVPager2 @JvmOverloads constructor(
             originEventAdapter.isAccessible = true
             val mScrollEventAdapter = originEventAdapter[mViewPager2]
             if (mScrollEventAdapter != null) {
-                val originLayoutManager = mScrollEventAdapter.javaClass.getDeclaredField("mLayoutManager")
+                val originLayoutManager =
+                    mScrollEventAdapter.javaClass.getDeclaredField("mLayoutManager")
                 originLayoutManager.isAccessible = true
                 originLayoutManager.set(mScrollEventAdapter, layoutManagerProxy)
             }
