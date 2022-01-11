@@ -17,9 +17,13 @@
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity">
         <activity
+            android:name=".viewpager2.ViewPager2DispatchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".viewpager2.ViewPager2Activity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".jetpack.datastore.DataStoreActivity"
             android:screenOrientation="portrait" />

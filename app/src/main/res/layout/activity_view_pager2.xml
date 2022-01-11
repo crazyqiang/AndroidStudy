@@ -6,11 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".viewpager2.ViewPager2Activity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <FrameLayout
+        android:id="@+id/fl_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_indicator"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/orange_salmon"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,6 +35,7 @@
         android:id="@+id/vp2_view"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tl_indicator" />
@@ -33,6 +46,7 @@
         android:layout_height="wrap_content"
         android:text="Slide"
         android:textAllCaps="false"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vp2_view" />
@@ -41,6 +55,7 @@
         android:id="@+id/vp2_view2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_slide" />

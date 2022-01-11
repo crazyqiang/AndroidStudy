@@ -15,7 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OffscreenPageLimit
 import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
-import org.ninetripods.lib_viewpager2.consts.log
+import org.ninetripods.lib_viewpager2.nestedScroll.log
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
 import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
