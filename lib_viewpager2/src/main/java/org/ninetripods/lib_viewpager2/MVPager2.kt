@@ -2,9 +2,11 @@ package org.ninetripods.lib_viewpager2
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -15,11 +17,15 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OffscreenPageLimit
 import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
-import org.ninetripods.lib_viewpager2.nestedScroll.log
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
 import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.proxy.LayoutManagerProxy
+import kotlin.math.absoluteValue
+
+fun log(message: String) {
+    Log.e("TTT", message)
+}
 
 class MVPager2 @JvmOverloads constructor(
     context: Context,
@@ -58,6 +64,9 @@ class MVPager2 @JvmOverloads constructor(
     private var mItemPaddingRight: Int = 0
     private var mItemPaddingTop: Int = 0
     private var mItemPaddingBottom: Int = 0
+    private var mTouchSlop = 0 //最小滑动距离
+    private var mInitialX = 0f //初始化X轴坐标
+    private var mInitialY = 0f //初始化Y轴坐标
 
     private val autoRunnable: Runnable = object : Runnable {
         override fun run() {
@@ -86,6 +95,7 @@ class MVPager2 @JvmOverloads constructor(
         mViewPager2 = findViewById(R.id.vp_pager2)
         mLlIndicator = findViewById(R.id.ll_circle_indicator)
         mIndicatorImgSize = context.resources.displayMetrics.widthPixels / 75
+        mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
     }
 
     /**
@@ -447,6 +457,42 @@ class MVPager2 @JvmOverloads constructor(
             }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    /**
+     * 处理嵌套滑动冲突
+     */
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        handleInterceptTouchEvent(ev)
+        return super.onInterceptTouchEvent(ev)
+    }
+
+    private fun handleInterceptTouchEvent(ev: MotionEvent) {
+        val orientation = mViewPager2.orientation
+        if (mRealCount <= 0 || !mUserInputEnable) {
+            parent.requestDisallowInterceptTouchEvent(false)
+            return
+        }
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                mInitialX = ev.x
+                mInitialY = ev.y
+                parent.requestDisallowInterceptTouchEvent(true)
+            }
+            MotionEvent.ACTION_MOVE -> {
+                val dx = (ev.x - mInitialX).absoluteValue
+                val dy = (ev.y - mInitialY).absoluteValue
+                if (dx > mTouchSlop || dy > mTouchSlop) {
+                    val disallowIntercept =
+                        (orientation == ViewPager2.ORIENTATION_HORIZONTAL && dx > dy)
+                                || (orientation == ViewPager2.ORIENTATION_VERTICAL && dx < dy)
+                    parent.requestDisallowInterceptTouchEvent(disallowIntercept)
+                }
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                parent.requestDisallowInterceptTouchEvent(false)
+            }
+        }
     }
 
     override fun onWindowFocusChanged(hasWindowFocus: Boolean) {

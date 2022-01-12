@@ -8,10 +8,13 @@ import android.view.ViewConfiguration
 import android.widget.FrameLayout
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
+import androidx.viewpager2.widget.ViewPager2.ORIENTATION_VERTICAL
 import kotlin.math.absoluteValue
 import kotlin.math.sign
 
 /**
+ * copy from: https://github.com/androidx/androidx/blob/androidx-main/viewpager2/integration-tests/testapp/src/main/java/androidx/viewpager2/integration/testapp/NestedScrollableHost.kt
+ *
  * Layout to wrap a scrollable component inside a ViewPager2. Provided as a solution to the problem
  * where pages of ViewPager2 have nested scrollable elements that scroll in the same direction as
  * ViewPager2. The scrollable element needs to be the immediate and only child of this host layout.
@@ -19,9 +22,9 @@ import kotlin.math.sign
  * This solution has limitations when using multiple levels of nested scrollable elements
  * (e.g. a horizontal RecyclerView in a vertical RecyclerView in a horizontal ViewPager2).
  *
- * 在ViewPager2中包装可滚动组件的布局。作为ViewPager2的页面嵌套了可滚动元素的问题的解决方案，这些元素的滚动方向与ViewPager2相同。可滚动元素必须是该主机布局的直接且唯一的子元素。
-
-当使用多层嵌套的可滚动元素时，这个解决方案有局限性。水平的RecyclerView在水平的ViewPager2中的垂直的RecyclerView)。
+ * 在ViewPager2中包装可滚动组件的布局。作为ViewPager2的页面嵌套了可滚动元素的问题的解决方案，这些元素的滚动方向与ViewPager2相同。
+ * 可滚动元素必须是该主机布局的直接且唯一的子元素。当使用多层嵌套的可滚动元素时，这个解决方案有局限性。
+ * 水平的RecyclerView在水平的ViewPager2中的垂直的RecyclerView。
  */
 class NestedScrollableHost : FrameLayout {
     constructor(context: Context) : super(context)
@@ -48,8 +51,8 @@ class NestedScrollableHost : FrameLayout {
     private fun canChildScroll(orientation: Int, delta: Float): Boolean {
         val direction = -delta.sign.toInt()
         return when (orientation) {
-            0 -> child?.canScrollHorizontally(direction) ?: false
-            1 -> child?.canScrollVertically(direction) ?: false
+            ORIENTATION_HORIZONTAL -> child?.canScrollHorizontally(direction) ?: false
+            ORIENTATION_VERTICAL -> child?.canScrollVertically(direction) ?: false
             else -> throw IllegalArgumentException()
         }
     }

@@ -8,10 +8,7 @@ import androidx.viewpager2.adapter.FragmentViewHolder
 import org.ninetripods.mq.study.viewpager2.PageDiffUtil
 import org.ninetripods.mq.study.viewpager2.model.VP2Model
 
-//const val PAGES_NUM = 4
-//const val EXTRA_TOTAL_NUM = 6
-
-class ViewPager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+open class VP2FragmentAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
     private val mItems: ArrayList<VP2Model> = arrayListOf()
 

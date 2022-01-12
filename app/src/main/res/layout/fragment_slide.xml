@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <org.ninetripods.lib_viewpager2.NestedScrollableHost
-        android:layout_width="match_parent"
-        android:layout_height="150dp">
+<!--    <org.ninetripods.lib_viewpager2.NestedScrollableHost-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp">-->
 
         <org.ninetripods.lib_viewpager2.MVPager2
             android:id="@+id/mvp_pager2"
             android:layout_width="match_parent"
             android:layout_height="150dp" />
 
-    </org.ninetripods.lib_viewpager2.NestedScrollableHost>
+<!--    </org.ninetripods.lib_viewpager2.NestedScrollableHost>-->
 
     <TextView
         android:id="@+id/tv_content"

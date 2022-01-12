@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.util.NavitateUtil;
-import org.ninetripods.mq.study.viewpager2.ViewPager2Activity;
+import org.ninetripods.mq.study.viewpager2.ViewPager2DispatchActivity;
 
 public class RecycleFragment extends Fragment implements View.OnClickListener {
     private TextView tv_contacts, tv_swipe_menu, tv_water_fall, tv_touch_helper, tv_refresh;
@@ -53,7 +53,7 @@ public class RecycleFragment extends Fragment implements View.OnClickListener {
                 NavitateUtil.startActivity(getActivity(), WaterFallActivity.class);
                 break;
             case R.id.tv_view_pager2:
-                NavitateUtil.startActivity(getActivity(), ViewPager2Activity.class);
+                NavitateUtil.startActivity(getActivity(), ViewPager2DispatchActivity.class);
                 break;
             case R.id.tv_touch_helper:
                 break;
