@@ -24,7 +24,8 @@ import org.ninetripods.lib_viewpager2.proxy.LayoutManagerProxy
 import kotlin.math.absoluteValue
 
 fun log(message: String) {
-    Log.e("TTT", message)
+    if (!BuildConfig.DEBUG) return
+    Log.e("MVPager2", message)
 }
 
 class MVPager2 @JvmOverloads constructor(
