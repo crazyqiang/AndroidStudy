@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/vp_tb_search_bar_radius" />
+            <solid android:color="@color/red_500" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/vp_tb_search_bar_radius" />
+            <solid android:color="@color/red" />
+        </shape>
+    </item>
+</selector>

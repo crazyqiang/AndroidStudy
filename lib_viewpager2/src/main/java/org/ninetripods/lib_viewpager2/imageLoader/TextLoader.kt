@@ -18,23 +18,28 @@ class TextLoader : BaseLoader() {
     private var mBgColor: Int = R.color.white
 
     @ColorRes
-    private var mTextColor: Int = R.color.red_deep
+    private var mTextColor: Int = R.color.black
+    private var mTextGravity: Int = Gravity.CENTER
+    private var mTextSize: Float = 14f
 
     override fun createView(context: Context): View {
-        val frameLayout = FrameLayout(context)
-        frameLayout.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        frameLayout.setBackgroundColor(context.resources.getColor(mBgColor))
-        val textView = TextView(context)
-        textView.gravity = Gravity.CENTER
-        textView.setTextColor(context.resources.getColor(mTextColor))
-        val layoutParams = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        frameLayout.addView(textView, layoutParams)
+        val frameLayout = FrameLayout(context).apply {
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            setBackgroundColor(context.resources.getColor(mBgColor))
+        }
+        val textView = TextView(context).apply {
+            gravity = mTextGravity
+            setTextColor(context.resources.getColor(mTextColor))
+            textSize = mTextSize
+            layoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        }
+        frameLayout.addView(textView)
         return frameLayout
     }
 
@@ -53,6 +58,16 @@ class TextLoader : BaseLoader() {
 
     fun setTextColor(@ColorRes textColor: Int): TextLoader {
         this.mTextColor = textColor
+        return this
+    }
+
+    fun setGravity(gravity: Int): TextLoader {
+        this.mTextGravity = gravity
+        return this
+    }
+
+    fun setTextSize(textSize: Float): TextLoader {
+        this.mTextSize = textSize
         return this
     }
 }

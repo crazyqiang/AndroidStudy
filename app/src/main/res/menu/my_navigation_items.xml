@@ -30,7 +30,7 @@
         android:id="@+id/my_navigation_3"
         android:checkable="false"
         android:enabled="true"
-        android:title="RecycleView系列" />
+        android:title="ViewPager2/RecyclerView系列" />
     <item
         android:id="@+id/my_navigation_5"
         android:checkable="false"

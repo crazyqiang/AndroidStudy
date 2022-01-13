@@ -283,6 +283,7 @@ class MVPager2 @JvmOverloads constructor(
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
+                    //TODO
                     //log("onPageScrollStateChanged: $state")
                     //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
                     if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {

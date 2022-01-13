@@ -35,6 +35,7 @@ class ViewPager2DispatchActivity : BaseActivity() {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_vp2_nested_scroll -> jumpTargetPage(FRAGMENT_NESTED_SCROLL)
+            R.id.tv_vp2_vertical -> jumpTargetPage(FRAGMENT_SEARCH_V_SCROLL)
         }
     }
 

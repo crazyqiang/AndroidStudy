@@ -6,4 +6,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="margin_btn">25dp</dimen>
+    <dimen name="vp_tb_search_bar_height">40dp</dimen>
+    <dimen name="vp_tb_search_bar_radius">100dp</dimen>
 </resources>

@@ -29,7 +29,7 @@
         style="@style/btn_style_done"
         android:layout_below="@+id/tv_water_fall"
         android:layout_marginTop="25dp"
-        android:text="ViewPager2 " />
+        android:text="ViewPager2系列" />
 
     <TextView
         android:id="@+id/tv_touch_helper"
