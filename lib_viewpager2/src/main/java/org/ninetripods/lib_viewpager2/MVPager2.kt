@@ -34,6 +34,11 @@ class MVPager2 @JvmOverloads constructor(
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
 
+    companion object {
+        const val HORIZONTAL = ViewPager2.ORIENTATION_HORIZONTAL
+        const val VERTICAL = ViewPager2.ORIENTATION_VERTICAL
+    }
+
     //轮播指示器相关
     private var mLlIndicator: LinearLayoutCompat
     private var mIndicatorImgSelectedResId = R.drawable.circle_indicator_selected
@@ -246,77 +251,78 @@ class MVPager2 @JvmOverloads constructor(
      * 初始化VP2
      */
     private fun initMVPager2() {
-        mViewPager2.offscreenPageLimit = mOffScreenPageLimit
-        mViewPager2.orientation = mOrientation
-        if (mPagerTransformer != null) {
-            mViewPager2.setPageTransformer(mPagerTransformer)
-        }
-        mViewPager2.isUserInputEnabled = mUserInputEnable
-        //ViewPager2源码第254行,RecyclerView固定索引为0：
-        //attachViewToParent(mRecyclerView, 0, mRecyclerView.getLayoutParams());
-        val innerRecyclerView = mViewPager2.getChildAt(0) as RecyclerView
-        innerRecyclerView.apply {
-            //这里会导致离屏预加载数+1
-            setPadding(mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom)
-            clipToPadding = false
-            clipChildren = false
-            //设置mCachedViews缓存大小 默认是2
-            //setItemViewCacheSize(2)
-        }
-
-        mViewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                mOnPageChangeCallback?.onPageScrolled(
-                    position,
-                    positionOffset,
-                    positionOffsetPixels
-                )
+        mViewPager2.apply {
+            offscreenPageLimit = mOffScreenPageLimit
+            orientation = mOrientation
+            isUserInputEnabled = mUserInputEnable
+            if (mPagerTransformer != null) {
+                setPageTransformer(mPagerTransformer)
             }
+            //ViewPager2源码第254行,RecyclerView固定索引为0：
+            //attachViewToParent(mRecyclerView, 0, mRecyclerView.getLayoutParams());
+            val innerRecyclerView = mViewPager2.getChildAt(0) as RecyclerView
+            innerRecyclerView.apply {
+                //这里会导致离屏预加载数+1
+                setPadding(mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom)
+                clipToPadding = false
+                clipChildren = false
+                //设置mCachedViews缓存大小 默认是2
+                //setItemViewCacheSize(2)
+            }
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    mOnPageChangeCallback?.onPageScrolled(
+                        position,
+                        positionOffset,
+                        positionOffsetPixels
+                    )
+                }
 
-            override fun onPageScrollStateChanged(state: Int) {
-                //log("onPageScrollStateChanged: $state")
-                //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
-                if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
-                    when (mViewPager2.currentItem) {
-                        exSecondPositive() -> {
-                            //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
-                            mSelectedValid = false
-                            mViewPager2.setCurrentItem(exThreeLastPos(), false)
-                        }
-                        exSecondLastPos() -> {
-                            //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第一个)
-                            mSelectedValid = false
-                            mViewPager2.setCurrentItem(SIDE_NUM, false)
-                        }
-                        else -> {
-                            mSelectedValid = true
+                override fun onPageScrollStateChanged(state: Int) {
+                    //log("onPageScrollStateChanged: $state")
+                    //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
+                    if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
+                        when (mViewPager2.currentItem) {
+                            exSecondPositive() -> {
+                                //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
+                                mSelectedValid = false
+                                mViewPager2.setCurrentItem(exThreeLastPos(), false)
+                            }
+                            exSecondLastPos() -> {
+                                //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第一个)
+                                mSelectedValid = false
+                                mViewPager2.setCurrentItem(SIDE_NUM, false)
+                            }
+                            else -> {
+                                mSelectedValid = true
+                            }
                         }
                     }
+                    if (mSelectedValid) {
+                        mOnPageChangeCallback?.onPageScrollStateChanged(state)
+                    }
                 }
-                if (mSelectedValid) {
-                    mOnPageChangeCallback?.onPageScrollStateChanged(state)
-                }
-            }
 
-            override fun onPageSelected(position: Int) {
-                log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
-                mCurPos = position
-                if (mSelectedValid) {
-                    mOnPageChangeCallback?.onPageSelected(position)
-                    mIndicatorImgs[getRealPosition(mLastPosition)].setImageResource(
-                        mIndicatorUnselectedResId
-                    )
-                    mIndicatorImgs[getRealPosition(position)].setImageResource(
-                        mIndicatorImgSelectedResId
-                    )
-                    mLastPosition = position
+                override fun onPageSelected(position: Int) {
+                    log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
+                    mCurPos = position
+                    if (mSelectedValid) {
+                        mOnPageChangeCallback?.onPageSelected(position)
+                        mIndicatorImgs[getRealPosition(mLastPosition)].setImageResource(
+                            mIndicatorUnselectedResId
+                        )
+                        mIndicatorImgs[getRealPosition(position)].setImageResource(
+                            mIndicatorImgSelectedResId
+                        )
+                        mLastPosition = position
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     /**

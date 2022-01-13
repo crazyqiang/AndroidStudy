@@ -1,12 +1,12 @@
 package org.ninetripods.mq.study.viewpager2
 
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
-import org.ninetripods.mq.study.util.NavitateUtil
 
 /**
  * ViewPager2
@@ -34,10 +34,13 @@ class ViewPager2DispatchActivity : BaseActivity() {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_vp2_nested_scroll -> NavitateUtil.startActivity(
-                this,
-                ViewPager2Activity::class.java
-            )
+            R.id.tv_vp2_nested_scroll -> jumpTargetPage(FRAGMENT_NESTED_SCROLL)
         }
+    }
+
+    private fun jumpTargetPage(targetPage: Int) {
+        val intent = Intent(this, ViewPager2Activity::class.java)
+        intent.putExtra(KEY_FRAGMENT_TYPE, targetPage)
+        startActivity(intent)
     }
 }

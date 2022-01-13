@@ -18,6 +18,7 @@ import org.ninetripods.mq.study.viewpager2.fragment.SearchVScrollFragment
 const val FRAGMENT_BASE = 0
 const val FRAGMENT_NESTED_SCROLL = 1
 const val FRAGMENT_SEARCH_V_SCROLL = 2
+const val KEY_FRAGMENT_TYPE = "key_fragment_type"
 
 class ViewPager2Activity : BaseActivity() {
 
@@ -35,7 +36,14 @@ class ViewPager2Activity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "ViewPager2", true, false, TYPE_BLOG)
+        mCurPos = intent.getIntExtra(KEY_FRAGMENT_TYPE, FRAGMENT_NESTED_SCROLL)
+        val titleName = when (mCurPos) {
+            FRAGMENT_BASE -> "MVP2基本使用"
+            FRAGMENT_NESTED_SCROLL -> "嵌套滑动"
+            FRAGMENT_SEARCH_V_SCROLL -> "MVP2实现文字上下轮播"
+            else -> "MVP2"
+        }
+        initToolBar(mToolBar, titleName, true, false, TYPE_BLOG)
     }
 
     override fun initEvents() {
