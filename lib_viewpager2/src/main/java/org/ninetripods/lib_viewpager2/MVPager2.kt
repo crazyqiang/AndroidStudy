@@ -25,7 +25,7 @@ import kotlin.math.absoluteValue
 
 fun log(message: String) {
     if (!BuildConfig.DEBUG) return
-    Log.e("MVPager2", message)
+    Log.d("MVPager2", message)
 }
 
 class MVPager2 @JvmOverloads constructor(
@@ -35,8 +35,8 @@ class MVPager2 @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyle) {
 
     companion object {
-        const val HORIZONTAL = ViewPager2.ORIENTATION_HORIZONTAL
-        const val VERTICAL = ViewPager2.ORIENTATION_VERTICAL
+        const val ORIENTATION_HORIZONTAL = ViewPager2.ORIENTATION_HORIZONTAL
+        const val ORIENTATION_VERTICAL = ViewPager2.ORIENTATION_VERTICAL
     }
 
     //轮播指示器相关
@@ -78,7 +78,7 @@ class MVPager2 @JvmOverloads constructor(
         override fun run() {
             if (mRealCount > 1 && mIsAutoPlay) {
                 mCurPos = mCurPos % mExtendModels.size + 1
-                log("mCurPos:$mCurPos , total: ${exFirstLastPos()}")
+                log("autoScroll: mCurPos is $mCurPos , total is ${exFirstLastPos()}")
                 when (mCurPos) {
                     exSecondLastPos() -> {
                         mSelectedValid = false
@@ -283,20 +283,29 @@ class MVPager2 @JvmOverloads constructor(
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
-                    //TODO
                     //log("onPageScrollStateChanged: $state")
                     //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
                     if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
                         when (mViewPager2.currentItem) {
+                            exFirstPositive() -> {
+                                //向左滑动，滑动到正数第1个时 自动将转换到倒数第4的位置(该位置为真实数量的倒数第2个)
+                                mSelectedValid = false
+                                mViewPager2.setCurrentItem(exFourLastPos(), false)
+                            }
                             exSecondPositive() -> {
-                                //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后一个)
+                                //向左滑动，滑动到正数第2个时 自动将转换到倒数第3的位置(该位置为真实数量的最后1个)
                                 mSelectedValid = false
                                 mViewPager2.setCurrentItem(exThreeLastPos(), false)
                             }
                             exSecondLastPos() -> {
-                                //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第一个)
+                                //向右滑动，滑动到倒数第2个时 自动将转换到正数第3的位置(该位置为真实数量的第1个)
                                 mSelectedValid = false
                                 mViewPager2.setCurrentItem(SIDE_NUM, false)
+                            }
+                            exFirstLastPos() -> {
+                                //向右滑动，滑动到倒数第1个时 自动将转换到正数第4的位置(该位置为真实数量的第2个)
+                                mSelectedValid = false
+                                mViewPager2.setCurrentItem(SIDE_NUM + 1, false)
                             }
                             else -> {
                                 mSelectedValid = true
@@ -452,8 +461,14 @@ class MVPager2 @JvmOverloads constructor(
     //扩展之后的倒数第3条数据
     private fun exThreeLastPos(): Int = mRealCount + 1
 
+    //扩展之后的倒数第4条数据
+    private fun exFourLastPos(): Int = mRealCount
+
     //正数第2条数据
     private fun exSecondPositive(): Int = 1
+
+    //正数第1条数据
+    private fun exFirstPositive(): Int = 0
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         if (mIsAutoPlay) {

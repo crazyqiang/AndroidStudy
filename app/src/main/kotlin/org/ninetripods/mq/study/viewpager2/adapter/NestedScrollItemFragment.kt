@@ -53,7 +53,7 @@ class NestedScrollItemFragment(val position: Int = 0) : BaseFragment() {
             .setOffscreenPageLimit(1)
             .setPageTransformer(multiTransformer)
             //.setAnimDuration(500)
-            .setOrientation(MVPager2.HORIZONTAL)
+            .setOrientation(MVPager2.ORIENTATION_HORIZONTAL)
             //.setUserInputEnabled(false)
             .setAutoPlay(true)
             .setPageInterval(5 * 1000L)

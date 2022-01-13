@@ -43,10 +43,10 @@ class ViewPager2Activity : BaseActivity() {
 
     private fun createTargetFragment(): Fragment {
         return when (mCurPos) {
-            FRAGMENT_BASE -> MVP2BaseUseFragment.newInstance()
+            FRAGMENT_BASE -> MVP2BaseUseFragment()
             FRAGMENT_NESTED_SCROLL -> NestedScrollFragment()
             FRAGMENT_SEARCH_V_SCROLL -> SearchVScrollFragment()
-            else -> MVP2BaseUseFragment.newInstance()
+            else -> MVP2BaseUseFragment()
         }
     }
 
