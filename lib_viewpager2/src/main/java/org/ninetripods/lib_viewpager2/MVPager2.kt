@@ -471,7 +471,7 @@ class MVPager2 @JvmOverloads constructor(
     private fun exFirstPositive(): Int = 0
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        if (mIsAutoPlay) {
+        if (mIsAutoPlay && mUserInputEnable) {
             val action = ev.action
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_OUTSIDE) {
                 startAutoPlay()

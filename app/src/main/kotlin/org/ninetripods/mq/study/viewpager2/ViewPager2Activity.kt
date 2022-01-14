@@ -26,7 +26,7 @@ class ViewPager2Activity : BaseActivity() {
         mCurPos = intent.getIntExtra(KEY_FRAGMENT_TYPE, FRAGMENT_NESTED_SCROLL)
         val titleName = when (mCurPos) {
             FRAGMENT_BASE -> "MVP2基本使用"
-            FRAGMENT_NESTED_SCROLL -> "嵌套滑动"
+            FRAGMENT_NESTED_SCROLL -> "MVP2嵌套滑动"
             FRAGMENT_SEARCH_V_SCROLL -> "仿淘宝搜索文字上下轮播"
             else -> "MVP2"
         }
