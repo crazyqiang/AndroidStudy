@@ -40,16 +40,18 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        return PageViewHolder(itemShowView)
+        val holder = PageViewHolder(itemShowView)
+        holder.itemShowView.setOnClickListener {
+            val realPosition = getRealPosition(holder.bindingAdapterPosition)
+            mItemClickListener?.onItemClick(realPosition)
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         //log("onBindViewHolder(): pos is $position, model is ${mModels[position]}")
         val contentStr = mModels[position]
         mLoader?.display(holder.itemShowView.context, contentStr, holder.itemShowView)
-        holder.itemShowView.setOnClickListener {
-            mItemClickListener?.OnItemClick(getRealPosition(position))
-        }
     }
 
     override fun getItemCount(): Int = mModels.size

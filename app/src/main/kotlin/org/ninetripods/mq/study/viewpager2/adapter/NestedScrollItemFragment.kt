@@ -12,13 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import org.ninetripods.lib_viewpager2.MVPager2
-import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.transformer.ScaleInTransformer
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
-import org.ninetripods.mq.study.kotlin.ktx.log
 
 class NestedScrollItemFragment(val position: Int = 0) : BaseFragment() {
 
@@ -44,11 +42,6 @@ class NestedScrollItemFragment(val position: Int = 0) : BaseFragment() {
         multiTransformer.addTransformer(MarginPageTransformer(20))
 
         mMVPager2.setModels(MConstant.urls)
-            .setItemClickListener(object : OnBannerClickListener {
-                override fun OnItemClick(position: Int) {
-                    log("$position is click")
-                }
-            })
             .setIndicatorShow(true)
             .setOffscreenPageLimit(1)
             .setPageTransformer(multiTransformer)

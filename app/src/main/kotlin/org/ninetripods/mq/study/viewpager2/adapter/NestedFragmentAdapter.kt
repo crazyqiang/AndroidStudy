@@ -17,17 +17,19 @@ open class NestedFragmentAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa
         return NestedScrollItemFragment(mItems[position].id)
     }
 
-    fun setDatas(newItems: List<VP2Model>) {
-        //不借助DiffUtil更新数据
-        //mItems.clear()
-        //mItems.addAll(newItems)
-        //notifyDataSetChanged()
-
-        //借助DiffUtil更新数据
-        val callback = PageDiffUtil(mItems, newItems)
-        val difResult = DiffUtil.calculateDiff(callback)
-        mItems.clear()
-        mItems.addAll(newItems)
-        difResult.dispatchUpdatesTo(this)
+    fun setDatas(newItems: List<VP2Model>, useDiffUtil: Boolean = true) {
+        if (useDiffUtil) {
+            //使用DiffUtil更新数据
+            val callback = PageDiffUtil(mItems, newItems)
+            val difResult = DiffUtil.calculateDiff(callback)
+            mItems.clear()
+            mItems.addAll(newItems)
+            difResult.dispatchUpdatesTo(this)
+        } else {
+            //不使用DiffUtil更新数据
+            mItems.clear()
+            mItems.addAll(newItems)
+            notifyDataSetChanged()
+        }
     }
 }

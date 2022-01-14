@@ -42,8 +42,8 @@ class SearchVScrollFragment : BaseFragment() {
                 TextLoader().setGravity(Gravity.START or Gravity.CENTER_VERTICAL)
                     .setTextColor(R.color.gray_holo_dark).setTextSize(14f)
             )
-            .setItemClickListener(object : OnBannerClickListener {
-                override fun OnItemClick(position: Int) {
+            .setOnBannerClickListener(object : OnBannerClickListener {
+                override fun onItemClick(position: Int) {
                     showToast(models[position])
                 }
             })

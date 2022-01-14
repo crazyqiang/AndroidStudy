@@ -196,7 +196,7 @@ class MVPager2 @JvmOverloads constructor(
      * 设置Banner的Item点击
      * @param listener
      */
-    fun setItemClickListener(listener: OnBannerClickListener): MVPager2 {
+    fun setOnBannerClickListener(listener: OnBannerClickListener): MVPager2 {
         this.mClickListener = listener
         return this
     }

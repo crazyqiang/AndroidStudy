@@ -23,7 +23,7 @@ class ViewPager2DispatchActivity : BaseActivity() {
     }
 
     override fun initViews() {
-        initToolBar(mToolBar, "ViewPager2", true, false)
+        initToolBar(mToolBar, "ViewPager2系列", true, false)
     }
 
     override fun initEvents() {

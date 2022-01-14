@@ -11,7 +11,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
-import org.ninetripods.mq.study.kotlin.ktx.log
+import org.ninetripods.mq.study.kotlin.ktx.showToast
 
 class MVP2BaseUseFragment : BaseFragment() {
 
@@ -31,11 +31,6 @@ class MVP2BaseUseFragment : BaseFragment() {
         multiTransformer.addTransformer(MarginPageTransformer(20))
 
         mMVPager2.setModels(MConstant.urls)
-            .setItemClickListener(object : OnBannerClickListener {
-                override fun OnItemClick(position: Int) {
-                    log("$position is click")
-                }
-            })
             .setIndicatorShow(true)
             .setOffscreenPageLimit(1)
             //.setPageTransformer(multiTransformer)
@@ -44,6 +39,11 @@ class MVP2BaseUseFragment : BaseFragment() {
             //.setUserInputEnabled(false)
             .setAutoPlay(true)
             .setPageInterval(5 * 1000L)
+            .setOnBannerClickListener(object : OnBannerClickListener {
+                override fun onItemClick(position: Int) {
+                    showToast("position is $position")
+                }
+            })
             .start()
     }
 }
