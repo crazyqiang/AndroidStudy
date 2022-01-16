@@ -54,6 +54,14 @@ class MVP2Adapter<T : Any> : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() 
         mLoader?.display(holder.itemShowView.context, contentStr, holder.itemShowView)
     }
 
+    override fun onBindViewHolder(
+        holder: PageViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        super.onBindViewHolder(holder, position, payloads)
+    }
+
     override fun getItemCount(): Int = mModels.size
 
     class PageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

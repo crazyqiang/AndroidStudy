@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import org.ninetripods.mq.study.viewpager2.PageDiffUtil
+import org.ninetripods.lib_viewpager2.adapter.PageDiffUtil
 import org.ninetripods.mq.study.viewpager2.model.VP2Model
 
 open class NestedFragmentAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
