@@ -10,6 +10,7 @@ import android.view.ViewConfiguration
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -40,6 +41,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     //轮播指示器相关
+    private var mClIndicator: ConstraintLayout
     private var mLlIndicator: LinearLayoutCompat
     private var mIndicatorImgSelectedResId = R.drawable.circle_indicator_selected
     private var mIndicatorUnselectedResId = R.drawable.circle_indicator_unseclected
@@ -48,13 +50,15 @@ class MVPager2 @JvmOverloads constructor(
     private var mLastPosition: Int = 0
     private var mShowIndicator: Boolean = false //是否展示轮播指示器
 
+    private var mIvDefault: ImageView
+
     //ViewPager2
     private lateinit var mViewPager2: ViewPager2
     private var mOnPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var mRealCount: Int = 0 //VP2真实数量
     private lateinit var mVP2Adapter: MVP2Adapter<String>
-    private var mModels: List<String> = ArrayList()
-    private var mExtendModels: ArrayList<String> = ArrayList()
+    private var mModels = mutableListOf<String>()
+    private var mExtendModels = mutableListOf<String>()
     private var mCurPos = SIDE_NUM //当前滑动到的位置
     private var mClickListener: OnBannerClickListener? = null
     private var mOffScreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
@@ -100,6 +104,8 @@ class MVPager2 @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.layout_mvpager2, this)
         mViewPager2 = findViewById(R.id.vp_pager2)
         mLlIndicator = findViewById(R.id.ll_circle_indicator)
+        mClIndicator = findViewById(R.id.cl_indicator)
+        mIvDefault = findViewById(R.id.iv_default)
         mIndicatorImgSize = context.resources.displayMetrics.widthPixels / 75
         mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
     }
@@ -108,11 +114,27 @@ class MVPager2 @JvmOverloads constructor(
      * 设置数据
      * @param list 轮播数据Models
      */
-    fun setModels(list: List<String>): MVPager2 {
-        this.mModels = list
+    fun setModels(list: MutableList<String>): MVPager2 {
+        this.mModels.clear()
+        this.mModels.addAll(list)
         this.mRealCount = mModels.size
         extendOriginModels()
         return this
+    }
+
+    /**
+     * TODO 待调试
+     * 使用DiffUtil进行增量数据更新
+     * @param newList 更新后的数据Models
+     */
+    fun submitList(newList: MutableList<String>) {
+        if (mIsAutoPlay) stopAutoPlay()
+        this.mModels.clear()
+        this.mModels.addAll(newList)
+        this.mRealCount = mModels.size
+        extendOriginModels()
+        initIndicator()
+        if (mIsAutoPlay) startAutoPlay()
     }
 
     /**
@@ -425,6 +447,12 @@ class MVPager2 @JvmOverloads constructor(
      */
     private fun extendOriginModels() {
         mExtendModels.clear()
+        if (mRealCount == 0) {
+            //展示默认图片
+            showMainView(false)
+            return
+        }
+        showMainView(true)
         if (mRealCount > 1) {
             //真实数量必须大于1
             for (i in 0..exFirstLastPos()) {
@@ -450,6 +478,12 @@ class MVPager2 @JvmOverloads constructor(
             mExtendModels.add(mModels[0])
         }
         log("mExtendModels:$mExtendModels")
+    }
+
+    private fun showMainView(visible: Boolean = true) {
+        mIvDefault.visibility = if (visible) View.GONE else View.VISIBLE
+        mViewPager2.visibility = if (visible) View.VISIBLE else View.GONE
+        mClIndicator.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     //扩展之后的倒数第1条数据

@@ -31,7 +31,7 @@ class SearchVScrollFragment : BaseFragment() {
     }
 
     private fun initVerticalTxScroll() {
-        val models = listOf("猫咪宠物衣服", "年货节，聚划算", "飞猪旅行", "天猫超市")
+        val models = arrayListOf("猫咪宠物衣服", "年货节，聚划算", "飞猪旅行", "天猫超市")
         mMVPager2.setModels(models)
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
             .setUserInputEnabled(false)

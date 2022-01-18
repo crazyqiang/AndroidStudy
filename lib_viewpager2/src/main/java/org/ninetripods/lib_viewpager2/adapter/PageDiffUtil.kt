@@ -20,7 +20,7 @@ class PageDiffUtil(private val oldModels: List<Any>, private val newModels: List
      * 例如，如果你的项目有唯一的id，这个方法应该检查它们的id是否相等。
      */
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldModels[oldItemPosition] === newModels[newItemPosition]
+        return oldModels[oldItemPosition]::class.java == newModels[newItemPosition]::class.java
     }
 
     /**
