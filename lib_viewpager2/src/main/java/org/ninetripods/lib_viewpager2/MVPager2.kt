@@ -56,7 +56,7 @@ class MVPager2 @JvmOverloads constructor(
     private lateinit var mViewPager2: ViewPager2
     private var mOnPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var mRealCount: Int = 0 //VP2真实数量
-    private lateinit var mVP2Adapter: MVP2Adapter<String>
+    private var mVP2Adapter: MVP2Adapter? = null
     private var mModels = mutableListOf<String>()
     private var mExtendModels = mutableListOf<String>()
     private var mCurPos = SIDE_NUM //当前滑动到的位置
@@ -82,7 +82,7 @@ class MVPager2 @JvmOverloads constructor(
         override fun run() {
             if (mRealCount > 1 && mIsAutoPlay) {
                 mCurPos = mCurPos % mExtendModels.size + 1
-                log("autoScroll: mCurPos is $mCurPos , total is ${exFirstLastPos()}")
+                //log("autoScroll: mCurPos is $mCurPos , total is ${exFirstLastPos()}")
                 when (mCurPos) {
                     exSecondLastPos() -> {
                         mSelectedValid = false
@@ -123,16 +123,24 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     * TODO 待调试
      * 使用DiffUtil进行增量数据更新
      * @param newList 更新后的数据Models
      */
     fun submitList(newList: MutableList<String>) {
+        if (mVP2Adapter == null) return
+        if (newList.isEmpty()) {
+            //展示默认图片
+            showMainView(false)
+            return
+        }
         if (mIsAutoPlay) stopAutoPlay()
         this.mModels.clear()
         this.mModels.addAll(newList)
         this.mRealCount = mModels.size
         extendOriginModels()
+        //TODO 滑动太快会停滞
+        //mVP2Adapter?.submitList(mExtendModels) //增量更新
+        mVP2Adapter?.notifyDataSetChanged()
         initIndicator()
         if (mIsAutoPlay) startAutoPlay()
     }
@@ -252,14 +260,14 @@ class MVPager2 @JvmOverloads constructor(
 
     fun start() {
         initMVPager2()
-        if (mCustomSwitchAnimDuration != 0) {
-            initVP2LayoutManagerProxy()
-        }
+        initVP2LayoutManagerProxy()
         initIndicator()
         mVP2Adapter = MVP2Adapter()
-        mVP2Adapter.setModels(mExtendModels)
-        mVP2Adapter.setImageLoader(if (mLoader != null) mLoader else DefaultLoader())
-        mVP2Adapter.setOnItemClickListener(mClickListener)
+        mVP2Adapter?.let {
+            it.setModels(mExtendModels)
+            it.setImageLoader(if (mLoader != null) mLoader else DefaultLoader())
+            it.setOnItemClickListener(mClickListener)
+        }
         mViewPager2.adapter = mVP2Adapter
         mViewPager2.setCurrentItem(SIDE_NUM, false)
         if (mIsAutoPlay) startAutoPlay()
@@ -308,6 +316,7 @@ class MVPager2 @JvmOverloads constructor(
                     //log("onPageScrollStateChanged: $state")
                     //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
                     if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
+                        //log("onPageScrollStateChanged${mViewPager2.currentItem}")
                         when (mViewPager2.currentItem) {
                             exFirstPositive() -> {
                                 //向左滑动，滑动到正数第1个时 自动将转换到倒数第4的位置(该位置为真实数量的倒数第2个)
@@ -340,7 +349,7 @@ class MVPager2 @JvmOverloads constructor(
                 }
 
                 override fun onPageSelected(position: Int) {
-                    log("onPageSelected: $position , mSelectedValid: $mSelectedValid")
+                    log("onPageSelected: $position ,total: ${mExtendModels.size}, mSelectedValid: $mSelectedValid")
                     mCurPos = position
                     if (mSelectedValid) {
                         mOnPageChangeCallback?.onPageSelected(position)
@@ -409,16 +418,19 @@ class MVPager2 @JvmOverloads constructor(
     private fun initIndicator() {
         mIndicatorImgs.clear()
         mLlIndicator.removeAllViews()
+        val mCurPos = getRealPosition(mViewPager2.currentItem)
         for (i in 0 until mRealCount) {
-            val imageView = ImageView(context)
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-            val params: LinearLayoutCompat.LayoutParams =
-                LinearLayoutCompat.LayoutParams(mIndicatorImgSize, mIndicatorImgSize)
-            params.leftMargin = 10
-            params.rightMargin = 10
-            imageView.setImageResource(if (i == 0) mIndicatorImgSelectedResId else mIndicatorUnselectedResId)
+            val imageView = ImageView(context).apply {
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                val linearLayoutParams: LinearLayoutCompat.LayoutParams =
+                    LinearLayoutCompat.LayoutParams(mIndicatorImgSize, mIndicatorImgSize)
+                linearLayoutParams.leftMargin = 10
+                linearLayoutParams.rightMargin = 10
+                layoutParams = linearLayoutParams
+                setImageResource(if (i == mCurPos) mIndicatorImgSelectedResId else mIndicatorUnselectedResId)
+            }
             mIndicatorImgs.add(imageView)
-            mLlIndicator.addView(imageView, params)
+            mLlIndicator.addView(imageView)
         }
         mLlIndicator.visibility = if (mRealCount > 1 && mShowIndicator) View.VISIBLE else View.GONE
     }
@@ -447,11 +459,6 @@ class MVPager2 @JvmOverloads constructor(
      */
     private fun extendOriginModels() {
         mExtendModels.clear()
-        if (mRealCount == 0) {
-            //展示默认图片
-            showMainView(false)
-            return
-        }
         showMainView(true)
         if (mRealCount > 1) {
             //真实数量必须大于1
@@ -477,7 +484,7 @@ class MVPager2 @JvmOverloads constructor(
         } else {
             mExtendModels.add(mModels[0])
         }
-        log("mExtendModels:$mExtendModels")
+        //log("mExtendModels:$mExtendModels")
     }
 
     private fun showMainView(visible: Boolean = true) {

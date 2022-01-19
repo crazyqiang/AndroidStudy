@@ -40,7 +40,9 @@ class MVP2BaseUseFragment : BaseFragment() {
             mMVPager2.submitList(mModels)
         }
         mTvDel.setOnClickListener {
-            mModels.removeAt(mModels.size - 1)
+            if (mModels.isNotEmpty()) {
+                mModels.removeAt(mModels.size - 1)
+            }
             mMVPager2.submitList(mModels)
         }
     }
@@ -57,7 +59,7 @@ class MVP2BaseUseFragment : BaseFragment() {
             //.setAnimDuration(500)
             .setOrientation(MVPager2.ORIENTATION_HORIZONTAL)
             //.setUserInputEnabled(false)
-            .setAutoPlay(true)
+            .setAutoPlay(false)
             .setPageInterval(5 * 1000L)
             .setOnBannerClickListener(object : OnBannerClickListener {
                 override fun onItemClick(position: Int) {
