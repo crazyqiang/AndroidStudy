@@ -96,6 +96,7 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
      * @param exPosition 扩展数据中的位置
      */
     private fun getRealPosition(exPosition: Int): Int {
+        if (itemCount == 1) return 0  //只有一条数据的时候直接返回0
         val realCount = itemCount - EXTRA_NUM
         var realPos = (exPosition - SIDE_NUM) % realCount
         if (realPos < 0) realPos += realCount
