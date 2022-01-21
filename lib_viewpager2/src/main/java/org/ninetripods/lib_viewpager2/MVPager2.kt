@@ -138,10 +138,8 @@ class MVPager2 @JvmOverloads constructor(
         this.mModels.addAll(newList)
         this.mRealCount = mModels.size
         extendOriginModels()
-        //TODO 滑动太快会停滞
-        //mVP2Adapter?.submitList(mExtendModels) //增量更新
-        mVP2Adapter?.notifyDataSetChanged()
         initIndicator()
+        mVP2Adapter?.submitList(mExtendModels) //增量更新
         if (mIsAutoPlay) startAutoPlay()
     }
 

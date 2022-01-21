@@ -15,6 +15,7 @@ const val SIDE_NUM = 2 //左右两侧各增加2条
 class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
 
     companion object {
+        //支持异步比较数据 因为这里是比较的String 暂时没有使用
         private val ITEM_COMPARATOR = object : DiffUtil.ItemCallback<String>() {
 
             override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
@@ -28,18 +29,25 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
         }
     }
 
+    /**
+     * use[DiffUtil] 增量更新数据
+     * @param newList 新数据
+     */
     fun submitList(newList: MutableList<String>) {
         val diffUtil = PageDiffUtil(mModels, newList)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         diffResult.dispatchUpdatesTo(this)
+        //NOTE:注意这里要重新设置Adapter中的数据
+        setModels(newList)
     }
 
-    private var mModels: List<String> = mutableListOf()
+    private var mModels = mutableListOf<String>()
     private var mLoader: ILoader<View>? = null
     private var mItemClickListener: OnBannerClickListener? = null
 
     fun setModels(models: List<String>) {
-        this.mModels = models
+        mModels.clear()
+        mModels.addAll(models)
     }
 
     fun setImageLoader(loader: ILoader<View>?) {
@@ -82,7 +90,11 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
         position: Int,
         payloads: MutableList<Any>
     ) {
-        super.onBindViewHolder(holder, position, payloads)
+        if (payloads.isNotEmpty()) {
+            //局部更新 partial bind
+        } else {
+            super.onBindViewHolder(holder, position, payloads)
+        }
     }
 
     override fun getItemCount(): Int = mModels.size
