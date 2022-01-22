@@ -95,9 +95,9 @@ class LayoutManagerProxy(
      * 优化RecyclerView: Inconsistency detected. Invalid item position
      * https://stackoverflow.com/questions/30220771/recyclerview-inconsistency-detected-invalid-item-position
      */
-    override fun supportsPredictiveItemAnimations(): Boolean {
-        return false
-    }
+//    override fun supportsPredictiveItemAnimations(): Boolean {
+//        return false
+//    }
 
     override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
         try {
