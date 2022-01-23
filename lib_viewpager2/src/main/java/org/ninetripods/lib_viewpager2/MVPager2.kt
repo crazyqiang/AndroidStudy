@@ -17,10 +17,10 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OffscreenPageLimit
 import org.ninetripods.lib_viewpager2.adapter.MVP2Adapter
+import org.ninetripods.lib_viewpager2.adapter.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.adapter.SIDE_NUM
 import org.ninetripods.lib_viewpager2.imageLoader.DefaultLoader
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
-import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.proxy.LayoutManagerProxy
 import kotlin.math.absoluteValue
 
@@ -276,6 +276,11 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
+     * 是否自动轮播
+     */
+    fun isAutoPlay(): Boolean = mIsAutoPlay
+
+    /**
      * 初始化VP2
      */
     private fun initMVPager2() {
@@ -510,12 +515,12 @@ class MVPager2 @JvmOverloads constructor(
     private fun exFirstPositive(): Int = 0
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        if (mIsAutoPlay && mUserInputEnable) {
+        if (mUserInputEnable) {
             val action = ev.action
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_OUTSIDE) {
-                startAutoPlay()
+                if (mIsAutoPlay) startAutoPlay()
             } else if (action == MotionEvent.ACTION_DOWN) {
-                stopAutoPlay()
+                if (mIsAutoPlay) removeCallbacks(autoRunnable)
             }
         }
         return super.dispatchTouchEvent(ev)

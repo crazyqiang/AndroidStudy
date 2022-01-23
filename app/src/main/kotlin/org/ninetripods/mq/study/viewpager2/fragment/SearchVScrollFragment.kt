@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import org.ninetripods.lib_viewpager2.MVPager2
-import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
+import org.ninetripods.lib_viewpager2.adapter.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.TextLoader
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.base.BaseFragment

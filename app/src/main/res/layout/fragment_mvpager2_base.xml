@@ -11,9 +11,8 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="20dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_add_one"
@@ -33,5 +32,53 @@
             android:gravity="center"
             android:text="减少一条" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/tv_auto_play"
+        style="@style/btn_style_done_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="开始自动轮播" />
+
+    <TextView
+        android:id="@+id/tv_orientation"
+        style="@style/btn_style_done_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="竖直方向滑动" />
+
+    <TextView
+        android:id="@+id/tv_indicator"
+        style="@style/btn_style_done_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="关闭轮播指示器" />
+
+    <TextView
+        android:id="@+id/tv_multi_page"
+        style="@style/btn_style_done_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="一屏多页" />
+
+    <TextView
+        android:id="@+id/tv_page_transformer"
+        style="@style/btn_style_done_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="转换动画" />
+
+    <TextView
+        android:id="@+id/tv_custom_loader"
+        style="@style/btn_style_done_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="自定义Item样式" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

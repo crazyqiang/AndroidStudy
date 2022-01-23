@@ -10,6 +10,10 @@ import com.bumptech.glide.Glide
  */
 class DefaultLoader : BaseLoader() {
 
+    override fun createView(context: Context): View {
+        return super.createView(context)
+    }
+
     override fun display(context: Context, content: Any, targetView: View) {
         Glide.with(context).load(content).into(targetView as ImageView)
     }

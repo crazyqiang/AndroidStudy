@@ -6,7 +6,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.lib_viewpager2.imageLoader.ILoader
-import org.ninetripods.lib_viewpager2.imageLoader.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.log
 
 const val EXTRA_NUM = 4 //额外增加4条数据
