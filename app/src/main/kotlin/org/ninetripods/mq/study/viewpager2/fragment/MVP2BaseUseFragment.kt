@@ -1,14 +1,14 @@
 package org.ninetripods.mq.study.viewpager2.fragment
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.lib_viewpager2.adapter.OnBannerClickListener
-import org.ninetripods.lib_viewpager2.imageLoader.TextLoader
-import org.ninetripods.lib_viewpager2.transformer.ScaleInTransformer
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
@@ -43,6 +43,7 @@ class MVP2BaseUseFragment : BaseFragment() {
         return R.layout.fragment_mvpager2_base
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initMvp2()
         mTvAdd.setOnClickListener {
@@ -76,7 +77,7 @@ class MVP2BaseUseFragment : BaseFragment() {
             }
         }
         mTvMultiPage.setOnClickListener {
-            mMVPager2.setPagePadding(50, 0, 50, 0).start()
+            mMVPager2.setPagePadding(100, 0, 100, 0).start()
         }
 
         mTvIndicator.setOnClickListener {
@@ -94,14 +95,14 @@ class MVP2BaseUseFragment : BaseFragment() {
         mTvTransformer.setOnClickListener {
             //转换动画
             val multiTransformer = CompositePageTransformer()
-            multiTransformer.addTransformer(ScaleInTransformer())
+//            multiTransformer.addTransformer(ScaleInTransformer())
             multiTransformer.addTransformer(MarginPageTransformer(20))
             mMVPager2.setPageTransformer(multiTransformer).start()
         }
 
         mTvItemLoader.setOnClickListener {
             //自定义Item样式
-            mMVPager2.setLoader(TextLoader()).start()
+            mMVPager2.setLoader(CustomMVP2ItemLoader()).start()
         }
     }
 
