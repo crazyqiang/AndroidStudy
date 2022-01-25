@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.lib_viewpager2.adapter.OnBannerClickListener
+import org.ninetripods.lib_viewpager2.imageLoader.RoundImageLoader
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
@@ -102,7 +103,7 @@ class MVP2BaseUseFragment : BaseFragment() {
 
         mTvItemLoader.setOnClickListener {
             //自定义Item样式
-            mMVPager2.setLoader(CustomMVP2ItemLoader()).start()
+            mMVPager2.setLoader(RoundImageLoader()).start()
         }
     }
 

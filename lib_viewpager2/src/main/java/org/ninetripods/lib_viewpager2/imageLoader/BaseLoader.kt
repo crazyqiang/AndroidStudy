@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 
+/**
+ * Item加载基类，默认是ImageView 可以在子类中修改
+ */
 abstract class BaseLoader : ILoader<View> {
 
     override fun createView(context: Context): View {
