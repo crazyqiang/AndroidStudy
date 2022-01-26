@@ -73,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="转换动画" />
+        android:text="转换动画Transformer" />
 
     <TextView
         android:id="@+id/tv_custom_loader"
