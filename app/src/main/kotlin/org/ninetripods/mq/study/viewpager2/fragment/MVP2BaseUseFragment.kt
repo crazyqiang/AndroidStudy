@@ -2,14 +2,26 @@ package org.ninetripods.mq.study.viewpager2.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.util.ArrayMap
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
+import com.ninetripods.sydialoglib.SYDialog
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.lib_viewpager2.adapter.OnBannerClickListener
 import org.ninetripods.lib_viewpager2.imageLoader.RoundImageLoader
+import org.ninetripods.lib_viewpager2.transformer.DepthPageTransformer
+import org.ninetripods.lib_viewpager2.transformer.ScaleInTransformer
+import org.ninetripods.lib_viewpager2.transformer.ZoomOutPageTransformer
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
@@ -23,10 +35,16 @@ class MVP2BaseUseFragment : BaseFragment() {
             "https://n.sinaimg.cn/spider20201221/308/w1143h765/20201221/4bba-kfnaptu6435105.jpg",
             "https://images.zi.org.tw/bigfang/2020/02/19222035/1582122033-6062688041443908d6d864b6722c38ff.jpg"
         )
+        const val MARGIN_TRANSFORMER = "MarginPageTransformer(左右边距30px)"
+        const val ZOOM_OUT_TRANSFORMER = "ZoomOutPageTransformer"
+        const val DEPTH_PAGE_TRANSFORMER = "DepthPageTransformer"
+        const val SCALE_IN_TRANSFORMER = "ScaleInTransformer"
+        const val MULTI_TRANSFORMER = "组合Transformer"
     }
 
     private var isIndicatorShow = true
     private var isHorizontal = true
+    private var isMultiPageShow = true
     private val mMVPager2: MVPager2 by id(R.id.mvp_pager2)
     private val mTvOrientation: TextView by id(R.id.tv_orientation)
     private val mTvAdd: TextView by id(R.id.tv_add_one)
@@ -78,7 +96,15 @@ class MVP2BaseUseFragment : BaseFragment() {
             }
         }
         mTvMultiPage.setOnClickListener {
-            mMVPager2.setPagePadding(100, 0, 100, 0).start()
+            if (isMultiPageShow) {
+                mMVPager2.setPagePadding(60, 0, 60, 0).start()
+                mTvMultiPage.text = "一屏一页"
+                isMultiPageShow = false
+            } else {
+                mMVPager2.setPagePadding(0, 0, 0, 0).start()
+                mTvMultiPage.text = "一屏三页"
+                isMultiPageShow = true
+            }
         }
 
         mTvIndicator.setOnClickListener {
@@ -95,10 +121,7 @@ class MVP2BaseUseFragment : BaseFragment() {
         }
         mTvTransformer.setOnClickListener {
             //转换动画
-            val multiTransformer = CompositePageTransformer()
-//            multiTransformer.addTransformer(ScaleInTransformer())
-            multiTransformer.addTransformer(MarginPageTransformer(20))
-            mMVPager2.setPageTransformer(multiTransformer).start()
+            showTransformDialog()
         }
 
         mTvItemLoader.setOnClickListener {
@@ -124,5 +147,99 @@ class MVP2BaseUseFragment : BaseFragment() {
                 }
             })
             .start()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun showTransformDialog() {
+        //在这里添加文案
+        val transforms = mutableListOf<String>()
+        transforms.add(MARGIN_TRANSFORMER)
+        transforms.add(ZOOM_OUT_TRANSFORMER)
+        transforms.add(DEPTH_PAGE_TRANSFORMER)
+        transforms.add(SCALE_IN_TRANSFORMER)
+        transforms.add(MULTI_TRANSFORMER)
+
+        //通过map获取最终的ViewPager2.PageTransformer
+        val transformMap = ArrayMap<String, ViewPager2.PageTransformer>()
+        transformMap[MARGIN_TRANSFORMER] = MarginPageTransformer(30)
+        transformMap[ZOOM_OUT_TRANSFORMER] = ZoomOutPageTransformer()
+        transformMap[DEPTH_PAGE_TRANSFORMER] = DepthPageTransformer()
+        transformMap[SCALE_IN_TRANSFORMER] = ScaleInTransformer()
+        transformMap[MULTI_TRANSFORMER] = getMultiTransformer()
+
+        SYDialog.Builder(context)
+            .setDialogView(R.layout.layout_mvp_pager_transform)
+            .setGravity(Gravity.BOTTOM)
+            .setScreenWidthP(1.0f)
+            .setAnimStyle(R.style.AnimUp)
+            .setBuildChildListener { dialog, parent, layoutRes ->
+                val recyclerView: RecyclerView = parent.findViewById(R.id.recycler_view)
+                recyclerView.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.VERTICAL, false
+                )
+                val transformAdapter = TransformerAdapter(transforms)
+                transformAdapter.setOnItemClickListener(object :
+                    TransformerAdapter.OnItemListener {
+                    override fun onItemClick(key: String) {
+                        //获取对应的ViewPager2.PageTransformer
+                        val targetTransformer = transformMap[key]
+                        val multiTransformer = CompositePageTransformer()
+                        multiTransformer.addTransformer(targetTransformer!!)
+                        mMVPager2.setPageTransformer(multiTransformer).start()
+                        dialog.dismiss()
+                    }
+
+                })
+                recyclerView.adapter = transformAdapter
+            }
+            .show()
+    }
+
+    /**
+     * 组合Transformer
+     */
+    private fun getMultiTransformer(): CompositePageTransformer {
+        val multiTransformer = CompositePageTransformer()
+        multiTransformer.addTransformer(ScaleInTransformer())
+        multiTransformer.addTransformer(MarginPageTransformer(10))
+        return multiTransformer
+    }
+
+    class TransformerAdapter(private val models: MutableList<String>) :
+        RecyclerView.Adapter<TransformerAdapter.TransformHolder>() {
+        private var listener: OnItemListener? = null
+
+        interface OnItemListener {
+            fun onItemClick(key: String)
+        }
+
+        fun setOnItemClickListener(listener: OnItemListener) {
+            this.listener = listener
+        }
+
+        class TransformHolder(val container: View) : RecyclerView.ViewHolder(container)
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransformHolder {
+            val textView = TextView(parent.context).apply {
+                layoutParams =
+                    ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+            }
+            textView.gravity = Gravity.CENTER
+            textView.textSize = 16f
+            textView.setTextColor(parent.context.resources.getColor(R.color.white))
+            textView.setPadding(0, 30, 0, 30)
+            return TransformHolder(textView).apply {
+                textView.setOnClickListener {
+                    listener?.onItemClick(models[bindingAdapterPosition])
+                }
+            }
+        }
+
+        override fun onBindViewHolder(holder: TransformHolder, position: Int) {
+            (holder.container as TextView).text = models[position]
+        }
+
+        override fun getItemCount(): Int = models.size
     }
 }

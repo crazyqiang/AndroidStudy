@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/red_100"
     android:orientation="vertical">
 
     <org.ninetripods.lib_viewpager2.MVPager2
@@ -64,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="一屏多页" />
+        android:text="一屏三页" />
 
     <TextView
         android:id="@+id/tv_page_transformer"
@@ -80,6 +81,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="自定义Item样式" />
+        android:text="自定义Item样式->设置圆角ImageView" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
