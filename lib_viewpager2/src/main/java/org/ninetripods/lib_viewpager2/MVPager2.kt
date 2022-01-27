@@ -154,6 +154,7 @@ class MVPager2 @JvmOverloads constructor(
 
     /**
      *设置ViewPager2是否可以滑动
+     * true-可以滑动 false-禁止滑动
      */
     fun setUserInputEnabled(inputEnable: Boolean): MVPager2 {
         this.mUserInputEnable = inputEnable
@@ -162,6 +163,7 @@ class MVPager2 @JvmOverloads constructor(
 
     /**
      * 是否展示轮播指示器
+     * true-展示 false-不展示
      */
     fun setIndicatorShow(isIndicatorShow: Boolean): MVPager2 {
         this.mShowIndicator = isIndicatorShow
@@ -178,7 +180,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     * 设置轮播切换时的动画持续时间 通过反射改变系统自动切换的时间 注意：这里设置的switchDuration值需要小于
+     * 设置轮播切换时的动画持续时间 通过反射改变系统自动切换的时间 注意：这里设置的animDuration值需要小于
      * @see MVPager2.setPageInterval()中设置的autoInterval值
      * @param animDuration 动画切换持续时间
      */
@@ -212,7 +214,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     * 设置自定义动画
+     * 设置ItemView切换动画
      * @param transformer CompositePageTransformer可以同时添加多个ViewPager2.PageTransformer
      */
     fun setPageTransformer(transformer: CompositePageTransformer): MVPager2 {
@@ -221,7 +223,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     * 设置Banner的Item点击
+     * 设置Banner的ItemView点击
      * @param listener
      */
     fun setOnBannerClickListener(listener: OnBannerClickListener): MVPager2 {
@@ -240,7 +242,7 @@ class MVPager2 @JvmOverloads constructor(
 
     /**
      * 设置轮播方向
-     * @param orientation 横竖方向：ViewPager2.ORIENTATION_HORIZONTAL 或 ViewPager2.ORIENTATION_VERTICAL
+     * @param orientation 横竖方向：ORIENTATION_HORIZONTAL 或 ORIENTATION_VERTICAL
      */
     fun setOrientation(@ViewPager2.Orientation orientation: Int): MVPager2 {
         mOrientation = orientation
@@ -248,7 +250,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     * 设置View
+     * 设置ItemView加载器
      * @param loader View加载
      */
     fun setLoader(loader: ILoader<View>): MVPager2 {

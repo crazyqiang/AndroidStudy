@@ -138,7 +138,7 @@ class MVP2BaseUseFragment : BaseFragment() {
             .setOrientation(MVPager2.ORIENTATION_HORIZONTAL) //轮播方向
             //.setUserInputEnabled(true) //控制是否可以触摸滑动
             .setAutoPlay(false) //设置自动轮播
-            .setPageInterval(5000L) //轮播间隔
+            .setPageInterval(3000L) //轮播间隔
             .setAnimDuration(500) //切换动画执行时间
             .setOnBannerClickListener(object : OnBannerClickListener {
                 override fun onItemClick(position: Int) {
