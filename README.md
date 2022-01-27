@@ -1,15 +1,13 @@
 ## 扫描二维码下载APK示例
-
 ![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
 
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
 # 更新日志
-
-库 | 更新日志
-:----|:----
-lib-dialog | __NOTE:__ dialog库已迁移到maven仓库，引入方式：<br> __implementation 'io.github.mqcodedev:lib_dialog:1.3.0'__ <br>别忘了在根目录下的build.gradle中声明 mavenCentral()，现在新建项目默认会自动引入<br><br> Jcenter引入方式：<br>~~implementation 'com.ninetripods:lib-dialog:1.1.0'~~<br>未来Jcenter不允许更新版本，墙裂建议使用maven方式引入 <br><br> 版本改动说明：[Dialog库README文档](https://github.com/crazyqiang/AndroidStudy/blob/master/lib_dialog/README.md)<br>Blog地址：[Android基于DialogFragment封装一个通用的Dialog](https://blog.csdn.net/u013700502/article/details/82777402)
-
+库 | 更新日志 | 备注
+:----|:----|:----
+lib_dialog | __NOTE:__ dialog库已迁移到maven仓库，引入方式：<br> __implementation 'io.github.mqcodedev:lib_dialog:1.3.0'__ <br>别忘了在根目录下的build.gradle中声明 mavenCentral()，现在新建项目默认会自动引入<br><br> Jcenter引入方式：<br>~~implementation 'com.ninetripods:lib-dialog:1.1.0'~~<br>未来Jcenter不允许更新版本，墙裂建议使用maven方式引入 <br><br> 版本改动说明：[Dialog库README文档](https://github.com/crazyqiang/AndroidStudy/blob/master/lib_dialog/README.md)<br>Blog地址：[Android基于DialogFragment封装一个通用的Dialog](https://blog.csdn.net/u013700502/article/details/82777402)
+lib_viewpager2 | 自动无限轮播实现，支持自定义ItemView及转场动画等 |**MVPager2基本使用：**<br><img src="https://img-blog.csdnimg.cn/3be2a0c909ef4f258e41d7eb9c8a3f22.gif" width="240"><br>**仿淘宝搜索栏文字上下轮播**：<br><img src="https://img-blog.csdnimg.cn/46946afd62884207b758e79ab845d8ae.gif" width="240">
 
 # Blog发布
 
@@ -27,28 +25,28 @@ PopupWindow | 1、[Android基于DialogFragment封装一个通用的Dialog](https
 
 
 ## 效果展示
- 
+
  ### Android多线程之HandlerThread、IntentService：
  ![HandlerThread.gif](https://upload-images.jianshu.io/upload_images/587163-8fcc2d6dcdbc7757.gif?imageMogr2/auto-orient/strip)
  ![IntentService.gif](https://upload-images.jianshu.io/upload_images/587163-d36f126c6b0483ff.gif?imageMogr2/auto-orient/strip)
- 
+
  ### Android中几种线程池的使用：
  ![CachedThreadPool.gif](https://upload-images.jianshu.io/upload_images/587163-a7fab256e4437799.gif?imageMogr2/auto-orient/strip)
  ![FixedThreadPool.gif](https://upload-images.jianshu.io/upload_images/587163-81b5fc189abec641.gif?imageMogr2/auto-orient/strip)
  ![SingleThreadExecutor.gif](https://upload-images.jianshu.io/upload_images/587163-3e6c003fa7e4278c.gif?imageMogr2/auto-orient/strip)
  ![Schedule.gif](https://upload-images.jianshu.io/upload_images/587163-b3a74b1e234a25a5.gif?imageMogr2/auto-orient/strip)
- 
+
  ### LruCache、DiskLruCache实现图片缓存，瀑布流：
  ![ImgCache.gif](https://upload-images.jianshu.io/upload_images/587163-a2fd6c97ab4a7811.gif?imageMogr2/auto-orient/strip)
- 
+
  ### 仿QQ侧滑菜单、小红点：
  ![Swipe_menu.gif](https://upload-images.jianshu.io/upload_images/587163-43f6b3f6c0964189.gif?imageMogr2/auto-orient/strip)
  ![qq_point.gif](https://upload-images.jianshu.io/upload_images/587163-7e35275bb608ad32.gif?imageMogr2/auto-orient/strip)
- 
- ### 仿魅族通讯录、通用PopupWindow： 
+
+ ### 仿魅族通讯录、通用PopupWindow：
  ![Contacts.gif](https://upload-images.jianshu.io/upload_images/587163-988a21a91ec89901.gif?imageMogr2/auto-orient/strip)
  ![PopupWindow.gif](https://upload-images.jianshu.io/upload_images/587163-2ed25095367ed1b8.gif?imageMogr2/auto-orient/strip)
- 
+
  ### Bundle、AIDL、Messenger、Binder：
  ![intent.gif](https://upload-images.jianshu.io/upload_images/587163-d125bd779e8fb671.gif?imageMogr2/auto-orient/strip)
  ![aidl.gif](https://upload-images.jianshu.io/upload_images/587163-6766165772f98949.gif?imageMogr2/auto-orient/strip)
