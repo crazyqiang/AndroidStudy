@@ -17,7 +17,7 @@ open class NestedFragmentAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa
         return NestedScrollItemFragment(mItems[position].id)
     }
 
-    fun setDatas(newItems: List<VP2Model>, useDiffUtil: Boolean = true) {
+    fun setModels(newItems: List<VP2Model>, useDiffUtil: Boolean = false) {
         if (useDiffUtil) {
             //使用DiffUtil更新数据
             val callback = PageDiffUtil(mItems, newItems)

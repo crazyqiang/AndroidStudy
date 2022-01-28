@@ -19,10 +19,10 @@ class NestedScrollFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = NestedFragmentAdapter(requireActivity())
         val models = mutableListOf<VP2Model>()
-        for (i in 0 until 5) {
+        for (i in 1 until 8) {
             models.add(VP2Model(id = i, content = "fragment$i"))
         }
-        adapter.setDatas(models)
+        adapter.setModels(models)
         mViewPager2.adapter = adapter
     }
 
