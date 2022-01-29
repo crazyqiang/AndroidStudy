@@ -2,6 +2,7 @@ package org.ninetripods.mq.study.viewpager2.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
@@ -24,6 +25,10 @@ class NestedScrollFragment : BaseFragment() {
         }
         adapter.setModels(models)
         mViewPager2.adapter = adapter
+        //设置预抓取
+        (mViewPager2.getChildAt(0) as RecyclerView).layoutManager?.apply {
+            isItemPrefetchEnabled = true
+        }
     }
 
 }
