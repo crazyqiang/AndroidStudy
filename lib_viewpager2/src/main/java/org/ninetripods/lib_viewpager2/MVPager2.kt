@@ -445,6 +445,7 @@ class MVPager2 @JvmOverloads constructor(
      * @param exPosition 扩展数据中的位置
      */
     private fun getRealPosition(exPosition: Int): Int {
+        if (mRealCount == 0) return mRealCount
         var realPos = (exPosition - SIDE_NUM) % mRealCount
         if (realPos < 0) realPos += mRealCount
         return realPos
@@ -463,6 +464,11 @@ class MVPager2 @JvmOverloads constructor(
      * 扩展原有数据
      */
     private fun extendOriginModels() {
+        if (mRealCount == 0) {
+            //传入的数据为空，展示默认图
+            showMainView(false)
+            return
+        }
         mExtendModels.clear()
         showMainView(true)
         if (mRealCount > 1) {
@@ -489,7 +495,6 @@ class MVPager2 @JvmOverloads constructor(
         } else {
             mExtendModels.add(mModels[0])
         }
-        //log("mExtendModels:$mExtendModels")
     }
 
     private fun showMainView(visible: Boolean = true) {

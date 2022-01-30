@@ -11,7 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 /**
  * 设置圆角半径
  */
-class RoundImageLoader(val roundRadius: Int = 30) : BaseLoader() {
+class RoundImageLoader(private val roundRadius: Int = 30) : BaseLoader() {
 
     override fun createView(context: Context): View {
         return super.createView(context)

@@ -2,6 +2,7 @@ package org.ninetripods.mq.study.viewpager2.adapter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 
 fun lifeLog(strInfo: String) {
-    //Log.e("FragmentLifeCycle", strInfo)
+    Log.e("FragmentLifeCycle", strInfo)
 }
 
 class NestedScrollItemFragment(val position: Int = 0) : BaseFragment() {

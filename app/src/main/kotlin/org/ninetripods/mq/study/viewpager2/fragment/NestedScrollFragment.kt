@@ -20,11 +20,13 @@ class NestedScrollFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = NestedFragmentAdapter(requireActivity())
         val models = mutableListOf<VP2Model>()
-        for (i in 1 until 8) {
+        for (i in 0 until 7) {
             models.add(VP2Model(id = i, content = "fragment$i"))
         }
         adapter.setModels(models)
         mViewPager2.adapter = adapter
+        //mViewPager2.offscreenPageLimit = 1
+
         //设置预抓取
         (mViewPager2.getChildAt(0) as RecyclerView).layoutManager?.apply {
             isItemPrefetchEnabled = true
