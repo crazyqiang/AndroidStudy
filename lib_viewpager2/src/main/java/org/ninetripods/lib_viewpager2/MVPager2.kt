@@ -84,14 +84,18 @@ class MVPager2 @JvmOverloads constructor(
                 mCurPos = mCurPos % mExtendModels.size + 1
                 //log("autoScroll: mCurPos is $mCurPos , total is ${exFirstLastPos()}")
                 when (mCurPos) {
+                    //扩展数据之后，滑动到倒数第2条数据时，改变轮播位置
                     exSecondLastPos() -> {
                         mSelectedValid = false
+                        //跳转到正数第2条数据，注意这里smoothScroll设置为false，即不会有跳转动画
                         mViewPager2.setCurrentItem(1, false)
+                        //立即执行,会走到下面的else中去 最终会展示正数第3条的数据，达到无限轮播的效果
                         post(this)
                     }
                     else -> {
                         mSelectedValid = true
                         mViewPager2.currentItem = mCurPos
+                        //延迟执行
                         postDelayed(this, AUTO_PLAY_INTERVAL)
                     }
                 }
@@ -521,6 +525,9 @@ class MVPager2 @JvmOverloads constructor(
     //正数第1条数据
     private fun exFirstPositive(): Int = 0
 
+    /**
+     * 手指触摸时停止自动轮播
+     */
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         if (mUserInputEnable) {
             val action = ev.action

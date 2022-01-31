@@ -33,11 +33,14 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
      * @param newList 新数据
      */
     fun submitList(newList: MutableList<String>) {
+        //传入新旧数据进行比对
         val diffUtil = PageDiffUtil(mModels, newList)
+        //经过比对得到差异结果
         val diffResult = DiffUtil.calculateDiff(diffUtil)
-        diffResult.dispatchUpdatesTo(this)
         //NOTE:注意这里要重新设置Adapter中的数据
         setModels(newList)
+        //将数据传给adapter，最终通过adapter.notifyItemXXX更新数据
+        diffResult.dispatchUpdatesTo(this)
     }
 
     private var mModels = mutableListOf<String>()
