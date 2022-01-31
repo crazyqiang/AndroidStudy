@@ -26,7 +26,7 @@
 ## 二 核心实现思路
 ### 2.1 无限轮播
 为了实现无限轮播，首先对原始数据进行扩充，如下图所示：<br>
-<img src="https://img-blog.csdnimg.cn/450e47c4009f4db9ac21a34a05dde993.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBALeWwj-mprOW_q-i3kS0=,size_20,color_FFFFFF,t_70,g_se,x_16" width="1000"><br>
+<img src="https://img-blog.csdnimg.cn/450e47c4009f4db9ac21a34a05dde993.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBALeWwj-mprOW_q-i3kS0=,size_20,color_FFFFFF,t_70,g_se,x_16" width="700"><br>
 
 在真实数据的前后各增加2条数据，添加规则已经在图片中注明了。
 ```
