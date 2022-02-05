@@ -4,6 +4,8 @@
 | **基本使用** | <img src="https://img-blog.csdnimg.cn/3be2a0c909ef4f258e41d7eb9c8a3f22.gif" width="300">  |
 | **仿淘宝搜索栏上下轮播** | <img src="https://img-blog.csdnimg.cn/46946afd62884207b758e79ab845d8ae.gif" width="300">|
 
+### 使用方式
+
 ### 1.1 API介绍
 | API  | 备注  |
 |:--|:--|
