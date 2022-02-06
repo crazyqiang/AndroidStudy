@@ -7,35 +7,36 @@
 ### 使用方式
 ```
 val mModels = mutableListOf(MConstant.IMG_1, MConstant.IMG_2, MConstant.IMG_3)
-        //多个转换动画
-        val multiTransformer = CompositePageTransformer()
-        multiTransformer.addTransformer(MarginPageTransformer(20))
-        multiTransformer.addTransformer(ZoomOutPageTransformer())
 
-        mMVPager2.setModels(mModels) //设置轮播数据
-            .setIndicatorShow(true) //设置轮播指示器
-            .setOffscreenPageLimit(1) //离屏缓存数量
-            .setLoader(DefaultLoader()) //设置ItemView加载器 可以自定义Item样式
-            .setPagePadding(50, 0, 50, 0) //设置一屏三页
-            .setPageTransformer(multiTransformer) //转换动画
-            .setOrientation(MVPager2.ORIENTATION_HORIZONTAL) //轮播方向
-            .setUserInputEnabled(true) //控制是否可以触摸滑动 默认为true
-            .setAutoPlay(false) //设置自动轮播
-            .setPageInterval(3000L) //轮播间隔
-            .setAnimDuration(500) //切换动画执行时间
-            .setOnBannerClickListener(object : OnBannerClickListener {
-                override fun onItemClick(position: Int) {
-                    //Item点击
-                    showToast("position is $position")
-                }
-            })
-            .registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-              //设置页面改变时的回调
-            })
-            .start() //开始
+//多个转换动画
+val multiTransformer = CompositePageTransformer()
+multiTransformer.addTransformer(MarginPageTransformer(20))
+multiTransformer.addTransformer(ZoomOutPageTransformer())
 
-        //使用DiffUtil进行增量数据更新 newList：更新后的数据Models
-        mMVPager2.submitList(newList)
+mMVPager2.setModels(mModels) //设置轮播数据
+    .setIndicatorShow(true) //设置轮播指示器
+    .setOffscreenPageLimit(1) //离屏缓存数量
+    .setLoader(DefaultLoader()) //设置ItemView加载器 可以自定义Item样式
+    .setPagePadding(50, 0, 50, 0) //设置一屏三页
+    .setPageTransformer(multiTransformer) //转换动画
+    .setOrientation(MVPager2.ORIENTATION_HORIZONTAL) //轮播方向
+    .setUserInputEnabled(true) //控制是否可以触摸滑动 默认为true
+    .setAutoPlay(false) //设置自动轮播
+    .setPageInterval(3000L) //轮播间隔
+    .setAnimDuration(500) //切换动画执行时间
+    .setOnBannerClickListener(object : OnBannerClickListener {
+        override fun onItemClick(position: Int) {
+            //Item点击
+            showToast("position is $position")
+        }
+     })
+    .registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+      //设置页面改变时的回调
+    })
+    .start() //开始
+
+//使用DiffUtil进行增量数据更新 newList：更新后的数据Models
+mMVPager2.submitList(newList)
 ```
 
 ### 1.1 API介绍
