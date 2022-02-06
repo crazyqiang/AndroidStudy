@@ -34,7 +34,9 @@ mMVPager2.setModels(mModels) //设置轮播数据
       //设置页面改变时的回调
     })
     .start() //开始
-
+```
+如果需要刷新整体数据，可以像下面进行增量更新：
+```
 //使用DiffUtil进行增量数据更新 newList：更新后的数据Models
 mMVPager2.submitList(newList)
 ```
