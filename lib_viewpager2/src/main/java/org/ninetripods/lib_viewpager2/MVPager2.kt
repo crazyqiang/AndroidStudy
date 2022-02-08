@@ -157,7 +157,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
-     *设置ViewPager2是否可以滑动
+     *设置ViewPager2是否可以滑动 默认为true
      * true-可以滑动 false-禁止滑动
      */
     fun setUserInputEnabled(inputEnable: Boolean): MVPager2 {
