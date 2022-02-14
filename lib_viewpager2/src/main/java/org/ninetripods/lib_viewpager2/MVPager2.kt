@@ -264,7 +264,9 @@ class MVPager2 @JvmOverloads constructor(
 
     fun start() {
         initMVPager2()
-        initVP2LayoutManagerProxy()
+        if (mCustomSwitchAnimDuration != 0) {
+            initVP2LayoutManagerProxy()
+        }
         initIndicator()
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter?.let {

@@ -30,11 +30,6 @@ import org.ninetripods.mq.study.kotlin.ktx.showToast
 
 class MVP2BaseUseFragment : BaseFragment() {
     companion object {
-        val urls = arrayListOf(
-            "https://cdn03.pinkoi.com/pinkoi.magz/tvzvjB9F/14650149183643.jpg",
-            "https://n.sinaimg.cn/spider20201221/308/w1143h765/20201221/4bba-kfnaptu6435105.jpg",
-            "https://images.zi.org.tw/bigfang/2020/02/19222035/1582122033-6062688041443908d6d864b6722c38ff.jpg"
-        )
         const val MARGIN_TRANSFORMER = "MarginPageTransformer(左右边距30px)"
         const val ZOOM_OUT_TRANSFORMER = "ZoomOutPageTransformer"
         const val DEPTH_PAGE_TRANSFORMER = "DepthPageTransformer"
@@ -139,7 +134,7 @@ class MVP2BaseUseFragment : BaseFragment() {
             //.setUserInputEnabled(true) //控制是否可以触摸滑动
             .setAutoPlay(false) //设置自动轮播
             .setPageInterval(3000L) //轮播间隔
-            .setAnimDuration(500) //切换动画执行时间
+            .setAnimDuration(300) //切换动画执行时间
             .setOnBannerClickListener(object : OnBannerClickListener {
                 override fun onItemClick(position: Int) {
                     //Item点击
