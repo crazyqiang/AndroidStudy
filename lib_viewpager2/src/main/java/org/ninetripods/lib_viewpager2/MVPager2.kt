@@ -57,8 +57,8 @@ class MVPager2 @JvmOverloads constructor(
     private var mOnPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var mRealCount: Int = 0 //VP2真实数量
     private var mVP2Adapter: MVP2Adapter? = null
-    private var mModels = mutableListOf<String>()
-    private var mExtendModels = mutableListOf<String>()
+    private var mModels = mutableListOf<Any>()
+    private var mExtendModels = mutableListOf<Any>()
     private var mCurPos = SIDE_NUM //当前滑动到的位置
     private var mClickListener: OnBannerClickListener? = null
     private var mOffScreenPageLimit = ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT
@@ -118,7 +118,7 @@ class MVPager2 @JvmOverloads constructor(
      * 设置数据
      * @param list 轮播数据Models
      */
-    fun setModels(list: MutableList<String>): MVPager2 {
+    fun setModels(list: List<Any>): MVPager2 {
         this.mModels.clear()
         this.mModels.addAll(list)
         this.mRealCount = mModels.size
@@ -130,7 +130,7 @@ class MVPager2 @JvmOverloads constructor(
      * 使用DiffUtil进行增量数据更新
      * @param newList 更新后的数据Models
      */
-    fun submitList(newList: MutableList<String>) {
+    fun submitList(newList: List<Any>) {
         if (mVP2Adapter == null) return
         if (newList.isEmpty()) {
             //展示默认图片

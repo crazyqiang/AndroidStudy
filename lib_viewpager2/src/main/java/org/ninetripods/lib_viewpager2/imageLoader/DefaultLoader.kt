@@ -16,9 +16,19 @@ class DefaultLoader : BaseLoader() {
     }
 
     override fun display(context: Context, content: Any, targetView: View) {
-        Glide.with(context)
-            .load(content)
-            .error(R.drawable.layout_img_default)
-            .into(targetView as ImageView)
+        val targetImageView = targetView as ImageView
+        when (content) {
+            is Int -> {
+                //加载本地资源
+                targetImageView.setImageResource(content)
+            }
+            is String -> {
+                //加载url
+                Glide.with(context)
+                    .load(content)
+                    .error(R.drawable.layout_img_default)
+                    .into(targetImageView)
+            }
+        }
     }
 }
