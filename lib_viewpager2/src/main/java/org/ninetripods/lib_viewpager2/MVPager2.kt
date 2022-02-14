@@ -49,6 +49,8 @@ class MVPager2 @JvmOverloads constructor(
     private var mIndicatorImgSize: Int = 0
     private var mLastPosition: Int = 0
     private var mShowIndicator: Boolean = false //是否展示轮播指示器
+    private var mIndicatorInside: Boolean = true //指示器是否在Banner内部
+    private var mIndicatorHeight: Float = 0F
 
     private var mIvDefault: ImageView
 
@@ -105,6 +107,13 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     init {
+        //获取自定义值
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.MVPager2)
+        mIndicatorInside = ta.getBoolean(R.styleable.MVPager2_indicator_inside_banner, true)
+        mIndicatorHeight = ta.getDimension(R.styleable.MVPager2_indicator_height, 0F)
+        ta.recycle()
+        log("mIndicatorHeight: $mIndicatorHeight")
+
         LayoutInflater.from(context).inflate(R.layout.layout_mvpager2, this)
         mViewPager2 = findViewById(R.id.vp_pager2)
         mLlIndicator = findViewById(R.id.ll_circle_indicator)
@@ -268,6 +277,22 @@ class MVPager2 @JvmOverloads constructor(
             initVP2LayoutManagerProxy()
         }
         initIndicator()
+        post {
+            if (mIndicatorHeight != 0F) {
+                //设置了指示器高度
+                mClIndicator.layoutParams.height = mIndicatorHeight.toInt()
+                if (!mIndicatorInside) {
+                    //指示器在Banner外部 重新设置mViewPager2的高度
+                    mViewPager2.layoutParams.height = height - mIndicatorHeight.toInt()
+                }
+            } else {
+                //未设置指示器高度 走默认指示器高度
+                if (!mIndicatorInside) {
+                    //指示器在Banner外部 重新设置mViewPager2的高度  mClIndicator.height:默认的指示器高度
+                    mViewPager2.layoutParams.height = height - mClIndicator.height
+                }
+            }
+        }
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter?.let {
             it.setModels(mExtendModels)
