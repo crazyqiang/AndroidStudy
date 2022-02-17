@@ -3,7 +3,7 @@
     <declare-styleable name="MVPager2">
         <!--指示器是否在Banner内部，默认是true-->
         <attr name="indicator_inside_banner" format="boolean" />
-        <!--指示器高度-->
-        <attr name="indicator_height" format="dimension" />
+        <!--指示器容器高度-->
+        <attr name="indicator_bg_height" format="dimension" />
     </declare-styleable>
 </resources>

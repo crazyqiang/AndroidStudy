@@ -52,8 +52,6 @@ class MVPager2 @JvmOverloads constructor(
     private var mIndicatorInside: Boolean = true //指示器是否在Banner内部
     private var mIndicatorHeight: Float = 0F
 
-    private var mIvDefault: ImageView
-
     //ViewPager2
     private lateinit var mViewPager2: ViewPager2
     private var mOnPageChangeCallback: ViewPager2.OnPageChangeCallback? = null
@@ -124,7 +122,6 @@ class MVPager2 @JvmOverloads constructor(
         mViewPager2 = findViewById(R.id.vp_pager2)
         mLlIndicator = findViewById(R.id.ll_circle_indicator)
         mClIndicator = findViewById(R.id.cl_indicator)
-        mIvDefault = findViewById(R.id.iv_default)
         mIndicatorImgSize = context.resources.displayMetrics.widthPixels / 75
         mTouchSlop = ViewConfiguration.get(context).scaledTouchSlop
     }
@@ -534,10 +531,8 @@ class MVPager2 @JvmOverloads constructor(
         }
     }
 
-    private fun showMainView(visible: Boolean = true) {
-        mIvDefault.visibility = if (visible) View.GONE else View.VISIBLE
-        mViewPager2.visibility = if (visible) View.VISIBLE else View.GONE
-        mClIndicator.visibility = if (visible) View.VISIBLE else View.GONE
+    private fun showMainView(isVisible: Boolean = true) {
+        visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     //扩展之后的倒数第1条数据
