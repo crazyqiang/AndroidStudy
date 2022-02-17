@@ -94,6 +94,12 @@ class MVPager2 @JvmOverloads constructor(
                         //立即执行,会走到下面的else中去 最终会展示正数第3条的数据，达到无限轮播的效果
                         post(this)
                     }
+                    exFirstLastPos() -> {
+                        //向右滑动，滑动到倒数第1个时 自动将转换到正数第4的位置(该位置为真实数量的第2个)
+                        mSelectedValid = false
+                        mViewPager2.setCurrentItem(SIDE_NUM, false)
+                        post(this)
+                    }
                     else -> {
                         mSelectedValid = true
                         mViewPager2.currentItem = mCurPos
@@ -110,7 +116,7 @@ class MVPager2 @JvmOverloads constructor(
         //获取自定义值
         val ta = context.obtainStyledAttributes(attrs, R.styleable.MVPager2)
         mIndicatorInside = ta.getBoolean(R.styleable.MVPager2_indicator_inside_banner, true)
-        mIndicatorHeight = ta.getDimension(R.styleable.MVPager2_indicator_height, 0F)
+        mIndicatorHeight = ta.getDimension(R.styleable.MVPager2_indicator_bg_height, 0F)
         ta.recycle()
         log("mIndicatorHeight: $mIndicatorHeight")
 
