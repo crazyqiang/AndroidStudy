@@ -331,6 +331,7 @@ class MVPager2 @JvmOverloads constructor(
             //attachViewToParent(mRecyclerView, 0, mRecyclerView.getLayoutParams());
             val innerRecyclerView = mViewPager2.getChildAt(0) as RecyclerView
             innerRecyclerView.apply {
+                overScrollMode = View.OVER_SCROLL_NEVER //去掉滑动到边缘时的光晕效果
                 //这里会导致离屏预加载数+1
                 setPadding(mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom)
                 clipToPadding = false
