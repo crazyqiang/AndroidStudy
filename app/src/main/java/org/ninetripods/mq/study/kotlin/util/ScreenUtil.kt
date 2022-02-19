@@ -1,4 +1,4 @@
-package com.example.jetpackstudy.util
+package org.ninetripods.mq.study.kotlin.util
 
 import android.content.Context
 import androidx.annotation.NonNull

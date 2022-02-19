@@ -1,9 +1,7 @@
-package com.example.jetpackstudy.util
+package org.ninetripods.mq.study.kotlin.util
 
 import android.annotation.SuppressLint
 import android.app.Application
-import java.lang.Exception
-import java.lang.reflect.InvocationTargetException
 
 object AppUtil {
     private var mApplication: Application? = null

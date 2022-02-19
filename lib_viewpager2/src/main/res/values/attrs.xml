@@ -5,5 +5,15 @@
         <attr name="indicator_inside_banner" format="boolean" />
         <!--指示器容器高度-->
         <attr name="indicator_bg_height" format="dimension" />
+        <!--指示器半径-->
+        <attr name="indicator_radius" format="dimension" />
+        <!--指示器Item间margin-->
+        <attr name="indicator_margin" format="dimension" />
+        <!--选中的指示器资源样式-->
+        <attr name="indicator_drawable_selected" format="reference" />
+        <!--未选中的指示器资源样式-->
+        <attr name="indicator_drawable_unselected" format="reference" />
+        <!--指示器的宽高比-->
+        <attr name="indicator_w_h_ratio" format="float" />
     </declare-styleable>
 </resources>
