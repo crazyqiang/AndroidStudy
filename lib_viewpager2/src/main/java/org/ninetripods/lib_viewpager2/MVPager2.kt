@@ -12,6 +12,7 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -53,8 +54,9 @@ class MVPager2 @JvmOverloads constructor(
     private var mIndicatorMargin: Float = 0F
     private var mShowIndicator: Boolean = false //是否展示轮播指示器
     private var mIndicatorInside: Boolean = true //指示器是否在Banner内部
-    private var mIndicatorHeight: Float = 0F
+    private var mIndicatorBgHeight: Float = 0F
     private var mIndicatorWHRatio: Float = 2F //指示器宽高比
+    private var mPrePosition = 0
 
     //ViewPager2
     private lateinit var mViewPager2: ViewPager2
@@ -118,7 +120,7 @@ class MVPager2 @JvmOverloads constructor(
         //获取自定义值
         val ta = context.obtainStyledAttributes(attrs, R.styleable.MVPager2)
         mIndicatorInside = ta.getBoolean(R.styleable.MVPager2_indicator_inside_banner, true)
-        mIndicatorHeight = ta.getDimension(R.styleable.MVPager2_indicator_bg_height, 0F)
+        mIndicatorBgHeight = ta.getDimension(R.styleable.MVPager2_indicator_bg_height, 0F)
         mIndicatorImgSelectedResId = ta.getResourceId(
             R.styleable.MVPager2_indicator_drawable_selected, R.drawable.circle_indicator_selected
         )
@@ -169,9 +171,9 @@ class MVPager2 @JvmOverloads constructor(
         this.mModels.addAll(newList)
         this.mRealCount = mModels.size
         extendOriginModels()
-        initIndicator()
         mVP2Adapter?.submitList(mExtendModels) //增量更新
         if (mIsAutoPlay) startAutoPlay()
+        initIndicator()
     }
 
     /**
@@ -295,12 +297,12 @@ class MVPager2 @JvmOverloads constructor(
             initVP2LayoutManagerProxy()
         }
         post {
-            if (mIndicatorHeight != 0F) {
+            if (mIndicatorBgHeight != 0F) {
                 //设置了指示器高度
-                mClIndicator.layoutParams.height = mIndicatorHeight.toInt()
+                mClIndicator.layoutParams.height = mIndicatorBgHeight.toInt()
                 if (!mIndicatorInside) {
                     //指示器在Banner外部 重新设置mViewPager2的高度
-                    mViewPager2.layoutParams.height = height - mIndicatorHeight.toInt()
+                    mViewPager2.layoutParams.height = height - mIndicatorBgHeight.toInt()
                 }
             } else {
                 //未设置指示器高度 走默认指示器高度
@@ -348,7 +350,11 @@ class MVPager2 @JvmOverloads constructor(
             innerRecyclerView.apply {
                 overScrollMode = View.OVER_SCROLL_NEVER //去掉滑动到边缘时的光晕效果
                 //这里会导致离屏预加载数+1
-                setPadding(mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom)
+                if (mItemPaddingLeft != 0 || mItemPaddingTop != 0 || mItemPaddingRight != 0 || mItemPaddingBottom != 0) {
+                    setPadding(
+                        mItemPaddingLeft, mItemPaddingTop, mItemPaddingRight, mItemPaddingBottom
+                    )
+                }
                 clipToPadding = false
                 clipChildren = false
                 //设置mCachedViews缓存大小 默认是2
@@ -370,7 +376,6 @@ class MVPager2 @JvmOverloads constructor(
                 override fun onPageScrollStateChanged(state: Int) {
                     //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
                     if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
-                        //log("onPageScrollStateChanged${mViewPager2.currentItem}")
                         when (mViewPager2.currentItem) {
                             exFirstPositive() -> {
                                 //向左滑动，滑动到正数第1个时 自动将转换到倒数第4的位置(该位置为真实数量的倒数第2个)
@@ -407,7 +412,8 @@ class MVPager2 @JvmOverloads constructor(
                     mCurPos = position
                     if (mSelectedValid) {
                         mOnPageChangeCallback?.onPageSelected(position)
-                        initIndicator()
+                        updateIndicator(mPrePosition, position)
+                        mPrePosition = position
                     }
                 }
             })
@@ -483,6 +489,32 @@ class MVPager2 @JvmOverloads constructor(
             mLlIndicator.addView(imageView)
         }
         mLlIndicator.visibility = if (mRealCount > 1 && mShowIndicator) View.VISIBLE else View.GONE
+    }
+
+    /**
+     * 更新指示器选中与未选中时的状态
+     * @param prePos 上次指示器位置
+     * @param nowPos 当前指示器位置
+     */
+    private fun updateIndicator(prePos: Int, nowPos: Int) {
+        if (prePos == nowPos) return
+        val nowRealPos = getRealPosition(nowPos)
+        val preRealPos = getRealPosition(prePos)
+        if (mLlIndicator.isEmpty() || nowRealPos >= mRealCount || preRealPos >= mRealCount || nowRealPos == preRealPos) return
+        val selectedView = mLlIndicator.getChildAt(nowRealPos) as ImageView
+        selectedView.apply {
+            layoutParams.width = (mIndicatorImgSize * mIndicatorWHRatio).toInt()
+            layoutParams.height = mIndicatorImgSize
+            setImageResource(mIndicatorImgSelectedResId)
+        }
+
+        val unSelectedView = mLlIndicator.getChildAt(preRealPos) as ImageView
+        unSelectedView.apply {
+            layoutParams.width = mIndicatorImgSize
+            layoutParams.height = mIndicatorImgSize
+            setImageResource(mIndicatorUnselectedResId)
+        }
+        mLlIndicator.requestLayout()
     }
 
     /**
