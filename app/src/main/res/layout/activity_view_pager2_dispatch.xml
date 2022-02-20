@@ -29,12 +29,22 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_vp2_base" />
 
     <TextView
+        android:id="@+id/tv_vp2_multi_item"
+        style="@style/btn_style_done_new"
+        android:layout_marginTop="25dp"
+        android:text="MVPager2自定义Item样式"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_vp2_nested_scroll" />
+
+    <TextView
         android:id="@+id/tv_vp2_vertical"
         style="@style/btn_style_done_new"
         android:layout_marginTop="25dp"
         android:text="仿淘宝搜索文字上下轮播"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_vp2_nested_scroll" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_vp2_multi_item" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.ninetripods.sydialoglib.SYDialog
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.lib_viewpager2.adapter.OnBannerClickListener
-import org.ninetripods.lib_viewpager2.imageLoader.RoundImageLoader
 import org.ninetripods.lib_viewpager2.transformer.DepthPageTransformer
 import org.ninetripods.lib_viewpager2.transformer.ScaleInTransformer
 import org.ninetripods.lib_viewpager2.transformer.ZoomOutPageTransformer
@@ -48,9 +47,8 @@ class MVP2BaseUseFragment : BaseFragment() {
     private val mTvIndicator: TextView by id(R.id.tv_indicator)
     private val mTvMultiPage: TextView by id(R.id.tv_multi_page)
     private val mTvTransformer: TextView by id(R.id.tv_page_transformer)
-    private val mTvItemLoader: TextView by id(R.id.tv_custom_loader)
 
-    private val mModels = mutableListOf(MConstant.IMG_1, MConstant.IMG_2, MConstant.IMG_3)
+    private val mModels: MutableList<Any> = mutableListOf(MConstant.IMG_1, MConstant.IMG_2)
 
 
     override fun getLayoutId(): Int {
@@ -117,11 +115,6 @@ class MVP2BaseUseFragment : BaseFragment() {
         mTvTransformer.setOnClickListener {
             //转换动画
             showTransformDialog()
-        }
-
-        mTvItemLoader.setOnClickListener {
-            //自定义Item样式
-            mMVPager2.setLoader(RoundImageLoader()).start()
         }
     }
 

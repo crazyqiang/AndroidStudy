@@ -14,6 +14,7 @@ import org.ninetripods.mq.study.kotlin.ktx.id
 class ViewPager2DispatchActivity : BaseActivity() {
 
     private val mTvBaseVp2: TextView by id(R.id.tv_vp2_base)
+    private val mTvMultiItemVp2: TextView by id(R.id.tv_vp2_multi_item)
     private val mTvNestedScrollVp2: TextView by id(R.id.tv_vp2_nested_scroll)
     private val mTvVerticalRoll: TextView by id(R.id.tv_vp2_vertical)
     private val mToolBar: Toolbar by id(R.id.toolbar)
@@ -30,6 +31,7 @@ class ViewPager2DispatchActivity : BaseActivity() {
         mTvBaseVp2.setOnClickListener(this)
         mTvNestedScrollVp2.setOnClickListener(this)
         mTvVerticalRoll.setOnClickListener(this)
+        mTvMultiItemVp2.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -37,6 +39,7 @@ class ViewPager2DispatchActivity : BaseActivity() {
             R.id.tv_vp2_nested_scroll -> jumpTargetPage(FRAGMENT_NESTED_SCROLL)
             R.id.tv_vp2_vertical -> jumpTargetPage(FRAGMENT_SEARCH_V_SCROLL)
             R.id.tv_vp2_base -> jumpTargetPage(FRAGMENT_BASE)
+            R.id.tv_vp2_multi_item -> jumpTargetPage(FRAGMENT_MULTI_ITEM_TYPE)
         }
     }
 

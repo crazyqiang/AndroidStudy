@@ -10,9 +10,11 @@
         android:id="@+id/mvp_pager2"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginTop="10dp"
         app:indicator_bg_height="30dp"
-        app:indicator_inside_banner="true" />
+        app:indicator_inside_banner="true"
+        app:indicator_margin="5dp"
+        app:indicator_radius="4dp"
+        app:indicator_w_h_ratio="2" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -77,13 +79,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="转换动画Transformer" />
-
-    <TextView
-        android:id="@+id/tv_custom_loader"
-        style="@style/btn_style_done_new"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="自定义Item样式->设置圆角ImageView" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

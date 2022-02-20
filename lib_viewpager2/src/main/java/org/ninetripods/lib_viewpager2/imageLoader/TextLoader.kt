@@ -1,6 +1,5 @@
 package org.ninetripods.lib_viewpager2.imageLoader
 
-import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -22,15 +21,15 @@ class TextLoader : BaseLoader() {
     private var mTextGravity: Int = Gravity.CENTER
     private var mTextSize: Float = 14f
 
-    override fun createView(context: Context): View {
-        val frameLayout = FrameLayout(context).apply {
+    override fun createView(parent: ViewGroup, viewType: Int): View {
+        val frameLayout = FrameLayout(parent.context).apply {
             layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             setBackgroundColor(context.resources.getColor(mBgColor))
         }
-        val textView = TextView(context).apply {
+        val textView = TextView(parent.context).apply {
             gravity = mTextGravity
             setTextColor(context.resources.getColor(mTextColor))
             textSize = mTextSize
@@ -43,7 +42,7 @@ class TextLoader : BaseLoader() {
         return frameLayout
     }
 
-    override fun display(context: Context, content: Any, targetView: View) {
+    override fun display(targetView: View, content: Any, position: Int) {
         val frameLayout = targetView as FrameLayout
         val childView = frameLayout.getChildAt(0)
         if (childView is TextView) {

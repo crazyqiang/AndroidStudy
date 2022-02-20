@@ -62,7 +62,7 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
         log("onCreateViewHolder()")
-        var itemShowView = mLoader?.createView(parent.context)
+        var itemShowView = mLoader?.createView(parent, viewType)
         if (itemShowView == null) {
             itemShowView = ImageView(parent.context)
         }
@@ -83,8 +83,13 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
 
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         log("onBindViewHolder(): pos is $position, model is ${mModels[position]}")
-        val contentStr = mModels[position]
-        mLoader?.display(holder.itemShowView.context, contentStr, holder.itemShowView)
+        val content = mModels[position]
+        mLoader?.display(holder.itemShowView, content, getRealPosition(position))
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return mLoader?.getItemViewType(getRealPosition(position))
+            ?: super.getItemViewType(position)
     }
 
     override fun onBindViewHolder(

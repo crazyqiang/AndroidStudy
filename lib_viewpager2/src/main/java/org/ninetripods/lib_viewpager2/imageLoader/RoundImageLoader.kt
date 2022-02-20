@@ -1,6 +1,5 @@
 package org.ninetripods.lib_viewpager2.imageLoader
 
-import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -13,12 +12,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
  */
 class RoundImageLoader(private val roundRadius: Int = 30) : BaseLoader() {
 
-    override fun createView(context: Context): View {
-        return super.createView(context)
-    }
-
-    override fun display(context: Context, content: Any, targetView: View) {
-        Glide.with(context)
+    override fun display(targetView: View, content: Any, position: Int) {
+        Glide.with(targetView.context)
             .load(content)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .transform(CenterCrop(), RoundedCorners(roundRadius)) //设置圆角半径
