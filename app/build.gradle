@@ -141,7 +141,7 @@ dependencies {
         //源码方式集成
         api project(':lib_viewpager2')
     } else {
-        implementation 'io.github.mqcodedev:lib_mvpager2:1.0.0-rc1'
+        implementation 'io.github.mqcodedev:lib_mvpager2:1.0.0-rc2'
     }
 
     if (compileDialogWithSource == "true") {
