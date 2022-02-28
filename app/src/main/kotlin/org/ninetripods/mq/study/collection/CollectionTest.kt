@@ -14,6 +14,9 @@ object CollectionTest {
         listTest() //List
         setTest() //Set
         mapTest() //Map
+        copyCollection() //copy集合
+        processCollection() //集合操作
+        processSequence() //序列相关 Sequence vs Iterable
     }
 
     /**
@@ -46,6 +49,10 @@ object CollectionTest {
         println(variableList) // 更新第一条数据：[newOne, three]
         variableList.shuffle()
         println(variableList) // 随机数据：[three, newOne]
+
+        //List转为Map
+        val numbers = listOf("one", "two", "three", "four")
+        println(numbers.associateWith { it.length }) // {one=3, two=3, three=5, four=4}
     }
 
     /**
@@ -109,5 +116,108 @@ object CollectionTest {
         variableMap["key3"] = 3
         variableMap.put("key1", 111)
         println(variableMap) //{key1=111, key2=2, key3=3}
+    }
+
+    /**
+     * copy集合
+     */
+    private fun copyCollection() {
+        val sourceList = mutableListOf<BookModel>()
+        for (i in 0..1) {
+            sourceList.add(BookModel(i, "Android"))
+        }
+        println("sourceList:$sourceList")
+        val copyList = sourceList.toMutableList()
+        println("sourceList新增数据:")
+        sourceList.add(BookModel(100, "IOS"))
+        println("sourceList:$sourceList")
+        println("copyList:$copyList")
+        sourceList.forEachIndexed { index, bookModel ->
+            bookModel.name = "Android$index"
+        }
+        println("sourceList修改之后:")
+        println("sourceList:$sourceList")
+        println("copyList:$copyList")
+        //执行结果：
+        // sourceList:[BookModel(id=0, name=Android), BookModel(id=1, name=Android)]
+        // sourceList新增数据:
+        // sourceList:[BookModel(id=0, name=Android), BookModel(id=1, name=Android), BookModel(id=100, name=IOS)]
+        // copyList:[BookModel(id=0, name=Android), BookModel(id=1, name=Android)]
+        // sourceList修改之后:
+        // sourceList:[BookModel(id=0, name=Android0), BookModel(id=1, name=Android1), BookModel(id=100, name=Android2)]
+        // copyList:[BookModel(id=0, name=Android0), BookModel(id=1, name=Android1)]
+    }
+
+    /**
+     * 集合操作
+     */
+    private fun processCollection() {
+        //不会影响原始集合数据，而是产生一个新的集合
+        val numbers = mutableListOf("one", "two", "three", "four")
+        val filterNums = numbers.filter { it.length > 3 }
+        println("numbers: $numbers") //numbers: [one, two, three, four]
+        println("filterNums:$filterNums")  //filterNums:[three, four]
+
+        //To相关操作符
+        val filterResults = mutableListOf("1", "2")
+        numbers.filterTo(filterResults, { it.length > 3 })
+        println("numbers: $numbers") //numbers: [one, two, three, four]
+        println("filterResults:$filterResults")  //filterResults:[1, 2, three, four]
+
+        //写操作
+        val sortedNums = numbers.sorted()
+        println("numbers: $numbers") //numbers: [one, two, three, four]
+        println("sortedNums:$sortedNums") //numbers: [one, two, three, four]  所以sorted()没有改变原始集合
+        numbers.sort()
+        println("numbers: $numbers") //numbers: [one, two, three, four]  所以sort()直接在原始集合上进行改动
+    }
+
+    /**
+     * Sequence序列相关
+     */
+    private fun processSequence() {
+        //创建Sequence
+        val sequenceNum = sequenceOf("one", "two", "three", "four")
+        println("sequenceNum: $sequenceNum")
+
+        //Iterable转为Sequence
+        val numbers = listOf("one", "two", "three", "four")
+        val numSequence = numbers.asSequence()
+        println("numSequence: $numSequence")
+
+        //通过函数generateSequence()创建序列，默认创建的序列是无限的；如果想创建有限数列，那么最后一个元素需要返回null
+        val oddNumbers = generateSequence(1) { it + 2 } // `it` 是上一个元素
+        println(oddNumbers.take(5).toList()) // [1, 3, 5, 7, 9]
+
+        //sequence()函数可以将组块生成序列，yield()-生产单个元素、yieldAll()-可以生产多个、无限个元素
+        val oNumbers = sequence {
+            yield(1)
+            yieldAll(listOf(3, 5))
+            yieldAll(generateSequence(7) { it + 2 })
+        }
+        println(oNumbers.take(4).toList()) // [1, 3, 5, 7]
+
+        //Iterable & Sequence执行顺序  举例：过滤长于三个字符的单词，并打印前四个单词的长度。
+        //Iterable
+        val words = "The quick brown fox jumps over the lazy dog".split(" ")
+        val lengthsList = words.filter { println("filter: $it"); it.length > 3 }
+            .map { println("length: ${it.length}"); it.length }
+            .take(4)
+
+        println("Lengths of first 4 words longer than 3 chars:")
+        println(lengthsList)
+
+        //Sequence
+        val originWords = "The quick brown fox jumps over the lazy dog".split(" ")
+        // 将列表转换为序列
+        val wordsSequence = originWords.asSequence()
+
+        val lengthsSequence = wordsSequence.filter { println("filter: $it"); it.length > 3 }
+            .map { println("length: ${it.length}"); it.length }
+            .take(4)
+
+        println("Lengths of first 4 words longer than 3 chars")
+        // 末端操作：以列表形式获取结果。
+        println(lengthsSequence.toList())
     }
 }
