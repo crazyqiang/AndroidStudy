@@ -1,5 +1,7 @@
 package org.ninetripods.mq.study.collection
 
+import java.util.*
+
 /**
  * 集合相关操作
  * 线上kotlin调试：https://play.kotlinlang.org/
@@ -14,7 +16,6 @@ object CollectionTest {
         listTest() //List
         setTest() //Set
         mapTest() //Map
-        copyCollection() //copy集合
         processCollection() //集合操作
         processSequence() //序列相关 Sequence vs Iterable
     }
@@ -119,6 +120,34 @@ object CollectionTest {
     }
 
     /**
+     * 集合操作
+     */
+    private fun processCollection() {
+        copyCollection() //copy集合相关操作
+        traverseCollection() //遍历集合
+
+        transformCollection() //转换集合
+        //不会影响原始集合数据，而是产生一个新的集合
+        val numbers = mutableListOf("one", "two", "three", "four")
+        val filterNums = numbers.filter { it.length > 3 }
+        println("numbers: $numbers") //numbers: [one, two, three, four]
+        println("filterNums:$filterNums")  //filterNums:[three, four]
+
+        //To相关操作符
+        val filterResults = mutableListOf("1", "2")
+        numbers.filterTo(filterResults, { it.length > 3 })
+        println("numbers: $numbers") //numbers: [one, two, three, four]
+        println("filterResults:$filterResults")  //filterResults:[1, 2, three, four]
+
+        //写操作
+        val sortedNums = numbers.sorted()
+        println("numbers: $numbers") //numbers: [one, two, three, four]
+        println("sortedNums:$sortedNums") //numbers: [one, two, three, four]  所以sorted()没有改变原始集合
+        numbers.sort()
+        println("numbers: $numbers") //numbers: [one, two, three, four]  所以sort()直接在原始集合上进行改动
+    }
+
+    /**
      * copy集合
      */
     private fun copyCollection() {
@@ -149,27 +178,112 @@ object CollectionTest {
     }
 
     /**
-     * 集合操作
+     * 遍历集合
      */
-    private fun processCollection() {
-        //不会影响原始集合数据，而是产生一个新的集合
+    private fun traverseCollection() {
+        //正向迭代
+        //1
         val numbers = mutableListOf("one", "two", "three", "four")
-        val filterNums = numbers.filter { it.length > 3 }
-        println("numbers: $numbers") //numbers: [one, two, three, four]
-        println("filterNums:$filterNums")  //filterNums:[three, four]
+        for (pos in 0..3) {//表示0<=pos && pos<=3,即pos在[0,3]内;或者用numbers.indices
+            print("${numbers[pos]} ") // one two three four
+        }
+        //如果是左闭右开区间[0,4)，使用until关键字
+        for (pos in 0 until 4) {
+            print("${numbers[pos]} ") // one two three four
+        }
+        //2
+        numbers.forEach { print("$it ") } //one two three four
+        //3
+        numbers.forEachIndexed { index, number -> println("index:$index, number:$number") }
+        /**
+         * index:0, number:one
+         * index:1, number:two
+         * index:2, number:three
+         * index:3, number:four
+         */
 
-        //To相关操作符
-        val filterResults = mutableListOf("1", "2")
-        numbers.filterTo(filterResults, { it.length > 3 })
-        println("numbers: $numbers") //numbers: [one, two, three, four]
-        println("filterResults:$filterResults")  //filterResults:[1, 2, three, four]
+        //反向迭代
+        for (pos in 3 downTo 0) {
+            print("${numbers[pos]} ") //four three two one
+        }
 
-        //写操作
-        val sortedNums = numbers.sorted()
-        println("numbers: $numbers") //numbers: [one, two, three, four]
-        println("sortedNums:$sortedNums") //numbers: [one, two, three, four]  所以sorted()没有改变原始集合
-        numbers.sort()
-        println("numbers: $numbers") //numbers: [one, two, three, four]  所以sort()直接在原始集合上进行改动
+        //任意步长迭代, 如下面的步长为2
+        for (pos in 0..3 step 2) {
+            print("${numbers[pos]} ") //one three
+        }
+
+    }
+
+    /**
+     * 集合转换
+     */
+    private fun transformCollection() {
+        val numbers = listOf("one", "two", "three")
+        val mIndexes = listOf(1, 2, 3)
+        val mTwoIndex = listOf(1, 2)
+        /**
+         * ----------------map()映射----------------
+         */
+        //map()、mapNotNull()映射函数，区别是mapNotNull()会过滤掉结果为null的值
+        println(numbers.map { "it's $it" }) //[it's one, it's two, it's three]
+        println(numbers.mapNotNull { if (it.length == 3) null else it }) //[three]
+
+        //mapIndexed()、mapIndexedNotNull()带有元素索引位置的映射函数，区别是mapIndexedNotNull()会过滤掉结果为null的值
+        println(numbers.mapIndexed { index, s -> "$index-$s" }) //[0-one, 1-two, 2-three]
+        println(numbers.mapIndexedNotNull { index, s ->
+            if (s.length == 3) null else "$index-$s" //[2-three]
+        })
+
+        //mapKeys() & mapValues()
+        val numMap = mapOf("one" to 1, "two" to 2, "three" to 3)
+        println(numMap) //{one=1, two=2, three=3}
+        println(numMap.mapKeys { it.key.toUpperCase(Locale.ROOT) }) //{ONE=1, TWO=2, THREE=3}
+        println(numMap.mapValues { it.value + it.key.length }) //{one=4, two=5, three=8}
+
+        /**
+         * ----------------zip()合拢----------------
+         */
+        //zip()操作。如果集合的大小不同，则 zip() 的结果为较小集合的大小
+        println(numbers.zip(mIndexes)) //[(one, 1), (two, 2), (three, 3)]
+        println(numbers zip mTwoIndex) //中缀表达式方式  [(one, 1), (two, 2)]
+
+        //zip()中第2个参数为转换函数的使用举例
+        println(numbers.zip(mIndexes) { number, index -> "number:$number index:$index" })
+        //执行结果：[number:one index:1, number:two index:2, number:three index:3]
+
+        //unzip()函数
+        val numPairs: List<Pair<String, Int>> = listOf("one" to 1, "two" to 2, "three" to 3)
+        println(numPairs.unzip()) //([one, two, three], [1, 2, 3])
+        println(numPairs.unzip().first) //[one, two, three]
+        println(numPairs.unzip().second) //[1, 2, 3]
+
+        /**
+         * ----------------associate关联----------------
+         */
+        //List转为Map，所以当key相同时，value会被最新的覆盖
+        println(numbers.associateWith { it.length }) //{one=3, two=3, three=5}
+        //associateBy将元素作为value来构建Map
+        println(numbers.associateBy { it.first() }) //{o=one, t=three}
+        println(numbers.associateBy(
+            //自行设计key和value
+            keySelector = { it.first() }, valueTransform = { it.length }) //{o=3, t=5}
+        )
+        println(numbers.associate { it.first() to it.length }) // {o=3, t=5}
+
+        /**
+         * ----------------flatten()、flatMap()----------------
+         * flatten()返回嵌套集合集合中的所有元素的List
+         * flatMap()需要一个函数将一个集合元素映射到另一个集合。返回单个列表其中包含所有元素的值。等于map()+flatten()的连续调用
+         */
+        val containers = listOf(
+            listOf("one", "two"),
+            listOf("three", "four", "five")
+        )
+        println(containers.flatten()) //[one, two, three, four, five]
+        println(containers.flatMap { subs ->
+            listOf(subs)  //[2, 3]
+        })
+
     }
 
     /**
