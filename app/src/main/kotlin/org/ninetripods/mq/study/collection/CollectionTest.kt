@@ -30,6 +30,32 @@ object CollectionTest {
         println(numList.get(0)) //one
         println(numList.lastIndex) //最后一个元素位置：2
 
+        //first()
+        println(numList.first()) //one 取第一个元素
+        println(numList.first { it.length > 3 }) //按条件取满足条件的第一个元素 都没有的话抛异常 执行结果：three
+        //find() 等同于 firstOrNull()
+        println(numList.firstOrNull { it.length > 5 }) //null
+        println(numList.find { it.length > 5 }) //null
+
+        //last()
+        println(numList.last()) //three 取最后一个元素
+        println(numList.last { it.contains("o") }) //two
+        //findLast() = lastOrNull()
+        println(numList.lastOrNull { it.length > 5 }) //null
+        println(numList.findLast { it.length > 5 }) //null
+
+        //index为3的位置没有元素
+        println(numList.elementAtOrNull(3)) //null
+        println(numList.elementAtOrElse(3) { index ->
+            "The value for index $index is undefined" //The value for index 3 is undefined
+        })
+
+        println(numList.random()) //随机取一个元素
+
+        println(numList.isEmpty())//false
+        println(numList.isNotEmpty()) //true
+        println(numList.isNullOrEmpty()) //false
+
         val initList = List(3) { it * it } //第一个参数是size，第二个参数是初始化函数
         println(initList) // [0, 1, 4]
 
@@ -125,6 +151,10 @@ object CollectionTest {
     private fun processCollection() {
         copyCollection() //copy集合相关操作
         traverseCollection() //遍历集合
+        plusMinusCollection()//加减集合
+        groupByCollection()//集合分组
+        partCollection() //集合的一部分
+        orderCollection() //集合排序
 
         transformCollection() //转换集合
         //不会影响原始集合数据，而是产生一个新的集合
@@ -284,6 +314,122 @@ object CollectionTest {
             listOf(subs)  //[2, 3]
         })
 
+    }
+
+    /**
+     * 集合加减
+     */
+    private fun plusMinusCollection() {
+        val numbers = listOf("one", "two", "three", "three")
+        val plusNumbers = numbers + "four"
+        println(numbers) //原始集合：[one, two, three, three]
+        println(plusNumbers) //集合加操作：[one, two, three, three, four]
+
+        val minusNum1 = numbers - listOf("three")
+        val minusNum2 = numbers - "three"
+        println(minusNum1)//集合减操作1：[one, two]
+        println(minusNum2) //集合减操作2：[one, two, three]
+        //注意：minus操作，如果第二个操作数是一个元素，那么 minus 移除其在原始集合中的 第一次 出现；
+        // 如果是一个集合，那么移除其元素在原始集合中的 所有 出现。
+    }
+
+    /**
+     * groupBy()、groupingBy()集合分组
+     */
+    private fun groupByCollection() {
+        val numbers = listOf("one", "two", "three")
+        //groupBy() 使用一个 lambda 函数并返回一个 Map。 在此 Map 中，每个键都是 lambda 结果，而对应的值是返回此结果的元素 List。
+        //在带有两个 lambda 的 groupBy() 结果 Map 中，由 keySelector 函数生成的键映射到值转换函数的结果，而不是原始元素。
+        println(numbers.groupBy { it.first() })//{o=[one], t=[two, three]}
+        println(
+            numbers.groupBy(keySelector = { it.length }, valueTransform = { it })
+            //{3=[one, two], 5=[three]}
+        )
+        //https://www.kotlincn.net/docs/reference/collection-grouping.html
+        println(numbers.groupingBy { it.first() }.eachCount()) //{o=1, t=2, f=2, s=1}
+    }
+
+    /**
+     * slice()、take()、drop()、chunked()、windowed()、zipWithNext()取集合的一部分
+     */
+    private fun partCollection() {
+        val numbers = listOf("one", "two", "three", "four")
+
+        //slice()
+        println(numbers.slice(1..2)) //slice(indices: IntRange) 执行结果：[two, three]
+        println(numbers.slice(0..3 step 2)) //slice(indices: IntRange)间隔2，执行结果：[one, three]
+        println(numbers.slice(listOf(1, 2))) //slice(indices: Iterable<Int>) 执行结果：[two, three]
+
+        //take() & drop()
+        //take:从头开始获取指定数量的元素; takeLast:从尾开始获取指定数量的元素
+        println(numbers.take(2)) //[one, two]
+        println(numbers.takeLast(2)) //[three, four]
+        println(numbers.drop(1)) //[two, three, four]
+        println(numbers.dropLast(2))//[one, two]
+
+        //takeWhile() & dropWhile()
+        //takeWhile()不停获取元素直到排除与谓词匹配的首个元素。如果首个集合元素与谓词匹配，则结果为空。
+        println(numbers.takeWhile { !it.startsWith("f") })//[one, two, three]
+        println(numbers.takeLastWhile { !it.startsWith("t") })//[four]
+        //dropWhile()将首个与谓词不匹配的元素返回到末尾
+        println(numbers.dropWhile { it.length == 3 }) //[three, four]
+        println(numbers.dropLastWhile { it.length > 3 })//[one, two]
+
+        //chunk():要将集合分解为给定大小的“块”,最后一个块的大小可能较小
+        val nums = (0..7).toList()
+        println(nums) //[0, 1, 2, 3, 4, 5, 6, 7]
+        println(nums.chunked(3)) //List<List<T>>类型： [[0, 1, 2], [3, 4, 5], [6, 7]]
+        //还可以对返回的块进行转换，如下：
+        println(nums.chunked(3) { it.sum() }) //[3, 12, 13]
+
+        val numWindows = (0..7).toList()
+        println(numWindows.windowed(3)) //[[0, 1, 2], [1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7]]
+        //step:定义相邻两个窗口第一个元素之间的距离 partialWindows：是否包含最后较少元素，true包含 false不包含
+        println(numWindows.windowed(3, step = 2, partialWindows = true))
+        //执行结果：[[0, 1, 2], [2, 3, 4], [4, 5, 6], [6, 7]]
+        println(numWindows.windowed(3) { it.sum() }) //[3, 6, 9, 12, 15, 18]
+
+        //zipWithNext()单独创建两个元素的窗口
+        println(numWindows.zipWithNext()) //List<Pair<T, T>>执行结果：[(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7)]
+        println(numWindows.zipWithNext { s1, s2 -> s1 * s2 }) //List<R>执行结果：[0, 2, 6, 12, 20, 30, 42]
+    }
+
+    /**
+     * 集合排序 Comparable可以理解为内部比较，Comparator为外部的比较
+     */
+    private fun orderCollection() {
+        //Comparable进行比较
+        println(Version(1, 2) > Version(1, 3)) //false
+        println(Version(2, 0) > Version(1, 5)) //true
+
+        val origins = listOf("aaa", "c", "bb")
+        //sortedWith() + Comparator自定义顺序进行比较
+        val lengthComparator = Comparator { o1: String, o2: String -> o1.length - o2.length }
+        println(origins.sortedWith(lengthComparator)) //[c, bb, aaa]
+        println(origins) //[aaa, bb, c]
+        //继续简化
+        println(origins.sortedWith(compareBy { it.length })) //[c, bb, aaa]
+        //上述sortedWith(compareBy{})代码简写为sortedBy{}
+        println(origins.sortedBy { it.length }) //[c, bb, aaa]
+        println(origins.sortedByDescending { it.length }) //[aaa, bb, c]
+
+        //自然顺序
+        println(origins.sorted()) //[aaa, bb, c]
+        println(origins.sortedDescending()) //[c, bb, aaa]
+
+        //倒序 reversed()产生新集合，改变原始集合不会影响新集合；
+        val originStrs = mutableListOf("aaa", "c", "bb")
+        println(originStrs.reversed()) //使用reversed()倒序 执行结果：[bb, c, aaa]
+        //使用asReversed()倒序
+        val asReverseList = originStrs.asReversed()
+        println(asReverseList) //[bb, c, aaa]
+        originStrs.add("dd") //对原始集合进行改动
+        println(asReverseList) //原始集合变化，倒序的集合也自动更新了 执行结果：[dd, bb, c, aaa]
+
+        //随机顺序
+        val shuffledNums = listOf("one", "two", "three")
+        println(shuffledNums.shuffled())//随机产生一个新的集合
+        println(shuffledNums) //[one, two, three]
     }
 
     /**
