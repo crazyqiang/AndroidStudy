@@ -29,6 +29,8 @@ object CollectionTest {
         println(numList[0]) //one
         println(numList.get(0)) //one
         println(numList.lastIndex) //最后一个元素位置：2
+        //取List一部分
+        println(numList.subList(0, 2))//左边右开区间，如果越界会抛异常。执行结果：[one, two]
 
         //first()
         println(numList.first()) //one 取第一个元素
@@ -64,18 +66,21 @@ object CollectionTest {
         println("numList==numList2:${numList == numList2}") //false  内容和元素都一致时才相等
 
         //可变List
-        val variableList = mutableListOf("one", "two", "three")
-        println(variableList) // 原始数据：[one, two, three]
-        variableList.add("three")
-        println(variableList) // 添加一条数据：[one, two, three, three]
-        variableList.removeAt(0)
-        println(variableList) // 删除第一条数据：[two, three, three]
-        variableList.remove("three")
-        println(variableList) // 删除符合条件的第一条element: [two, three]
-        variableList[0] = "newOne"
-        println(variableList) // 更新第一条数据：[newOne, three]
-        variableList.shuffle()
-        println(variableList) // 随机数据：[three, newOne]
+        val origins = mutableListOf("one", "two", "three")
+        println(origins) // 原始数据：[one, two, three]
+        origins.add("three")
+        println(origins) // 添加一条数据：[one, two, three, three]
+        origins.removeAt(0)
+        println(origins) // 删除第一条数据：[two, three, three]
+        origins.remove("three")
+        println(origins) // 删除符合条件的第一条element: [two, three]
+        origins[0] = "newOne"
+        println(origins) // 更新第一条数据：[newOne, three]
+        origins.shuffle()
+        println(origins) // 随机数据：[three, newOne]
+        origins.removeAll { it.length == 3 }
+        println(origins) //删除全部符合条件的元素 [three, newOne]
+        println(origins.retainAll { it.length == 3 }) //保留全部符合条件的元素
 
         //List转为Map
         val numbers = listOf("one", "two", "three", "four")
@@ -118,6 +123,12 @@ object CollectionTest {
         println(variableSet) // [one, two, three, four]
         variableSet.remove("two")
         println(variableSet) // [one, three, four]
+
+        //union()并集、intersect()交集、subtract()差集
+        val numSets = setOf("one", "two", "three")
+        println(numSets union setOf("four", "five")) //[one, two, three, four, five]
+        println(numSets intersect setOf("two", "one")) //[one, two]
+        println(numSets subtract setOf("three", "four")) //[one, two]
     }
 
     /**
@@ -127,12 +138,23 @@ object CollectionTest {
         //Map常用API，默认实现 – LinkedHashMap：迭代 Map 时保留元素插入的顺序
         val numMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3)
         println(numMap.keys) //[key1, key2, key3]
-        println(numMap.values) //[1, 2, 3]
+        println(numMap.values) //[1, 2, 3]  注意：在.values中调用remove()仅删除给定值匹配到的的第一个条目。
         println(numMap.entries) //[key1=1, key2=2, key3=3]
         println(numMap["key1"]) // 1
+        //println(numMap.getOrDefault("key4", 4)) //API24添加 执行结果：4
         println("${numMap.containsValue(1)}, ${1 in numMap.values}") //true true
         println("${numMap.containsKey("key1")}, ${"key1" in numMap.keys}") //true true
         numMap.forEach { entry -> println(entry) } //Map遍历 默认有顺序 key1=1 key2=2 key3=3
+
+        //filter()过滤操作
+        val filterMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key11" to 11)
+        println(filterMap.filter { (key, value) ->
+            key.endsWith("1") && value < 10  //{key1=1}
+        })
+        //filterKeys()过滤key
+        println(filterMap.filterKeys { it.endsWith("2") }) //{key2=2}
+        //filterValues()过滤value
+        println(filterMap.filterValues { it < 3 })  //{key1=1, key2=2}
 
         //Map之间的比较
         val num2Map = mapOf("key2" to 2, "key1" to 1, "key3" to 3)
@@ -150,14 +172,15 @@ object CollectionTest {
      */
     private fun processCollection() {
         copyCollection() //copy集合相关操作
+        transformCollection() //转换集合
         traverseCollection() //遍历集合
         plusMinusCollection()//加减集合
         groupByCollection()//集合分组
         partCollection() //集合的一部分
         orderCollection() //集合排序
+        polymerCollection() //集合聚合
 
-        transformCollection() //转换集合
-        //不会影响原始集合数据，而是产生一个新的集合
+        //filter()不会影响原始集合数据，而是产生一个新的集合
         val numbers = mutableListOf("one", "two", "three", "four")
         val filterNums = numbers.filter { it.length > 3 }
         println("numbers: $numbers") //numbers: [one, two, three, four]
@@ -168,8 +191,11 @@ object CollectionTest {
         numbers.filterTo(filterResults, { it.length > 3 })
         println("numbers: $numbers") //numbers: [one, two, three, four]
         println("filterResults:$filterResults")  //filterResults:[1, 2, three, four]
+        //可以看到`filterTo`并没有创建新集合，而是将结果添加到已知的集合中去了。
 
         //写操作
+        //对于可变集合，还存在可更改集合状态的`写操作` 。这些操作包括`添加、删除和更新元素`。
+        //对于某些操作，有成对的函数可以执行相同的操作：`一个函数就地应用该操作，另一个函数将结果作为单独的集合返回`
         val sortedNums = numbers.sorted()
         println("numbers: $numbers") //numbers: [one, two, three, four]
         println("sortedNums:$sortedNums") //numbers: [one, two, three, four]  所以sorted()没有改变原始集合
@@ -178,7 +204,9 @@ object CollectionTest {
     }
 
     /**
-     * copy集合
+     * copy集合 创建与现有集合具有相同元素的集合，可以使用复制操作，例如`toList()、toMutableList()、toSet()` 等等。
+     * 标准库中的集合复制操作创建了具有相同元素引用的 `浅复制`集合。 因此，`对集合元素所做的更改会反映在其所有副本中，
+     * 如果对源集合进行添加或删除元素，则不会影响副本`。
      */
     private fun copyCollection() {
         val sourceList = mutableListOf<BookModel>()
@@ -245,7 +273,7 @@ object CollectionTest {
     }
 
     /**
-     * 集合转换
+     * 集合转换map()、zip()、associate()、flatten()、flatMap()
      */
     private fun transformCollection() {
         val numbers = listOf("one", "two", "three")
@@ -288,7 +316,7 @@ object CollectionTest {
         println(numPairs.unzip().second) //[1, 2, 3]
 
         /**
-         * ----------------associate关联----------------
+         * ----------------associate()关联----------------
          */
         //List转为Map，所以当key相同时，value会被最新的覆盖
         println(numbers.associateWith { it.length }) //{one=3, two=3, three=5}
@@ -313,7 +341,6 @@ object CollectionTest {
         println(containers.flatMap { subs ->
             listOf(subs)  //[2, 3]
         })
-
     }
 
     /**
@@ -430,6 +457,90 @@ object CollectionTest {
         val shuffledNums = listOf("one", "two", "three")
         println(shuffledNums.shuffled())//随机产生一个新的集合
         println(shuffledNums) //[one, two, three]
+    }
+
+    /**
+     * 集合聚合 maxOrNull()、minOrNull()、average()、sum()、sumBy()、reduce()、fold()
+     */
+    private fun polymerCollection() {
+        val numbers = listOf(30, 20, 40, 10)
+        println(numbers.count()) //元素数量 4
+        println(numbers.maxOrNull()) //最大元素 40
+        println(numbers.minOrNull()) //最小元素 10
+        println(numbers.average()) //平均值 25.0
+        println(numbers.sum())//集合元素的总和 100
+
+        //接受一个选择器函数并返回使选择器返回最大或最小值的元素。
+        val min3Remainder = numbers.minByOrNull { it % 3 } //30
+        val max3Remainder = numbers.maxByOrNull { it % 3 } //20
+        //接受一个 Comparator 对象并且根据此 Comparator 对象返回最大或最小元素
+        val maxNum = numbers.maxWithOrNull(compareBy { it }) //40
+        val minNum = numbers.minWithOrNull(compareBy { it }) //10
+        println(min3Remainder) //30
+        println(max3Remainder) //20
+        println(maxNum) //40
+        println(minNum) //10
+
+        println(numbers.sumBy { it * 2 }) //对lambda函数返回的Int结果进行求和 200
+        println(numbers.sumByDouble { it.toDouble() / 2 }) //对lambda函数返回的Double结果进行求和 50.0
+
+        //fold() & reduce() 依次将所提供的操作应用于集合元素并返回累积的结果。
+        //区别：fold() 接受一个初始值并将其用作第一步的累积值，而 reduce() 的第一步则将第一个和第二个元素作为第一步的操作参数。
+        val sum = numbers.reduce { sum, element -> sum + element }
+        println(sum) //100
+
+        //val numbers = listOf(30, 20, 40, 10)
+        //reduce()
+        val sumDouble = numbers.reduce { sum1, element ->
+            print("$sum1 ") //30 70 150 170
+            sum1 + element * 2
+        }
+        println(sumDouble) //170
+        //reduceRight() 操作参数会更改其顺序：第一个参数变为元素，然后第二个参数变为累积值。
+        val sumDoubleRight = numbers.reduceRight { element, sum2 ->
+            print("$sum2 ") //10 90 130 190
+            sum2 + element * 2
+        }
+        println(sumDoubleRight) //190
+        //reduceIndexed()
+        val sumIndex = numbers.reduceIndexed { index, sumI, element ->
+            print("index:$index,sum:$sumI,element:$element ")
+            /**
+             * index:1,sum:30,element:20
+             * index:2,sum:50,element:40
+             * index:3,sum:90,element:10
+             */
+            sumI + element
+        }
+        println(sumIndex)
+        //reduceRightIndexed()
+        val sumIndexRight = numbers.reduceRightIndexed { index, sumR, element ->
+            print("index:$index,sum:$sumR,element:$element ")
+            /**
+             * index:2,sum:40,element:10
+             * index:1,sum:20,element:50
+             * index:0,sum:30,element:70
+             */
+            sumR + element
+        }
+        println(sumIndexRight) //100
+
+        //注：为了防止为null时抛异常，可以使用对应的reduceOrNull()、
+        // reduceRightOrNull()、reduceIndexedOrNull()、reduceRightIndexedOrNull()
+
+        //val numbers = listOf(30, 20, 40, 10)
+        //fold()
+        val sumDouble1 = numbers.fold(0) { sum3, element ->
+            print("$sum3 ") //0 60 100 180 200
+            sum3 + element * 2
+        }
+        println(sumDouble1) //200
+        //foldRight() 操作参数会更改其顺序：第一个参数变为元素，然后第二个参数变为累积值。
+        val sumDoubleRight1 = numbers.foldRight(0) { element, sum4 ->
+            print("$sum4 ") //0 20 100 140 200
+            sum4 + element * 2
+        }
+        println(sumDoubleRight1) //200
     }
 
     /**
