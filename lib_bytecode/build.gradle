@@ -30,7 +30,8 @@ android {
 }
 
 dependencies {
-
+    //javassist
+    implementation 'org.javassist:javassist:3.28.0-GA'
     implementation Deps.kotlinCore
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_material
