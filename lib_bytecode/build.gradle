@@ -32,6 +32,8 @@ android {
 dependencies {
     //javassist
     implementation 'org.javassist:javassist:3.28.0-GA'
+    //ASM
+    implementation 'org.ow2.asm:asm:9.2'
     implementation Deps.kotlinCore
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_material
