@@ -1,4 +1,4 @@
-package org.ninetripods.lib_bytecode
+package org.ninetripods.lib_bytecode.javassist
 
 import javassist.*
 

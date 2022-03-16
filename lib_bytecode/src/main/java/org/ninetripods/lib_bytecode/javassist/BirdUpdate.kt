@@ -1,4 +1,4 @@
-package org.ninetripods.lib_bytecode
+package org.ninetripods.lib_bytecode.javassist
 
 import javassist.ClassPool
 import javassist.CtClass
@@ -14,7 +14,7 @@ object BirdUpdate {
     //TODO Javassist是否能操作kotlin类文件
     private fun update() {
         val pool: ClassPool = ClassPool.getDefault()
-        val cc: CtClass = pool.get("org.ninetripods.lib_bytecode.Bird")
+        val cc: CtClass = pool.get("org.ninetripods.lib_bytecode.javassist.Bird")
         val fly: CtMethod = cc.getDeclaredMethod("fly")
         fly.insertBefore("System.out.println(\"准备起飞\");")
         fly.insertAfter("System.out.println(\"成功落地\");")
