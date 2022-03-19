@@ -1,6 +1,7 @@
 ## 欢迎关注
 欢迎关注我的微信公众号，查看最新文章，期待您的关注~
-![微信搜索](https://img-blog.csdnimg.cn/956729f381d243e295b639dda9d5492a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBALeWwj-mprOW_q-i3kS0=,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+<img src="https://img-blog.csdnimg.cn/956729f381d243e295b639dda9d5492a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBALeWwj-mprOW_q-i3kS0=,size_20,color_FFFFFF,t_70,g_se,x_16" width="1500">
 
 ## 扫描二维码下载APK示例
 ![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
