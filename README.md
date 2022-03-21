@@ -1,7 +1,7 @@
 ## 欢迎扫码关注
 欢迎**扫描下方二维码**关注我的微信公众号，查看最新文章，期待您的关注~
 
-<img src="https://img-blog.csdnimg.cn/a46153b686dd4e3aa81311f3cfac4b89.png" width="800">
+<img src="https://img-blog.csdnimg.cn/96a543794ff940a399465b50c2117830.png" width="800">
 
 ## 扫描二维码下载APK示例
 ![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
