@@ -33,7 +33,8 @@ dependencies {
     //javassist
     implementation 'org.javassist:javassist:3.28.0-GA'
     //ASM wiki：https://asm.ow2.io
-    implementation 'org.ow2.asm:asm:9.2'
+    implementation 'org.ow2.asm:asm:9.2' //核心库 基于事件使用时可以只使用这个
+    implementation 'org.ow2.asm:asm-commons:9.2' //Tree API使用
     implementation Deps.kotlinCore
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_material

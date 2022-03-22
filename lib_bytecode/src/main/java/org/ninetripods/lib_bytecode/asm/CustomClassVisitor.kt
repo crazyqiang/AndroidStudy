@@ -2,7 +2,7 @@ package org.ninetripods.lib_bytecode.asm
 
 import org.objectweb.asm.*
 
-class TraceClassAdapter(val api: Int, val classVisitor: ClassVisitor? = null) :
+class CustomClassVisitor(val api: Int, val classVisitor: ClassVisitor? = null) :
     ClassVisitor(api) {
 
     /**
@@ -113,7 +113,12 @@ class TraceClassAdapter(val api: Int, val classVisitor: ClassVisitor? = null) :
         exceptions: Array<out String>?,
     ): MethodVisitor? {
         println("visitMethod($access, $name, $descriptor, $signature, $exceptions)")
-        return super.visitMethod(access, name, descriptor, signature, exceptions)
+        //MethodVisitor
+        var mv = super.visitMethod(access, name, descriptor, signature, exceptions)
+        if (mv != null) {
+            mv = CustomMethodVisitor(api, mv)
+        }
+        return mv
     }
 
     override fun visitEnd() {
