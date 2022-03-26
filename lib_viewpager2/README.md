@@ -40,6 +40,7 @@ mMVPager2.setModels(mModels) //设置轮播数据
 //使用DiffUtil进行增量数据更新 newList：更新后的数据Models
 mMVPager2.submitList(newList)
 ```
+**注意**：使用增量更新时，如果开发语言是`Java`，需要针对实体类重写`hashCode()`、`equals()`方法，否则增量更新可能会失效；而如果开发语言为`kotlin`，则实体类(data class xxx)不需要特殊处理，因为系统已经自动帮我们重写了这两个方法。
 
 ### 1.1 API介绍
 | API  | 备注  |
