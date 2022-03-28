@@ -3,7 +3,7 @@ package org.ninetripods.lib_bytecode.asm
 import org.objectweb.asm.*
 
 class CustomClassVisitor(val api: Int, val classVisitor: ClassVisitor? = null) :
-    ClassVisitor(api) {
+    ClassVisitor(api, classVisitor) {
 
     /**
      * @param version JDK版本  例如返回52，代表是是JDK1.8
