@@ -1,6 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: "com.vanniktech.maven.publish"
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
 
 android {
     compileSdkVersion App.compileSdkVersion
@@ -10,6 +11,7 @@ android {
         targetSdkVersion App.targetSdkVersion
         versionCode App.versionCode
         versionName App.versionName
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -27,28 +29,13 @@ android {
     }
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.17.0'
-    }
-}
-
-allprojects {
-    plugins.withId("com.vanniktech.maven.publish") {
-        mavenPublish {
-            sonatypeHost = "S01"
-        }
-    }
-}
-
 dependencies {
-    api Deps.androidx_viewpager2
+    //javassist
+    implementation 'org.javassist:javassist:3.28.0-GA'
+    //ASM wiki：https://asm.ow2.io
+    implementation 'org.ow2.asm:asm:9.2' //核心库 基于事件使用时可以只使用这个
+    implementation 'org.ow2.asm:asm-commons:9.2' //Tree API使用
+    implementation Deps.kotlinCore
     implementation Deps.androidx_appcompat
     implementation Deps.androidx_material
-    implementation Deps.kotlinCore
-    api 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 }
