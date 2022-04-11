@@ -1,7 +1,7 @@
 package org.ninetripods.lib_bytecode.asm
 
-import org.ninetripods.lib_bytecode.AddTimeCostTest
 import org.ninetripods.lib_bytecode.ByteConstant
+import org.ninetripods.lib_bytecode.MethodTimeCostTest
 import org.ninetripods.lib_bytecode.log
 import org.ninetripods.lib_bytecode.util.Loader
 import org.ninetripods.lib_bytecode.util.decodeAcc
@@ -9,19 +9,31 @@ import org.ninetripods.lib_bytecode.util.decodeOpcode
 import org.objectweb.asm.*
 import org.objectweb.asm.commons.AdviceAdapter
 
+private const val FIELD_NAME_ADD = "timeCost" //新增属性名称
+
+/**
+   执行结果：
+   visit(): owner-org/ninetripods/lib_bytecode/MethodTimeCostTest
+   visitMethod(): access-ACC_PUBLIC ACC_FINAL , name-addTimeCostMonitor, descriptor-()V, signature-null, exceptions-null
+   onMethodEnter():
+   onMethodExit(): opcode-RETURN
+   visitMethod(): access-ACC_PUBLIC , name-<init>, descriptor-()V, signature-null, exceptions-null
+   visitEnd():
+   timeCost: 1003
+ */
 fun main() {
-    val classReader = ClassReader(AddTimeCostTest::class.java.name)
+    val classReader = ClassReader(MethodTimeCostTest::class.java.name)
     val classWriter = ClassWriter(ClassWriter.COMPUTE_MAXS)
     val classVisitor = AddTimeCostVisitor(ByteConstant.ASM9, classWriter)
-    classReader.accept(classVisitor, ClassReader.SKIP_DEBUG)
+    classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
 
     val loader = Loader()
     val addTimeClass =
-        loader.defineClass(AddTimeCostTest::class.java.name, classWriter.toByteArray())
+        loader.defineClass(MethodTimeCostTest::class.java.name, classWriter.toByteArray())
     val instance = addTimeClass.newInstance()
     //调用插桩之后的方法
     addTimeClass.getDeclaredMethod("addTimeCostMonitor").invoke(instance)
-    val timeCost = addTimeClass.getDeclaredField("timeCost").getLong(instance)
+    val timeCost = addTimeClass.getDeclaredField(FIELD_NAME_ADD).getLong(instance)
     log("timeCost: $timeCost")
 
 }
@@ -66,7 +78,7 @@ class AddTimeCostVisitor(api: Int, classVisitor: ClassVisitor) :
         log("visitEnd():")
         if (cv != null) {
             val fieldVisitor =
-                cv.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, "timeCost", "J", null, null)
+                cv.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, FIELD_NAME_ADD, "J", null, null)
             fieldVisitor.visitEnd()
         }
         super.visitEnd()
@@ -94,18 +106,18 @@ class CustomAdviceAdapter(
 
     override fun onMethodEnter() {
         log("onMethodEnter():")
-        mv.visitFieldInsn(GETSTATIC, owner, "timeCost", "J")
+        mv.visitFieldInsn(GETSTATIC, owner, FIELD_NAME_ADD, "J")
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
         mv.visitInsn(LSUB)
-        mv.visitFieldInsn(PUTSTATIC, owner, "timeCost", "J")
+        mv.visitFieldInsn(PUTSTATIC, owner, FIELD_NAME_ADD, "J")
     }
 
     override fun onMethodExit(opcode: Int) {
         log("onMethodExit(): opcode-${opcode.decodeOpcode()}")
-        mv.visitFieldInsn(GETSTATIC, owner, "timeCost", "J")
+        mv.visitFieldInsn(GETSTATIC, owner, FIELD_NAME_ADD, "J")
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
         mv.visitInsn(LADD)
-        mv.visitFieldInsn(PUTSTATIC, owner, "timeCost", "J")
+        mv.visitFieldInsn(PUTSTATIC, owner, FIELD_NAME_ADD, "J")
     }
 
     override fun visitMaxs(maxStack: Int, maxLocals: Int) {

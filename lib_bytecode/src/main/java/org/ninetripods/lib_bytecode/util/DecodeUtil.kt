@@ -2,12 +2,12 @@ package org.ninetripods.lib_bytecode.util
 
 import org.objectweb.asm.Opcodes
 
-fun Int.decodeAcc() {
-    DecodeUtil.accCode2String(this)
+fun Int.decodeAcc(): String {
+    return DecodeUtil.accCode2String(this)
 }
 
-fun Int.decodeOpcode() {
-    DecodeUtil.opcode2String(this)
+fun Int.decodeOpcode(): String {
+    return DecodeUtil.opcode2String(this)
 }
 
 object DecodeUtil {

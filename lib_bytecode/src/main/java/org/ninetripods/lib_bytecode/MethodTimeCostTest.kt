@@ -1,6 +1,6 @@
 package org.ninetripods.lib_bytecode
 
-class AddTimeCostTest {
+class MethodTimeCostTest {
 
     fun addTimeCostMonitor() {
         var aaa = 10
