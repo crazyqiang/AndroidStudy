@@ -4,9 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import androidx.core.view.ViewCompat
 import kotlin.math.abs
 
-class TargetView @JvmOverloads constructor(
+class TargetTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -16,23 +17,31 @@ class TargetView @JvmOverloads constructor(
     private var mLastX: Float = 0F
     private var mLastY: Float = 0F
 
+    init {
+        isClickable = true
+    }
+
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (event == null) return super.onTouchEvent(event)
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                mLastX = event.x
-                mLastY = event.y
+                mLastX = event.rawX
+                mLastY = event.rawY
             }
             MotionEvent.ACTION_MOVE -> {
-                val dx = event.x - mLastX
-                val dy = event.y - mLastY
-                if (abs(dx) > mScaleTouchSlop || abs(dy) > mScaleTouchSlop){
-                    mLastX = event.x
-                    mLastY = event.y
+                val dx = event.rawX - mLastX
+                val dy = event.rawY - mLastY
+                if (abs(dx) > mScaleTouchSlop || abs(dy) > mScaleTouchSlop) {
+                    //将视图的水平、垂直位置偏移指定的像素量。offset:-偏移视图的像素数
+                    ViewCompat.offsetLeftAndRight(this, dx.toInt())
+                    ViewCompat.offsetTopAndBottom(this, dy.toInt())
+                    mLastX = event.rawX
+                    mLastY = event.rawY
                 }
             }
         }
-        return super.onTouchEvent(event)
+        return true
     }
 
 }
