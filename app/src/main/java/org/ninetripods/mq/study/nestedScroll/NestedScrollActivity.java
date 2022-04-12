@@ -1,12 +1,12 @@
-package org.ninetripods.mq.study.NestedScroll.nested;
+package org.ninetripods.mq.study.nestedScroll;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.NestedScroll.util.view.ItemFragment;
-import org.ninetripods.mq.study.NestedScroll.util.view.SimpleViewPagerIndicator;
+import org.ninetripods.mq.study.nestedScroll.util.view.ItemFragment;
+import org.ninetripods.mq.study.nestedScroll.util.view.SimpleViewPagerIndicator;
 import org.ninetripods.mq.study.R;
 
 public class NestedScrollActivity extends BaseActivity {

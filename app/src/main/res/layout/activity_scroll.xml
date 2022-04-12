@@ -6,7 +6,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context="org.ninetripods.mq.study.NestedScroll.tradition.ScrollListViewActivity">
+    tools:context="org.ninetripods.mq.study.nestedScroll.tradition.ScrollListViewActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:text="Header"
             android:textSize="30sp" />
 
-        <org.ninetripods.mq.study.NestedScroll.util.view.CustomListView
+        <org.ninetripods.mq.study.nestedScroll.util.view.CustomListView
             android:id="@+id/lv_listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

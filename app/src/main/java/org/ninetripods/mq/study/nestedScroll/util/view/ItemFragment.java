@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.NestedScroll.util.view;
+package org.ninetripods.mq.study.nestedScroll.util.view;
 
 
 import android.os.Bundle;

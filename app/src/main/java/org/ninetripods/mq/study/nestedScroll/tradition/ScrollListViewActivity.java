@@ -1,9 +1,9 @@
-package org.ninetripods.mq.study.NestedScroll.tradition;
+package org.ninetripods.mq.study.nestedScroll.tradition;
 
 import android.widget.ArrayAdapter;
 
 import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.NestedScroll.util.view.CustomListView;
+import org.ninetripods.mq.study.nestedScroll.util.view.CustomListView;
 import org.ninetripods.mq.study.R;
 
 public class ScrollListViewActivity extends BaseActivity {

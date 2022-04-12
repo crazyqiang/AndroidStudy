@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.NestedScroll.nested;
+package org.ninetripods.mq.study.nestedScroll;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.NestedScroll.util.adapter.MyFragmentPagerAdapter;
-import org.ninetripods.mq.study.NestedScroll.util.adapter.ZJBaseRecyclerAdapter;
-import org.ninetripods.mq.study.NestedScroll.util.adapter.ZJViewHolder;
-import org.ninetripods.mq.study.NestedScroll.util.view.OnMeasureListView;
+import org.ninetripods.mq.study.nestedScroll.util.adapter.MyFragmentPagerAdapter;
+import org.ninetripods.mq.study.nestedScroll.util.adapter.ZJBaseRecyclerAdapter;
+import org.ninetripods.mq.study.nestedScroll.util.adapter.ZJViewHolder;
+import org.ninetripods.mq.study.nestedScroll.util.view.OnMeasureListView;
 import org.ninetripods.mq.study.R;
 
 import java.util.Arrays;

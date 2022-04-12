@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.NestedScroll.util.adapter;
+package org.ninetripods.mq.study.nestedScroll.util.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

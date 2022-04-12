@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.NestedScroll.util.adapter;
+package org.ninetripods.mq.study.nestedScroll.util.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

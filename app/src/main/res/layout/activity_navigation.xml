@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context="org.ninetripods.mq.study.NestedScroll.NavigationActivity">
+    tools:context="org.ninetripods.mq.study.nestedScroll.NavigationActivity">
 
     <TextView
         style="@style/btn_style_done"

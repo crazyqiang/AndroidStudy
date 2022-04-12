@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="org.ninetripods.mq.study.NestedScroll.NestedScrollingActivity">
+    tools:context="org.ninetripods.mq.study.nestedScroll.NestedScrollingActivity">
 
     <TextView
         android:layout_width="match_parent"

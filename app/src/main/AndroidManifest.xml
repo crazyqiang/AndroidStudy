@@ -141,23 +141,28 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".NestedScroll.NestedScrollingActivity"
+            android:name=".nestedScroll.NestedScrollingActivity"
             android:label="@string/title_activity_nested_scrolling"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".NestedScroll.tradition.ScrollListViewActivity"
+            android:name=".nestedScroll.CustomBehaviorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".nestedScroll.tradition.ScrollListViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NestedScroll.NavigationActivity"
+            android:name=".nestedScroll.NavigationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NestedScroll.tradition.ScrollViewPagerActivity"
+            android:name=".nestedScroll.tradition.ScrollViewPagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NestedScroll.nested.CoordinatorLayoutToolbarActivity"
+            android:name=".nestedScroll.CoordinatorLayoutToolbarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NestedScroll.nested.NestedScrollActivity"
+            android:name=".nestedScroll.NestedScrollActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".popup.WindowManagerActivity"

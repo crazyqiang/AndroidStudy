@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.ninetripods.mq.study.CommonWebviewActivity;
-import org.ninetripods.mq.study.NestedScroll.tradition.ScrollListViewActivity;
+import org.ninetripods.mq.study.nestedScroll.tradition.ScrollListViewActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.bezier.BezierDemoActivity;
 import org.ninetripods.mq.study.bezier.QQTrackPointActivity;
@@ -22,7 +22,7 @@ import org.ninetripods.mq.study.multiprocess_client.AidlActivity;
 import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
 import org.ninetripods.mq.study.multiprocess_client.MessengerActivity;
-import org.ninetripods.mq.study.NestedScroll.NestedScrollingActivity;
+import org.ninetripods.mq.study.nestedScroll.NestedScrollingActivity;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
 import org.ninetripods.mq.study.path.PathVectorActivity;
 import org.ninetripods.mq.study.popup.PopupWindowActivity;

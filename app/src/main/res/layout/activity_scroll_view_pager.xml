@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <org.ninetripods.mq.study.NestedScroll.util.view.CustomViewPager
+        <org.ninetripods.mq.study.nestedScroll.util.view.CustomViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

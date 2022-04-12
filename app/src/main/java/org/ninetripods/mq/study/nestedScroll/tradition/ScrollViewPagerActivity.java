@@ -1,8 +1,8 @@
-package org.ninetripods.mq.study.NestedScroll.tradition;
+package org.ninetripods.mq.study.nestedScroll.tradition;
 
 import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.NestedScroll.util.adapter.MyPagerAdapter;
-import org.ninetripods.mq.study.NestedScroll.util.view.CustomViewPager;
+import org.ninetripods.mq.study.nestedScroll.util.adapter.MyPagerAdapter;
+import org.ninetripods.mq.study.nestedScroll.util.view.CustomViewPager;
 import org.ninetripods.mq.study.R;
 
 public class ScrollViewPagerActivity extends BaseActivity {
