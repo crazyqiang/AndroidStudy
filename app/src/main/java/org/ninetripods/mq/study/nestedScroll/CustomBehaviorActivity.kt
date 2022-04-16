@@ -8,8 +8,8 @@ import org.ninetripods.mq.study.R
  */
 class CustomBehaviorActivity : BaseActivity() {
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_custom_behavior_scrolling
+    override fun setContentView() {
+        setContentView(R.layout.activity_custom_behavior_scrolling)
     }
 
     override fun initViews() {

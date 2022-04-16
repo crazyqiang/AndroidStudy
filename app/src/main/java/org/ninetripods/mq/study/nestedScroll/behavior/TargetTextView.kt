@@ -1,12 +1,15 @@
 package org.ninetripods.mq.study.nestedScroll.behavior
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import kotlin.math.abs
 
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class TargetTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
