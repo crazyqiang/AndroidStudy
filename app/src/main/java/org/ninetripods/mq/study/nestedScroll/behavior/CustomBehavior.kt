@@ -149,4 +149,47 @@ class CustomBehavior(
         log("onDependentViewRemoved()")
         super.onDependentViewRemoved(parent, child, dependency)
     }
+
+    /**
+     * 对子View的测量
+     *
+     * @param parent
+     * @param child
+     * @param parentWidthMeasureSpec
+     * @param widthUsed
+     * @param parentHeightMeasureSpec
+     * @param heightUsed
+     * @return
+     */
+    override fun onMeasureChild(
+        parent: CoordinatorLayout,
+        child: View,
+        parentWidthMeasureSpec: Int,
+        widthUsed: Int,
+        parentHeightMeasureSpec: Int,
+        heightUsed: Int,
+    ): Boolean {
+        log("onMeasureChild(parent:$parent, child:$child, parentWidthMeasureSpec:$parentWidthMeasureSpec," +
+                " widthUsed:$widthUsed, parentHeightMeasureSpec:$parentHeightMeasureSpec, heightUsed:$heightUsed)")
+        return super.onMeasureChild(parent, child,
+            parentWidthMeasureSpec, widthUsed, parentHeightMeasureSpec, heightUsed)
+    }
+
+    /**
+     * 对子View的布局
+     *
+     * @param parent
+     * @param child
+     * @param layoutDirection
+     * @return
+     */
+    override fun onLayoutChild(
+        parent: CoordinatorLayout,
+        child: View,
+        layoutDirection: Int,
+    ): Boolean {
+        log("onLayoutChild(parent, child, layoutDirection)")
+        return super.onLayoutChild(parent, child, layoutDirection)
+    }
+
 }

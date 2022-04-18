@@ -1,54 +1,46 @@
-package org.ninetripods.mq.study.nestedScroll;
+package org.ninetripods.mq.study.nestedScroll
 
-import androidx.viewpager.widget.ViewPager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
+import android.view.View
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.R
+import org.ninetripods.mq.study.nestedScroll.util.adapter.ZJBaseRecyclerAdapter
+import org.ninetripods.mq.study.nestedScroll.util.adapter.ZJViewHolder
+import java.util.*
 
-import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.nestedScroll.util.adapter.MyFragmentPagerAdapter;
-import org.ninetripods.mq.study.nestedScroll.util.adapter.ZJBaseRecyclerAdapter;
-import org.ninetripods.mq.study.nestedScroll.util.adapter.ZJViewHolder;
-import org.ninetripods.mq.study.nestedScroll.util.view.OnMeasureListView;
-import org.ninetripods.mq.study.R;
+/**
+ * CoordinatorLayout + Toolbar
+ */
+class CoordinatorLayoutToolbarActivity : BaseActivity() {
+    private var recycle_view: RecyclerView? = null
+    private val data = arrayOf(
+        "Apple", "Banana", "Orange", "Watermelon",
+        "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange",
+        "Watermelon", "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana",
+        "Orange", "Watermelon", "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango",
+        "Banana", "Orange", "Watermelon",
+    )
 
-import java.util.Arrays;
-import java.util.List;
-
-public class CoordinatorLayoutToolbarActivity extends BaseActivity {
-    private ViewPager view_pager;
-    private MyFragmentPagerAdapter pagerAdapter;
-    private OnMeasureListView list_view;
-    private RecyclerView recycle_view;
-    private String[] data = {"Apple", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango"};
-
-    @Override
-    public void setContentView() {
-        setContentView(R.layout.activity_coordinator_layout_toolbar);
+    override fun setContentView() {
+        setContentView(R.layout.activity_coordinator_layout_toolbar)
     }
 
-    @Override
-    public void initViews() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        initToolBar(toolbar, "CoordinatorLayout+Toolbar", false);
+    override fun initViews() {
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        initToolBar(toolbar, "CoordinatorLayout+Toolbar", false)
+        recycle_view = findViewById<View>(R.id.recycle_view) as RecyclerView
+        recycle_view!!.layoutManager = LinearLayoutManager(this)
+        val stringList = Arrays.asList(*data)
+        recycle_view!!.adapter = object :
+            ZJBaseRecyclerAdapter<Any?>(stringList as Collection<Any?>?,
+                android.R.layout.simple_list_item_1,
+                null) {
 
-        recycle_view = (RecyclerView) findViewById(R.id.recycle_view);
-        recycle_view.setLayoutManager(new LinearLayoutManager(this));
-        final List<String> stringList = Arrays.asList(data);
-        recycle_view.setAdapter(new ZJBaseRecyclerAdapter(stringList, android.R.layout.simple_list_item_1, null) {
-            @Override
-            protected void onBindViewHolder(ZJViewHolder holder, Object model, int position) {
-                holder.setText(android.R.id.text1, stringList.get(position));
+            override fun onBindViewHolder(holder: ZJViewHolder?, model: Any?, position: Int) {
+                holder?.setText(android.R.id.text1, stringList[position])
             }
-        });
-//        list_view = (OnMeasureListView) findViewById(R.id.list_view);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-//                this, android.R.layout.simple_list_item_1, data);
-//        list_view.setAdapter(adapter);
+        }
     }
-
 }

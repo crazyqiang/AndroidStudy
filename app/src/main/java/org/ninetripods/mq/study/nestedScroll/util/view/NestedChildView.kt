@@ -1,38 +1,23 @@
-package org.ninetripods.mq.study.nestedScroll.util.view;
+package org.ninetripods.mq.study.nestedScroll.util.view
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
-
-import androidx.annotation.Nullable;
-import androidx.core.view.NestedScrollingChild;
-import androidx.core.view.NestedScrollingChildHelper;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.View
+import androidx.core.view.NestedScrollingChild
+import androidx.core.view.NestedScrollingChildHelper
 
 /**
  * Created by mq on 2018/4/6 下午5:22
  * mqcoder90@gmail.com
  */
-
-public class NestedChildView extends View implements NestedScrollingChild {
-
-    private NestedScrollingChildHelper mChildHelper;
-
-    public NestedChildView(Context context) {
-        this(context, null);
-    }
-
-    public NestedChildView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public NestedChildView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        mChildHelper = new NestedScrollingChildHelper(this);
-    }
-
-    @Override
-    public void setNestedScrollingEnabled(boolean enabled) {
-        mChildHelper.setNestedScrollingEnabled(enabled);
+class NestedChildView @JvmOverloads constructor(
+    context: Context?,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr), NestedScrollingChild {
+    private val mChildHelper: NestedScrollingChildHelper
+    override fun setNestedScrollingEnabled(enabled: Boolean) {
+        mChildHelper.isNestedScrollingEnabled = enabled
     }
 
     /**
@@ -40,31 +25,36 @@ public class NestedChildView extends View implements NestedScrollingChild {
      *
      * @return true表示可以嵌套滑动
      */
-    @Override
-    public boolean isNestedScrollingEnabled() {
-        return mChildHelper.isNestedScrollingEnabled();
+    override fun isNestedScrollingEnabled(): Boolean {
+        return mChildHelper.isNestedScrollingEnabled
     }
 
-    @Override
-    public boolean startNestedScroll(int axes) {
+    override fun startNestedScroll(axes: Int): Boolean {
         //告诉Parent自己要滑动
-        return mChildHelper.startNestedScroll(axes);
+        return mChildHelper.startNestedScroll(axes)
     }
 
-    @Override
-    public void stopNestedScroll() {
-        mChildHelper.stopNestedScroll();
+    override fun stopNestedScroll() {
+        mChildHelper.stopNestedScroll()
     }
 
-    @Override
-    public boolean hasNestedScrollingParent() {
-        return mChildHelper.hasNestedScrollingParent();
+    override fun hasNestedScrollingParent(): Boolean {
+        return mChildHelper.hasNestedScrollingParent()
     }
 
-    @Override
-    public boolean dispatchNestedScroll(int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int[] offsetInWindow) {
+    override fun dispatchNestedScroll(
+        dxConsumed: Int,
+        dyConsumed: Int,
+        dxUnconsumed: Int,
+        dyUnconsumed: Int,
+        offsetInWindow: IntArray?
+    ): Boolean {
         //Parent是否需要继续滑动你剩下的距离
-        return mChildHelper.dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow);
+        return mChildHelper.dispatchNestedScroll(dxConsumed,
+            dyConsumed,
+            dxUnconsumed,
+            dyUnconsumed,
+            offsetInWindow)
     }
 
     /**
@@ -74,19 +64,29 @@ public class NestedChildView extends View implements NestedScrollingChild {
      * @param offsetInWindow 子View窗体偏移量
      * @return
      */
-    @Override
-    public boolean dispatchNestedPreScroll(int dx, int dy, int[] consumed, int[] offsetInWindow) {
+    override fun dispatchNestedPreScroll(
+        dx: Int,
+        dy: Int,
+        consumed: IntArray?,
+        offsetInWindow: IntArray?
+    ): Boolean {
         //询问Parent是否需要滑动
-        return mChildHelper.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow);
+        return mChildHelper.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
     }
 
-    @Override
-    public boolean dispatchNestedFling(float velocityX, float velocityY, boolean consumed) {
-        return mChildHelper.dispatchNestedFling(velocityX, velocityY, consumed);
+    override fun dispatchNestedFling(
+        velocityX: Float,
+        velocityY: Float,
+        consumed: Boolean
+    ): Boolean {
+        return mChildHelper.dispatchNestedFling(velocityX, velocityY, consumed)
     }
 
-    @Override
-    public boolean dispatchNestedPreFling(float velocityX, float velocityY) {
-        return mChildHelper.dispatchNestedPreFling(velocityX, velocityY);
+    override fun dispatchNestedPreFling(velocityX: Float, velocityY: Float): Boolean {
+        return mChildHelper.dispatchNestedPreFling(velocityX, velocityY)
+    }
+
+    init {
+        mChildHelper = NestedScrollingChildHelper(this)
     }
 }
