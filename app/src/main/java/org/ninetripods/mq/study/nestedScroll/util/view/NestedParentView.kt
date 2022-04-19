@@ -21,10 +21,11 @@ import java.util.*
  * mqcoder90@gmail.com
  */
 class NestedParentView @JvmOverloads constructor(
-    context: Context?,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context?,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), NestedScrollingParent {
+
     private val TOP_CHILD_FLING_THRESHOLD = 3
     private var mTop: View? = null
     private var mNav: View? = null
@@ -33,26 +34,28 @@ class NestedParentView @JvmOverloads constructor(
     private val mScroller: OverScroller
     private var mOffsetAnimator: ValueAnimator? = null
     private val parentHelper: NestedScrollingParentHelper
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        //不限制顶部的高度
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        getChildAt(0).measure(widthMeasureSpec,
-            MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED))
-        val params = mViewPager!!.layoutParams
-        params.height = measuredHeight - mNav!!.measuredHeight
-        setMeasuredDimension(measuredWidth,
-            mTop!!.measuredHeight + mNav!!.measuredHeight + mViewPager!!.measuredHeight)
-    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
         mTop = findViewById(R.id.id_nested_layout_top)
         mNav = findViewById(R.id.id_nested_layout_indicator)
         val view = findViewById<View>(R.id.id_nested_layout_viewpager) as? ViewPager
-            ?: throw RuntimeException(
-                "id_stickynavlayout_viewpager show used by ViewPager !")
+                ?: throw RuntimeException(
+                        "id_stickynavlayout_viewpager show used by ViewPager !")
         mViewPager = view
     }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        //不限制顶部的高度
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        getChildAt(0).measure(widthMeasureSpec,
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED))
+        val params = mViewPager!!.layoutParams
+        params.height = measuredHeight - mNav!!.measuredHeight
+        setMeasuredDimension(measuredWidth,
+                mTop!!.measuredHeight + mNav!!.measuredHeight + mViewPager!!.measuredHeight)
+    }
+
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -113,11 +116,11 @@ class NestedParentView @JvmOverloads constructor(
      * @param dyUnconsumed
      */
     override fun onNestedScroll(
-        target: View,
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int
+            target: View,
+            dxConsumed: Int,
+            dyConsumed: Int,
+            dxUnconsumed: Int,
+            dyUnconsumed: Int
     ) {
         Log.e(TAG, "onNestedScroll")
     }
@@ -133,10 +136,10 @@ class NestedParentView @JvmOverloads constructor(
     }
 
     override fun onNestedFling(
-        target: View,
-        velocityX: Float,
-        velocityY: Float,
-        consumed: Boolean
+            target: View,
+            velocityX: Float,
+            velocityY: Float,
+            consumed: Boolean
     ): Boolean {
         //如果是recyclerView 根据判断第一个元素是哪个位置可以判断是否消耗
         //这里判断如果第一个元素的位置是大于TOP_CHILD_FLING_THRESHOLD的
@@ -169,15 +172,13 @@ class NestedParentView @JvmOverloads constructor(
      */
     private fun computeDuration(velocityY: Float): Int {
         var velocityY = velocityY
-        val distance: Int
-        distance = if (velocityY > 0) {
+        val distance: Int = if (velocityY > 0) {
             Math.abs(mTop!!.height - scrollY)
         } else {
             Math.abs(mTop!!.height - (mTop!!.height - scrollY))
         }
-        val duration: Int
         velocityY = Math.abs(velocityY)
-        duration = if (velocityY > 0) {
+        val duration: Int = if (velocityY > 0) {
             3 * Math.round(1000 * (distance / velocityY))
         } else {
             val distanceRatio = distance.toFloat() / height

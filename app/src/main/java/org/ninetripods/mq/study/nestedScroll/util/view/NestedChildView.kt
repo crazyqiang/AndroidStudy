@@ -11,11 +11,13 @@ import androidx.core.view.NestedScrollingChildHelper
  * mqcoder90@gmail.com
  */
 class NestedChildView @JvmOverloads constructor(
-    context: Context?,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context?,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr), NestedScrollingChild {
-    private val mChildHelper: NestedScrollingChildHelper
+
+    private val mChildHelper: NestedScrollingChildHelper = NestedScrollingChildHelper(this)
+
     override fun setNestedScrollingEnabled(enabled: Boolean) {
         mChildHelper.isNestedScrollingEnabled = enabled
     }
@@ -43,18 +45,18 @@ class NestedChildView @JvmOverloads constructor(
     }
 
     override fun dispatchNestedScroll(
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int,
-        offsetInWindow: IntArray?
+            dxConsumed: Int,
+            dyConsumed: Int,
+            dxUnconsumed: Int,
+            dyUnconsumed: Int,
+            offsetInWindow: IntArray?
     ): Boolean {
         //Parent是否需要继续滑动你剩下的距离
         return mChildHelper.dispatchNestedScroll(dxConsumed,
-            dyConsumed,
-            dxUnconsumed,
-            dyUnconsumed,
-            offsetInWindow)
+                dyConsumed,
+                dxUnconsumed,
+                dyUnconsumed,
+                offsetInWindow)
     }
 
     /**
@@ -65,19 +67,19 @@ class NestedChildView @JvmOverloads constructor(
      * @return
      */
     override fun dispatchNestedPreScroll(
-        dx: Int,
-        dy: Int,
-        consumed: IntArray?,
-        offsetInWindow: IntArray?
+            dx: Int,
+            dy: Int,
+            consumed: IntArray?,
+            offsetInWindow: IntArray?
     ): Boolean {
         //询问Parent是否需要滑动
         return mChildHelper.dispatchNestedPreScroll(dx, dy, consumed, offsetInWindow)
     }
 
     override fun dispatchNestedFling(
-        velocityX: Float,
-        velocityY: Float,
-        consumed: Boolean
+            velocityX: Float,
+            velocityY: Float,
+            consumed: Boolean
     ): Boolean {
         return mChildHelper.dispatchNestedFling(velocityX, velocityY, consumed)
     }
@@ -86,7 +88,4 @@ class NestedChildView @JvmOverloads constructor(
         return mChildHelper.dispatchNestedPreFling(velocityX, velocityY)
     }
 
-    init {
-        mChildHelper = NestedScrollingChildHelper(this)
-    }
 }
