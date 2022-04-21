@@ -4,22 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
         app:layout_behavior=".nestedScroll.behavior.CustomBehavior" />
 
-    <org.ninetripods.mq.study.nestedScroll.behavior.TargetTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/backgroud_gray"
-        android:padding="20dp"
-        android:text="I am TargetTextView" />
+<!--    <org.ninetripods.mq.study.nestedScroll.behavior.TargetTextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:background="@color/backgroud_gray"-->
+<!--        android:padding="20dp"-->
+<!--        android:text="I am TargetTextView" />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

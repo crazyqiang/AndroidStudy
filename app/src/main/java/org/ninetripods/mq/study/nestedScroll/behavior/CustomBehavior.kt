@@ -2,6 +2,7 @@ package org.ninetripods.mq.study.nestedScroll.behavior
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import org.ninetripods.mq.study.kotlin.ktx.log
@@ -17,6 +18,10 @@ class CustomBehavior(
     context: Context,
     attrs: AttributeSet? = null,
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
+
+    // onMeasureChild()、onLayoutChild()是对子View的测量、布局
+    // layoutDependsOn()、onDependentViewChanged()、onDependentViewRemoved()是子View之间设置Behavior的条件等
+    // onInterceptTouchEvent()、onTouchEvent()对事件的拦截与处理
 
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
@@ -125,6 +130,11 @@ class CustomBehavior(
         return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY)
     }
 
+    /**
+     * @param parent 父View
+     * @param child 设置当前Behavior的子View
+     * @param dependency 依赖的View
+     */
     override fun layoutDependsOn(
         parent: CoordinatorLayout,
         child: View,
@@ -134,6 +144,13 @@ class CustomBehavior(
         return dependency is TargetTextView
     }
 
+    /**
+     * dependency View发生变化时执行
+     * @param parent 父View
+     * @param child 设置当前Behavior的子View
+     * @param dependency 依赖的View
+     * @return
+     */
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
         child: View,
@@ -145,6 +162,12 @@ class CustomBehavior(
         return true
     }
 
+    /**
+     * dependency View从父View中移除的时候，即child失去dependency View依赖时执行
+     * @param parent
+     * @param child
+     * @param dependency
+     */
     override fun onDependentViewRemoved(parent: CoordinatorLayout, child: View, dependency: View) {
         log("onDependentViewRemoved()")
         super.onDependentViewRemoved(parent, child, dependency)
@@ -190,6 +213,30 @@ class CustomBehavior(
     ): Boolean {
         log("onLayoutChild(parent, child, layoutDirection)")
         return super.onLayoutChild(parent, child, layoutDirection)
+    }
+
+    /**
+     * 是否对事件进行拦截
+     * @param parent 父View
+     * @param child 子View
+     * @param ev MotionEvent事件
+     */
+    override fun onInterceptTouchEvent(
+        parent: CoordinatorLayout,
+        child: View,
+        ev: MotionEvent
+    ): Boolean {
+        return super.onInterceptTouchEvent(parent, child, ev)
+    }
+
+    /**
+     * 事件处理
+     * @param parent 父View
+     * @param child 子View
+     * @param ev MotionEvent事件
+     */
+    override fun onTouchEvent(parent: CoordinatorLayout, child: View, ev: MotionEvent): Boolean {
+        return super.onTouchEvent(parent, child, ev)
     }
 
 }
