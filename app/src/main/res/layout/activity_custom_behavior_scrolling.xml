@@ -10,15 +10,17 @@
         android:src="@mipmap/ic_launcher"
         app:layout_behavior=".nestedScroll.behavior.CustomBehavior" />
 
-<!--    <org.ninetripods.mq.study.nestedScroll.behavior.TargetTextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:background="@color/backgroud_gray"-->
-<!--        android:padding="20dp"-->
-<!--        android:text="I am TargetTextView" />-->
+    <!--    <org.ninetripods.mq.study.nestedScroll.behavior.TargetTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:background="@color/backgroud_gray"-->
+    <!--        android:padding="20dp"-->
+    <!--        android:text="I am TargetTextView" />-->
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_nested_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
