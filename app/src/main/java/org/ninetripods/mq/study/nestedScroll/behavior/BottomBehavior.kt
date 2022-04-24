@@ -14,7 +14,7 @@ import org.ninetripods.mq.study.kotlin.ktx.log
  * @param context
  * @param attrs
  */
-class CustomBehavior(
+class BottomBehavior(
     context: Context,
     attrs: AttributeSet? = null,
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
@@ -22,18 +22,7 @@ class CustomBehavior(
     // 1、onMeasureChild()、onLayoutChild()是对子View的测量、布局
     // 2、layoutDependsOn()、onDependentViewChanged()、onDependentViewRemoved()是子View之间设置Behavior的条件等
     // 3、onInterceptTouchEvent()、onTouchEvent()对事件的拦截与处理
-    // 4、onStartNestedScroll()、onNestedScrollAccepted()、onNestedScroll()、 onNestedPreScroll()、
-    //    onStopNestedScroll()、onNestedFling()、onNestedPreFling()执行嵌套滑动
 
-    /**
-     * @param coordinatorLayout 父View
-     * @param child coordinatorLayout中的子View
-     * @param directTargetChild
-     * @param target
-     * @param axes 横、竖方向
-     * @param type
-     * @return
-     */
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
         child: View,

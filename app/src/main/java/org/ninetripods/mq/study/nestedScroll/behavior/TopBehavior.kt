@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
@@ -14,7 +15,7 @@ import org.ninetripods.mq.study.kotlin.ktx.log
  * @param context
  * @param attrs
  */
-class CustomBehavior(
+class TopBehavior(
     context: Context,
     attrs: AttributeSet? = null,
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
@@ -25,15 +26,6 @@ class CustomBehavior(
     // 4、onStartNestedScroll()、onNestedScrollAccepted()、onNestedScroll()、 onNestedPreScroll()、
     //    onStopNestedScroll()、onNestedFling()、onNestedPreFling()执行嵌套滑动
 
-    /**
-     * @param coordinatorLayout 父View
-     * @param child coordinatorLayout中的子View
-     * @param directTargetChild
-     * @param target
-     * @param axes 横、竖方向
-     * @param type
-     * @return
-     */
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
         child: View,
@@ -44,12 +36,7 @@ class CustomBehavior(
     ): Boolean {
         log("onStartNestedScroll(coordinatorLayout:$coordinatorLayout, " +
                 "child:$child, directTargetChild:$directTargetChild, target:$target, axes:$axes, type:$type)")
-        return super.onStartNestedScroll(coordinatorLayout,
-            child,
-            directTargetChild,
-            target,
-            axes,
-            type)
+        return axes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
     override fun onNestedScrollAccepted(
@@ -68,6 +55,38 @@ class CustomBehavior(
             target,
             axes,
             type)
+    }
+
+    override fun onNestedPreScroll(
+        coordinatorLayout: CoordinatorLayout,
+        child: View,
+        target: View,
+        dx: Int,
+        dy: Int,
+        consumed: IntArray,
+        type: Int,
+    ) {
+        //向上滑动时 dy>0 ; 向下滑动时 dy<0
+        log("onNestedPreScroll(coordinatorLayout:$coordinatorLayout, " +
+                "child:$child, target:$target, dx:$dx, dy:$dy, consumed:$consumed, type:$type)")
+        //super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
+        // 注意，手指向上滑动的时候，dy大于0。向下的时候dy小于0。
+        val translationY = child.translationY
+        if (-translationY >= child.measuredHeight || dy < 0) {
+            // child已经滚动到屏幕外了，或者向下滚动，就不去消耗滚动了
+            return
+        }
+        // 还差desireHeight距离将会移出屏幕外
+        val desireHeight = translationY + child.measuredHeight
+        if (dy <= desireHeight) {
+            // 将dy全部消耗掉
+            child.translationY = translationY - dy
+            consumed[1] = dy
+        } else {
+            // 消耗一部分的的dy
+            child.translationY = translationY - desireHeight
+            consumed[1] = desireHeight.toInt()
+        }
     }
 
     override fun onNestedScroll(
@@ -92,20 +111,6 @@ class CustomBehavior(
             dyUnconsumed,
             type,
             consumed)
-    }
-
-    override fun onNestedPreScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        dx: Int,
-        dy: Int,
-        consumed: IntArray,
-        type: Int,
-    ) {
-        log("onNestedPreScroll(coordinatorLayout:$coordinatorLayout, " +
-                "child:$child, target:$target, dx:$dx, dy:$dy, consumed:$consumed, type:$type)")
-        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
     }
 
     override fun onStopNestedScroll(
@@ -182,51 +187,6 @@ class CustomBehavior(
     override fun onDependentViewRemoved(parent: CoordinatorLayout, child: View, dependency: View) {
         log("onDependentViewRemoved()")
         super.onDependentViewRemoved(parent, child, dependency)
-    }
-
-    /**
-     * 对子View的测量
-     *
-     * @param parent
-     * @param child
-     * @param parentWidthMeasureSpec
-     * @param widthUsed
-     * @param parentHeightMeasureSpec
-     * @param heightUsed
-     * @return
-     */
-    override fun onMeasureChild(
-        parent: CoordinatorLayout,
-        child: View,
-        parentWidthMeasureSpec: Int,
-        widthUsed: Int,
-        parentHeightMeasureSpec: Int,
-        heightUsed: Int,
-    ): Boolean {
-        log("onMeasureChild(parent:$parent, child:$child, parentWidthMeasureSpec:$parentWidthMeasureSpec," +
-                " widthUsed:$widthUsed, parentHeightMeasureSpec:$parentHeightMeasureSpec, heightUsed:$heightUsed)")
-        return super.onMeasureChild(parent, child,
-            parentWidthMeasureSpec, widthUsed, parentHeightMeasureSpec, heightUsed)
-    }
-
-    /**
-     * 对子View的布局
-     *
-     * @param parent
-     * @param child
-     * @param layoutDirection
-     * @return
-     */
-    override fun onLayoutChild(
-        parent: CoordinatorLayout,
-        child: View,
-        layoutDirection: Int,
-    ): Boolean {
-        log("onLayoutChild(parent, child, layoutDirection)")
-        if (parent.childCount < 2) return false
-        val firstView = parent.getChildAt(0)
-        child.layout(0, firstView.measuredHeight, child.measuredWidth, child.measuredHeight)
-        return true
     }
 
     /**
