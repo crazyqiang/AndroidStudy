@@ -104,13 +104,15 @@ class CustomBehavior(
             child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed)
     }
 
-    override fun onStopNestedScroll(
-        coordinatorLayout: CoordinatorLayout, child: View, target: View, type: Int,
-    ) {
-        log("onStopNestedScroll(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, type:$type)")
-        super.onStopNestedScroll(coordinatorLayout, child, target, type)
-    }
-
+    /**
+     * @param coordinatorLayout
+     * @param child
+     * @param target
+     * @param velocityX
+     * @param velocityY
+     * @param consumed
+     * @return
+     */
     override fun onNestedFling(
         coordinatorLayout: CoordinatorLayout,
         child: View, target: View, velocityX: Float, velocityY: Float, consumed: Boolean,
@@ -119,12 +121,34 @@ class CustomBehavior(
         return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed)
     }
 
+
+    /**
+     * @param coordinatorLayout
+     * @param child
+     * @param target
+     * @param velocityX
+     * @param velocityY
+     * @return
+     */
     override fun onNestedPreFling(
         coordinatorLayout: CoordinatorLayout,
         child: View, target: View, velocityX: Float, velocityY: Float,
     ): Boolean {
         log("onNestedPreFling(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, velocityX:$velocityX, velocityY:$velocityY)")
         return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY)
+    }
+
+    /**
+     * @param coordinatorLayout
+     * @param child
+     * @param target
+     * @param type
+     */
+    override fun onStopNestedScroll(
+        coordinatorLayout: CoordinatorLayout, child: View, target: View, type: Int,
+    ) {
+        log("onStopNestedScroll(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, type:$type)")
+        super.onStopNestedScroll(coordinatorLayout, child, target, type)
     }
 
     /**
