@@ -102,15 +102,21 @@ class TopBehavior(
     ) {
         log("onNestedScroll(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, dxConsumed:$dxConsumed," +
                 " dyConsumed:$dyConsumed, dxUnconsumed:$dxUnconsumed, dyUnconsumed$dyUnconsumed, type:$type, consumed:$consumed)")
-        super.onNestedScroll(coordinatorLayout,
-            child,
-            target,
-            dxConsumed,
-            dyConsumed,
-            dxUnconsumed,
-            dyUnconsumed,
-            type,
-            consumed)
+//        super.onNestedScroll(coordinatorLayout,
+//            child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed)
+
+        val translationY = child.translationY
+        // 手指向上滚动或者child已经滚出了屏幕，不去处理
+        if (translationY >= 0 || dyUnconsumed > 0) return
+        if (dyUnconsumed > translationY) {
+            //全部消耗
+            consumed[1] += dyUnconsumed
+            child.translationY = translationY - dyUnconsumed
+        } else {
+            //消耗一部分
+            consumed[1] += child.translationY.toInt()
+            child.translationY = 0F
+        }
     }
 
     override fun onStopNestedScroll(

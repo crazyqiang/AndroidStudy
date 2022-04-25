@@ -22,6 +22,8 @@ class BottomBehavior(
     // 1、onMeasureChild()、onLayoutChild()是对子View的测量、布局
     // 2、layoutDependsOn()、onDependentViewChanged()、onDependentViewRemoved()是子View之间设置Behavior的条件等
     // 3、onInterceptTouchEvent()、onTouchEvent()对事件的拦截与处理
+    // 4、onStartNestedScroll()、onNestedScrollAccepted()、onNestedScroll()、 onNestedPreScroll()、
+    //    onStopNestedScroll()、onNestedFling()、onNestedPreFling()执行嵌套滑动
 
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
@@ -141,7 +143,7 @@ class BottomBehavior(
         dependency: View,
     ): Boolean {
         log("layoutDependsOn()")
-        return dependency is TargetTextView
+        return dependency == parent.getChildAt(0)
     }
 
     /**
@@ -157,8 +159,13 @@ class BottomBehavior(
         dependency: View,
     ): Boolean {
         log("onDependentViewChanged()")
-        child.y = dependency.bottom.toFloat()
-        child.x = dependency.left.toFloat()
+//        child.y = dependency.bottom.toFloat()
+//        child.x = dependency.left.toFloat()
+//        child.translationY = dependency.translationY
+        //不止改变位置 还改变高度
+        child.layout(0,
+            (dependency.bottom + dependency.translationY).toInt(),
+            child.measuredWidth, child.measuredHeight)
         return true
     }
 
