@@ -8,55 +8,50 @@ import androidx.core.view.ViewCompat
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 class TopBehavior(
-    context: Context,
-    attrs: AttributeSet? = null,
+        context: Context,
+        attrs: AttributeSet? = null,
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
 
     override fun onStartNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        directTargetChild: View,
-        target: View,
-        axes: Int,
-        type: Int,
+            coordinatorLayout: CoordinatorLayout,
+            child: View,
+            directTargetChild: View,
+            target: View,
+            axes: Int,
+            type: Int,
     ): Boolean {
-        log("onStartNestedScroll(coordinatorLayout:$coordinatorLayout, " +
-                "child:$child, directTargetChild:$directTargetChild, target:$target, axes:$axes, type:$type)")
+        log("top: onStartNestedScroll(axes:$axes, type:$type)")
         return axes == ViewCompat.SCROLL_AXIS_VERTICAL
     }
 
     override fun onNestedScrollAccepted(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        directTargetChild: View,
-        target: View,
-        axes: Int,
-        type: Int,
+            coordinatorLayout: CoordinatorLayout,
+            child: View,
+            directTargetChild: View,
+            target: View,
+            axes: Int,
+            type: Int,
     ) {
-        log("onNestedScrollAccepted(coordinatorLayout:$coordinatorLayout," +
-                " child:$child, directTargetChild:$directTargetChild, target:$target, axes:$axes, type:$type)")
+        log("top: onNestedScrollAccepted(axes:$axes, type:$type)")
         super.onNestedScrollAccepted(coordinatorLayout,
-            child,
-            directTargetChild,
-            target,
-            axes,
-            type)
+                child,
+                directTargetChild,
+                target,
+                axes,
+                type)
     }
 
     override fun onNestedPreScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        dx: Int,
-        dy: Int,
-        consumed: IntArray,
-        type: Int,
+            coordinatorLayout: CoordinatorLayout,
+            child: View,
+            target: View,
+            dx: Int,
+            dy: Int,
+            consumed: IntArray,
+            type: Int,
     ) {
-        //向上滑动时 dy>0 ; 向下滑动时 dy<0
-        log("onNestedPreScroll(coordinatorLayout:$coordinatorLayout, " +
-                "child:$child, target:$target, dx:$dx, dy:$dy, consumed:$consumed, type:$type)")
-        //super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
-        // 注意，手指向上滑动的时候，dy大于0。向下的时候dy小于0。
+        //Scroller向上滑动时 dy>0 ; 向下滑动时 dy<0
+        log("top: onNestedPreScroll(dx:$dx, dy:$dy, consumed:$consumed, type:$type)")
         val translationY = child.translationY
         if (-translationY >= child.measuredHeight || dy < 0) {
             // child已经滚动到屏幕外了，或者向下滚动，就不去消耗滚动了
@@ -76,17 +71,17 @@ class TopBehavior(
     }
 
     override fun onNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int,
-        type: Int,
-        consumed: IntArray,
+            coordinatorLayout: CoordinatorLayout,
+            child: View,
+            target: View,
+            dxConsumed: Int,
+            dyConsumed: Int,
+            dxUnconsumed: Int,
+            dyUnconsumed: Int,
+            type: Int,
+            consumed: IntArray,
     ) {
-        log("onNestedScroll(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, dxConsumed:$dxConsumed," +
+        log("top: onNestedScroll(dxConsumed:$dxConsumed," +
                 " dyConsumed:$dyConsumed, dxUnconsumed:$dxUnconsumed, dyUnconsumed$dyUnconsumed, type:$type, consumed:$consumed)")
 //        super.onNestedScroll(coordinatorLayout,
 //            child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed)
@@ -104,39 +99,5 @@ class TopBehavior(
             child.translationY = 0F
         }
     }
-
-    override fun onStopNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        type: Int,
-    ) {
-        log("onStopNestedScroll(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, type:$type)")
-        super.onStopNestedScroll(coordinatorLayout, child, target, type)
-    }
-
-    override fun onNestedFling(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        velocityX: Float,
-        velocityY: Float,
-        consumed: Boolean,
-    ): Boolean {
-        log("onNestedFling(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, velocityX:$velocityX, velocityY:$velocityY, consumed:$consumed)")
-        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed)
-    }
-
-    override fun onNestedPreFling(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        velocityX: Float,
-        velocityY: Float,
-    ): Boolean {
-        log("onNestedPreFling(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, velocityX:$velocityX, velocityY:$velocityY)")
-        return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY)
-    }
-
 
 }
