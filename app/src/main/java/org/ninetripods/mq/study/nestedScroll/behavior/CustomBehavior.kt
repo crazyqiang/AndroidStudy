@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.ViewCompat
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
@@ -24,8 +23,8 @@ class CustomBehavior(
     // 1、onMeasureChild()、onLayoutChild()是对子View的测量、布局
     // 2、layoutDependsOn()、onDependentViewChanged()、onDependentViewRemoved()是子View之间设置Behavior的条件等
     // 3、onInterceptTouchEvent()、onTouchEvent()对事件的拦截与处理
-    // 4、onStartNestedScroll()、onNestedScrollAccepted()、onNestedScroll()、 onNestedPreScroll()、
-    //    onStopNestedScroll()、onNestedFling()、onNestedPreFling()执行嵌套滑动
+    // 4、onStartNestedScroll()、onNestedScrollAccepted()、onNestedPreScroll()、onNestedScroll()、
+    //    onNestedPreFling()、onNestedFling()、onStopNestedScroll()执行嵌套滑动
     // 二、
     // (use[CoordinatorLayout.parseBehavior])如何反射获取Behavior
 
@@ -43,7 +42,6 @@ class CustomBehavior(
         coordinatorLayout: CoordinatorLayout, child: View,
         directTargetChild: View, target: View, axes: Int, type: Int,
     ): Boolean {
-        ViewCompat.TYPE_TOUCH
         log("onStartNestedScroll(coordinatorLayout:$coordinatorLayout, " +
                 "child:$child, directTargetChild:$directTargetChild, target:$target, axes:$axes, type:$type)")
         return super.onStartNestedScroll(
@@ -52,6 +50,12 @@ class CustomBehavior(
 
     /**
      * onStartNestedScroll()返回true时会执行到该方法，可以做一些初始化操作。参数跟onStartNestedScroll()中的含义一致
+     * @param coordinatorLayout
+     * @param child
+     * @param directTargetChild
+     * @param target
+     * @param axes
+     * @param type
      */
     override fun onNestedScrollAccepted(
         coordinatorLayout: CoordinatorLayout, child: View,
@@ -83,7 +87,7 @@ class CustomBehavior(
     }
 
     /**
-     * 前面onNestedPreScroll()执行完后，剩余事件交给target去处理，如果有剩余，会将剩余事件又交给Behavior去滑动
+     * 前面onNestedPreScroll()执行完后，剩余事件交给子View去处理，子View执行完后，如果还有剩余，会将剩余事件又交给Behavior去滑动
      * @param coordinatorLayout 父View
      * @param child
      * @param target
@@ -105,30 +109,14 @@ class CustomBehavior(
     }
 
     /**
-     * @param coordinatorLayout
+     * 1、子View发生惯性滑动时，同样会先传给Behavior的onNestedFling()方法。该方法判断是否需要消耗本次惯性滑动。
+     * 2、在NestedScrollingParent2/NestedScrollingParent3中默认会在Child中去消耗惯性滑动，Behavior中保持默认实现即可
+     * @param coordinatorLayout 父View
      * @param child
      * @param target
-     * @param velocityX
-     * @param velocityY
-     * @param consumed
-     * @return
-     */
-    override fun onNestedFling(
-        coordinatorLayout: CoordinatorLayout,
-        child: View, target: View, velocityX: Float, velocityY: Float, consumed: Boolean,
-    ): Boolean {
-        log("onNestedFling(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, velocityX:$velocityX, velocityY:$velocityY, consumed:$consumed)")
-        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed)
-    }
-
-
-    /**
-     * @param coordinatorLayout
-     * @param child
-     * @param target
-     * @param velocityX
-     * @param velocityY
-     * @return
+     * @param velocityX 惯性滑动的水平速度
+     * @param velocityY 惯性滑动的垂直速度
+     * @return  返回true，表示会消耗惯性滑动；反之false，表示不消耗惯性滑动
      */
     override fun onNestedPreFling(
         coordinatorLayout: CoordinatorLayout,
@@ -139,10 +127,29 @@ class CustomBehavior(
     }
 
     /**
-     * @param coordinatorLayout
+     * 执行惯性滑动处理
+     * @param coordinatorLayout 父View
      * @param child
      * @param target
-     * @param type
+     * @param velocityX 惯性滑动的水平速度
+     * @param velocityY 惯性滑动的垂直速度
+     * @param consumed 发起滚动的子View是否消耗此次惯性滑动
+     * @return 返回true，表示Behavior消耗此次惯性滑动
+     */
+    override fun onNestedFling(
+        coordinatorLayout: CoordinatorLayout,
+        child: View, target: View, velocityX: Float, velocityY: Float, consumed: Boolean,
+    ): Boolean {
+        log("onNestedFling(coordinatorLayout:$coordinatorLayout, child:$child, target:$target, velocityX:$velocityX, velocityY:$velocityY, consumed:$consumed)")
+        return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed)
+    }
+
+    /**
+     * 滚动结束后会执行该方法
+     * @param coordinatorLayout 父View
+     * @param child
+     * @param target
+     * @param type ViewCompat.TYPE_TOUCH(触摸滑动，值为0)、ViewCompat.TYPE_NON_TOUCH(非触摸滑动，即惯性滑动，值为1)
      */
     override fun onStopNestedScroll(
         coordinatorLayout: CoordinatorLayout, child: View, target: View, type: Int,
@@ -152,17 +159,19 @@ class CustomBehavior(
     }
 
     /**
+     * 设置Behavior的子View和其他子View是否存在依赖关系。Behavior会遍历除child之外的其他子View，带入该方法判断是否存在依赖关系，即dependency是一直会变的且layoutDependsOn()会被执行多次。
      * @param parent 父View
      * @param child 设置当前Behavior的子View
      * @param dependency 依赖的View
+     * @return 返回true，存在依赖关系；返回false，不存在依赖关系
      */
     override fun layoutDependsOn(
         parent: CoordinatorLayout,
         child: View,
         dependency: View,
     ): Boolean {
-        log("layoutDependsOn()")
-        return dependency is TargetTextView
+        log("layoutDependsOn(parent: $parent, child: $child, dependency)")
+        return super.layoutDependsOn(parent, child, dependency)
     }
 
     /**
@@ -170,7 +179,7 @@ class CustomBehavior(
      * @param parent 父View
      * @param child 设置当前Behavior的子View
      * @param dependency 依赖的View
-     * @return
+     * @return child发生变化时返回true
      */
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
@@ -216,7 +225,7 @@ class CustomBehavior(
     }
 
     /**
-     * 对子View的布局
+     * 对子View的布局 CoordinatorLayout是一个FrameLayout，所以需要自行实现对子View的布局和测量
      *
      * @param parent
      * @param child
@@ -234,7 +243,7 @@ class CustomBehavior(
     }
 
     /**
-     * 是否对事件进行拦截
+     * 是否对事件进行拦截  相当于CoordinatorLayout中的事件拦截抽离到Behavior中了
      * @param parent 父View
      * @param child 子View
      * @param ev MotionEvent事件

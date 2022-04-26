@@ -2,28 +2,14 @@ package org.ninetripods.mq.study.nestedScroll.behavior
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.MotionEvent
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import org.ninetripods.mq.study.kotlin.ktx.log
 
-/**
- * 自定义Behavior必须要继承有参数的，否则会报以下错误：
- * Caused by: java.lang.RuntimeException: Could not inflate Behavior subclass org.ninetripods.mq.study.nestedScroll.behavior.CustomBehavior
- * ，因为CoordinatorLayout里是利用反射(use[CoordinatorLayout.parseBehavior]) 获取该Behavior的
- * @param context
- * @param attrs
- */
 class BottomBehavior(
     context: Context,
     attrs: AttributeSet? = null,
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
-
-    // 1、onMeasureChild()、onLayoutChild()是对子View的测量、布局
-    // 2、layoutDependsOn()、onDependentViewChanged()、onDependentViewRemoved()是子View之间设置Behavior的条件等
-    // 3、onInterceptTouchEvent()、onTouchEvent()对事件的拦截与处理
-    // 4、onStartNestedScroll()、onNestedScrollAccepted()、onNestedScroll()、 onNestedPreScroll()、
-    //    onStopNestedScroll()、onNestedFling()、onNestedPreFling()执行嵌套滑动
 
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
@@ -223,30 +209,6 @@ class BottomBehavior(
         val firstView = parent.getChildAt(0)
         child.layout(0, firstView.measuredHeight, child.measuredWidth, child.measuredHeight)
         return true
-    }
-
-    /**
-     * 是否对事件进行拦截
-     * @param parent 父View
-     * @param child 子View
-     * @param ev MotionEvent事件
-     */
-    override fun onInterceptTouchEvent(
-        parent: CoordinatorLayout,
-        child: View,
-        ev: MotionEvent,
-    ): Boolean {
-        return super.onInterceptTouchEvent(parent, child, ev)
-    }
-
-    /**
-     * 事件处理
-     * @param parent 父View
-     * @param child 子View
-     * @param ev MotionEvent事件
-     */
-    override fun onTouchEvent(parent: CoordinatorLayout, child: View, ev: MotionEvent): Boolean {
-        return super.onTouchEvent(parent, child, ev)
     }
 
 }
