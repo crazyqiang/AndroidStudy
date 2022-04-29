@@ -113,7 +113,8 @@ public class PopupWindowActivity extends BaseActivity implements CommonPopupWind
         //得到button的左上角坐标
 //        int[] positions = new int[2];
 //        view.getLocationOnScreen(positions);
-//        popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.NO_GRAVITY, positions[0], positions[1] - popupWindow.getHeight());
+//        popupWindow.showAtLocation(findViewById(android.R.id.content),
+//                Gravity.NO_GRAVITY, positions[0], positions[1] - popupWindow.getHeight());
     }
 
 

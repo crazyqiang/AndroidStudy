@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/mark_pic_normal"
         android:gravity="center_vertical"
-        android:paddingTop="10dp"
         android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="20dp"
         android:text="你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好你好好你好好好" />
