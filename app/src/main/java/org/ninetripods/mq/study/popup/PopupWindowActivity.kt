@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.popup.PopupWindow.PopWindow
+import org.ninetripods.mq.study.popup.popupWindow.PopWindow
 import org.ninetripods.mq.study.util.adapter.PopupAdapter
 
 /**

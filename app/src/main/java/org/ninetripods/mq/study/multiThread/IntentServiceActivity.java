@@ -15,7 +15,7 @@ import org.ninetripods.mq.study.CommonWebviewActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.multiThread.intentService.MyIntentService;
 import org.ninetripods.mq.study.multiThread.intentService.UpdateUIReceiver;
-import org.ninetripods.mq.study.popup.PopupWindow.PopWindow;
+import org.ninetripods.mq.study.popup.popupWindow.PopWindow;
 import org.ninetripods.mq.study.util.CommonUtil;
 import org.ninetripods.mq.study.util.Constant;
 import org.ninetripods.mq.study.util.DpUtil;

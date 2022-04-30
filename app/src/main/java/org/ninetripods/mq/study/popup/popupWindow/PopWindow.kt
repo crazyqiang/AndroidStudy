@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.popup.PopupWindow
+package org.ninetripods.mq.study.popup.popupWindow
 
 import android.content.Context
 import android.view.View
