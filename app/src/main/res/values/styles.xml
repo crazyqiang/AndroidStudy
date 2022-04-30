@@ -30,8 +30,8 @@
     </style>
 
     <style name="AnimDown" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/push_scale_in</item>
-        <item name="android:windowExitAnimation">@anim/push_scale_out</item>
+        <item name="android:windowEnterAnimation">@anim/push_top_translate_in</item>
+        <item name="android:windowExitAnimation">@anim/push_top_translate_out</item>
     </style>
 
     <style name="bg_corner">

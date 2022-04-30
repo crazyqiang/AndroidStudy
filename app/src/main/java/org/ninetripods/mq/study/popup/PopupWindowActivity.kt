@@ -33,13 +33,13 @@ class PopupWindowActivity : BaseActivity(), CommonPopupWindow.ViewInterface,
         initToolBar(toolbar, "PopupWindow", true)
     }
 
-    //向下弹出 TODO translate使用
+    //向下弹出
     fun showDownPop(view: View) {
         mPopDownWindow = PopWindow.Builder(this)
             .setView(R.layout.popup_down)
-//            .setView(R.layout.query_info2)
             .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
+            .setAnimStyle(R.style.AnimDown)
             .setChildrenView(this)
             .create()
         mPopDownWindow?.showOnTargetBottom(view)
