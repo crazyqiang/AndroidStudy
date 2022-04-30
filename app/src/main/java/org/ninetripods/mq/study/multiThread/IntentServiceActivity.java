@@ -15,16 +15,16 @@ import org.ninetripods.mq.study.CommonWebviewActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.multiThread.intentService.MyIntentService;
 import org.ninetripods.mq.study.multiThread.intentService.UpdateUIReceiver;
-import org.ninetripods.mq.study.popup.PopupWindow.CommonPopupWindow;
+import org.ninetripods.mq.study.popup.PopupWindow.PopWindow;
 import org.ninetripods.mq.study.util.CommonUtil;
 import org.ninetripods.mq.study.util.Constant;
 import org.ninetripods.mq.study.util.DpUtil;
 
-public class IntentServiceActivity extends BaseActivity implements CommonPopupWindow.ViewInterface {
+public class IntentServiceActivity extends BaseActivity implements PopWindow.ViewInterface {
 
 
     private TextView tv_start_one, tv_start_two;
-    private CommonPopupWindow popupWindow;
+    private PopWindow popupWindow;
     private ProgressBar pb_one, pb_two;
     private TextView tv_progress_one, tv_progress_two;
 
@@ -96,12 +96,12 @@ public class IntentServiceActivity extends BaseActivity implements CommonPopupWi
         View upView = LayoutInflater.from(this).inflate(R.layout.intent_service, null);
         //测量View的宽高
         CommonUtil.measureWidthAndHeight(upView);
-        popupWindow = new CommonPopupWindow.Builder(this)
+        popupWindow = new PopWindow.Builder(this)
                 .setView(R.layout.intent_service)
                 .setWidthAndHeight(ViewGroup.LayoutParams.WRAP_CONTENT, upView.getMeasuredHeight())
                 .setBackGroundLevel(0.7f)//取值范围0.0f-1.0f 值越小越暗
 //                .setAnimationStyle(R.style.AnimUp)
-                .setViewOnclickListener(this)
+                .setChildrenView(this)
                 .create();
         popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.TOP, 0, (int) DpUtil.dp2px(this, 150));
     }

@@ -11,15 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.popup.PopupWindow.CommonPopupWindow
 import org.ninetripods.mq.study.popup.PopupWindow.PopWindow
 import org.ninetripods.mq.study.util.adapter.PopupAdapter
 
 /**
  * PopupWindow
  */
-class PopupWindowActivity : BaseActivity(), CommonPopupWindow.ViewInterface,
-    PopWindow.ViewInterface {
+class PopupWindowActivity : BaseActivity(), PopWindow.ViewInterface {
     private var mPopLRWindow: PopWindow? = null
     private var mPopAllWindow: PopWindow? = null
     private var mPopDownWindow: PopWindow? = null
