@@ -3,9 +3,11 @@ package org.ninetripods.mq.study.popup.PopupWindow
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.PopupWindow
-import java.lang.IllegalArgumentException
 
 class PopController(private val context: Context, private val popupWindow: PopupWindow) {
     private var layoutResId = 0 //布局id

@@ -2,18 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/gray_holo_light"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/mark_pic_normal"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="20dp"
-        android:text="锄禾日当午，汗滴禾下土；谁知盘中餐，粒粒皆辛苦。" />
+        android:padding="10dp"
+        android:text="锄禾日当午，汗滴禾下土；谁知盘中餐，粒粒皆辛苦。"
+        android:textColor="@color/black" />
 
 </LinearLayout>

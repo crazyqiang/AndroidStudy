@@ -1,22 +1,119 @@
-package com.zybang.jump.views.dialog
+package org.ninetripods.mq.study.popup.PopupWindow
 
 import android.content.Context
-import android.view.Gravity
 import android.view.View
 import android.widget.PopupWindow
-import org.ninetripods.mq.study.popup.PopupWindow.PopController
 
 class PopWindow private constructor(context: Context) : PopupWindow() {
 
     val controller: PopController = PopController(context, this)
 
     /**
-     * 在当前View的正上方展示
+     * 在当前View的上方展示
      * @param target  目标View
+     * @param gravity
+     * @param wExtra x轴微调使用 >0时向右移，<0时向左移
+     * @param hExtra y轴微调使用 >0时向下移, <0时向上移
      */
-    fun showOnTop(target: View, gravity: Int = Gravity.CENTER, hExtra: Float = 0F) {
-        showAsDropDown(target,
-            -(width - target.measuredWidth) / 2, -(height + target.measuredHeight + hExtra.toInt()))
+    fun showOnTargetTop(
+        target: View,
+        gravity: Int = CENTER_TOP,
+        wExtra: Int = 0,
+        hExtra: Int = 0,
+    ) {
+        var xOff = 0
+        when (gravity) {
+            CENTER_TOP -> {
+                //正上方
+                xOff = -(width - target.measuredWidth) / 2
+            }
+            LEFT_TOP -> {
+                //左上方
+                xOff = -(width - target.measuredWidth / 2)
+            }
+            RIGHT_TOP -> {
+                //右上方
+                xOff = target.measuredWidth / 2
+            }
+        }
+        showAsDropDown(target, xOff + wExtra, -(height + target.measuredHeight) + hExtra)
+    }
+
+    /**
+     * 在当前View的下方展示
+     * @param target  目标View
+     * @param gravity
+     * @param wExtra x轴微调使用 >0时向右移，<0时向左移
+     * @param hExtra y轴微调使用 >0时向下移, <0时向上移
+     */
+    fun showOnTargetBottom(
+        target: View,
+        gravity: Int = CENTER_BOTTOM,
+        wExtra: Int = 0,
+        hExtra: Int = 0,
+    ) {
+        var xOff = 0
+        when (gravity) {
+            CENTER_BOTTOM -> {
+                //正下方
+                xOff = -(width - target.measuredWidth) / 2
+            }
+            LEFT_BOTTOM -> {
+                //左下方
+                xOff = -(width - target.measuredWidth / 2)
+            }
+            RIGHT_BOTTOM -> {
+                //右下方
+                xOff = target.measuredWidth / 2
+            }
+        }
+        showAsDropDown(target, xOff + wExtra, hExtra)
+    }
+
+    /**
+     * 在当前View的右侧展示
+     * @param target  目标View
+     * @param gravity
+     * @param wExtra x轴微调使用 >0时向右移，<0时向左移
+     * @param hExtra y轴微调使用 >0时向下移, <0时向上移
+     */
+    fun showOnTargetRight(
+        target: View,
+        gravity: Int = CENTER_RIGHT,
+        wExtra: Int = 0,
+        hExtra: Int = 0,
+    ) {
+        var hOff = 0
+        when (gravity) {
+            CENTER_RIGHT -> {
+                //右侧
+                hOff = -(height + target.height) / 2
+            }
+        }
+        showAsDropDown(target, target.measuredWidth + wExtra, hOff + hExtra)
+    }
+
+    /**
+     * 在当前View的左侧展示
+     * @param target  目标View
+     * @param gravity
+     * @param wExtra x轴微调使用 >0时向右移，<0时向左移
+     * @param hExtra y轴微调使用 >0时向下移, <0时向上移
+     */
+    fun showOnTargetLeft(
+        target: View,
+        gravity: Int = CENTER_LEFT,
+        wExtra: Int = 0,
+        hExtra: Int = 0,
+    ) {
+        var hOff = 0
+        when (gravity) {
+            CENTER_LEFT -> {
+                //左侧
+                hOff = -(height + target.height) / 2
+            }
+        }
+        showAsDropDown(target, -width + wExtra, hOff + hExtra)
     }
 
     override fun getWidth(): Int {
@@ -120,7 +217,17 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
     }
 
     companion object {
-        private fun measureWidthAndHeight(view: View?) {
+
+        const val CENTER_TOP = 0 //正上方
+        const val LEFT_TOP = 1 //左上方
+        const val RIGHT_TOP = 2 //右上方
+        const val CENTER_BOTTOM = 3 //正下方
+        const val LEFT_BOTTOM = 4 //左下方
+        const val RIGHT_BOTTOM = 5 //右下方
+        const val CENTER_RIGHT = 6 //右侧
+        const val CENTER_LEFT = 7 //左侧
+
+        fun measureWidthAndHeight(view: View?) {
             val widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
             val heightMeasureSpec =
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
