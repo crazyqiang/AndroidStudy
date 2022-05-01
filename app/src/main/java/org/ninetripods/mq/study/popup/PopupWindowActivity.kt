@@ -10,8 +10,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.popup.popupWindow.PopWindow
+import org.ninetripods.mq.study.util.Constant
 import org.ninetripods.mq.study.util.adapter.PopupAdapter
 
 /**
@@ -28,7 +30,7 @@ class PopupWindowActivity : BaseActivity(), PopWindow.ViewInterface {
 
     override fun initViews() {
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        initToolBar(toolbar, "PopupWindow", true)
+        initToolBar(toolbar, "PopupWindow", true, true, TYPE_BLOG)
     }
 
     //向下弹出
@@ -174,5 +176,9 @@ class PopupWindowActivity : BaseActivity(), PopWindow.ViewInterface {
                 }
             }
         }
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_POPUP_WINDOW)
     }
 }

@@ -21,6 +21,8 @@ public class Constant {
     public static final String BLOG_JETPACK_FLOW = "https://blog.csdn.net/u013700502/article/details/120526170";
     public static final String BLOG_JETPACK_DATASTORE = "https://blog.csdn.net/u013700502/article/details/121076531";
 
+    public static final String BLOG_POPUP_WINDOW = "https://blog.csdn.net/u013700502/article/details/71275093";
+
     //Image URL
     public final static String[] imageUrls = new String[] {
             "http://upload-images.jianshu.io/upload_images/587163-8eefdbb4be942ff1.jpg",
