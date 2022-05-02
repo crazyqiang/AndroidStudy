@@ -53,13 +53,13 @@ abstract class BaseMvvmActivity<VM : BaseViewModel> : BaseActivity() {
             mStatusViewUtil.showErrorView(errStr)
         }
         //接收Loading信息
-        mViewModel.loadingLiveData.observe(this, { isShow ->
+        mViewModel.loadingLiveData.observe(this) { isShow ->
             mStatusViewUtil.showLoadingView(isShow)
-        })
+        }
         //接收正常信息
-        mViewModel.normalLiveData.observe(this, {
+        mViewModel.normalLiveData.observe(this) {
             mStatusViewUtil.showMainView()
-        })
+        }
     }
 
     protected abstract fun init()
