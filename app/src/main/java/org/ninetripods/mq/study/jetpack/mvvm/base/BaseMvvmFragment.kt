@@ -2,10 +2,12 @@ package org.ninetripods.mq.study.jetpack.mvvm.base
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import org.ninetripods.mq.study.jetpack.mvvm.base.widget.IStatusView
 import org.ninetripods.mq.study.jetpack.mvvm.base.widget.LoadingDialog
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
+import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment(), IStatusView {
@@ -18,7 +20,6 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment(), IStatusVie
         mLoadingDialog = LoadingDialog(requireContext(), false)
         initViews(view)
         mViewModel = getViewModel()!!
-        mViewModel.init(arguments)
         registerEvent()
     }
 
@@ -42,13 +43,13 @@ abstract class BaseMvvmFragment<VM : BaseViewModel> : BaseFragment(), IStatusVie
 
     private fun registerEvent() {
         //接收错误信息
-        mViewModel.errorLiveData.observe(this) { errMsg ->
+        mViewModel.errorFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { errMsg ->
             showErrorView(errMsg)
         }
         //接收Loading信息
-        mViewModel.loadingLiveData.observe(this, { isShow ->
+        mViewModel.loadingFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { isShow ->
             showLoadingView(isShow)
-        })
+        }
     }
 
     override fun showLoadingView(isShow: Boolean) {
