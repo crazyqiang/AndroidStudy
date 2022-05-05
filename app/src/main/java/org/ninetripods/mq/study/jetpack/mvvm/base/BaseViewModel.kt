@@ -41,6 +41,10 @@ abstract class BaseViewModel : ViewModel() {
         request: suspend () -> BaseData<T>,
     ) {
         viewModelScope.launch {
+            if (!NetworkUtil.isNetworkConnected()) {
+                _errorChannel.send("网络未连接")
+                return@launch
+            }
             //是否展示Loading
             if (showLoading) {
                 loadStart()
@@ -82,6 +86,10 @@ abstract class BaseViewModel : ViewModel() {
         request: suspend () -> BaseData<T>,
     ) {
         viewModelScope.launch {
+            if (!NetworkUtil.isNetworkConnected()) {
+                _errorChannel.send("网络未连接")
+                return@launch
+            }
             //是否展示Loading
             if (showLoading) {
                 loadStart()

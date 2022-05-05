@@ -4,6 +4,8 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.showToast
 
@@ -13,7 +15,7 @@ import org.ninetripods.mq.study.kotlin.ktx.showToast
 class StatusViewOwner(
     var context: Activity,
     private var mMainView: View? = null,
-    private var mOnclickListener: View.OnClickListener? = null
+    private var mOnclickListener: View.OnClickListener? = null,
 ) : IStatusView {
 
     private var mLoadingDialog: LoadingDialog
@@ -74,7 +76,7 @@ class StatusViewOwner(
         }
     }
 
-    fun showCustomView(incomeView: View) {
+    private fun showCustomView(incomeView: View) {
         if (incomeView == mLastShowView) return
         if (mLastShowView != null && mLastShowView != mMainView) {
             removeView(mLastShowView)
@@ -83,9 +85,23 @@ class StatusViewOwner(
         if (incomeView != mMainView) {
             mMainView?.visibility = View.GONE
             val parentView = mMainView?.let { getParentView(it) }
-            if (parentView != null) {
+            if (parentView != null && mMainView != null) {
                 checkChildView(incomeView)
-                parentView.addView(incomeView, mChildViewIndex, mMainView?.layoutParams)
+                //父View是ConstraintLayout 单独处理
+                var clParams: ConstraintLayout.LayoutParams? = null
+                var isClLayout = false //父View是否是CL布局
+                if (mMainView?.layoutParams is ConstraintLayout.LayoutParams) {
+                    isClLayout = true
+                    clParams = ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT)
+                    clParams.bottomToBottom = ConstraintSet.PARENT_ID
+                    clParams.leftToLeft = ConstraintSet.PARENT_ID
+                    clParams.rightToRight = ConstraintSet.PARENT_ID
+                    clParams.topToTop = ConstraintSet.PARENT_ID
+                }
+                parentView.addView(incomeView,
+                    mChildViewIndex,
+                    if (isClLayout) clParams else mMainView?.layoutParams)
             }
         } else {
             mMainView?.visibility = View.VISIBLE

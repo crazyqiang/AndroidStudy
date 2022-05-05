@@ -1,10 +1,10 @@
 package org.ninetripods.mq.study.jetpack.mvvm
 
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseMvvmActivity
@@ -21,7 +21,7 @@ class MvvmExampleActivity : BaseMvvmActivity() {
     private val mTvContent: TextView by id(R.id.tv_content)
     private val mBtnQuest: Button by id(R.id.btn_request)
     private val mToolBar: Toolbar by id(R.id.toolbar)
-    private val mContentView: ConstraintLayout by id(R.id.cl_content_view)
+    private val mContentView: ViewGroup by id(R.id.cl_content_view)
 
     override fun getLayoutId(): Int {
         return R.layout.activity_wan_android
