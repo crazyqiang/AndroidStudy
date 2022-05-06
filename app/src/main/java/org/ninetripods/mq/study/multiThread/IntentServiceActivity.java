@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -107,7 +108,7 @@ public class IntentServiceActivity extends BaseActivity implements PopWindow.Vie
     }
 
     @Override
-    public void getChildView(View view, int layoutResId) {
+    public void getChildView(View view, int layoutResId, PopupWindow pop) {
         switch (layoutResId) {
             case R.layout.intent_service:
                 tv_progress_one = (TextView) view.findViewById(R.id.tv_progress_one);

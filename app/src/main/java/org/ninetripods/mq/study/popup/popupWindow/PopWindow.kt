@@ -130,7 +130,7 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
     }
 
     interface ViewInterface {
-        fun getChildView(view: View, layoutResId: Int)
+        fun getChildView(view: View, layoutResId: Int, pop: PopupWindow)
     }
 
     class Builder(context: Context) {
@@ -207,8 +207,8 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
             val popupWindow = PopWindow(params.mContext)
             params.apply(popupWindow.controller)
             val popView = popupWindow.controller.mPopupView
-            if (listener != null && params.layoutResId != 0 && popView != null) {
-                listener?.getChildView(popView, params.layoutResId)
+            if (listener != null && popView != null) {
+                listener?.getChildView(popView, params.layoutResId, popupWindow)
             }
             measureWidthAndHeight(popView)
             return popupWindow
