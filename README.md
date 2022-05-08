@@ -1,10 +1,10 @@
 ## 欢迎扫码关注
 欢迎**扫描下方二维码**或搜索公众号 **代码说** 关注我的微信公众号查看最新文章，在公众号回复 **hello world** 不定时参与现金红包抽奖，期待您的关注~
 
-![wechat_qr](http://r92sjbx0n.hn-bkt.clouddn.com/we_chat_qr.png)
+<img src="https://github.com/crazyqiang/AndroidStudy/blob/master/pic/wechat_qr.png" width="600">
 
 ## 扫描二维码下载APK示例
-![apk](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/wechat_qr.png)
+![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
 
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
