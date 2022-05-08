@@ -4,7 +4,7 @@
 ![wechat_qr](http://r92sjbx0n.hn-bkt.clouddn.com/we_chat_qr.png)
 
 ## 扫描二维码下载APK示例
-![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
+![apk](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/wechat_qr.png)
 
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
