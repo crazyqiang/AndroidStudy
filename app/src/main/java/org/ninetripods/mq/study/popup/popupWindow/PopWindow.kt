@@ -130,6 +130,11 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
     }
 
     interface ViewInterface {
+        /**
+         * @param view  popUpWindow的布局Container View
+         * @param layoutResId popUpWindow的布局 调用方未传默认为0
+         * @param pop PopupWindow
+         */
         fun getChildView(view: View, layoutResId: Int, pop: PopupWindow)
     }
 
