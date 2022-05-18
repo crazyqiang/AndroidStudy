@@ -48,6 +48,6 @@ class CustomBehaviorActivity : BaseActivity() {
             holder.textView.text = "position: $position"
         }
 
-        override fun getItemCount(): Int = 50
+        override fun getItemCount(): Int = 20
     }
 }

@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.ViewCompat
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
@@ -160,7 +159,8 @@ class CustomBehavior(
     }
 
     /**
-     * 设置Behavior的子View和其他子View是否存在依赖关系。Behavior会遍历除child之外的其他子View，带入该方法判断是否存在依赖关系，即dependency是一直会变的且layoutDependsOn()会被执行多次。
+     * child、dependency都是parent（CoordinatorLayout）的直接或间接子View，设置Behavior的子View和其他子View是否存在依赖关系。
+     * Behavior会遍历除child之外的其他子View，带入该方法判断是否存在依赖关系，即dependency是一直会变的且layoutDependsOn()会被执行多次。
      * @param parent 父View
      * @param child 设置当前Behavior的子View
      * @param dependency 依赖的View

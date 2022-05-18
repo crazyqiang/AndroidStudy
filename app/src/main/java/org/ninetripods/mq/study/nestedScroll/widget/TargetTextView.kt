@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.nestedScroll.behavior
+package org.ninetripods.mq.study.nestedScroll.widget
 
 import android.content.Context
 import android.os.Build

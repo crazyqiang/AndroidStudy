@@ -19,4 +19,22 @@
         android:background="@color/white"
         app:layout_behavior=".nestedScroll.behavior.BottomBehavior" />
 
+    <!--去掉阴影-->
+    <!--    android:elevation="0dp"-->
+    <!--    android:outlineProvider="none"-->
+    <org.ninetripods.mq.study.nestedScroll.widget.ScrollFloatingButton
+        android:id="@+id/fb_scroll"
+        android:layout_width="80dp"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp"
+        android:elevation="0dp"
+        android:outlineProvider="none"
+        android:src="@mipmap/icon_gift"
+        app:backgroundTint="@color/transparent"
+        app:fabCustomSize="80dp"
+        app:layout_behavior=".nestedScroll.behavior.ScrollFloatingBehavior"
+        app:maxImageSize="80dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
