@@ -33,6 +33,7 @@ class PopController(private val context: Context, private val popupWindow: Popup
         } else if (mView != null) {
             mPopupView = mView
         }
+        detachFromParentView(mPopupView)  //如果mPopupView存在父View 删除依附关系
         popupWindow.contentView = mPopupView
     }
 
@@ -113,6 +114,13 @@ class PopController(private val context: Context, private val popupWindow: Popup
             if (isShowAnim) {
                 controller.setAnimStyle(animStyle)
             }
+        }
+    }
+
+    private fun detachFromParentView(childView: View?) {
+        val viewParent = childView?.parent
+        if (viewParent != null && viewParent is ViewGroup) {
+            viewParent.removeView(childView)
         }
     }
 }

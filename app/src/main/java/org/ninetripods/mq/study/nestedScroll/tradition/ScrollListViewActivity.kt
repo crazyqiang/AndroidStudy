@@ -1,37 +1,61 @@
-package org.ninetripods.mq.study.nestedScroll.tradition;
+package org.ninetripods.mq.study.nestedScroll.tradition
 
-import android.widget.ArrayAdapter;
+import android.view.View
+import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.nestedScroll.util.view.CustomListView
+import org.ninetripods.mq.study.R
+import android.widget.ArrayAdapter
 
-import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.nestedScroll.util.view.CustomListView;
-import org.ninetripods.mq.study.R;
+class ScrollListViewActivity : BaseActivity() {
+    private var lv_listView: CustomListView? = null
+    private val data = arrayOf("Apple",
+        "Banana",
+        "Orange",
+        "Watermelon",
+        "Pear",
+        "Grape",
+        "Pineapple",
+        "Strawberry",
+        "Cherry",
+        "Mango",
+        "Banana",
+        "Orange",
+        "Watermelon",
+        "Pear",
+        "Grape",
+        "Pineapple",
+        "Strawberry",
+        "Cherry",
+        "Mango",
+        "Banana",
+        "Orange",
+        "Watermelon",
+        "Pear",
+        "Grape",
+        "Pineapple",
+        "Strawberry",
+        "Cherry",
+        "Mango",
+        "Banana",
+        "Orange",
+        "Watermelon",
+        "Pear",
+        "Grape",
+        "Pineapple",
+        "Strawberry",
+        "Cherry",
+        "Mango")
 
-public class ScrollListViewActivity extends BaseActivity {
-
-    private CustomListView lv_listView;
-    private String[] data = {"Apple", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango", "Banana", "Orange", "Watermelon",
-            "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango"};
-
-    @Override
-    public void setContentView() {
-        setContentView(R.layout.activity_scroll);
+    override fun setContentView() {
+        setContentView(R.layout.activity_scroll)
     }
 
-    @Override
-    public void initViews() {
-        lv_listView = (CustomListView) findViewById(R.id.lv_listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, data);
-        lv_listView.setAdapter(adapter);
+    override fun initViews() {
+        lv_listView = findViewById<View>(R.id.lv_listView) as CustomListView
+        val adapter = ArrayAdapter(
+            this, android.R.layout.simple_list_item_1, data)
+        lv_listView!!.adapter = adapter
     }
 
-    @Override
-    public void initEvents() {
-
-    }
-
-
+    override fun initEvents() {}
 }

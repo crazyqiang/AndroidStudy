@@ -1,29 +1,25 @@
-package org.ninetripods.mq.study.nestedScroll.tradition;
+package org.ninetripods.mq.study.nestedScroll.tradition
 
-import org.ninetripods.mq.study.BaseActivity;
-import org.ninetripods.mq.study.nestedScroll.util.adapter.MyPagerAdapter;
-import org.ninetripods.mq.study.nestedScroll.util.view.CustomViewPager;
-import org.ninetripods.mq.study.R;
+import android.view.View
+import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.R
+import org.ninetripods.mq.study.nestedScroll.util.adapter.MyPagerAdapter
+import org.ninetripods.mq.study.nestedScroll.util.view.CustomViewPager
 
-public class ScrollViewPagerActivity extends BaseActivity {
-
-    private CustomViewPager view_pager;
-    private MyPagerAdapter myPagerAdapter;
-
-    @Override
-    public void setContentView() {
-        setContentView(R.layout.activity_scroll_view_pager);
+class ScrollViewPagerActivity : BaseActivity() {
+    private var view_pager: CustomViewPager? = null
+    private var myPagerAdapter: MyPagerAdapter? = null
+    override fun setContentView() {
+        setContentView(R.layout.activity_scroll_view_pager)
     }
 
-    @Override
-    public void initViews() {
-        view_pager = (CustomViewPager) findViewById(R.id.view_pager);
-        myPagerAdapter = new MyPagerAdapter(this);
-        view_pager.setAdapter(myPagerAdapter);
+    override fun initViews() {
+        view_pager = findViewById<View>(R.id.view_pager) as CustomViewPager
+        myPagerAdapter = MyPagerAdapter(this)
+        view_pager!!.adapter = myPagerAdapter
     }
 
-    @Override
-    public void initEvents() {
-        super.initEvents();
+    override fun initEvents() {
+        super.initEvents()
     }
 }
