@@ -119,6 +119,7 @@ class PopupWindowActivity : BaseActivity(), PopWindow.ViewInterface {
         PopWindow.Builder(this)
             .setView(R.layout.query_info2)
             .setChildrenView(this)
+            .setOutsideTouchable(false)
             .create()
             .showOnTargetTop(view, PopWindow.CENTER_TOP, hExtra = -20)
     }

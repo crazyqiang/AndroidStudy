@@ -12,14 +12,14 @@ import org.objectweb.asm.commons.AdviceAdapter
 private const val FIELD_NAME_ADD = "timeCost" //新增属性名称
 
 /**
-   执行结果：
-   visit(): owner-org/ninetripods/lib_bytecode/MethodTimeCostTest
-   visitMethod(): access-ACC_PUBLIC ACC_FINAL , name-addTimeCostMonitor, descriptor-()V, signature-null, exceptions-null
-   onMethodEnter():
-   onMethodExit(): opcode-RETURN
-   visitMethod(): access-ACC_PUBLIC , name-<init>, descriptor-()V, signature-null, exceptions-null
-   visitEnd():
-   timeCost: 1003
+执行结果：
+visit(): owner-org/ninetripods/lib_bytecode/MethodTimeCostTest
+visitMethod(): access-ACC_PUBLIC ACC_FINAL , name-addTimeCostMonitor, descriptor-()V, signature-null, exceptions-null
+onMethodEnter():
+onMethodExit(): opcode-RETURN
+visitMethod(): access-ACC_PUBLIC , name-<init>, descriptor-()V, signature-null, exceptions-null
+visitEnd():
+timeCost: 1003
  */
 fun main() {
     val classReader = ClassReader(MethodTimeCostTest::class.java.name)
@@ -77,8 +77,8 @@ class AddTimeCostVisitor(api: Int, classVisitor: ClassVisitor) :
     override fun visitEnd() {
         log("visitEnd():")
         if (cv != null) {
-            val fieldVisitor =
-                cv.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, FIELD_NAME_ADD, "J", null, null)
+            val fieldVisitor = cv.visitField(
+                Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, FIELD_NAME_ADD, "J", null, null)
             fieldVisitor.visitEnd()
         }
         super.visitEnd()
