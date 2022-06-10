@@ -12,6 +12,7 @@ buildscript {
         }
     }
     dependencies {
+        //https://developer.android.com/studio/releases/gradle-plugin?hl=zh-cn
         classpath 'com.android.tools.build:gradle:4.1.3'
         classpath Deps.kotlinPlugin
         //protocol buffer插件：https://github.com/google/protobuf-gradle-plugin
