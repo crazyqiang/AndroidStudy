@@ -50,9 +50,9 @@ class TopBehavior(
             consumed: IntArray,
             type: Int,
     ) {
+        val translationY = child.translationY //View距离原始距离，>0为往下滑 <0为往上滑
         //Scroller向上滑动时 dy>0 ; 向下滑动时 dy<0
-        log("top: onNestedPreScroll(dx:$dx, dy:$dy, consumed:$consumed, type:$type)")
-        val translationY = child.translationY
+        log("top: onNestedPreScroll(translationY:$translationY,dx:$dx, dy:$dy, consumed:$consumed, type:$type)")
         if (-translationY >= child.measuredHeight || dy < 0) {
             // child已经滚动到屏幕外了，或者向下滚动，就不去消耗滚动了
             return
@@ -81,12 +81,12 @@ class TopBehavior(
             type: Int,
             consumed: IntArray,
     ) {
-        log("top: onNestedScroll(dxConsumed:$dxConsumed," +
-                " dyConsumed:$dyConsumed, dxUnconsumed:$dxUnconsumed, dyUnconsumed$dyUnconsumed, type:$type, consumed:$consumed)")
+        val translationY = child.translationY
+        log("top: onNestedScroll(translationY:$translationY,dxConsumed:$dxConsumed," +
+                " dyConsumed:$dyConsumed, dxUnconsumed:$dxUnconsumed, dyUnconsumed:$dyUnconsumed, type:$type, consumed:$consumed)")
 //        super.onNestedScroll(coordinatorLayout,
 //            child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type, consumed)
 
-        val translationY = child.translationY
         // 手指向上滚动或者child已经滚出了屏幕，不去处理
         if (translationY >= 0 || dyUnconsumed > 0) return
         if (dyUnconsumed > translationY) {
