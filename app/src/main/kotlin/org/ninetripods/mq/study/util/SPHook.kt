@@ -6,9 +6,6 @@ import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
 object SPHook {
-    private const val CLASS_QUEUED_WORK = "android.app.QueuedWork"
-    private const val FIELD_FINISHERS_8_UP = "sFinishers"
-    private const val FIELD_PENDING_WORK_FINISHERS_8_DOWN = "sPendingWorkFinishers"
 
     fun optimizeSpTask() {
         if (Build.VERSION.SDK_INT < 26) {
@@ -24,8 +21,8 @@ object SPHook {
      */
     private fun reflectSFinishers() {
         try {
-            val clz = Class.forName(CLASS_QUEUED_WORK)
-            val field = clz.getDeclaredField(FIELD_FINISHERS_8_UP)
+            val clz = Class.forName("android.app.QueuedWork")
+            val field = clz.getDeclaredField("sFinishers")
             field.isAccessible = true
             val queue = field.get(clz) as? LinkedList<Runnable>
             if (queue != null) {
@@ -43,8 +40,8 @@ object SPHook {
      */
     private fun reflectSPendingWorkFinishers() {
         try {
-            val clz = Class.forName(CLASS_QUEUED_WORK)
-            val field = clz.getDeclaredField(FIELD_PENDING_WORK_FINISHERS_8_DOWN)
+            val clz = Class.forName("android.app.QueuedWork")
+            val field = clz.getDeclaredField("sPendingWorkFinishers")
             field.isAccessible = true
             val queue = field.get(clz) as? ConcurrentLinkedQueue<Runnable>
             if (queue != null) {
@@ -108,5 +105,4 @@ object SPHook {
             return null
         }
     }
-
 }
