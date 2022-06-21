@@ -7,6 +7,7 @@ import androidx.multidex.MultiDex;
 
 import org.ninetripods.mq.study.jetpack.lifecycle.MyApplicationLifecycleObserver;
 import org.ninetripods.mq.study.jetpack.mvvm.base.http.RetrofitUtil;
+import org.ninetripods.mq.study.util.SPHook;
 
 /**
  * Created by mq on 2018/8/19 下午9:17
@@ -28,6 +29,8 @@ public class MyApplication extends Application {
         RetrofitUtil.INSTANCE.initRetrofit();
         //基于Lifecycle，监听Application的生命周期
         ProcessLifecycleOwner.get().getLifecycle().addObserver(new MyApplicationLifecycleObserver());
+        //SP优化
+        SPHook.INSTANCE.optimizeSpTask();
     }
 
     public static MyApplication getApplication() {

@@ -116,6 +116,41 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
         showAsDropDown(target, -width + wExtra, hOff + hExtra)
     }
 
+    override fun showAsDropDown(anchor: View?, xoff: Int, yoff: Int) {
+        showAsDropDown(anchor, xoff, yoff, null)
+    }
+
+    fun showAsDropDown(anchor: View?, xoff: Int, yoff: Int, block: (() -> Unit)? = null) {
+        try {
+            super.showAsDropDown(anchor, xoff, yoff)
+        } catch (ex: Throwable) {
+            block?.invoke()
+        }
+    }
+
+    override fun showAtLocation(
+        parent: View?,
+        gravity: Int,
+        x: Int,
+        y: Int,
+    ) {
+        showAtLocation(parent, gravity, x, y, null)
+    }
+
+    fun showAtLocation(
+        parent: View?,
+        gravity: Int,
+        x: Int,
+        y: Int,
+        block: (() -> Unit)? = null,
+    ) {
+        try {
+            super.showAtLocation(parent, gravity, x, y)
+        } catch (ex: Throwable) {
+            block?.invoke()
+        }
+    }
+
     override fun getWidth(): Int {
         return controller.mPopupView?.measuredWidth ?: 0
     }
