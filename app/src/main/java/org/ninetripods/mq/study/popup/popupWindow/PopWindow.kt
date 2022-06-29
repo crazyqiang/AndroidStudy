@@ -1,5 +1,6 @@
 package org.ninetripods.mq.study.popup.popupWindow
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.PopupWindow
@@ -122,8 +123,11 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
 
     fun showAsDropDown(anchor: View?, xoff: Int, yoff: Int, block: (() -> Unit)? = null) {
         try {
-            super.showAsDropDown(anchor, xoff, yoff)
+            if ((anchor?.context as? Activity)?.isFinishing == false) {
+                super.showAsDropDown(anchor, xoff, yoff)
+            }
         } catch (ex: Throwable) {
+            ex.printStackTrace()
             block?.invoke()
         }
     }
@@ -145,8 +149,11 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
         block: (() -> Unit)? = null,
     ) {
         try {
-            super.showAtLocation(parent, gravity, x, y)
+            if ((parent?.context as? Activity)?.isFinishing == false) {
+                super.showAtLocation(parent, gravity, x, y)
+            }
         } catch (ex: Throwable) {
+            ex.printStackTrace()
             block?.invoke()
         }
     }
@@ -159,9 +166,30 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
         return controller.mPopupView?.measuredHeight ?: 0
     }
 
+    override fun update(x: Int, y: Int, width: Int, height: Int, force: Boolean) {
+        try {
+            super.update(x, y, width, height, force)
+        } catch (ex: Throwable) {
+            ex.printStackTrace()
+        }
+    }
+
+    override fun update(anchor: View?, xoff: Int, yoff: Int, width: Int, height: Int) {
+        try {
+            super.update(anchor, xoff, yoff, width, height)
+        } catch (ex: Throwable) {
+            ex.printStackTrace()
+        }
+    }
+
     override fun dismiss() {
-        super.dismiss()
-        controller.setBackGroundLevel(1.0f)
+        try {
+            super.dismiss()
+            controller.setBackGroundLevel(1.0f)
+        } catch (ex: Throwable) {
+            ex.printStackTrace()
+            controller.setBackGroundLevel(1.0f)
+        }
     }
 
     interface ViewInterface {
