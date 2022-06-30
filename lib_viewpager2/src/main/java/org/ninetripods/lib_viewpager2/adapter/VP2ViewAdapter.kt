@@ -46,6 +46,11 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
     private var mModels = mutableListOf<Any>()
     private var mLoader: ILoader<View>? = null
     private var mItemClickListener: OnBannerClickListener? = null
+    private var isLoop: Boolean = true  //是否支持循环
+
+    fun setLoop(isLoop: Boolean) {
+        this.isLoop = isLoop
+    }
 
     fun setModels(models: List<Any>) {
         mModels.clear()
@@ -95,7 +100,7 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
     override fun onBindViewHolder(
         holder: PageViewHolder,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>,
     ) {
         if (payloads.isNotEmpty()) {
             //局部更新 partial bind
@@ -115,6 +120,7 @@ class MVP2Adapter : RecyclerView.Adapter<MVP2Adapter.PageViewHolder>() {
      * @param exPosition 扩展数据中的位置
      */
     private fun getRealPosition(exPosition: Int): Int {
+        if (!isLoop) return exPosition //非循环模式下 本身就是真实位置
         if (itemCount == 1) return 0  //只有一条数据的时候直接返回0
         val realCount = itemCount - EXTRA_NUM
         var realPos = (exPosition - SIDE_NUM) % realCount
