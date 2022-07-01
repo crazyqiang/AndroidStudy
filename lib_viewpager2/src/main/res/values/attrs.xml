@@ -15,5 +15,10 @@
         <attr name="indicator_drawable_unselected" format="reference" />
         <!--指示器的宽高比-->
         <attr name="indicator_w_h_ratio" format="float" />
+        <attr name="indicator_gravity" format="enum">
+            <enum name="top" value="0" />
+            <enum name="center" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

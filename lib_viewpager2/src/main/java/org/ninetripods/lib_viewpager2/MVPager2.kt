@@ -3,10 +3,7 @@ package org.ninetripods.lib_viewpager2
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewConfiguration
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -40,6 +37,11 @@ class MVPager2 @JvmOverloads constructor(
     companion object {
         const val ORIENTATION_HORIZONTAL = ViewPager2.ORIENTATION_HORIZONTAL
         const val ORIENTATION_VERTICAL = ViewPager2.ORIENTATION_VERTICAL
+
+        //指示器gravity位置：上中下
+        private const val INDICATOR_GRAVITY_TOP = 0
+        private const val INDICATOR_GRAVITY_CENTER = 1
+        private const val INDICATOR_GRAVITY_BOTTOM = 2
     }
 
     //轮播指示器相关
@@ -57,6 +59,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mIndicatorBgHeight: Float = 0F
     private var mIndicatorWHRatio: Float = 2F //指示器宽高比
     private var mPrePosition = 0
+    private var mIndicatorGravity: Int = INDICATOR_GRAVITY_CENTER //指示器Gravity
 
     //ViewPager2
     private lateinit var mViewPager2: ViewPager2
@@ -135,6 +138,8 @@ class MVPager2 @JvmOverloads constructor(
         ).toInt()
         mIndicatorMargin = ta.getDimension(R.styleable.MVPager2_indicator_margin, 20F)
         mIndicatorWHRatio = ta.getFloat(R.styleable.MVPager2_indicator_w_h_ratio, 2f)
+        mIndicatorGravity =
+            ta.getInt(R.styleable.MVPager2_indicator_gravity, INDICATOR_GRAVITY_CENTER)
         ta.recycle()
 
         LayoutInflater.from(context).inflate(R.layout.layout_mvpager2, this)
@@ -320,6 +325,7 @@ class MVPager2 @JvmOverloads constructor(
                     mViewPager2.layoutParams.height = height - mClIndicator.height
                 }
             }
+            mViewPager2.requestLayout()
         }
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter?.let {
@@ -482,6 +488,12 @@ class MVPager2 @JvmOverloads constructor(
      */
     private fun initIndicator() {
         mLlIndicator.removeAllViews()
+        when (mIndicatorGravity) {
+            INDICATOR_GRAVITY_TOP -> mLlIndicator.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            INDICATOR_GRAVITY_CENTER -> mLlIndicator.gravity = Gravity.CENTER
+            INDICATOR_GRAVITY_BOTTOM -> mLlIndicator.gravity =
+                Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+        }
         var mCurPos = getRealPosition(mViewPager2.currentItem)
         if (mCurPos >= mRealCount) {
             //兜底
