@@ -34,7 +34,7 @@ fun log(message: String) {
 class MVPager2 @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = 0
+    defStyle: Int = 0,
 ) : FrameLayout(context, attrs, defStyle) {
 
     companion object {
@@ -76,6 +76,7 @@ class MVPager2 @JvmOverloads constructor(
     private var mLoader: ILoader<View>? = null
     private var mSelectedValid: Boolean = true //滑动回调是否有效 默认有效
     private var mUserInputEnable: Boolean = true //设置VP2是否可以滑动
+    private var isLoop: Boolean = true //VP2是否是可以循环轮播的
     private var mItemPaddingLeft: Int = 0 //Item之间的padding间隔
     private var mItemPaddingRight: Int = 0
     private var mItemPaddingTop: Int = 0
@@ -144,6 +145,14 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     /**
+     * @param isLoop 是否支持循环
+     */
+    fun setLoop(isLoop: Boolean): MVPager2 {
+        this.isLoop = isLoop
+        return this
+    }
+
+    /**
      * 设置数据
      * @param list 轮播数据Models
      */
@@ -151,7 +160,6 @@ class MVPager2 @JvmOverloads constructor(
         this.mModels.clear()
         this.mModels.addAll(list)
         this.mRealCount = mModels.size
-        extendOriginModels()
         return this
     }
 
@@ -292,6 +300,7 @@ class MVPager2 @JvmOverloads constructor(
     }
 
     fun start() {
+        extendOriginModels() //如果是循环模式，则会先扩展数据
         initMVPager2()
         if (mCustomSwitchAnimDuration != 0) {
             initVP2LayoutManagerProxy()
@@ -314,12 +323,13 @@ class MVPager2 @JvmOverloads constructor(
         }
         mVP2Adapter = MVP2Adapter()
         mVP2Adapter?.let {
+            it.setLoop(isLoop)
             it.setModels(mExtendModels)
             it.setImageLoader(if (mLoader != null) mLoader else DefaultLoader())
             it.setOnItemClickListener(mClickListener)
         }
         mViewPager2.adapter = mVP2Adapter
-        mViewPager2.setCurrentItem(SIDE_NUM, false)
+        mViewPager2.setCurrentItem(if (isLoop) SIDE_NUM else 0, false)
         if (mIsAutoPlay) startAutoPlay()
         initIndicator()
     }
@@ -364,7 +374,7 @@ class MVPager2 @JvmOverloads constructor(
                 override fun onPageScrolled(
                     position: Int,
                     positionOffset: Float,
-                    positionOffsetPixels: Int
+                    positionOffsetPixels: Int,
                 ) {
                     mOnPageChangeCallback?.onPageScrolled(
                         position,
@@ -375,7 +385,7 @@ class MVPager2 @JvmOverloads constructor(
 
                 override fun onPageScrollStateChanged(state: Int) {
                     //ViewPager2.SCROLL_STATE_DRAGGING 手指触摸滑动时才会触发
-                    if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING)) {
+                    if (mRealCount > 1 && (state == ViewPager2.SCROLL_STATE_DRAGGING) && isLoop) {
                         when (mViewPager2.currentItem) {
                             exFirstPositive() -> {
                                 //向左滑动，滑动到正数第1个时 自动将转换到倒数第4的位置(该位置为真实数量的倒数第2个)
@@ -408,7 +418,8 @@ class MVPager2 @JvmOverloads constructor(
                 }
 
                 override fun onPageSelected(position: Int) {
-                    log("onPageSelected: $position ,total: ${mExtendModels.size}, mSelectedValid: $mSelectedValid")
+                    log("onPageSelected: $position ,total: ${mExtendModels.size}," +
+                            " mSelectedValid: $mSelectedValid, mPrePosition:$mPrePosition")
                     mCurPos = position
                     if (mSelectedValid) {
                         mOnPageChangeCallback?.onPageSelected(position)
@@ -471,7 +482,12 @@ class MVPager2 @JvmOverloads constructor(
      */
     private fun initIndicator() {
         mLlIndicator.removeAllViews()
-        val mCurPos = getRealPosition(mViewPager2.currentItem)
+        var mCurPos = getRealPosition(mViewPager2.currentItem)
+        if (mCurPos >= mRealCount) {
+            //兜底
+            mCurPos = 0
+            mViewPager2.setCurrentItem(mCurPos, false)
+        }
         for (i in 0 until mRealCount) {
             val imageView = ImageView(context).apply {
                 scaleType = ImageView.ScaleType.CENTER_CROP
@@ -523,6 +539,7 @@ class MVPager2 @JvmOverloads constructor(
      */
     private fun getRealPosition(exPosition: Int): Int {
         if (mRealCount == 0) return mRealCount
+        if (!isLoop) return exPosition //如果不是循环模式 当前位置就是真实位置
         var realPos = (exPosition - SIDE_NUM) % mRealCount
         if (realPos < 0) realPos += mRealCount
         return realPos
@@ -530,6 +547,7 @@ class MVPager2 @JvmOverloads constructor(
 
     private fun startAutoPlay() {
         removeCallbacks(autoRunnable)
+        if (!isLoop) return
         postDelayed(autoRunnable, AUTO_PLAY_INTERVAL)
     }
 
@@ -548,6 +566,11 @@ class MVPager2 @JvmOverloads constructor(
         }
         mExtendModels.clear()
         showMainView(true)
+        if (!isLoop) {
+            //非循环模式下 mExtendModels == mModels
+            mExtendModels.addAll(mModels)
+            return
+        }
         if (mRealCount > 1) {
             //真实数量必须大于1
             for (i in 0..exFirstLastPos()) {
@@ -600,7 +623,7 @@ class MVPager2 @JvmOverloads constructor(
      * 手指触摸时停止自动轮播
      */
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        if (mUserInputEnable) {
+        if (mUserInputEnable && isLoop) {
             val action = ev.action
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_OUTSIDE) {
                 if (mIsAutoPlay) startAutoPlay()
