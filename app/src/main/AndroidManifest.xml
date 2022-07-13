@@ -30,6 +30,9 @@
         <activity
             android:name=".kotlin.flow.FlowStudyActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".kotlin.flow.FlowDispatchActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="UMENG_CHANNEL"
