@@ -133,4 +133,9 @@ class CountDownCircleView @JvmOverloads constructor(
             .launchIn(scope) //保证在一个协程中执行
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        mCountDown?.cancel()
+    }
+
 }
