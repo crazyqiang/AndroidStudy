@@ -46,7 +46,8 @@ public class MainActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
-        selectItem(KConsts.FRAGMENT_NESTED_SCROLLER);
+        //切换初始化展示的Fragment
+        selectItem(KConsts.FRAGMENT_JETPACK);
     }
 
     @Override

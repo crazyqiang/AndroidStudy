@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.viewpager2
+package org.ninetripods.mq.study.viewpager2.loader
 
 import android.view.LayoutInflater
 import android.view.View

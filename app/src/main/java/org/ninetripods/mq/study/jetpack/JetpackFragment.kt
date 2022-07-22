@@ -10,7 +10,7 @@ import org.ninetripods.mq.study.jetpack.livedata.LiveDataActivity
 import org.ninetripods.mq.study.jetpack.mvvm.MvvmExampleActivity
 import org.ninetripods.mq.study.jetpack.viewmodel.ViewModelActivity
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
-import org.ninetripods.mq.study.kotlin.flow.FlowStudyActivity
+import org.ninetripods.mq.study.kotlin.flow.FlowDispatchActivity
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.NavitateUtil
 
@@ -61,7 +61,7 @@ class JetpackFragment : BaseFragment() {
             NavitateUtil.startActivity(activity, MvvmExampleActivity::class.java)
         }
         mTvFlow.setOnClickListener {
-            NavitateUtil.startActivity(activity, FlowStudyActivity::class.java)
+            NavitateUtil.startActivity(activity, FlowDispatchActivity::class.java)
         }
         mTvDataStore.setOnClickListener {
             NavitateUtil.startActivity(activity, DataStoreActivity::class.java)

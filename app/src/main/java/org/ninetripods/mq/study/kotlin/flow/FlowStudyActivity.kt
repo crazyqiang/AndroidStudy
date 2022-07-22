@@ -56,7 +56,7 @@ class FlowStudyActivity : BaseActivity() {
 
         val blogUrl = when (mCurPos) {
             FRAGMENT_FLOW_BASE -> Constant.BLOG_JETPACK_FLOW
-            FRAGMENT_FLOW_COUNT_DOWN -> Constant.BLOG_JETPACK_FLOW
+            FRAGMENT_FLOW_COUNT_DOWN -> Constant.BLOG_JETPACK_FLOW_COUNT_DOWN
             else -> Constant.BLOG_JETPACK_FLOW
         }
         CommonWebviewActivity.webviewEntrance(this, blogUrl)
