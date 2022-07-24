@@ -16,7 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
 
-import org.ninetripods.mq.study.jetpack.JetpackFragment;
+import org.ninetripods.mq.study.jetpack.JetpackAndKtFragment;
 import org.ninetripods.mq.study.jetpack.KConsts;
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
 import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity {
                 currentFragment = new HomeFragment();
                 break;
             case KConsts.FRAGMENT_JETPACK:
-                currentFragment = JetpackFragment.newInstance("");
+                currentFragment = JetpackAndKtFragment.newInstance("");
                 break;
             case KConsts.FRAGMENT_POP:
                 currentFragment = new PopFragment();

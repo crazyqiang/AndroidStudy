@@ -4,13 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="30dp"
-    android:layout_marginEnd="30dp"
-    tools:context=".jetpack.JetpackFragment">
+    android:layout_marginEnd="30dp">
+
+    <TextView
+        android:id="@+id/tv_kt"
+        style="@style/btn_style_done"
+        android:layout_marginTop="80dp"
+        android:text="Kotlin基础/协程/Flow系列" />
 
     <TextView
         android:id="@+id/tv_lifecycle"
         style="@style/btn_style_done"
-        android:layout_marginTop="100dp"
+        android:layout_below="@+id/tv_kt"
+        android:layout_marginTop="@dimen/margin_btn"
         android:text="Lifecycle" />
 
     <TextView
@@ -35,16 +41,9 @@
         android:text="Jetpack MVVM" />
 
     <TextView
-        android:id="@+id/tv_kt_flow"
-        style="@style/btn_style_done"
-        android:layout_below="@+id/tv_mvvm"
-        android:layout_marginTop="@dimen/margin_btn"
-        android:text="Kotlin Flow" />
-
-    <TextView
         android:id="@+id/tv_datastore"
         style="@style/btn_style_done"
-        android:layout_below="@+id/tv_kt_flow"
+        android:layout_below="@+id/tv_mvvm"
         android:layout_marginTop="@dimen/margin_btn"
         android:text="DataStore" />
 

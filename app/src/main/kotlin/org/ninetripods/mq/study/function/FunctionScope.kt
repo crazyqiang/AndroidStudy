@@ -2,7 +2,10 @@ package org.ninetripods.mq.study.function
 
 import kotlin.random.Random
 
-class ScopeFunction {
+/**
+ * 函数作用域
+ */
+class FunctionScope {
 
     /**
      * takeIf: 如果`takeIf`后面的表达式或闭包符合要求，则`takeIf`返回此对象；否则返回`null`。

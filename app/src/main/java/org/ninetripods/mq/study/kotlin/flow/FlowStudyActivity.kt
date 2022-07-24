@@ -23,7 +23,7 @@ class FlowStudyActivity : BaseActivity() {
     private var mCurPos: Int = FRAGMENT_FLOW_BASE
 
     override fun setContentView() {
-        setContentView(R.layout.activity_view_pager2)
+        setContentView(R.layout.activity_fragment_container)
     }
 
     override fun initViews() {
