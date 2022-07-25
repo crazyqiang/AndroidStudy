@@ -5,7 +5,7 @@ import android.content.Context
 import android.view.View
 import android.widget.PopupWindow
 
-class PopWindow private constructor(context: Context) : PopupWindow() {
+class PopWindow private constructor(val context: Context) : PopupWindow() {
 
     val controller: PopController = PopController(context, this)
 
@@ -166,25 +166,11 @@ class PopWindow private constructor(context: Context) : PopupWindow() {
         return controller.mPopupView?.measuredHeight ?: 0
     }
 
-    override fun update(x: Int, y: Int, width: Int, height: Int, force: Boolean) {
-        try {
-            super.update(x, y, width, height, force)
-        } catch (ex: Throwable) {
-            ex.printStackTrace()
-        }
-    }
-
-    override fun update(anchor: View?, xoff: Int, yoff: Int, width: Int, height: Int) {
-        try {
-            super.update(anchor, xoff, yoff, width, height)
-        } catch (ex: Throwable) {
-            ex.printStackTrace()
-        }
-    }
-
     override fun dismiss() {
         try {
-            super.dismiss()
+            if ((context as? Activity)?.isFinishing == false && this.isShowing) {
+                super.dismiss()
+            }
             controller.setBackGroundLevel(1.0f)
         } catch (ex: Throwable) {
             ex.printStackTrace()
