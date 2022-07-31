@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".kotlin.flow.FlowStudyActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/m_toolbar" />
-
     <TextView
         android:id="@+id/tv_flow_info"
         android:layout_width="wrap_content"
@@ -18,8 +14,9 @@
         android:text="1、Flow默认是冷流,订阅者与发布者一一对应"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/tv_flow"

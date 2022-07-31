@@ -11,8 +11,8 @@ import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.showToast
-import org.ninetripods.mq.study.viewpager2.CustomItemLoader
-import org.ninetripods.mq.study.viewpager2.MultiModel
+import org.ninetripods.mq.study.viewpager2.loader.CustomItemLoader
+import org.ninetripods.mq.study.viewpager2.loader.MultiModel
 
 class MVP2MultiItemFragment : BaseFragment() {
 

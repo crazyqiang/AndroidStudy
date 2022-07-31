@@ -25,6 +25,12 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".coroutine.CoroutineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".coroutine.CoroutineDispatchActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".jetpack.datastore.DataStoreActivity"
             android:screenOrientation="portrait" />
         <activity
