@@ -5,15 +5,13 @@ import androidx.fragment.app.Fragment
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
-import org.ninetripods.mq.study.viewpager2.fragment.MVP2BaseUseFragment
-import org.ninetripods.mq.study.viewpager2.fragment.MVP2MultiItemFragment
-import org.ninetripods.mq.study.viewpager2.fragment.NestedScrollFragment
-import org.ninetripods.mq.study.viewpager2.fragment.SearchVScrollFragment
+import org.ninetripods.mq.study.viewpager2.fragment.*
 
 const val FRAGMENT_BASE = 0
 const val FRAGMENT_NESTED_SCROLL = 1
 const val FRAGMENT_SEARCH_V_SCROLL = 2
 const val FRAGMENT_MULTI_ITEM_TYPE = 3
+const val FRAGMENT_TX_NEWS_BANNER = 4
 const val KEY_FRAGMENT_TYPE = "key_fragment_type"
 
 class ViewPager2Activity : BaseActivity() {
@@ -21,7 +19,7 @@ class ViewPager2Activity : BaseActivity() {
     private var mCurPos: Int = FRAGMENT_NESTED_SCROLL
 
     override fun setContentView() {
-        setContentView(R.layout.activity_view_pager2)
+        setContentView(R.layout.activity_fragment_container)
     }
 
     override fun initViews() {
@@ -29,8 +27,9 @@ class ViewPager2Activity : BaseActivity() {
         val titleName = when (mCurPos) {
             FRAGMENT_BASE -> "MVPager2基本使用"
             FRAGMENT_NESTED_SCROLL -> "MVPager2嵌套滑动"
-            FRAGMENT_SEARCH_V_SCROLL -> "仿淘宝搜索文字上下轮播"
             FRAGMENT_MULTI_ITEM_TYPE -> "MVPager2自定义Item样式"
+            FRAGMENT_SEARCH_V_SCROLL -> "仿淘宝搜索文字上下轮播"
+            FRAGMENT_TX_NEWS_BANNER -> "仿腾讯新闻轮播Banner"
             else -> "MVPager2"
         }
         initToolBar(mToolBar, titleName, true, false, TYPE_BLOG)
@@ -48,8 +47,9 @@ class ViewPager2Activity : BaseActivity() {
         return when (mCurPos) {
             FRAGMENT_BASE -> MVP2BaseUseFragment()
             FRAGMENT_NESTED_SCROLL -> NestedScrollFragment()
-            FRAGMENT_SEARCH_V_SCROLL -> SearchVScrollFragment()
             FRAGMENT_MULTI_ITEM_TYPE -> MVP2MultiItemFragment()
+            FRAGMENT_SEARCH_V_SCROLL -> SearchVScrollFragment()
+            FRAGMENT_TX_NEWS_BANNER -> TxNewsFragment()
             else -> MVP2BaseUseFragment()
         }
     }
