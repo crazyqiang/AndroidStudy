@@ -46,15 +46,17 @@ class CoroutineBaseFragment : BaseFragment() {
      */
     private fun coroutineDispatcherFunc() {
         /**
-         * 1、Dispatchers.Main.immediate 如果在UI线程，不会做特殊处理；如果是在子线程，会通过Handler转发到主线程
-         * 2、Dispatchers.IO
-         * 3、Dispatchers.DEFAULT
-         * 4、Dispatchers.Unconfined
+         * 1、Dispatchers.Main：运行在UI线程中。Dispatchers.Main.immediate： 如果在UI线程加载，不会做特殊处理；如果是在子线程，会通过Handler转发到主线程
+         * 2、Dispatchers.IO: 执行IO密集型任务，最多提交max(64, CPU核心数)个任务执行。
+         * 3、Dispatchers.DEFAULT ：执行CPU密集型任务 CoroutineScheduler最多有corePoolSize个线程被创建，corePoolSize它的取值为max(2, CPU核心数)，即它会尽量的等于CPU核心数
+         * 4、Dispatchers.Unconfined：不给协程指定运行的线程，由启动协程的线程决定；但当被挂起后, 会由恢复协程的线程继续执行。
+         *                            内部通过ThreadLocal保存执行协程时对应的线程，用于恢复协程时在取出对应线程并在其继续执行协程。
          */
-        val deferred = mainScope.async(Dispatchers.IO) {
-
-        }
         lifecycleScope.launch {
+            val deferred = mainScope.async(Dispatchers.IO) {
+                log("CoroutineDispatcher")
+            }
+            //TODO
             deferred.await()
         }
     }
@@ -66,7 +68,7 @@ class CoroutineBaseFragment : BaseFragment() {
         //----------------Job的生命周期----------------
         //NOTE:需要在onDestroy中关闭协程
         val mainJob = mainScope.launch(
-            start = CoroutineStart.LAZY) {
+                start = CoroutineStart.LAZY) {
             log("isActive2: ${this.coroutineContext.job.isActive}, isCancelled: ${this.coroutineContext.job.isCancelled}, isCompleted: ${this.coroutineContext.job.isCompleted} ")
         }
         log("isActive1: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
@@ -78,7 +80,7 @@ class CoroutineBaseFragment : BaseFragment() {
 
         //----------------子Job中使用SupervisorJob----------------
         val exceptionHandler =
-            CoroutineExceptionHandler { context, throwable -> log("throwable:$throwable") }
+                CoroutineExceptionHandler { context, throwable -> log("throwable:$throwable") }
 
         GlobalScope.launch(exceptionHandler) {
             //子Job1, 注意这里传入的是 SupervisorJob，当发生异常时，兄弟协程(job2/job3)不会被取消；如果是Job，那么兄弟协程也会被取消
