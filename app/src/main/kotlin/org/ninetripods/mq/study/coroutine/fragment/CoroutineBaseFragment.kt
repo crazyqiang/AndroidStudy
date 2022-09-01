@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
-import kotlinx.coroutines.NonCancellable.isCancelled
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.log
@@ -22,32 +21,8 @@ class CoroutineBaseFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        supervisorJobFuc()
-        //NOTE:需要在onDestroy中关闭协程
-        /**
-         * Dispatchers.Main.immediate 如果在UI线程，不会做特殊处理；如果是在子线程，会通过Handler转发到主线程
-         */
-//        val mainJob = mainScope.launch(
-//                start = CoroutineStart.LAZY,
-//                context = Dispatchers.Main.immediate) {
-//            log("MainScope启动了")
-//            log("isActive2: ${this.coroutineContext.job.isActive}, isCancelled: ${this.coroutineContext.job.isCancelled}, isCompleted: ${this.coroutineContext.job.isCompleted} ")
-//        }
-//        log("isActive1: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
-//        mainJob.start()
-//        mainJob.cancel()
-//        mainJob.invokeOnCompletion {
-//            log("isActive4: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
-//        }
-//        log("isActive3: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
-
-//        val deferred = MainScope().async {
-//
-//        }
-//        lifecycleScope.launch {
-//            deferred.await()
-//        }
-
+        // supervisorJobFunc() //Job & SupervisorJob示例
+        coroutineDispatcherFunc() //CoroutineDispatcher切换线程示例
 
         /**
          * CoroutineContext可以设置以下内容:
@@ -67,11 +42,43 @@ class CoroutineBaseFragment : BaseFragment() {
     }
 
     /**
+     * CoroutineDispatcher 将工作分派到适当的线程
+     */
+    private fun coroutineDispatcherFunc() {
+        /**
+         * 1、Dispatchers.Main.immediate 如果在UI线程，不会做特殊处理；如果是在子线程，会通过Handler转发到主线程
+         * 2、Dispatchers.IO
+         * 3、Dispatchers.DEFAULT
+         * 4、Dispatchers.Unconfined
+         */
+        val deferred = mainScope.async(Dispatchers.IO) {
+
+        }
+        lifecycleScope.launch {
+            deferred.await()
+        }
+    }
+
+    /**
      * Job & SupervisorJob
      */
-    private fun supervisorJobFuc() {
+    private fun supervisorJobFunc() {
+        //----------------Job的生命周期----------------
+        //NOTE:需要在onDestroy中关闭协程
+        val mainJob = mainScope.launch(
+            start = CoroutineStart.LAZY) {
+            log("isActive2: ${this.coroutineContext.job.isActive}, isCancelled: ${this.coroutineContext.job.isCancelled}, isCompleted: ${this.coroutineContext.job.isCompleted} ")
+        }
+        log("isActive1: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
+        mainJob.start()
+        mainJob.invokeOnCompletion {
+            log("isActive4: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
+        }
+        log("isActive3: ${mainJob.isActive}, isCancelled: ${mainJob.isCancelled}, isCompleted: ${mainJob.isCompleted} ")
+
+        //----------------子Job中使用SupervisorJob----------------
         val exceptionHandler =
-                CoroutineExceptionHandler { context, throwable -> log("throwable:$throwable") }
+            CoroutineExceptionHandler { context, throwable -> log("throwable:$throwable") }
 
         GlobalScope.launch(exceptionHandler) {
             //子Job1, 注意这里传入的是 SupervisorJob，当发生异常时，兄弟协程(job2/job3)不会被取消；如果是Job，那么兄弟协程也会被取消
