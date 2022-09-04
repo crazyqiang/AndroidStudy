@@ -21,24 +21,44 @@ class CoroutineBaseFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // supervisorJobFunc() //Job & SupervisorJob示例
-        coroutineDispatcherFunc() //CoroutineDispatcher切换线程示例
-
         /**
-         * CoroutineContext可以设置以下内容:
+         * 整体使用CoroutineContext可以设置以下内容:
          * 1、Job：控制协程的生命周期。
          * 2、CoroutineDispatcher：将工作分派到适当的线程。
          * 3、CoroutineName：协程的名称，可用于调试。
          * 4、CoroutineExceptionHandler：处理未捕获的异常。
          */
-//        val exceptionHandler =
-//                CoroutineExceptionHandler { context, throwable -> print("throwable:$throwable") }
-//
-//        lifecycleScope.launch(
-//                context = Dispatchers.Main + Job() + CoroutineName("MyCoroutines") + exceptionHandler,
-//                start = CoroutineStart.LAZY) {
-//            suspendFuc()
-//        }
+        val exceptionHandler =
+                CoroutineExceptionHandler { context, throwable -> print("throwable:$throwable") }
+        lifecycleScope.launch(
+                context = Dispatchers.Main + Job() + CoroutineName("MyCoroutines") + exceptionHandler,
+                start = CoroutineStart.DEFAULT) {
+            //do something
+        }
+        // supervisorJobFunc() //Job & SupervisorJob示例
+        // coroutineDispatcherFunc() //CoroutineDispatcher切换线程示例
+        coroutineExceptionFunc() // CoroutineExceptionHandler异常处理
+    }
+
+    /**
+     * CoroutineExceptionHandler异常处理
+     */
+    private fun coroutineExceptionFunc() {
+        val exceptionHandler =
+                CoroutineExceptionHandler { context, throwable -> log("parent throwable:$throwable") }
+        lifecycleScope.launch(exceptionHandler) {
+            log("parent execute start")
+            val childExHandler =
+                    CoroutineExceptionHandler { context, throwable -> log("child throwable:$throwable") }
+            //子协程中如果使用SupervisorJob()、Job()，则异常不会往上传播；否则异常会在顶层协程中处理
+            val childJob = launch(childExHandler + SupervisorJob()) {
+                delay(1000)
+                log("child execute")
+                throw  IllegalArgumentException("error occur")
+            }
+            childJob.join()
+            log("parent execute end")
+        }
     }
 
     /**
@@ -52,12 +72,18 @@ class CoroutineBaseFragment : BaseFragment() {
          * 4、Dispatchers.Unconfined：不给协程指定运行的线程，由启动协程的线程决定；但当被挂起后, 会由恢复协程的线程继续执行。
          *                            内部通过ThreadLocal保存执行协程时对应的线程，用于恢复协程时在取出对应线程并在其继续执行协程。
          */
-        lifecycleScope.launch {
-            val deferred = mainScope.async(Dispatchers.IO) {
-                log("CoroutineDispatcher")
+        lifecycleScope.launch(Dispatchers.Default) {
+
+            //CoroutineStart.LAZY会等到deferred.await()或start()才会继续执行协程内部逻辑
+            val deferred = async(Dispatchers.IO, start = CoroutineStart.LAZY) {
+                log("子协程 execute")
+                delay(1000)
+                "ok"
             }
-            //TODO
-            deferred.await()
+            val result = deferred.await()
+            log(result)
+            delay(500)
+            log("父协程继续执行")
         }
     }
 
@@ -103,11 +129,7 @@ class CoroutineBaseFragment : BaseFragment() {
         }
     }
 
-    private suspend fun suspendFuc(): String {
-        delay(1000)
-        return "value"
-    }
-
+    //自定义CoroutineContext
     class MyElement : AbstractCoroutineContextElement(MyElement) {
         public companion object Key : CoroutineContext.Key<MyElement>
     }
