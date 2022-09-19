@@ -27,11 +27,12 @@
     <!--左边导航栏-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/drawer_header_layout"
-        app:menu="@menu/my_navigation_items"
-        />
+        app:insetForeground="@android:color/transparent"
+        app:menu="@menu/my_navigation_items" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

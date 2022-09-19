@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="wrap_content"
+    android:background="@color/green_500"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="70dp">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
-        android:src="@mipmap/doubao" />
+        android:src="@drawable/icon_qrcode_we_chat" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="一起交流，欢迎关注公众号：代码说"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black_deep" />
 
 </LinearLayout>
