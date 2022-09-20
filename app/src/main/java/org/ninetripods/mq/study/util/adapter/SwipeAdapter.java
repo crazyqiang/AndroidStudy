@@ -1,12 +1,13 @@
 package org.ninetripods.mq.study.util.adapter;
 
 import android.content.Context;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.bezier.view.QQPoint.QQBezierView;
