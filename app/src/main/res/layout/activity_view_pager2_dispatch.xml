@@ -48,7 +48,7 @@
 
     <TextView
         android:id="@+id/tv_tx_news"
-        style="@style/btn_style_done_new"
+        style="@style/btn_style_undo"
         android:layout_marginTop="25dp"
         android:text="仿腾讯新闻Banner"
         app:layout_constraintLeft_toLeftOf="parent"

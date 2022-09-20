@@ -21,7 +21,7 @@ class TxNewsLoader(private val models: MutableList<Any>? = null) : BaseLoader() 
             TYPE_VIEW_NEWS -> LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_view_news, parent, false)
             TYPE_IMAGE_MORE -> LayoutInflater.from(parent.context)
-                .inflate(R.layout.layout_view_more, parent, false)
+                .inflate(R.layout.vp2_load_more, parent, false)
             else -> super.createView(parent, viewType)
         }
     }
@@ -29,7 +29,7 @@ class TxNewsLoader(private val models: MutableList<Any>? = null) : BaseLoader() 
     override fun display(targetView: View, content: Any, position: Int) {
         when (content) {
             is String -> {
-                val targetTv: TextView = targetView.findViewById(R.id.tv_title_more)
+                val targetTv: TextView = targetView.findViewById(R.id.tv_tips)
                 targetTv.text = content
             }
             is TxNewsModel -> {
