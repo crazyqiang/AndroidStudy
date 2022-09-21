@@ -58,12 +58,12 @@ class VpLoadMoreView @JvmOverloads constructor(
 
                 override fun onPageScrollStateChanged(state: Int) {
                     log("onPageScrollStateChanged -> state:$state")
-//                    if (state == ViewPager2.SCROLL_STATE_DRAGGING && mCurPos == mModels.lastIndex) {
-//                        mNeedIntercept = true
-////                        mMVPager2.get().isUserInputEnabled = false
-//                        log("lastScroll")
-//                        scrollTo(200, 0)
-//                    }
+                    if (state == ViewPager2.SCROLL_STATE_DRAGGING && mCurPos == mModels.lastIndex) {
+                        mNeedIntercept = true
+                        mMVPager2.setUserInputEnabled(false)
+//                        mMVPager2.get().isUserInputEnabled = false
+                        log("lastScroll")
+                    }
                 }
 
                 override fun onPageSelected(position: Int) {
@@ -86,19 +86,20 @@ class VpLoadMoreView @JvmOverloads constructor(
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-//        var isIntercept = false
-//        when (ev?.action) {
-//            MotionEvent.ACTION_DOWN -> {
-//                isIntercept = false
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//                isIntercept = mNeedIntercept
-//            }
-//            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-//                isIntercept = false
-//            }
-//        }
-        return mNeedIntercept
+        var isIntercept = false
+        when (ev?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                isIntercept = false
+            }
+            MotionEvent.ACTION_MOVE -> {
+                isIntercept = mNeedIntercept
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                isIntercept = false
+            }
+        }
+        log("ev?.action: ${ev?.action},isIntercept: $isIntercept")
+        return isIntercept
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
