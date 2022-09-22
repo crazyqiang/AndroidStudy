@@ -1,5 +1,6 @@
 package org.ninetripods.mq.study.viewpager2.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -21,9 +22,24 @@ class VpLoadMoreView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0,
 ) : LinearLayout(context, attrs, defStyle) {
+
+    companion object {
+        const val STATE_CLOSED = 0 //关闭状态
+        const val STATE_OPEN = 1 //打开状态
+        const val STATE_MOVING_LEFT = 2 //左滑将要打开状态
+        const val STATE_MOVING_RIGHT = 3 //右滑将要关闭状态
+    }
+
     private var mCurPos: Int = 0
     private val mMVPager2: MVPager2 by id(R.id.mvp_pager2)
     private var mNeedIntercept: Boolean = false //是否需要拦截VP2事件
+    private var mLastX = 0f
+    private var mLastY = 0f
+    private var mDownX = 0f
+    private var mDownY = 0f
+    private val mLoadMoreContainer: LinearLayout by id(R.id.load_more_container)
+    private var mMenuWidth = 0 //加载更多宽度
+    private var mCurState = 0 //当前滑动状态
 
     init {
         orientation = HORIZONTAL
@@ -81,6 +97,17 @@ class VpLoadMoreView @JvmOverloads constructor(
             .start()
     }
 
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        measureChildren(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        mMenuWidth = mLoadMoreContainer.measuredWidth
+        super.onLayout(changed, l, t, r, b)
+    }
+
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         return super.dispatchTouchEvent(ev)
     }
@@ -90,6 +117,10 @@ class VpLoadMoreView @JvmOverloads constructor(
         when (ev?.action) {
             MotionEvent.ACTION_DOWN -> {
                 isIntercept = false
+                mDownX = ev.x
+                mDownY = ev.y
+                mLastX = ev.x
+                log("mLastX:$mLastX,mDownY:$mDownY")
             }
             MotionEvent.ACTION_MOVE -> {
                 isIntercept = mNeedIntercept
@@ -102,9 +133,40 @@ class VpLoadMoreView @JvmOverloads constructor(
         return isIntercept
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        log("parent: onTouchEvent")
-        scrollTo(200, 0)
-        return super.onTouchEvent(event)
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(ev: MotionEvent?): Boolean {
+        when (ev?.action) {
+            MotionEvent.ACTION_MOVE -> {
+                val dx = mDownX - ev.x
+                val dy = mDownY - ev.y
+                val mDeltaX = mLastX - ev.x
+                log("parent: onTouchEvent -> ${ev.action}," +
+                        "mLastX:$mLastX,mDeltaX:$mDeltaX，getScrollX:$scaleX，mMenuWidth：$mMenuWidth")
+                if (mDeltaX > 0) {
+                    //向左滑动
+                    mCurState = STATE_MOVING_LEFT
+                    if (mDeltaX >= mMenuWidth || scaleX + mDeltaX >= mMenuWidth) {
+                        //右边缘检测
+                        mCurState = STATE_OPEN
+                        scrollTo(mMenuWidth, 0)
+                        return super.onTouchEvent(ev)
+                    }
+                } else if (mDeltaX < 0) {
+                    //向右滑动
+                    mCurState = STATE_MOVING_RIGHT
+                    if (scaleX + mDeltaX <= 0) {
+                        //左边缘检测
+                        mCurState = STATE_CLOSED
+                        scrollTo(0, 0)
+                        return super.onTouchEvent(ev)
+                    }
+                }
+                scrollBy(mDeltaX.toInt(), 0)
+                mLastX = ev.x
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+            }
+        }
+        return super.onTouchEvent(ev)
     }
 }
