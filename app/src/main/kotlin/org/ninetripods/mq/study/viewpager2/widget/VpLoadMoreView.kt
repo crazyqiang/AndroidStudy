@@ -5,7 +5,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
@@ -38,8 +42,43 @@ class VpLoadMoreView @JvmOverloads constructor(
     private var mDownX = 0f
     private var mDownY = 0f
     private val mLoadMoreContainer: LinearLayout by id(R.id.load_more_container)
+    private val mIvArrow: ImageView by id(R.id.iv_pull)
+    private val mTvTips: TextView by id(R.id.tv_tips)
     private var mMenuWidth = 0 //加载更多宽度
     private var mCurState = 0 //当前滑动状态
+    private var mLastStatus = 0 // 默认箭头样式
+    var animRightStart = RotateAnimation(0f,
+        -180f,
+        Animation.RELATIVE_TO_SELF,
+        0.5f,
+        Animation.RELATIVE_TO_SELF,
+        0.5f)
+
+    var animRightEnd = RotateAnimation(-180f,
+        0f,
+        Animation.RELATIVE_TO_SELF,
+        0.5f,
+        Animation.RELATIVE_TO_SELF,
+        0.5f)
+
+    private fun showLoadMoreAnim(dx: Float) {
+        log("dx:$dx,mMenuWidth:$mMenuWidth")
+        val showLoadMore = if (dx >= mMenuWidth / 3 * 2) 1 else 0
+        log("dx:$dx,mMenuWidth:$mMenuWidth,mLastStatus:$mLastStatus")
+        if (mLastStatus == showLoadMore) return
+        if (dx >= mMenuWidth / 3 * 2) {
+            log("111")
+            mIvArrow.startAnimation(animRightStart)
+            mTvTips.text = "释放查看图文详情"
+            mLastStatus = 1
+        }
+//        else {
+//            log("000")
+//            mIvArrow.startAnimation(animRightEnd)
+//            mTvTips.text = "滑动查看图文详情"
+//            mLastStatus = 0
+//        }
+    }
 
     init {
         orientation = HORIZONTAL
@@ -97,11 +136,11 @@ class VpLoadMoreView @JvmOverloads constructor(
             .start()
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        measureChildren(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    }
+//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+//        measureChildren(widthMeasureSpec, heightMeasureSpec)
+//        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
+////        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+//    }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         mMenuWidth = mLoadMoreContainer.measuredWidth
@@ -141,11 +180,11 @@ class VpLoadMoreView @JvmOverloads constructor(
                 val dy = mDownY - ev.y
                 val mDeltaX = mLastX - ev.x
                 log("parent: onTouchEvent -> ${ev.action}," +
-                        "mLastX:$mLastX,mDeltaX:$mDeltaX，getScrollX:$scaleX，mMenuWidth：$mMenuWidth")
+                        "mLastX:$mLastX,mDeltaX:$mDeltaX，getScrollX:$scrollX，mMenuWidth：$mMenuWidth")
                 if (mDeltaX > 0) {
                     //向左滑动
                     mCurState = STATE_MOVING_LEFT
-                    if (mDeltaX >= mMenuWidth || scaleX + mDeltaX >= mMenuWidth) {
+                    if (mDeltaX >= mMenuWidth || scrollX + mDeltaX >= mMenuWidth) {
                         //右边缘检测
                         mCurState = STATE_OPEN
                         scrollTo(mMenuWidth, 0)
@@ -161,6 +200,7 @@ class VpLoadMoreView @JvmOverloads constructor(
                         return super.onTouchEvent(ev)
                     }
                 }
+                showLoadMoreAnim(scrollX + mDeltaX)
                 scrollBy(mDeltaX.toInt(), 0)
                 mLastX = ev.x
             }
