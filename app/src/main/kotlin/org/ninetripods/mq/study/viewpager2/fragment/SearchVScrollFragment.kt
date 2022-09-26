@@ -35,7 +35,7 @@ class SearchVScrollFragment : BaseFragment() {
         mMVPager2.setModels(models)
             .setOrientation(ViewPager2.ORIENTATION_VERTICAL)
             .setUserInputEnabled(false)
-            .setPageInterval(3000)
+            .setPageInterval(2000)
             .setAnimDuration(300)
             .setAutoPlay(true)
             .setLoader(

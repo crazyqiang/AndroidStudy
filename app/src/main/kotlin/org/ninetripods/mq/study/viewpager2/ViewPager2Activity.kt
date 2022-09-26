@@ -49,7 +49,7 @@ class ViewPager2Activity : BaseActivity() {
             FRAGMENT_NESTED_SCROLL -> NestedScrollFragment()
             FRAGMENT_MULTI_ITEM_TYPE -> MVP2MultiItemFragment()
             FRAGMENT_SEARCH_V_SCROLL -> SearchVScrollFragment()
-            FRAGMENT_TX_NEWS_BANNER -> TxNewsFragment()
+            FRAGMENT_TX_NEWS_BANNER -> TJBannerFragment()
             else -> MVP2BaseUseFragment()
         }
     }

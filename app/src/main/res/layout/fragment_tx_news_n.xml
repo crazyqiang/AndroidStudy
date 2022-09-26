@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/red_100">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:text="滑动到最后一页继续滑动查看更多详情"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <org.ninetripods.mq.study.viewpager2.widget.VpLoadMoreView
         android:id="@+id/vp2_load_more"
         android:layout_width="match_parent"
