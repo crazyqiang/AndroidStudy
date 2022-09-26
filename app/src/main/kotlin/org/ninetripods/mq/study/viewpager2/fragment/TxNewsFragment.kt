@@ -9,6 +9,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.MConstant
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.kotlin.ktx.showToast
 import org.ninetripods.mq.study.viewpager2.loader.TxNewsModel
 import org.ninetripods.mq.study.viewpager2.widget.VpLoadMoreView
 
@@ -28,7 +29,9 @@ class TxNewsFragment : BaseFragment() {
         mModels.add(TxNewsModel(MConstant.IMG_3, "北京2022冬奥会", "冬奥会盛大开幕"))
         mModels.add(TxNewsModel(MConstant.IMG_1, "精美商品", "9块9包邮"))
         mModels.add(TxNewsModel(MConstant.IMG_4, "美轮美奂节目", "奥运五环缓缓升起"))
-        mContainer.setData(mModels)
+        mContainer.setData(mModels) {
+            showToast("打开更多页面")
+        }
     }
 
     /**
