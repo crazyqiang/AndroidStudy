@@ -29,7 +29,7 @@ class ViewPager2Activity : BaseActivity() {
             FRAGMENT_NESTED_SCROLL -> "MVPager2嵌套滑动"
             FRAGMENT_MULTI_ITEM_TYPE -> "MVPager2自定义Item样式"
             FRAGMENT_SEARCH_V_SCROLL -> "仿淘宝搜索文字上下轮播"
-            FRAGMENT_TX_NEWS_BANNER -> "仿腾讯新闻轮播Banner"
+            FRAGMENT_TX_NEWS_BANNER -> "仿淘宝、京东轮播Banner"
             else -> "MVPager2"
         }
         initToolBar(mToolBar, titleName, true, false, TYPE_BLOG)
