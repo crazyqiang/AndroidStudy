@@ -5,11 +5,13 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.flow.FRAGMENT_FLOW_BASE
 import org.ninetripods.mq.study.kotlin.flow.FRAGMENT_FLOW_COUNT_DOWN
 import org.ninetripods.mq.study.kotlin.flow.FlowStudyActivity
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.util.Constant
 
 /**
  * 协程
@@ -37,7 +39,8 @@ class CoroutineDispatchActivity : BaseActivity() {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_coroutine_base -> jumpTargetPage(FRAGMENT_BASE, CoroutineActivity::class.java)
+            R.id.tv_coroutine_base -> CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_KT_COROUTINE)
+            //jumpTargetPage(FRAGMENT_BASE, CoroutineActivity::class.java)
             R.id.tv_flow_base -> jumpTargetPage(FRAGMENT_FLOW_BASE, FlowStudyActivity::class.java)
             R.id.tv_time_countdown ->
                 jumpTargetPage(FRAGMENT_FLOW_COUNT_DOWN, FlowStudyActivity::class.java)

@@ -20,6 +20,7 @@ public class Constant {
     public static final String BLOG_JETPACK_MVVM = "https://blog.csdn.net/u013700502/article/details/120263741";
     public static final String BLOG_JETPACK_FLOW = "https://mp.weixin.qq.com/s/aWLhx8UrQpJbYfiZwfrzKQ";
     public static final String BLOG_JETPACK_FLOW_COUNT_DOWN = "https://mp.weixin.qq.com/s/IJYEj00576ircTkDHjnrcg";
+    public static final String BLOG_KT_COROUTINE = "https://blog.csdn.net/u013700502/article/details/125664262";
 
     public static final String BLOG_JETPACK_DATASTORE = "https://mp.weixin.qq.com/s/zzucf9ZhBWr4Pqru9xWP_g";
 

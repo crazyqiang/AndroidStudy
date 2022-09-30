@@ -21,8 +21,8 @@ class CoroutineActivity : BaseActivity() {
     override fun initViews() {
         mCurPos = intent.getIntExtra(KEY_FRAGMENT_TYPE, FRAGMENT_BASE)
         val titleName = when (mCurPos) {
-            FRAGMENT_BASE -> "Coroutine基本使用"
-            else -> "Coroutine基本使用"
+            FRAGMENT_BASE -> "深入理解Coroutine协程"
+            else -> "深入理解Coroutine协程"
         }
         initToolBar(mToolBar, titleName, true, false, TYPE_BLOG)
     }
