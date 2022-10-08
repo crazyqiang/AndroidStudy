@@ -64,6 +64,9 @@
             android:name=".jetpack.mvvm.MvvmExampleActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".jetpack.mvi.MviExampleActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".multiThread.AsyncTaskActivity"
             android:screenOrientation="portrait" />
         <activity

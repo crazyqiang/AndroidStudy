@@ -8,6 +8,7 @@ import org.ninetripods.mq.study.coroutine.CoroutineDispatchActivity
 import org.ninetripods.mq.study.jetpack.datastore.DataStoreActivity
 import org.ninetripods.mq.study.jetpack.lifecycle.LifecycleActivity
 import org.ninetripods.mq.study.jetpack.livedata.LiveDataActivity
+import org.ninetripods.mq.study.jetpack.mvi.MviExampleActivity
 import org.ninetripods.mq.study.jetpack.mvvm.MvvmExampleActivity
 import org.ninetripods.mq.study.jetpack.viewmodel.ViewModelActivity
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
@@ -26,6 +27,7 @@ class JetpackAndKtFragment : BaseFragment() {
     private val mTvLiveData: TextView by id(R.id.tv_livedata)
     private val mTvViewModel: TextView by id(R.id.tv_viewmodel)
     private val mTvMvvm: TextView by id(R.id.tv_mvvm)
+    private val mTvMvi: TextView by id(R.id.tv_mvi)
     private val mTvDataStore: TextView by id(R.id.tv_datastore)
     private val mTvKotlin: TextView by id(R.id.tv_kt)
 
@@ -65,6 +67,9 @@ class JetpackAndKtFragment : BaseFragment() {
         }
         mTvMvvm.setOnClickListener {
             NavitateUtil.startActivity(activity, MvvmExampleActivity::class.java)
+        }
+        mTvMvi.setOnClickListener {
+            NavitateUtil.startActivity(activity, MviExampleActivity::class.java)
         }
         mTvDataStore.setOnClickListener {
             NavitateUtil.startActivity(activity, DataStoreActivity::class.java)
