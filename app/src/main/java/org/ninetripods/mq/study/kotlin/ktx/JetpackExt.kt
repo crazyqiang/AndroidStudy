@@ -6,7 +6,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlin.reflect.KProperty1
 
 /**
  * LiveData扩展函数封装
@@ -40,6 +42,21 @@ inline fun <T> Flow<T>.flowWithLifecycle2(
     //            action(it)
     //        }
     //    }
+}
+
+/**
+ * MVI模式中使用
+ */
+inline fun <T, A> Flow<T>.flowWithLifecycle2(
+    lifecycleOwner: LifecycleOwner,
+    minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
+    prop1: KProperty1<T, A>,
+    crossinline block: suspend CoroutineScope.(A) -> Unit,
+) = lifecycleOwner.lifecycleScope.launch {
+    //前后台切换时可以重复订阅数据。如：Lifecycle.State是STARTED，那么在生命周期进入 STARTED 状态时开始任务，在 STOPED 状态时停止订阅
+    flowOnSingleLifecycle(lifecycleOwner.lifecycle, minActiveState)
+        .map { prop1.get(it) }
+        .collect { block(it) }
 }
 
 inline fun <T> Flow<T>.flowSingleWithLifecycle2(
