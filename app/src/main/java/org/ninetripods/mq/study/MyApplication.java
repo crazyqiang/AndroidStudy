@@ -6,7 +6,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 
 import org.ninetripods.mq.study.jetpack.lifecycle.MyApplicationLifecycleObserver;
-import org.ninetripods.mq.study.jetpack.mvvm.base.http.RetrofitUtil;
+import org.ninetripods.mq.study.jetpack.base.http.RetrofitUtil;
 import org.ninetripods.mq.study.util.SPHook;
 
 /**

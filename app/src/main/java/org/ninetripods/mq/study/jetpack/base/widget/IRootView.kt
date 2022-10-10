@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvvm.base.widget
+package org.ninetripods.mq.study.jetpack.base.widget
 
 import android.view.View
 

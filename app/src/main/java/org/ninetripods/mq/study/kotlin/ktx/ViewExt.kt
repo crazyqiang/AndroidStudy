@@ -3,7 +3,7 @@ package org.ninetripods.mq.study.kotlin.ktx
 import android.app.Activity
 import android.app.Dialog
 import android.view.View
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.IRootView
+import org.ninetripods.mq.study.jetpack.base.widget.IRootView
 
 fun <T : View> Activity.bind(id: Int): T {
     return this.findViewById(id) as T

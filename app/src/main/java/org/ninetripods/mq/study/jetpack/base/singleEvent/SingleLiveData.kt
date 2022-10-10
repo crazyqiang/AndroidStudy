@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvvm.base.singleEvent
+package org.ninetripods.mq.study.jetpack.base.singleEvent
 
 import android.util.Log
 import androidx.annotation.MainThread

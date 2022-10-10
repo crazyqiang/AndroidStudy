@@ -3,11 +3,9 @@ package org.ninetripods.mq.study.jetpack.mvi.base
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import org.ninetripods.mq.study.BaseActivity
-import org.ninetripods.mq.study.jetpack.mvi.MViewModel
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.StatusViewOwner
+import org.ninetripods.mq.study.jetpack.base.widget.StatusViewOwner
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 
 /**
@@ -15,8 +13,6 @@ import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
  */
 abstract class BaseMviActivity : BaseActivity() {
 
-    //TODO 优化这里ViewModel的初始化时机
-    protected val mViewModel: MViewModel by viewModels()
     private lateinit var mStatusViewUtil: StatusViewOwner
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,18 +24,21 @@ abstract class BaseMviActivity : BaseActivity() {
         registerEvent()
     }
 
+    abstract fun getVModel(): BaseViewModel
+
     private fun registerEvent() {
         //接收错误信息
-        mViewModel.errorFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { errMsg ->
+        getVModel().errorFlow.flowWithLifecycle2(this,
+            Lifecycle.State.STARTED) { errMsg ->
             val errStr = if (!TextUtils.isEmpty(errMsg)) errMsg else "出错了"
             mStatusViewUtil.showErrorView(errStr)
         }
         //接收Loading信息
-        mViewModel.loadingFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { isShow ->
+        getVModel().loadingFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { isShow ->
             mStatusViewUtil.showLoadingView(isShow)
         }
         //接收正常信息
-        mViewModel.normalFlow.flowWithLifecycle2(this) {
+        getVModel().normalFlow.flowWithLifecycle2(this) {
             mStatusViewUtil.showMainView()
         }
     }

@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvvm.base.http
+package org.ninetripods.mq.study.jetpack.base.http
 
 import android.content.Context
 import android.net.ConnectivityManager

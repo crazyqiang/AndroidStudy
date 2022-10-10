@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.IStatusView
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.LoadingDialog
+import org.ninetripods.mq.study.jetpack.base.widget.IStatusView
+import org.ninetripods.mq.study.jetpack.base.widget.LoadingDialog
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import java.lang.reflect.ParameterizedType

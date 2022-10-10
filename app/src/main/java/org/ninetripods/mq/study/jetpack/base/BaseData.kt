@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvi.base
+package org.ninetripods.mq.study.jetpack.base
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,9 +8,9 @@ class BaseData<T> {
     @SerializedName("errorMsg")
     var msg: String? = null
     var data: T? = null
-    var state: State = State.Error
+    var state: ReqState = ReqState.Error
 }
 
-enum class State {
+enum class ReqState {
     Success, Error
 }

@@ -1,7 +1,6 @@
-package org.ninetripods.mq.study.jetpack.mvvm.base.http
+package org.ninetripods.mq.study.jetpack.base.http
 
 import android.util.Log
-import com.example.jetpackstudy.mvvm.http.LocalCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

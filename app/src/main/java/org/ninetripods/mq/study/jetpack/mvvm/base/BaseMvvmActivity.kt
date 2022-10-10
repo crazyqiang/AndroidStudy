@@ -6,7 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import org.ninetripods.mq.study.BaseActivity
-import org.ninetripods.mq.study.jetpack.mvvm.base.widget.StatusViewOwner
+import org.ninetripods.mq.study.jetpack.base.widget.StatusViewOwner
 import org.ninetripods.mq.study.jetpack.mvvm.viewmodel.WanViewModel
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 

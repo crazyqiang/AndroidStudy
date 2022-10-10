@@ -7,7 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import org.ninetripods.mq.study.jetpack.mvvm.base.http.NetworkUtil
+import org.ninetripods.mq.study.jetpack.base.BaseData
+import org.ninetripods.mq.study.jetpack.base.ReqState
+import org.ninetripods.mq.study.jetpack.base.http.NetworkUtil
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -53,11 +55,11 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 baseData = request()
                 when (baseData.state) {
-                    State.Success -> {
+                    ReqState.Success -> {
                         _normalChannel.send(true)
                         baseData.data?.let { modelFlow?.emit(it) }
                     }
-                    State.Error -> baseData.msg?.let { error(it) }
+                    ReqState.Error -> baseData.msg?.let { error(it) }
                 }
             } catch (e: Exception) {
                 e.message?.let { handleEx(it) }
@@ -98,11 +100,11 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 baseData = request()
                 when (baseData.state) {
-                    State.Success -> {
+                    ReqState.Success -> {
                         _normalChannel.send(true)
                         baseData.data?.let { channel?.send(it) }
                     }
-                    State.Error -> baseData.msg?.let { error(it) }
+                    ReqState.Error -> baseData.msg?.let { error(it) }
                 }
             } catch (e: Exception) {
                 e.message?.let { handleEx(it) }
@@ -140,8 +142,8 @@ abstract class BaseViewModel : ViewModel() {
             flow {
                 baseData = request()
                 when (baseData.state) {
-                    State.Success -> emit(baseData)
-                    State.Error -> throw IllegalArgumentException(baseData.msg)
+                    ReqState.Success -> emit(baseData)
+                    ReqState.Error -> throw IllegalArgumentException(baseData.msg)
                 }
             }.flowOn(Dispatchers.IO)
                 .onStart { if (showLoading) loadStart() }
@@ -195,11 +197,11 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 baseData = request()
                 when (baseData.state) {
-                    State.Success -> {
+                    ReqState.Success -> {
                         _normalChannel.send(true)
                         liveData?.postValue(baseData.data)
                     }
-                    State.Error -> baseData.msg?.let { error(it) }
+                    ReqState.Error -> baseData.msg?.let { error(it) }
                 }
             } catch (e: Exception) {
                 error(e.message ?: "")

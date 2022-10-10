@@ -8,13 +8,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.ninetripods.mq.study.jetpack.mvvm.base.BaseData
-import org.ninetripods.mq.study.jetpack.mvvm.base.http.NetworkUtil
+import org.ninetripods.mq.study.jetpack.base.BaseData
+import org.ninetripods.mq.study.jetpack.base.ReqState
 
 /**
  * ViewModel基类
+ *
+ * @param UiState 重复性事件，View层可以多次接收并刷新
+ * @param SingleUiState 一次性事件，View层不支持多次消费 如弹Toast，导航Activity等
+ * @param Event  View层分发事件
  */
-abstract class BaseViewModel<State : IState, Event : IEvent, Effect : IEffect> : ViewModel() {
+abstract class BaseViewModel<UiState : IUiState, Event : IEvent, SingleUiState : ISingleUiState> :
+    ViewModel() {
 
     //loading
     private val _loadingChannel = Channel<Boolean>()
@@ -28,8 +33,11 @@ abstract class BaseViewModel<State : IState, Event : IEvent, Effect : IEffect> :
     private val _normalChannel = Channel<Boolean>()
     val normalFlow = _normalChannel.receiveAsFlow()
 
-    private val _viewState = MutableStateFlow(initState())
-    val viewState: StateFlow<State> = _viewState
+    /**
+     * 可以重复消费的事件
+     */
+    private val _viewState = MutableStateFlow(initUiState())
+    val viewState: StateFlow<IUiState> = _viewState
 
     /**
      * 事件带来的副作用，通常是 一次性事件 且 一对一的订阅关系
@@ -38,37 +46,38 @@ abstract class BaseViewModel<State : IState, Event : IEvent, Effect : IEffect> :
      * 1.每个消息只有一个订阅者可以收到，用于一对一的通信
      * 2.第一个订阅者可以收到 collect 之前的事件
      */
-    private val _viewEffect: Channel<Effect> = Channel()
-    val viewEffect = _viewEffect.receiveAsFlow()
+    private val _singleUiState: Channel<SingleUiState> = Channel()
+    val singleUiState = _singleUiState.receiveAsFlow()
 
-    abstract fun initState(): State
+    protected abstract fun initUiState(): UiState
     abstract fun dispatch(event: Event)
 
-    protected fun sendState(copy: State.() -> State) {
+    protected fun sendState(copy: UiState.() -> UiState) {
         _viewState.update { _viewState.value.copy() }
     }
 
-    protected fun sendEffect(effect: Effect) {
+    protected fun sendSingleUiState(effect: SingleUiState) {
         viewModelScope.launch {
-            _viewEffect.send(effect)
+            _singleUiState.send(effect)
         }
     }
 
-    fun <T : Any> requestDataWithFlow(
+    /**
+     * @param showLoading 是否展示Loading
+     * @param request 请求数据
+     * @param successCallback 请求成功
+     * @param failCallback 请求失败，处理异常逻辑
+     */
+    protected fun <T : Any> requestDataWithFlow(
         showLoading: Boolean = true,
-//        modelFlow: MutableStateFlow<T>? = _viewState,
-        handleEx: suspend (String) -> Unit /**/ = { errMsg ->
+        request: suspend () -> BaseData<T>,
+        successCallback: (T) -> Unit,
+        failCallback: suspend (String) -> Unit = { errMsg ->
             //默认异常处理，子类可以进行覆写
             _errorChannel.send(errMsg)
         },
-        request: suspend () -> BaseData<T>,
-        sucFunction: (T) -> Unit,
     ) {
         viewModelScope.launch {
-            if (!NetworkUtil.isNetworkConnected()) {
-                _errorChannel.send("网络未连接")
-                return@launch
-            }
             //是否展示Loading
             if (showLoading) {
                 loadStart()
@@ -77,16 +86,16 @@ abstract class BaseViewModel<State : IState, Event : IEvent, Effect : IEffect> :
             try {
                 baseData = request()
                 when (baseData.state) {
-                    org.ninetripods.mq.study.jetpack.mvvm.base.State.Success -> {
+                    ReqState.Success -> {
                         _normalChannel.send(true)
-                        baseData.data?.let { sucFunction(it) }
+                        baseData.data?.let { successCallback(it) }
                     }
-                    org.ninetripods.mq.study.jetpack.mvvm.base.State.Error -> baseData.msg?.let {
+                    ReqState.Error -> baseData.msg?.let {
                         error(it)
                     }
                 }
             } catch (e: Exception) {
-                e.message?.let { handleEx(it) }
+                e.message?.let { failCallback(it) }
             } finally {
                 if (showLoading) {
                     loadFinish()
