@@ -4,11 +4,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseMvvmActivity
+import org.ninetripods.mq.study.jetpack.mvvm.base.BaseViewModel
 import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
+import org.ninetripods.mq.study.jetpack.mvvm.viewmodel.WanViewModel
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.Constant
@@ -22,6 +25,8 @@ class MvvmExampleActivity : BaseMvvmActivity() {
     private val mBtnQuest: Button by id(R.id.btn_request)
     private val mToolBar: Toolbar by id(R.id.toolbar)
     private val mContentView: ViewGroup by id(R.id.cl_content_view)
+
+    private val mViewModel: WanViewModel by viewModels()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_wan_android
@@ -39,6 +44,8 @@ class MvvmExampleActivity : BaseMvvmActivity() {
             //mViewModel.getWanInfoByChannel("")
         }
     }
+
+    override fun getViewModel(): BaseViewModel = mViewModel
 
     private fun registerEvent() {
         /**

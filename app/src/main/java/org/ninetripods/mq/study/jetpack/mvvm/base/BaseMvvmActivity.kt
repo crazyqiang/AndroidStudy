@@ -3,16 +3,12 @@ package org.ninetripods.mq.study.jetpack.mvvm.base
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.jetpack.base.widget.StatusViewOwner
-import org.ninetripods.mq.study.jetpack.mvvm.viewmodel.WanViewModel
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 
 abstract class BaseMvvmActivity : BaseActivity() {
-
-    protected val mViewModel: WanViewModel by viewModels()
 
     private lateinit var mStatusViewUtil: StatusViewOwner
 
@@ -24,6 +20,8 @@ abstract class BaseMvvmActivity : BaseActivity() {
         init()
         registerEvent()
     }
+
+    abstract fun getViewModel(): BaseViewModel
 
     /**
      * 获取ViewModel 子类可以复写，自行初始化
@@ -49,16 +47,16 @@ abstract class BaseMvvmActivity : BaseActivity() {
 
     private fun registerEvent() {
         //接收错误信息
-        mViewModel.errorFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { errMsg ->
+        getViewModel().errorFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { errMsg ->
             val errStr = if (!TextUtils.isEmpty(errMsg)) errMsg else "出错了"
             mStatusViewUtil.showErrorView(errStr)
         }
         //接收Loading信息
-        mViewModel.loadingFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { isShow ->
+        getViewModel().loadingFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED) { isShow ->
             mStatusViewUtil.showLoadingView(isShow)
         }
         //接收正常信息
-        mViewModel.normalFlow.flowWithLifecycle2(this) {
+        getViewModel().normalFlow.flowWithLifecycle2(this) {
             mStatusViewUtil.showMainView()
         }
     }
