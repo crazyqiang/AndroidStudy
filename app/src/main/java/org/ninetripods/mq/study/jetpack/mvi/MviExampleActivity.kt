@@ -16,6 +16,7 @@ import org.ninetripods.mq.study.jetpack.mvi.base.LoadUiState
 import org.ninetripods.mq.study.jetpack.mvi.widget.RankAdapter
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.kotlin.ktx.showToast
 
 /**
  * MVI示例
@@ -42,6 +43,7 @@ class MviExampleActivity : BaseMviActivity() {
     override fun initEvents() {
         registerEvent()
         mBtnQuest.setOnClickListener {
+            mViewModel.showToast() //一次性消费
             mViewModel.loadBannerData()
             mViewModel.loadDetailData()
         }
@@ -49,7 +51,7 @@ class MviExampleActivity : BaseMviActivity() {
 
     private fun registerEvent() {
         /**
-         * 一次性消费事件
+         * Load加载事件 Loading、Error、ShowMainView
          */
         mViewModel.loadUiStateFlow.flowWithLifecycle2(this) { state ->
             when (state) {
@@ -58,6 +60,13 @@ class MviExampleActivity : BaseMviActivity() {
                 is LoadUiState.Loading -> mStatusViewUtil.showLoadingView(state.isShow)
             }
         }
+        /**
+         * 一次性消费事件
+         */
+        mViewModel.sUiStateFlow.flowWithLifecycle2(this) { data ->
+            showToast(data.message)
+        }
+
         mViewModel.uiStateFlow.flowWithLifecycle2(this, prop1 = MviState::bannerUiState) { state ->
             when (state) {
                 is BannerUiState.INIT -> {}
@@ -90,6 +99,7 @@ class MviExampleActivity : BaseMviActivity() {
 
     override fun retryRequest() {
         //点击屏幕重试
+        mViewModel.showToast() //一次性消费
         mViewModel.loadBannerData()
         mViewModel.loadDetailData()
     }

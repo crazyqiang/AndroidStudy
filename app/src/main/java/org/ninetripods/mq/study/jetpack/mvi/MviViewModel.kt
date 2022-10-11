@@ -20,7 +20,11 @@ class MViewModel : BaseViewModel<MviState, MviSingleUiState>() {
         requestDataWithFlow(
             showLoading = true,
             request = { mWanRepo.requestWanData("") },
-            successCallback = { data -> sendUiState { copy(bannerUiState = BannerUiState.SUCCESS(data)) } },
+            successCallback = { data ->
+                sendUiState {
+                    copy(bannerUiState = BannerUiState.SUCCESS(data))
+                }
+            },
             failCallback = {}
         )
     }
@@ -30,8 +34,16 @@ class MViewModel : BaseViewModel<MviState, MviSingleUiState>() {
         requestDataWithFlow(
             showLoading = false,
             request = { mWanRepo.requestRankData() },
-            successCallback = { data -> sendUiState { copy(detailUiState = DetailUiState.SUCCESS(data)) } },
+            successCallback = { data ->
+                sendUiState {
+                    copy(detailUiState = DetailUiState.SUCCESS(data))
+                }
+            },
         )
+    }
+
+    fun showToast() {
+        sendSingleUiState(MviSingleUiState("触发了一次性消费事件！"))
     }
 }
 
