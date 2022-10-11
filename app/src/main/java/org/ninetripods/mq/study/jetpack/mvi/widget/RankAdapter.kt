@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvi.adapter
+package org.ninetripods.mq.study.jetpack.mvi.widget
 
 import android.view.LayoutInflater
 import android.view.View

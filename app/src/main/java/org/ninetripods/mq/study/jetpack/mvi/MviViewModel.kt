@@ -7,8 +7,7 @@ import org.ninetripods.mq.study.jetpack.mvvm.model.RankModel
 import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
 import org.ninetripods.mq.study.jetpack.mvvm.repo.WanRepository
 
-class MViewModel : BaseViewModel<MviState, MviSingleState>() {
-
+class MViewModel : BaseViewModel<MviState, MviSingleUiState>() {
     //Repository中间层 管理所有数据来源 包括本地的及网络的
     private val mWanRepo = WanRepository()
 
@@ -21,7 +20,7 @@ class MViewModel : BaseViewModel<MviState, MviSingleState>() {
         requestDataWithFlow(
             showLoading = true,
             request = { mWanRepo.requestWanData("") },
-            successCallback = { data -> sendState { copy(bannerUiState = BannerUiState.SUCCESS(data)) } },
+            successCallback = { data -> sendUiState { copy(bannerUiState = BannerUiState.SUCCESS(data)) } },
             failCallback = {}
         )
     }
@@ -31,17 +30,16 @@ class MViewModel : BaseViewModel<MviState, MviSingleState>() {
         requestDataWithFlow(
             showLoading = false,
             request = { mWanRepo.requestRankData() },
-            successCallback = { data -> sendState { copy(detailUiState = DetailUiState.SUCCESS(data)) } },
+            successCallback = { data -> sendUiState { copy(detailUiState = DetailUiState.SUCCESS(data)) } },
         )
     }
 }
 
+/**
+ * 定义UiState 将View层所有实体类相关的都包括在这里，可以有效避免模板代码(StateFlow只需要定义一个即可)
+ */
 data class MviState(val bannerUiState: BannerUiState, val detailUiState: DetailUiState?) : IUiState
-data class MviSingleState(val singleUiState: HomeSingleUiState) : ISingleUiState
-
-sealed class HomeSingleUiState {
-    data class ShowToast(val message: String) : HomeSingleUiState()
-}
+data class MviSingleUiState(val message: String) : ISingleUiState
 
 sealed class BannerUiState {
     object INIT : BannerUiState()

@@ -3,7 +3,6 @@ package org.ninetripods.mq.study.jetpack.mvi
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
@@ -12,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
-import org.ninetripods.mq.study.jetpack.mvi.adapter.RankAdapter
 import org.ninetripods.mq.study.jetpack.mvi.base.BaseMviActivity
+import org.ninetripods.mq.study.jetpack.mvi.base.LoadUiState
+import org.ninetripods.mq.study.jetpack.mvi.widget.RankAdapter
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import org.ninetripods.mq.study.kotlin.ktx.id
 
@@ -47,24 +47,18 @@ class MviExampleActivity : BaseMviActivity() {
         }
     }
 
-//    override fun getVModel(): BaseViewModel {
-//        return mViewModel
-//    }
-
     private fun registerEvent() {
         /**
          * 一次性消费事件
          */
-        mViewModel.singleUiState.flowWithLifecycle2(this,
-            prop1 = MviSingleState::singleUiState) { singleUiState ->
-            when (singleUiState) {
-                is HomeSingleUiState.ShowToast ->
-                    Toast.makeText(this@MviExampleActivity,
-                        singleUiState.message, Toast.LENGTH_LONG).show()
+        mViewModel.loadUiStateFlow.flowWithLifecycle2(this) { state ->
+            when (state) {
+                is LoadUiState.Error -> mStatusViewUtil.showErrorView(state.msg)
+                is LoadUiState.ShowMainView -> mStatusViewUtil.showMainView()
+                is LoadUiState.Loading -> mStatusViewUtil.showLoadingView(state.isShow)
             }
-
         }
-        mViewModel.viewState.flowWithLifecycle2(this, prop1 = MviState::bannerUiState) { state ->
+        mViewModel.uiStateFlow.flowWithLifecycle2(this, prop1 = MviState::bannerUiState) { state ->
             when (state) {
                 is BannerUiState.INIT -> {}
                 is BannerUiState.SUCCESS -> {
@@ -80,7 +74,7 @@ class MviExampleActivity : BaseMviActivity() {
 
         }
 
-        mViewModel.viewState.flowWithLifecycle2(this, Lifecycle.State.STARTED,
+        mViewModel.uiStateFlow.flowWithLifecycle2(this, Lifecycle.State.STARTED,
             prop1 = MviState::detailUiState) { state ->
             when (state) {
                 is DetailUiState.INIT -> {}

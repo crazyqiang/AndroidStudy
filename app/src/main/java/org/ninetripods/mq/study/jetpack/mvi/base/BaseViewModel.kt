@@ -3,10 +3,7 @@ package org.ninetripods.mq.study.jetpack.mvi.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.jetpack.base.BaseData
 import org.ninetripods.mq.study.jetpack.base.ReqState
@@ -16,48 +13,45 @@ import org.ninetripods.mq.study.jetpack.base.ReqState
  *
  * @param UiState 重复性事件，View层可以多次接收并刷新
  * @param SingleUiState 一次性事件，View层不支持多次消费 如弹Toast，导航Activity等
- * @param Event  View层分发事件
  */
-abstract class BaseViewModel<UiState : IUiState, SingleUiState : ISingleUiState> :
-    ViewModel() {
-//
-//    //loading
-//    private val _loadingChannel = Channel<Boolean>()
-//    val loadingFlow = _loadingChannel.receiveAsFlow()
-//
-//    //异常
-//    private val _errorChannel = Channel<String>()
-//    val errorFlow = _errorChannel.receiveAsFlow()
-//
-//    //正常
-//    private val _normalChannel = Channel<Boolean>()
-//    val normalFlow = _normalChannel.receiveAsFlow()
-
+abstract class BaseViewModel<UiState : IUiState, SingleUiState : ISingleUiState> : ViewModel() {
     /**
      * 可以重复消费的事件
      */
-    private val _viewState = MutableStateFlow(initUiState())
-    val viewState: StateFlow<UiState> = _viewState
+    private val _uiStateFlow = MutableStateFlow(initUiState())
+    val uiStateFlow: StateFlow<UiState> = _uiStateFlow
 
     /**
-     * 事件带来的副作用，通常是 一次性事件 且 一对一的订阅关系
+     * 一次性事件 且 一对一的订阅关系
      * 例如：弹Toast、导航Fragment等
      * Channel特点
      * 1.每个消息只有一个订阅者可以收到，用于一对一的通信
      * 2.第一个订阅者可以收到 collect 之前的事件
      */
-    private val _singleUiState: Channel<SingleUiState> = Channel()
-    val singleUiState = _singleUiState.receiveAsFlow()
+    private val _sUiStateFlow: Channel<SingleUiState> = Channel()
+    val sUiStateFlow: Flow<SingleUiState> = _sUiStateFlow.receiveAsFlow()
+
+    private val _loadUiStateFlow: Channel<LoadUiState> = Channel()
+    val loadUiStateFlow: Flow<LoadUiState> = _loadUiStateFlow.receiveAsFlow()
 
     protected abstract fun initUiState(): UiState
 
-    protected fun sendState(copy: UiState.() -> UiState) {
-        _viewState.update { _viewState.value.copy() }
+    protected fun sendUiState(copy: UiState.() -> UiState) {
+        _uiStateFlow.update { _uiStateFlow.value.copy() }
     }
 
-    protected fun sendSingleUiState(effect: SingleUiState) {
+    protected fun sendSingleUiState(sUiState: SingleUiState) {
         viewModelScope.launch {
-            _singleUiState.send(effect)
+            _sUiStateFlow.send(sUiState)
+        }
+    }
+
+    /**
+     * 发送当前加载状态： Loading、Error、Normal
+     */
+    private fun sendLoadUiState(loadState: LoadUiState) {
+        viewModelScope.launch {
+            _loadUiStateFlow.send(loadState)
         }
     }
 
@@ -73,20 +67,20 @@ abstract class BaseViewModel<UiState : IUiState, SingleUiState : ISingleUiState>
         successCallback: (T) -> Unit,
         failCallback: suspend (String) -> Unit = { errMsg ->
             //默认异常处理，子类可以进行覆写
-//            _errorChannel.send(errMsg)
+            sendLoadUiState(LoadUiState.Error(errMsg))
         },
     ) {
         viewModelScope.launch {
             //是否展示Loading
             if (showLoading) {
-                loadStart()
+                sendLoadUiState(LoadUiState.Loading(true))
             }
             val baseData: BaseData<T>
             try {
                 baseData = request()
                 when (baseData.state) {
                     ReqState.Success -> {
-//                        _normalChannel.send(true)
+                        sendLoadUiState(LoadUiState.ShowMainView)
                         baseData.data?.let { successCallback(it) }
                     }
                     ReqState.Error -> baseData.msg?.let {
@@ -97,18 +91,10 @@ abstract class BaseViewModel<UiState : IUiState, SingleUiState : ISingleUiState>
                 e.message?.let { failCallback(it) }
             } finally {
                 if (showLoading) {
-                    loadFinish()
+                    sendLoadUiState(LoadUiState.Loading(false))
                 }
             }
         }
-    }
-
-    private suspend fun loadStart() {
-//        _loadingChannel.send(true)
-    }
-
-    private suspend fun loadFinish() {
-//        _loadingChannel.send(false)
     }
 
 }

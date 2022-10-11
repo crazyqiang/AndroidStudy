@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/tv_mvi"
-        style="@style/btn_style_undo"
+        style="@style/btn_style_done"
         android:layout_below="@+id/tv_mvvm"
         android:layout_marginTop="@dimen/margin_btn"
         android:text="Jetpack MVI" />
