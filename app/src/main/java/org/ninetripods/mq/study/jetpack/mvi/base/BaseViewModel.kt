@@ -18,26 +18,26 @@ import org.ninetripods.mq.study.jetpack.base.ReqState
  * @param SingleUiState 一次性事件，View层不支持多次消费 如弹Toast，导航Activity等
  * @param Event  View层分发事件
  */
-abstract class BaseViewModel<UiState : IUiState, Event : IEvent, SingleUiState : ISingleUiState> :
+abstract class BaseViewModel<UiState : IUiState, SingleUiState : ISingleUiState> :
     ViewModel() {
-
-    //loading
-    private val _loadingChannel = Channel<Boolean>()
-    val loadingFlow = _loadingChannel.receiveAsFlow()
-
-    //异常
-    private val _errorChannel = Channel<String>()
-    val errorFlow = _errorChannel.receiveAsFlow()
-
-    //正常
-    private val _normalChannel = Channel<Boolean>()
-    val normalFlow = _normalChannel.receiveAsFlow()
+//
+//    //loading
+//    private val _loadingChannel = Channel<Boolean>()
+//    val loadingFlow = _loadingChannel.receiveAsFlow()
+//
+//    //异常
+//    private val _errorChannel = Channel<String>()
+//    val errorFlow = _errorChannel.receiveAsFlow()
+//
+//    //正常
+//    private val _normalChannel = Channel<Boolean>()
+//    val normalFlow = _normalChannel.receiveAsFlow()
 
     /**
      * 可以重复消费的事件
      */
     private val _viewState = MutableStateFlow(initUiState())
-    val viewState: StateFlow<IUiState> = _viewState
+    val viewState: StateFlow<UiState> = _viewState
 
     /**
      * 事件带来的副作用，通常是 一次性事件 且 一对一的订阅关系
@@ -50,7 +50,6 @@ abstract class BaseViewModel<UiState : IUiState, Event : IEvent, SingleUiState :
     val singleUiState = _singleUiState.receiveAsFlow()
 
     protected abstract fun initUiState(): UiState
-    abstract fun dispatch(event: Event)
 
     protected fun sendState(copy: UiState.() -> UiState) {
         _viewState.update { _viewState.value.copy() }
@@ -74,7 +73,7 @@ abstract class BaseViewModel<UiState : IUiState, Event : IEvent, SingleUiState :
         successCallback: (T) -> Unit,
         failCallback: suspend (String) -> Unit = { errMsg ->
             //默认异常处理，子类可以进行覆写
-            _errorChannel.send(errMsg)
+//            _errorChannel.send(errMsg)
         },
     ) {
         viewModelScope.launch {
@@ -87,7 +86,7 @@ abstract class BaseViewModel<UiState : IUiState, Event : IEvent, SingleUiState :
                 baseData = request()
                 when (baseData.state) {
                     ReqState.Success -> {
-                        _normalChannel.send(true)
+//                        _normalChannel.send(true)
                         baseData.data?.let { successCallback(it) }
                     }
                     ReqState.Error -> baseData.msg?.let {
@@ -105,11 +104,11 @@ abstract class BaseViewModel<UiState : IUiState, Event : IEvent, SingleUiState :
     }
 
     private suspend fun loadStart() {
-        _loadingChannel.send(true)
+//        _loadingChannel.send(true)
     }
 
     private suspend fun loadFinish() {
-        _loadingChannel.send(false)
+//        _loadingChannel.send(false)
     }
 
 }

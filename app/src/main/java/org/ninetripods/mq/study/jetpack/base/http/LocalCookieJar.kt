@@ -1,4 +1,4 @@
-package com.example.jetpackstudy.mvvm.http
+package org.ninetripods.mq.study.jetpack.base.http
 
 import okhttp3.Cookie
 import okhttp3.CookieJar

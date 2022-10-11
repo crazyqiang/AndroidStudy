@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.mvi
+package org.ninetripods.mq.study.jetpack.base
 
 sealed class Result<out T> {
     object Loading : Result<Nothing>()

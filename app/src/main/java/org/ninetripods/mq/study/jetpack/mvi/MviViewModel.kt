@@ -1,14 +1,13 @@
 package org.ninetripods.mq.study.jetpack.mvi
 
 import org.ninetripods.mq.study.jetpack.mvi.base.BaseViewModel
-import org.ninetripods.mq.study.jetpack.mvi.base.IEvent
 import org.ninetripods.mq.study.jetpack.mvi.base.ISingleUiState
 import org.ninetripods.mq.study.jetpack.mvi.base.IUiState
 import org.ninetripods.mq.study.jetpack.mvvm.model.RankModel
 import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
 import org.ninetripods.mq.study.jetpack.mvvm.repo.WanRepository
 
-class MViewModel : BaseViewModel<MviState, MviEvent, MviSingleState>() {
+class MViewModel : BaseViewModel<MviState, MviSingleState>() {
 
     //Repository中间层 管理所有数据来源 包括本地的及网络的
     private val mWanRepo = WanRepository()
@@ -17,18 +16,8 @@ class MViewModel : BaseViewModel<MviState, MviEvent, MviSingleState>() {
         return MviState(BannerUiState.INIT, DetailUiState.INIT)
     }
 
-    override fun dispatch(event: MviEvent) {
-        when (event) {
-            is MviEvent.Banner -> loadBannerData()
-            is MviEvent.Detail -> loadDetailData()
-            //toast是一次性消费事件 使用Channel进行发送
-            is MviEvent.Toast ->
-                sendSingleUiState(MviSingleState(singleUiState = HomeSingleUiState.ShowToast("我是Toast,一次性消费事件！")))
-        }
-    }
-
     //请求Banner数据
-    private fun loadBannerData() {
+    fun loadBannerData() {
         requestDataWithFlow(
             showLoading = true,
             request = { mWanRepo.requestWanData("") },
@@ -38,7 +27,7 @@ class MViewModel : BaseViewModel<MviState, MviEvent, MviSingleState>() {
     }
 
     //请求List数据
-    private fun loadDetailData() {
+    fun loadDetailData() {
         requestDataWithFlow(
             showLoading = false,
             request = { mWanRepo.requestRankData() },
@@ -49,12 +38,6 @@ class MViewModel : BaseViewModel<MviState, MviEvent, MviSingleState>() {
 
 data class MviState(val bannerUiState: BannerUiState, val detailUiState: DetailUiState?) : IUiState
 data class MviSingleState(val singleUiState: HomeSingleUiState) : ISingleUiState
-
-sealed class MviEvent : IEvent {
-    object Banner : MviEvent()
-    object Detail : MviEvent()
-    object Toast : MviEvent()
-}
 
 sealed class HomeSingleUiState {
     data class ShowToast(val message: String) : HomeSingleUiState()
