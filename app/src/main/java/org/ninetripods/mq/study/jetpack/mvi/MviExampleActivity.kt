@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.lib_viewpager2.MVPager2
 import org.ninetripods.mq.study.BaseActivity
+import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.mvi.base.BaseMviActivity
 import org.ninetripods.mq.study.jetpack.mvi.base.LoadUiState
@@ -17,6 +18,7 @@ import org.ninetripods.mq.study.jetpack.mvi.widget.RankAdapter
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.showToast
+import org.ninetripods.mq.study.util.Constant
 
 /**
  * MVI示例
@@ -109,6 +111,10 @@ class MviExampleActivity : BaseMviActivity() {
      */
     override fun getStatusOwnerView(): View? {
         return mContentView
+    }
+
+    override fun openWebview() {
+        CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_JETPACK_MVI)
     }
 
 }

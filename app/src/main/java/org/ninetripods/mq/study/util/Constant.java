@@ -18,6 +18,7 @@ public class Constant {
     public static final String BLOG_JETPACK_LIVEDATA = "https://mp.weixin.qq.com/s/P57FZLdIbvz5sfPhsi8f6w";
     public static final String BLOG_JETPACK_VIEW_MODEL = "https://blog.csdn.net/u013700502/article/details/118962560";
     public static final String BLOG_JETPACK_MVVM = "https://blog.csdn.net/u013700502/article/details/120263741";
+    public static final String BLOG_JETPACK_MVI = "https://blog.csdn.net/u013700502/article/details/127155843";
     public static final String BLOG_JETPACK_FLOW = "https://mp.weixin.qq.com/s/aWLhx8UrQpJbYfiZwfrzKQ";
     public static final String BLOG_JETPACK_FLOW_COUNT_DOWN = "https://mp.weixin.qq.com/s/IJYEj00576ircTkDHjnrcg";
     public static final String BLOG_KT_COROUTINE = "https://mp.weixin.qq.com/s/AkG-AataO87VOVS_FIONvA";
