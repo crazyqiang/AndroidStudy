@@ -1,17 +1,18 @@
 package org.ninetripods.mq.study.util.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.ninetripods.mq.study.CommonWebviewActivity;
-import org.ninetripods.mq.study.nestedScroll.tradition.ScrollListViewActivity;
 import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.anim.AnimationActivity;
 import org.ninetripods.mq.study.bezier.BezierDemoActivity;
 import org.ninetripods.mq.study.bezier.QQTrackPointActivity;
 import org.ninetripods.mq.study.customView.alipayView.ALiPayActivity;
@@ -23,6 +24,7 @@ import org.ninetripods.mq.study.multiprocess_client.BinderActivity;
 import org.ninetripods.mq.study.multiprocess_client.IntentActivity;
 import org.ninetripods.mq.study.multiprocess_client.MessengerActivity;
 import org.ninetripods.mq.study.nestedScroll.NestedScrollingActivity;
+import org.ninetripods.mq.study.nestedScroll.tradition.ScrollListViewActivity;
 import org.ninetripods.mq.study.path.PathMeasureActivity;
 import org.ninetripods.mq.study.path.PathVectorActivity;
 import org.ninetripods.mq.study.popup.PopupWindowActivity;
@@ -73,7 +75,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
         String[][] array = {
                 {"自定义View", "饼形图", "AliPay", "", ""},
                 {"自定义ViewGroup", "五环图", "流式布局", "", ""},
-                {"属性动画+Path", "PathMeasure", "Path+SVG", "ViewPropertyAnimator", ""},
+                {"动画+Path", "补间动画", "PathMeasure", "Path+SVG", "ViewPropertyAnimator"},
                 {"贝塞尔曲线", "基本用法示例", "仿QQ小红点", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
                 {"事件滑动", "NestedScroll", "ScrollView+ListView", "", "", ""},
@@ -119,14 +121,17 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
             case 2:
                 //属性动画+Path
                 switch (view.getId()) {
-                    case R.id.tv_view_one:
+                    case R.id.tv_view_two:
                         NavitateUtil.startActivity(getActivity(), PathMeasureActivity.class);
                         break;
-                    case R.id.tv_view_two:
+                    case R.id.tv_view_three:
                         NavitateUtil.startActivity(getActivity(), PathVectorActivity.class);
                         break;
-                    case R.id.tv_view_three:
+                    case R.id.tv_view_four:
                         NavitateUtil.startActivity(getActivity(), ViewPropertyAnimatorActivity.class);
+                        break;
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(getActivity(), AnimationActivity.class);
                         break;
                 }
                 break;

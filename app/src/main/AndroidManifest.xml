@@ -59,6 +59,8 @@
         <activity
             android:name=".jetpack.livedata.LiveDataActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".anim.AnimationActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".jetpack.viewmodel.ViewModelActivity" />
         <activity
             android:name=".jetpack.mvvm.MvvmExampleActivity"
