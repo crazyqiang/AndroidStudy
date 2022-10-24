@@ -1,7 +1,7 @@
 ## 欢迎扫码关注
 欢迎**扫描下方二维码**或搜索公众号 **代码说** 关注我的微信公众号查看最新文章，在公众号回复 **hello world** 不定时参与现金红包抽奖，期待您的关注~
 
-<img src="https://pcsdata.baidu.com/thumbnail/f14fc9bf5n2db6f2c47543e1d3b69b61?fid=2672971150-16051585-46086852931433&rt=pr&sign=FDTAER-yUdy3dSFZ0SVxtzShv1zcMqd-QZp4UfKxT2NDqrsOTRgLQYBzUIQ%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=9069345223535737935&dp-callid=0&time=1666159200&bus_no=26&size=c1600_u1600&quality=100&vuk=-&ft=video" width="600">
+<img src="https://github.com/crazyqiang/AndroidStudy/blob/master/pic/wechat_qr.png" width="600">
 
 ## 扫描二维码下载APK示例
 ![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
