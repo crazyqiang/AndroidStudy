@@ -32,8 +32,8 @@ class AnimationActivity : BaseActivity() {
     override fun initEvents() {
         mBtnRotate.setOnClickListener { mTvTarget.startAnimation(loadRotationAnim()) }
         mBtnScale.setOnClickListener { mTvTarget.startAnimation(loadScaleAnimation()) }
-        mBtnTranslate.setOnClickListener { }
-        mBtnAlpha.setOnClickListener { }
+        mBtnTranslate.setOnClickListener { mTvTarget.startAnimation(loadTranslateAnimation()) }
+        mBtnAlpha.setOnClickListener { mTvTarget.startAnimation(loadAlphaAnimation()) }
         mBtnAnimSet.setOnClickListener { } //组合动画
         mBtnStop.setOnClickListener { mTvTarget.clearAnimation() }
     }
@@ -45,32 +45,34 @@ class AnimationActivity : BaseActivity() {
     private fun loadRotationAnim(): Animation {
         //方式1：代码动态生成
         val rotateAnim: Animation = RotateAnimation(
-                0f,
-                360f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f,
-                Animation.RELATIVE_TO_SELF,
-                0.5f
+            0f,
+            360f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
         ).apply {
             duration = 2000
             interpolator = LinearInterpolator()
             fillAfter = true //动画结束后，是否停留在动画结束状态
             repeatCount = Animation.INFINITE //重复次数 INFINITE为无限重复
             startOffset = 0L //动画延迟开始时间 ms
-            repeatMode =
-                    Animation.RESTART // RESTART：正序重新开始、REVERSE：倒序重新开始，默认是RESTART。注意：repeatCount(count)设置的count值必须>0或者是INFINITE才会生效
+            repeatMode = Animation.RESTART // RESTART：正序重新开始、REVERSE：倒序重新开始，默认是RESTART。注意：repeatCount(count)设置的count值必须>0或者是INFINITE才会生效
         }
         return rotateAnim
         // 方式2：通过XML创建
         //return AnimationUtils.loadAnimation(this, R.anim.view_rotate)
     }
 
+    /**
+     * 缩放动画
+     */
     private fun loadScaleAnimation(): Animation {
         //方式1：代码动态生成
         return ScaleAnimation(
-                1.0f, 0.5f, 1.0f, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f).apply {
+            1.0f, 0.5f, 1.0f, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f).apply {
             duration = 1000
             repeatCount = Animation.INFINITE
             repeatMode = Animation.REVERSE
@@ -78,6 +80,40 @@ class AnimationActivity : BaseActivity() {
         }
         // 方式2：通过XML创建
         //return AnimationUtils.loadAnimation(this, R.anim.view_scale)
+    }
+
+    /**
+     * 平移动画
+     */
+    private fun loadTranslateAnimation(): Animation {
+        //方式1：代码动态生成
+        return TranslateAnimation(
+            Animation.ABSOLUTE, 0f, Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.ABSOLUTE, 0f, Animation.RELATIVE_TO_SELF, 0.5f).apply {
+            duration = 2000
+            fillAfter = true
+            interpolator = LinearInterpolator()
+            repeatMode = Animation.REVERSE
+            repeatCount = Animation.INFINITE
+        }
+        // 方式2：通过XML创建
+        //return AnimationUtils.loadAnimation(this, R.anim.view_translate)
+    }
+
+    /**
+     * 透明度动画
+     */
+    private fun loadAlphaAnimation(): Animation {
+        //方式1：代码动态生成
+        return AlphaAnimation(1.0f, 0f).apply {
+            duration = 1000
+            fillAfter = true
+            interpolator = LinearInterpolator()
+            repeatMode = Animation.REVERSE
+            repeatCount = Animation.INFINITE
+        }
+        // 方式2：通过XML创建
+        //return AnimationUtils.loadAnimation(this, R.anim.view_alpha)
     }
 
 
