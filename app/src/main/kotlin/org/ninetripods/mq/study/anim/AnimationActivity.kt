@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.id
+import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
  * Created by mq on 2022/10/23 下午9:46
@@ -59,6 +60,22 @@ class AnimationActivity : BaseActivity() {
             startOffset = 0L //动画延迟开始时间 ms
             repeatMode =
                 Animation.RESTART // RESTART：正序重新开始、REVERSE：倒序重新开始，默认是RESTART。注意：repeatCount(count)设置的count值必须>0或者是INFINITE才会生效
+            setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationEnd(animation: Animation?) {
+                    //动画结束时回调，注意：当repeatCount设置为Animation.INFINITE不再收到该回调
+                    log("onAnimationEnd")
+                }
+
+                override fun onAnimationStart(animation: Animation?) {
+                    //动画开始时回调
+                    log("onAnimationStart")
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    //repeatCount设置为Animation.INFINITE时动画每执行一次该方法回调就会执行一次
+                    log("onAnimationRepeat")
+                }
+            })
         }
         return rotateAnim
         // 方式2：通过XML创建
