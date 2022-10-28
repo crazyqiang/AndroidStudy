@@ -34,7 +34,7 @@ class AnimationActivity : BaseActivity() {
         mBtnScale.setOnClickListener { mTvTarget.startAnimation(loadScaleAnimation()) }
         mBtnTranslate.setOnClickListener { mTvTarget.startAnimation(loadTranslateAnimation()) }
         mBtnAlpha.setOnClickListener { mTvTarget.startAnimation(loadAlphaAnimation()) }
-        mBtnAnimSet.setOnClickListener { } //组合动画
+        mBtnAnimSet.setOnClickListener { mTvTarget.startAnimation(loadAnimSet()) } //组合动画
         mBtnStop.setOnClickListener { mTvTarget.clearAnimation() }
     }
 
@@ -57,7 +57,8 @@ class AnimationActivity : BaseActivity() {
             fillAfter = true //动画结束后，是否停留在动画结束状态
             repeatCount = Animation.INFINITE //重复次数 INFINITE为无限重复
             startOffset = 0L //动画延迟开始时间 ms
-            repeatMode = Animation.RESTART // RESTART：正序重新开始、REVERSE：倒序重新开始，默认是RESTART。注意：repeatCount(count)设置的count值必须>0或者是INFINITE才会生效
+            repeatMode =
+                Animation.RESTART // RESTART：正序重新开始、REVERSE：倒序重新开始，默认是RESTART。注意：repeatCount(count)设置的count值必须>0或者是INFINITE才会生效
         }
         return rotateAnim
         // 方式2：通过XML创建
@@ -114,6 +115,41 @@ class AnimationActivity : BaseActivity() {
         }
         // 方式2：通过XML创建
         //return AnimationUtils.loadAnimation(this, R.anim.view_alpha)
+    }
+
+    /**
+     * 动画组合AnimationSet
+     * - duration, repeatMode, fillBefore, fillAfter:当在AnimationSet对象上设置这些属性时，将被下推到所有子动画。
+     * - repeatCount, fillEnabled:这些属性在AnimationSet中被忽略。
+     * - startOffset, shareInterpolator: 这些属性应用于AnimationSet本身
+     */
+    private fun loadAnimSet(): Animation {
+        //方式1：代码动态生成
+        val rotateAnim = loadRotationAnim()
+        val alphaAnim = loadAlphaAnimation()
+        val translateAnim = loadTranslateAnimation()
+        val scaleAnim = loadScaleAnimation()
+
+        /**
+         * shareInterpolator: 如果想让集合中的所有动画都使用与AnimationSet中
+         * 设置的一样的插值器，则传true；反之，如果集合中每个动画都使用自己的插值器，则传false.
+         */
+        val animSet = AnimationSet(true).apply {
+            duration = 3000
+            interpolator = LinearInterpolator()
+            fillAfter = true
+            repeatMode = Animation.REVERSE
+            startOffset = 100 //延迟执行动画，应用于AnimationSet本身
+        }
+        //animSet.cancel() //取消动画
+        //animSet.reset() //重置动画
+        animSet.addAnimation(rotateAnim)
+        animSet.addAnimation(alphaAnim)
+        animSet.addAnimation(translateAnim)
+        animSet.addAnimation(scaleAnim)
+        return animSet
+        // 方式2：通过XML创建
+        // return AnimationUtils.loadAnimation(this, R.anim.view_animation_set)
     }
 
 
