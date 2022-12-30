@@ -22,12 +22,22 @@ class GenericsStudy {
         val nums: List<Number> = arrayListOf(10, 100, 1000)
         nums.sortedWith(anyComparator)
         nums.sortedWith(numberComparator)
-        //nums.sortedWith(intComparator)
+//        nums.sortedWith(intComparator)
+    }
+
+//    interface Comparable<in T> {
+//        operator fun compareTo(other: T): Int
+//    }
+
+    fun demo(x: Comparable<Number>) {
+//        x.compareTo(1.0) // 1.0 拥有类型 Double，它是 Number 的子类型
+        // 因此，我们可以将 x 赋给类型为 Comparable <Double> 的变量
+        val y: Comparable<Double> = x // OK！
     }
 
 }
 
-fun <T> Iterable<T>.sortedWith(comparator: Comparator<in T>): List<T> {
+fun <T> Iterable<T>.sortedWith(comparator: Comparator<T>): List<T> {
     if (this is Collection) {
         if (size <= 1) return this.toList()
         return (toTypedArray<Any?>() as Array<T>).apply { sortWith(comparator) }.asList()
@@ -53,6 +63,10 @@ class Herd<out T : Animal> {
     fun getVa(): T {
         return animal as T
     }
+
+//    fun setVa(value: T){
+//
+//    }
 
     val size = 10
 }
