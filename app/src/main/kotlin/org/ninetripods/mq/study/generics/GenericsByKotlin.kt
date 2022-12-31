@@ -19,10 +19,28 @@ class GenericsByKotlin {
     }
 
     /**
-     * 称为而GenericsP在T上是逆变的。
+     * 称为GenericsC在Book上是逆变的。
+     * 跟系统源码中的Comparable类似
      */
-    fun consume(to: GenericsC<EnglishBook>) {
-//        val book: GenericsP<Book> = to
+    private fun consume(to: GenericsC<Book>) {
+        //GenericsC<Book>实例赋值给了GenericsC<EnglishBook>
+        val target: GenericsC<EnglishBook> = to
+        target.put(EnglishBook("英语"))
+    }
+
+    fun copy(from: Array<out Any>, to: Array<Any>) {
+        if (from.size != to.size) return
+        for (i in from.indices)
+            to[i] = from[i]
+    }
+
+    /**
+     * 使用处型变：类型投影
+     */
+    fun processCopy(){
+        val strs: Array<String> = arrayOf("1", "2")
+        val any = Array<Any>(2) {}
+        copy(strs, any)
     }
 
     /**
