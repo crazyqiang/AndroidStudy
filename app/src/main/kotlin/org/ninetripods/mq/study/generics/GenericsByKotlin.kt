@@ -5,8 +5,36 @@ import android.content.Context
 import android.content.Intent
 
 /**
+ * 泛型类
+ */
+abstract class BaseBook<T> {
+    private var books: ArrayList<T> = ArrayList()
+
+    /**
+     * 泛型方法
+     */
+    fun <E : T> add(item: E) {
+        books.add(item)
+        println("list:$books, size:${books.size}")
+    }
+}
+
+/**
+ * 子类继承BaseBook并传入泛型参数MathBook
+ */
+class BookImpl : BaseBook<MathBook>()
+
+fun show() {
+    BookImpl().apply {
+        add(MathBook("数学"))
+    }
+    //输出：list:[MathBook(math=数学)], size: 1
+}
+
+/**
  * Kotlin泛型 协变、逆变
- * Created by maqiang06@zuoyebang.com on 2022/12/21
+ * 1、如果A是B的子类，且Producer<A>是Producer<B>的子类型，那么Producer在<T>上是协变的；
+ * 2、如果A是B的子类，且Consumer<B>是Consumer<A>的子类型，那么Producer在<T>上是逆变的。
  */
 class GenericsByKotlin {
 
@@ -28,6 +56,9 @@ class GenericsByKotlin {
         target.put(EnglishBook("英语"))
     }
 
+    /**
+     * 使用处型变：类型投影
+     */
     fun copy(from: Array<out Any>, to: Array<Any>) {
         if (from.size != to.size) return
         for (i in from.indices)
@@ -37,7 +68,7 @@ class GenericsByKotlin {
     /**
      * 使用处型变：类型投影
      */
-    fun processCopy(){
+    fun processCopy() {
         val strs: Array<String> = arrayOf("1", "2")
         val any = Array<Any>(2) {}
         copy(strs, any)
@@ -49,14 +80,6 @@ class GenericsByKotlin {
      */
     inline fun <reified T> isAny(value: Any): Boolean {
         return value is T
-    }
-
-    /**
-     * 1、如果A是B的子类，且Producer<A>是Producer<B>的子类型，那么这个泛型是协变的；
-     * 2、如果A是B的子类，且Consumer<B>是Consumer<A>的子类型，那么这个泛型是逆变的。
-     */
-    fun addContent(list: ArrayList<Any>) {
-        list.add(40)
     }
 }
 
