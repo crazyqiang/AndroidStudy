@@ -81,14 +81,14 @@ class GenericsByKotlin {
     inline fun <reified T> isAny(value: Any): Boolean {
         return value is T
     }
-}
 
-/**
- * 通过reified实化类型参数来简化调用
- */
-inline fun <reified T : Activity> Context.startActivity() {
-    val intent = Intent(this, T::class.java)
-    startActivity(intent)
+    /**
+     * 通过reified实化类型参数来简化调用
+     */
+    inline fun <reified T : Activity> Context.startActivity() {
+        val intent = Intent(this, T::class.java)
+        startActivity(intent)
+    }
 }
 
 /**
