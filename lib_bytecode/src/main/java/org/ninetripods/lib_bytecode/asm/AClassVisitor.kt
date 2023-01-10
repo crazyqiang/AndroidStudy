@@ -2,7 +2,7 @@ package org.ninetripods.lib_bytecode.asm
 
 import org.objectweb.asm.*
 
-class CustomClassVisitor(val api: Int, val classVisitor: ClassVisitor? = null) :
+class AClassVisitor(val api: Int, val classVisitor: ClassVisitor? = null) :
     ClassVisitor(api, classVisitor) {
 
     /**

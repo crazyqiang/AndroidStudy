@@ -16,9 +16,9 @@ object ASMTest {
         val classReader = ClassReader("java.lang.Runnable")
 
 //        val classWriter = ClassWriter(ClassWriter.COMPUTE_MAXS)
-//        val classVisitor = CustomClassVisitor(Opcodes.ASM5, classWriter)
+//        val classVisitor = AClassVisitor(Opcodes.ASM5, classWriter)
 
-        val classVisitor = CustomClassVisitor(Opcodes.ASM9)
+        val classVisitor = AClassVisitor(Opcodes.ASM9)
         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
         produceClass()
     }
