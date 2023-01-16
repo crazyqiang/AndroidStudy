@@ -9,6 +9,6 @@ fun log(message: String = "") {
 /**
  * 存储一些常量值
  */
-object ByteConstant {
+object BConstant {
     const val ASM9 = Opcodes.ASM9
 }

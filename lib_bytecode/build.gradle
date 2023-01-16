@@ -9,9 +9,9 @@ dependencies {
     //ASM wiki：https://asm.ow2.io
     implementation 'org.ow2.asm:asm:9.2' //核心库 基于事件使用时可以只使用这个
     implementation 'org.ow2.asm:asm-commons:9.2' //Tree API使用
-//    implementation Deps.kotlinCore
-//    implementation Deps.androidx_appcompat
-//    implementation Deps.androidx_material
+    implementation Deps.kotlinCore
+    implementation Deps.androidx_appcompat
+    implementation Deps.androidx_material
     implementation gradleApi()
     implementation localGroovy()
 }
@@ -33,9 +33,9 @@ publishing {
 
 sourceSets {
     main {
-        groovy {
-            srcDirs = ['src/main/groovy']
-        }
+//        groovy {
+//            srcDirs = ['src/main/groovy']
+//        }
         java {
             srcDirs = ['src/main/java']
         }

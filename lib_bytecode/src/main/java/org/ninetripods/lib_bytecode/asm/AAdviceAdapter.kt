@@ -1,6 +1,6 @@
 package org.ninetripods.lib_bytecode.asm
 
-import org.ninetripods.lib_bytecode.ByteConstant
+import org.ninetripods.lib_bytecode.BConstant
 import org.ninetripods.lib_bytecode.MethodTimeCostTest
 import org.ninetripods.lib_bytecode.log
 import org.ninetripods.lib_bytecode.util.Loader
@@ -9,7 +9,7 @@ import org.ninetripods.lib_bytecode.util.decodeOpcode
 import org.objectweb.asm.*
 import org.objectweb.asm.commons.AdviceAdapter
 
-private const val FIELD_NAME_ADD = "timeCost" //新增属性名称
+const val FIELD_NAME_ADD = "timeCost" //新增属性名称
 
 /**
 执行结果：
@@ -24,7 +24,7 @@ timeCost: 1003
 fun main() {
     val classReader = ClassReader(MethodTimeCostTest::class.java.name)
     val classWriter = ClassWriter(ClassWriter.COMPUTE_MAXS)
-    val classVisitor = AddTimeCostVisitor(ByteConstant.ASM9, classWriter)
+    val classVisitor = AddTimeCostVisitor(BConstant.ASM9, classWriter)
     classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
 
     val loader = Loader()
