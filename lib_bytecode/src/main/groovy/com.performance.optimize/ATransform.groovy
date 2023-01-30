@@ -3,6 +3,12 @@ package com.performance.optimize
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import groovy.io.FileType
+import jdk.internal.org.objectweb.asm.ClassReader
+import jdk.internal.org.objectweb.asm.ClassVisitor
+import jdk.internal.org.objectweb.asm.ClassWriter
+import org.ninetripods.lib_bytecode.asm.AClassVisitor
+import org.objectweb.asm.Opcodes
+import shadow.bundletool.com.android.utils.FileUtils
 
 class ATransform extends Transform {
 
@@ -13,7 +19,7 @@ class ATransform extends Transform {
      */
     @Override
     void transform(TransformInvocation invocation) throws TransformException, InterruptedException, IOException {
-        Collection<TransformInput> transformInputs = transformInvocation.inputs
+        Collection<TransformInput> transformInputs = invocation.inputs
 
         System.out.println("transformInputs: " + transformInputs.size())
         transformInputs.each { TransformInput input ->
@@ -22,9 +28,17 @@ class ATransform extends Transform {
                 File dir = dInput.file
                 if (dir) {
                     dir.traverse(type: FileType.FILES, nameFilter: ~/.*\.class/) { File file ->
+                        ClassReader classReader = new ClassReader(file.bytes)
+                        ClassVisitor classVisitor = new AClassVisitor(Opcodes.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
+                        classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
                         System.out.println("find class: " + file.name)
                     }
                 }
+
+                //处理完文件把输出传给下一个文件
+                def dest = invocation.outputProvider.getContentLocation(dInput.name,
+                        dInput.contentTypes, dInput.scopes, Format.DIRECTORY)
+                FileUtils.copyDirectory(dInput.file, dest)
             }
 
             //jarInputs表示以jar包方式参与项目编译的文件

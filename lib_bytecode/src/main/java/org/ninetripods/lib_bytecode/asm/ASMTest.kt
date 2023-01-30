@@ -14,11 +14,7 @@ object ASMTest {
     fun main(args: Array<String>) {
         println("ASM示例")
         val classReader = ClassReader("java.lang.Runnable")
-
-//        val classWriter = ClassWriter(ClassWriter.COMPUTE_MAXS)
-//        val classVisitor = AClassVisitor(Opcodes.ASM5, classWriter)
-
-        val classVisitor = AClassVisitor(Opcodes.ASM9)
+        val classVisitor = AClassVisitor(Opcodes.ASM9, ClassWriter(ClassWriter.COMPUTE_MAXS))
         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
         produceClass()
     }

@@ -44,6 +44,14 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+//-------配置完成后，可以通过Task.getTaskGraph()获取Task有向无环图-------
+//TaskExecutionGraph graph = gradle.getTaskGraph()
+//graph.whenReady {
+//    println("whenReady")
+//}
+//graph.beforeTask {Task task -> println("任务名称：${task.name} beforeTask")}
+//graph.afterTask {Task task -> println("任务名称：${task.name} afterTask")}
+
 //1、直接在build.gradle中定义插件
 //apply plugin: GreetingPlugin
 
