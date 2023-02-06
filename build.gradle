@@ -18,7 +18,7 @@ buildscript {
         //protocol buffer插件：https://github.com/google/protobuf-gradle-plugin
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
         //classpath 'com.fastgo:plugin:1.0-test'
-        //classpath 'com.performance.optimize:lib_bytecode:1.0.0'
+//        classpath 'com.performance.optimize:lib_bytecode:1.0.0'
     }
 }
 

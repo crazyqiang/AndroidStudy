@@ -3,11 +3,11 @@ package com.performance.optimize
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import groovy.io.FileType
-import jdk.internal.org.objectweb.asm.ClassReader
-import jdk.internal.org.objectweb.asm.ClassVisitor
-import jdk.internal.org.objectweb.asm.ClassWriter
 import org.ninetripods.lib_bytecode.asm.AClassVisitor
-import org.objectweb.asm.Opcodes
+import org.ninetripods.lib_bytecode.BConstant
+import org.objectweb.asm.ClassReader
+import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.ClassWriter
 import shadow.bundletool.com.android.utils.FileUtils
 
 class ATransform extends Transform {
@@ -29,7 +29,7 @@ class ATransform extends Transform {
                 if (dir) {
                     dir.traverse(type: FileType.FILES, nameFilter: ~/.*\.class/) { File file ->
                         ClassReader classReader = new ClassReader(file.bytes)
-                        ClassVisitor classVisitor = new AClassVisitor(Opcodes.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
+                        ClassVisitor classVisitor = new AClassVisitor(BConstant.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
                         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
                         System.out.println("find class: " + file.name)
                     }
