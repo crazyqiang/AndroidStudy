@@ -17,7 +17,17 @@ class C {
     }
 }
 
-class CustomMethodVisitor(var api: Int, var mv: MethodVisitor) : MethodVisitor(api, mv) {
+/**
+CustomMethodVisitor: visitInsn opcode 190
+CustomMethodVisitor: visitInsn opcode 4
+CustomMethodVisitor: visitInsn opcode 79
+CustomMethodVisitor: visitInsn opcode 5
+CustomMethodVisitor: visitInsn opcode 79
+CustomMethodVisitor: visitInsn opcode 6
+CustomMethodVisitor: visitInsn opcode 79
+CustomMethodVisitor: visitInsn opcode 177
+ */
+class CustomMethodVisitor(api: Int, mv: MethodVisitor) : MethodVisitor(api, mv) {
 
     override fun visitCode() {
         mv.visitCode()

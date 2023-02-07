@@ -1,7 +1,7 @@
 //package org.ninetripods.lib_bytecode.asm
 //
 //import org.ninetripods.lib_bytecode.BConstant
-//import org.ninetripods.lib_bytecode.MethodTimeCostTest
+//import org.ninetripods.lib_bytecode.asm.demo.MethodTimeCostTest
 //import org.ninetripods.lib_bytecode.log
 //import org.ninetripods.lib_bytecode.util.Loader
 //import org.ninetripods.lib_bytecode.util.decodeAcc

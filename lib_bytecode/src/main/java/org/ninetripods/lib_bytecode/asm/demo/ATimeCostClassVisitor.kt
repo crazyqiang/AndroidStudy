@@ -1,4 +1,4 @@
-package org.ninetripods.lib_bytecode.asm
+package org.ninetripods.lib_bytecode.asm.demo
 
 import org.ninetripods.lib_bytecode.log
 import org.ninetripods.lib_bytecode.util.decodeAcc
@@ -10,11 +10,42 @@ import org.objectweb.asm.commons.AdviceAdapter
 
 const val FIELD_NAME_ADD: String = "timeCost" //新增属性名称
 
-class AddTimeCostVisitor(api: Int, classVisitor: ClassVisitor) :
+/**
+ * 方法耗时统计
+ * @param api
+ * @param classVisitor
+visit(): owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest
+visitMethod(): access-ACC_PUBLIC , name-<init>, descriptor-()V, signature-null, exceptions-null
+visitMethod(): access-ACC_PUBLIC ACC_FINAL , name-getTimeCost, descriptor-()J, signature-null, exceptions-null
+onMethodEnter():
+visitFieldInsn(): opcode-180, owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest, name-timeCost, descriptor-J
+onMethodExit(): opcode-LRETURN
+visitMethod(): access-ACC_PUBLIC ACC_FINAL , name-setTimeCost, descriptor-(J)V, signature-null, exceptions-null
+onMethodEnter():
+visitFieldInsn(): opcode-181, owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest, name-timeCost, descriptor-J
+onMethodExit(): opcode-RETURN
+visitMethod(): access-ACC_PUBLIC ACC_FINAL , name-addTimeCostMonitor, descriptor-()V, signature-null, exceptions-null
+onMethodEnter():
+visitFieldInsn(): opcode-181, owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest, name-timeCost, descriptor-J
+visitFieldInsn(): opcode-180, owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest, name-timeCost, descriptor-J
+visitFieldInsn(): opcode-178, owner-java/lang/System, name-out, descriptor-Ljava/io/PrintStream;
+onMethodExit(): opcode-RETURN
+visitEnd():
+ */
+class ATimeCostClassVisitor(api: Int, classVisitor: ClassVisitor) :
     ClassVisitor(api, classVisitor) {
 
     private var owner = ""
 
+    /**
+     * 如：visit(): owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest
+     * @param version
+     * @param access
+     * @param name
+     * @param signature
+     * @param superName
+     * @param interfaces
+     */
     override fun visit(
         version: Int,
         access: Int,
@@ -24,7 +55,7 @@ class AddTimeCostVisitor(api: Int, classVisitor: ClassVisitor) :
         interfaces: Array<out String>?,
     ) {
         this.owner = name ?: ""
-        log("visit(): owner-$owner")
+        //log("visit(): owner-$owner")
         super.visit(version, access, name, signature, superName, interfaces)
     }
 
@@ -47,7 +78,7 @@ class AddTimeCostVisitor(api: Int, classVisitor: ClassVisitor) :
     }
 
     override fun visitEnd() {
-        log("visitEnd():")
+        //log("visitEnd():")
         if (cv != null) {
             val fieldVisitor = cv.visitField(
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, FIELD_NAME_ADD, "J", null, null)

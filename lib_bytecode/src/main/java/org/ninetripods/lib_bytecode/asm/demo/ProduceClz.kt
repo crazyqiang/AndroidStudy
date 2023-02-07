@@ -1,20 +1,21 @@
-package org.ninetripods.lib_bytecode.asm
+package org.ninetripods.lib_bytecode.asm.demo
 
+import org.ninetripods.lib_bytecode.asm.AClassVisitor
+import org.ninetripods.lib_bytecode.util.FileUtil
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
-import org.objectweb.asm.Opcodes
 import org.objectweb.asm.Opcodes.*
 
 /**
  * ASM使用示例
  */
-object ASMTest {
+object ProduceClz {
 
     @JvmStatic
     fun main(args: Array<String>) {
         println("ASM示例")
         val classReader = ClassReader("java.lang.Runnable")
-        val classVisitor = AClassVisitor(Opcodes.ASM9, ClassWriter(ClassWriter.COMPUTE_MAXS))
+        val classVisitor = AClassVisitor(ASM9, ClassWriter(ClassWriter.COMPUTE_MAXS))
         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
         produceClass()
     }
@@ -45,7 +46,6 @@ object ASMTest {
         cw.visitMethod(ACC_PUBLIC + ACC_ABSTRACT, "compareTo",
             "(Ljava/lang/Object;)I", null, null).visitEnd()
         cw.visitEnd()
-        val b = cw.toByteArray()
-        println(b.toString())
+        FileUtil.byte2File("AndroidStudy/build/demo/GenerAuto.java",cw.toByteArray())
     }
 }

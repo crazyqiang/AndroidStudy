@@ -1,9 +1,8 @@
-package org.ninetripods.lib_bytecode
+package org.ninetripods.lib_bytecode.asm.demo
 
 class MethodTimeCostTest {
 
     fun addTimeCostMonitor() {
-        var aaa = 10
         Thread.sleep(1000)
     }
 
