@@ -107,11 +107,28 @@ class CustomAdviceAdapter(
         super.visitFieldInsn(opcode, owner, name, descriptor)
     }
 
+    override fun visitVarInsn(opcode: Int, `var`: Int) {
+        super.visitVarInsn(opcode, `var`)
+    }
+
     override fun onMethodEnter() {
         log("onMethodEnter():")
+        /**
+         * @see FIELD_NAME_ADD
+         * 1、访问FIELD_NAME_ADD变量
+         */
         mv.visitFieldInsn(GETSTATIC, owner, FIELD_NAME_ADD, "J")
+        /**
+         * 2、System.currentTimeMillis()
+         */
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
+        /**
+         * 上述1、2步的值进行相减
+         */
         mv.visitInsn(LSUB)
+        /**
+         * @see FIELD_NAME_ADD 将相减的结果重新赋值给变量FIELD_NAME_ADD
+         */
         mv.visitFieldInsn(PUTSTATIC, owner, FIELD_NAME_ADD, "J")
     }
 

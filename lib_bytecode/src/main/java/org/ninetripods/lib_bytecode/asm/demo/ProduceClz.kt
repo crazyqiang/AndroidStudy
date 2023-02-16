@@ -7,7 +7,7 @@ import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Opcodes.*
 
 /**
- * ASM使用示例
+ * ASM自动生成代码示例
  */
 object ProduceClz {
 
@@ -22,20 +22,20 @@ object ProduceClz {
 
     /**
      * 产生类
-    package pkg;
-    public interface Comparable extends Mesurable {
-    int LESS = -1;
-    int EQUAL = 0;
-    int GREATER = 1;
-    int compareTo(Object o);
-    }
+      package pkg;
+      public interface Comparable extends Measurable {
+         int LESS = -1;
+         int EQUAL = 0;
+         int GREATER = 1;
+         int compareTo(Object o);
+      }
      */
     private fun produceClass() {
         val cw = ClassWriter(0)
         //access：修饰字段
         //signature: 泛型
         cw.visit(V1_8, ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE,
-            "pkg/Comparable", null, "java/lang/Object", arrayOf("pkg/Mesurable"))
+            "pkg/Comparable", null, "java/lang/Object", arrayOf("pkg/Measurable"))
         cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "LESS", "I",
             null, -1).visitEnd()
         cw.visitField(ACC_PUBLIC + ACC_FINAL + ACC_STATIC, "EQUAL", "I",
@@ -46,6 +46,6 @@ object ProduceClz {
         cw.visitMethod(ACC_PUBLIC + ACC_ABSTRACT, "compareTo",
             "(Ljava/lang/Object;)I", null, null).visitEnd()
         cw.visitEnd()
-        FileUtil.byte2File("AndroidStudy/build/demo/GenerAuto.java",cw.toByteArray())
+        FileUtil.byte2File("lib_bytecode/files/Comparable.class",cw.toByteArray())
     }
 }

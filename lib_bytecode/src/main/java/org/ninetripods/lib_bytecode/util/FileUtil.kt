@@ -15,6 +15,7 @@ object FileUtil {
             if (file.exists()) {
                 file.delete()
             } else {
+                file.parentFile.mkdir()
                 file.createNewFile()
             }
 
