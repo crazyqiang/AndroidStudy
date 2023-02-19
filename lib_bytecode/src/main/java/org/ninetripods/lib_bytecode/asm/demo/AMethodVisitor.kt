@@ -1,4 +1,4 @@
-package org.ninetripods.lib_bytecode.asm
+package org.ninetripods.lib_bytecode.asm.demo
 
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes.*
@@ -27,14 +27,12 @@ CustomMethodVisitor: visitInsn opcode 6
 CustomMethodVisitor: visitInsn opcode 79
 CustomMethodVisitor: visitInsn opcode 177
  */
-class CustomMethodVisitor(api: Int, mv: MethodVisitor) : MethodVisitor(api, mv) {
+class AMethodVisitor(api: Int, mv: MethodVisitor) : MethodVisitor(api, mv) {
 
     override fun visitCode() {
         mv.visitCode()
-        val opcode = GETSTATIC
-        mv.visitFieldInsn(opcode, Type.getInternalName(C::class.java), "timer", "J")
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J",
-            opcode == INVOKEINTERFACE)
+        mv.visitFieldInsn(GETSTATIC, Type.getInternalName(C::class.java), "timer", "J")
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
         mv.visitInsn(LSUB)
         mv.visitFieldInsn(PUTSTATIC, Type.getInternalName(C::class.java), "timer", "J")
     }

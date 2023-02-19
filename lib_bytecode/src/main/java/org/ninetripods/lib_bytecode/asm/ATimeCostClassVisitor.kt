@@ -1,5 +1,6 @@
-package org.ninetripods.lib_bytecode.asm.demo
+package org.ninetripods.lib_bytecode.asm
 
+import groovyjarjarasm.asm.Type
 import org.ninetripods.lib_bytecode.log
 import org.ninetripods.lib_bytecode.util.decodeAcc
 import org.ninetripods.lib_bytecode.util.decodeOpcode
@@ -38,12 +39,12 @@ class ATimeCostClassVisitor(api: Int, classVisitor: ClassVisitor) :
     private var owner = ""
 
     /**
-     * 如：visit(): owner-org/ninetripods/lib_bytecode/asm/demo/MethodTimeCostTest
-     * @param version
-     * @param access
-     * @param name
-     * @param signature
-     * @param superName
+     * 如：visit(52,4128,org/ninetripods/mq/study/customView/alipayView/AlipayView$1:java/lang/Object,null,[Ljava.lang.String;@4ab48b2b)
+     * @param version JDK版本  例如返回52，代表是是JDK1.8
+     * @param access 修饰字段 如:Opcodes.ACC_PUBLIC + Opcodes.ACC_ABSTRACT + Opcodes.ACC_INTERFACE
+     * @param name 类名
+     * @param signature 泛型
+     * @param superName 父类名
      * @param interfaces
      */
     override fun visit(
@@ -115,13 +116,15 @@ class CustomAdviceAdapter(
         log("onMethodEnter():")
         /**
          * @see FIELD_NAME_ADD
+         * @param descriptor J表示Long类型
          * 1、访问FIELD_NAME_ADD变量
          */
         mv.visitFieldInsn(GETSTATIC, owner, FIELD_NAME_ADD, "J")
         /**
          * 2、System.currentTimeMillis()
+         * Type.getInternalName(System::class.java) == java/lang/System
          */
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
+        mv.visitMethodInsn(INVOKESTATIC, Type.getInternalName(System::class.java), "currentTimeMillis", "()J", false)
         /**
          * 上述1、2步的值进行相减
          */
@@ -135,7 +138,7 @@ class CustomAdviceAdapter(
     override fun onMethodExit(opcode: Int) {
         log("onMethodExit(): opcode-${opcode.decodeOpcode()}")
         mv.visitFieldInsn(GETSTATIC, owner, FIELD_NAME_ADD, "J")
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
+        mv.visitMethodInsn(INVOKESTATIC, Type.getInternalName(System::class.java), "currentTimeMillis", "()J", false)
         mv.visitInsn(LADD)
         mv.visitFieldInsn(PUTSTATIC, owner, FIELD_NAME_ADD, "J")
     }

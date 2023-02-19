@@ -7,3 +7,4 @@ if (compileDialogWithSource == "true") {
 include ':lib_protobuf'
 include ':lib_viewpager2'
 include ':lib_bytecode'
+include ':lib_bytecode_common'

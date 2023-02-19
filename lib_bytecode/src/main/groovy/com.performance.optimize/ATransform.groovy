@@ -4,7 +4,7 @@ import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import groovy.io.FileType
 import org.ninetripods.lib_bytecode.BConstant
-import org.ninetripods.lib_bytecode.asm.demo.ATimeCostClassVisitor
+import org.ninetripods.lib_bytecode.asm.ATimeCostClassVisitor
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter

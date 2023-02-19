@@ -1,4 +1,4 @@
-package org.ninetripods.lib_bytecode.asm
+package org.ninetripods.lib_bytecode.asm.demo
 
 import org.objectweb.asm.*
 
@@ -143,7 +143,7 @@ class AClassVisitor(api: Int, classVisitor: ClassVisitor? = null) :
         //MethodVisitor
         var mv = super.visitMethod(access, name, descriptor, signature, exceptions)
         if (mv != null) {
-            mv = CustomMethodVisitor(api, mv)
+            mv = AMethodVisitor(api, mv)
         }
         return mv
     }

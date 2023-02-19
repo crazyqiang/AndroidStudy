@@ -1,6 +1,5 @@
 package org.ninetripods.lib_bytecode.asm.demo
 
-import org.ninetripods.lib_bytecode.asm.AClassVisitor
 import org.ninetripods.lib_bytecode.util.FileUtil
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
