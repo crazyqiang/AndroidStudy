@@ -1,4 +1,4 @@
-package com.performance.optimize
+package optimize2
 
 import com.android.build.gradle.AppExtension
 import org.gradle.api.Plugin

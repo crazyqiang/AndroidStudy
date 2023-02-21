@@ -2,12 +2,19 @@
 //apply plugin: 'maven-publish'
 //apply plugin: 'maven'
 //apply plugin: 'kotlin'
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
-    id 'groovy'
-    id 'maven'
-    id 'maven-publish'
-}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+
+//plugins {
+//    id 'org.jetbrains.kotlin.jvm'
+//    id 'groovy'
+//    id 'maven'
+//    id 'maven-publish'
+//}
 
 //compileKotlin.dependsOn = compileKotlin.taskDependencies.values - 'compileJava'
 compileGroovy.dependsOn compileKotlin
@@ -32,16 +39,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.android.tools.build:gradle:4.1.3'
+    implementation "com.android.tools.build:gradle:$agp_version"
     //javassist
     implementation 'org.javassist:javassist:3.28.0-GA'
     //ASM wiki：https://asm.ow2.io
     implementation 'org.ow2.asm:asm:9.2' //核心库 基于事件使用时可以只使用这个
     implementation 'org.ow2.asm:asm-commons:9.2' //Tree API使用
-//    implementation Deps.kotlinCore
     implementation Deps.kotlinStdlib
-//    implementation Deps.androidx_appcompat
-//    implementation Deps.androidx_material
     implementation gradleApi()
     implementation localGroovy()
 }
@@ -64,13 +68,17 @@ publishing {
 sourceSets {
     main {
         groovy {
-            srcDirs = ['src/main/groovy','src/main/java']
+            srcDirs +=  ['src/main/groovy','src/main/java']
         }
         java {
-            srcDirs = ['src/main/java']
+            srcDirs +=  ['src/main/java']
         }
         kotlin {
-            srcDirs = ['src/main/java']
+            srcDirs +=  ['src/main/java']
         }
     }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
 }
