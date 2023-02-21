@@ -20,8 +20,8 @@ import LibsVersion.Companion.retrofit_version
  * mqcoder90@gmail.com
  */
 object App {
-    const val targetSdkVersion = 30
-    const val compileSdkVersion = 30
+    const val targetSdkVersion = 31
+    const val compileSdkVersion = 31
     const val minSdkVersion = 19
     const val appId = "org.ninetripods.mq.study"
     const val versionCode = 20220930

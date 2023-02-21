@@ -40,11 +40,17 @@ android {
             minifyEnabled false
             buildConfigField "boolean", "IS_SHOW_LOG", NOT_SHOW_LOG
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexKeepProguard = file('multidex-config.pro')
         }
-//        debug {
-//            minifyEnabled false
-//            buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
-//        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
+            //signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexKeepProguard = file('multidex-config.pro')
+        }
 //        preview {
 //            minifyEnabled false
 //            buildConfigField "boolean", "IS_SHOW_LOG", SHOW_LOG
@@ -109,6 +115,7 @@ dependencies {
     implementation Deps.androidx_constraintLayout
     implementation Deps.androidx_legacy
     implementation Deps.androidx_multidex
+//    implementation "androidx.startup:startup-runtime:1.1.1"
     //协程
     implementation Deps.coroutines_core
     implementation Deps.coroutines_android
