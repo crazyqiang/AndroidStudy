@@ -1,6 +1,5 @@
-package org.ninetripods.lib_bytecode.asm
+package org.ninetripods.lib_bytecode.asm.coreApi
 
-import groovyjarjarasm.asm.Type
 import org.ninetripods.lib_bytecode.log
 import org.ninetripods.lib_bytecode.util.decodeAcc
 import org.ninetripods.lib_bytecode.util.decodeOpcode
@@ -79,12 +78,12 @@ class ATimeCostClassVisitor(api: Int, classVisitor: ClassVisitor) :
     }
 
     override fun visitEnd() {
-        //log("visitEnd():")
         if (cv != null) {
             val fieldVisitor = cv.visitField(
                 Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, FIELD_NAME_ADD, "J", null, null)
             fieldVisitor.visitEnd()
         }
+        log("visitEnd()")
         super.visitEnd()
     }
 }
@@ -124,7 +123,7 @@ class CustomAdviceAdapter(
          * 2、System.currentTimeMillis()
          * Type.getInternalName(System::class.java) == java/lang/System
          */
-        mv.visitMethodInsn(INVOKESTATIC, Type.getInternalName(System::class.java), "currentTimeMillis", "()J", false)
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
         /**
          * 上述1、2步的值进行相减
          */
@@ -138,9 +137,21 @@ class CustomAdviceAdapter(
     override fun onMethodExit(opcode: Int) {
         log("onMethodExit(): opcode-${opcode.decodeOpcode()}")
         mv.visitFieldInsn(GETSTATIC, owner, FIELD_NAME_ADD, "J")
-        mv.visitMethodInsn(INVOKESTATIC, Type.getInternalName(System::class.java), "currentTimeMillis", "()J", false)
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/System", "currentTimeMillis", "()J", false)
         mv.visitInsn(LADD)
         mv.visitFieldInsn(PUTSTATIC, owner, FIELD_NAME_ADD, "J")
+
+        //Log.e("TTT", "===timeCost:===" + timeCost);
+        mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+        mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
+        mv.visitInsn(DUP);
+        mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
+        mv.visitLdcInsn("===timeCost:===");
+        mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
+        mv.visitFieldInsn(GETSTATIC, owner, "timeCost", "J");
+        mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(J)Ljava/lang/StringBuilder;", false);
+        mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false);
+        mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
     }
 
     override fun visitMaxs(maxStack: Int, maxLocals: Int) {

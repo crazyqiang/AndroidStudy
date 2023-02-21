@@ -9,7 +9,8 @@ class APlugin implements Plugin<Project> {
     void apply(Project target) {
         System.out.println("== APlugin start ==")
         AppExtension appExtension = target.extensions.getByType(AppExtension)
-        ATransform transform = new ATransform()
+        BTransform transform = new BTransform()
+        //ATransform transform = new ATransform()
         appExtension.registerTransform(transform)
     }
 }
