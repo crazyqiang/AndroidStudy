@@ -76,8 +76,5 @@ class ATimeCostClassNode(var api: Int, var classVisitor: ClassVisitor) : ClassNo
 
         val acc = Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC
         fields.add(FieldNode(acc, "timer", "J", null, null))
-//        methods.forEach { methodNode ->
-//            if (methodNode.name.equals("<init>") || methodNode.name.equals("<clinit>")) continue
-//        }
     }
 }

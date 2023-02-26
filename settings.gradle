@@ -1,10 +1,11 @@
 include ':app'
 include ':multiprocess_sever'
 include ':plugin'
-if (compileDialogWithSource == "true") {
+if (compileDialogWithSource == "1") {
     include ':lib_dialog'
 }
 include ':lib_protobuf'
 include ':lib_viewpager2'
+//字节码插桩相关
 include ':lib_bytecode'
-//include ':lib_bytecode_common'
+include ':lib_bytecode_common'

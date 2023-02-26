@@ -2,6 +2,7 @@ package org.ninetripods.lib_bytecode.asm.demo;
 
 import org.ninetripods.lib_bytecode.BConstant;
 import org.ninetripods.lib_bytecode.asm.coreApi.ATimeCostClassVisitor;
+import org.ninetripods.lib_bytecode.asm.treeApi.AOutLibClassNode;
 import org.ninetripods.lib_bytecode.asm.treeApi.ATimeCostClassNode;
 import org.ninetripods.lib_bytecode.util.FileUtil;
 import org.objectweb.asm.ClassReader;
@@ -21,7 +22,8 @@ public class AExecutor {
             ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 
             //-------------------------方式1：ASM Tree API -------------------------
-            ClassNode classNode = new ATimeCostClassNode(BConstant.ASM9,classWriter);
+            //ClassNode classNode = new ATimeCostClassNode(BConstant.ASM9,classWriter);
+            ClassNode classNode = new AOutLibClassNode(BConstant.ASM9, classWriter);
             //-------------------------方式2：ASM Core API -------------------------
             //ClassVisitor classVisitor = new ATimeCostClassVisitor(BConstant.ASM9, classWriter);
 

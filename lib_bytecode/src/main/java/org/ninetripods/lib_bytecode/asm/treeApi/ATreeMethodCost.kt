@@ -1,7 +1,6 @@
 package org.ninetripods.lib_bytecode.asm.treeApi
 
 import org.ninetripods.lib_bytecode.BConstant
-import org.ninetripods.lib_bytecode.util.ExtUtil
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.tree.ClassNode
 
@@ -43,10 +42,10 @@ object ATreeMethodCost {
 
 
 
-    private fun notMatchBlackList(className: String): Boolean {
-        for (blackMethodName in ExtUtil.methodExt.normalMethod.blackMethods) {
-            if (className.contains(blackMethodName)) return false
-        }
-        return true
-    }
+//    private fun notMatchBlackList(className: String): Boolean {
+//        for (blackMethodName in ExtUtil.methodExt.normalMethod.blackMethods) {
+//            if (className.contains(blackMethodName)) return false
+//        }
+//        return true
+//    }
 }

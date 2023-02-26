@@ -152,7 +152,7 @@ dependencies {
         implementation 'io.github.mqcodedev:lib_mvpager2:1.0.0-rc2'
     }
 
-    if (compileDialogWithSource == "true") {
+    if (compileDialogWithSource == "1") {
         //源码方式集成
         api project(':lib_dialog')
     } else {

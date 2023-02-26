@@ -17,7 +17,13 @@ object TimeCostUtil {
      */
     private val METHODS_MAP by lazy { ConcurrentHashMap<String, Long>() }
 
-    fun recordMethodStart(methodName: String, clz: Any?) {
+    /**
+     * 对象方法
+     * @param thresholdTime 阈值
+     * @param methodName 方法名
+     * @param clz 类名
+     */
+    fun recordMethodStart(thresholdTime: Int, methodName: String, clz: Any?) {
         try {
             METHODS_MAP[methodName] = System.currentTimeMillis()
             if (clz is Application) {
@@ -36,6 +42,16 @@ object TimeCostUtil {
     }
 
     /**
+     * 静态方法
+     * @param thresholdTime 阈值
+     * @param methodName 方法名
+     */
+    fun recordStaticMethodStart(thresholdTime: Int, methodName: String){
+        recordMethodStart(thresholdTime, methodName, staticMethodObj)
+    }
+
+    /**
+     * 对象方法
      * @param thresholdTime 阈值时间
      * @param methodName 方法名
      * @param clz 类名
@@ -51,8 +67,10 @@ object TimeCostUtil {
                     //方法耗时超过了阈值
                     if (costTime >= thresholdTime) {
                         val threadName = Thread.currentThread().name
-                        Log.e(TAG,
-                            "\t methodName=>$methodName threadNam=>$threadName thresholdTime=>$thresholdTime costTime=>$costTime")
+                        Log.e(
+                            TAG,
+                            "\t methodName=>$methodName threadNam=>$threadName thresholdTime=>$thresholdTime costTime=>$costTime"
+                        )
                         val stackTraceElements = Thread.currentThread().stackTrace
                         for (element in stackTraceElements) {
                             if (element.toString().contains("TimeCostUtil")) continue
@@ -72,6 +90,15 @@ object TimeCostUtil {
                 ex.printStackTrace()
             }
         }
+    }
+
+    /**
+     * 静态方法
+     * @param thresholdTime 阈值
+     * @param methodName 方法名
+     */
+    fun recordStaticMethodEnd(thresholdTime: Int, methodName: String) {
+        recordMethodEnd(thresholdTime, methodName, staticMethodObj)
     }
 
 }
