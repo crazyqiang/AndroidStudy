@@ -57,32 +57,39 @@ class FlowBaseFragment : BaseFragment() {
 
     private fun initFlow() {
         var sendNum = 0
-        lifecycleScope.launch {
-            mSimpleFlow = flow {
-                sendNum++
-                emit("sendValue:$sendNum")
-            }.flowOn(Dispatchers.IO)
-                .onEmpty { log("onEmpty") }
-                .onStart { log("onStart") }
-                .onEach { log("onEach: $it") }
-                .onCompletion { log("onCompletion") }
-                .catch { exception -> exception.message?.let { log(it) } }
+
+        lifecycleScope.launch{
+          lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+
+              launch {
+                  //flow本身是冷流
+                  mSimpleFlow = flow {
+                      sendNum++
+                      emit("sendValue:$sendNum")
+                  }.flowOn(Dispatchers.IO)
+                      .onEmpty { log("onEmpty") }
+                      .onStart { log("onStart") }
+                      .onEach { log("onEach: $it") }
+                      .onCompletion { log("onCompletion") }
+                      .catch { exception -> exception.message?.let { log(it) } }
+              }
+
+              launch(Dispatchers.IO) {
+                  //TODO SharedFlow
+                  //extraBufferCapacity=1 缓存数量为1， onBufferOverflow = BufferOverflow.DROP_OLDEST丢弃的是最老的值
+                  // 注意 这里设置的是Dispatchers.IO 即发送与接收不在一个线程中
+                  mFlowModel.mSharedFlow.collect { value ->
+                      log("collect: $value")
+                      withContext(Dispatchers.Main) {
+                          mTvShareF.text = value
+                      }
+                  }
+              }
+          }
         }
 
         //StateFlow
         mFlowModel.fetchStateFlowData()
-
-        //TODO SharedFlow
-        //extraBufferCapacity=1 缓存数量为1， onBufferOverflow = BufferOverflow.DROP_OLDEST丢弃的是最老的值
-        // 注意 这里设置的是Dispatchers.IO 即发送与接收不在一个线程中
-        lifecycleScope.launch(Dispatchers.IO) {
-            mFlowModel.mSharedFlow.collect { value ->
-                log("collect: $value")
-                withContext(Dispatchers.Main) {
-                    mTvShareF.text = value
-                }
-            }
-        }
     }
 
 //    @FlowPreview
