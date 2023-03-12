@@ -139,10 +139,12 @@ class FlowViewModel : ViewModel() {
         val callback = object : ICallBack {
             override fun onSuccess(sucStr: String?) {
                 trySend(true)
+                close() //使用完关闭
             }
 
             override fun onError(error: Exception) {
                 trySend(false)
+                close() //使用完关闭
             }
         }
         //模拟网络请求
@@ -155,7 +157,7 @@ class FlowViewModel : ViewModel() {
         }.start()
 
         //这是一个挂起函数, 当 flow 被关闭的时候 block 中的代码会被执行 可以在这里取消接口的注册等
-        awaitClose { log("awaitClose") }
+        awaitClose { log("awaitClose1") }
     }
 
     /**
@@ -166,10 +168,12 @@ class FlowViewModel : ViewModel() {
         val callback = object : ICallBack {
             override fun onSuccess(sucStr: String?) {
                 trySend(sucStr)
+                close() //使用完关闭
             }
 
             override fun onError(error: Exception) {
                 trySend(error.message)
+                close() //使用完关闭
             }
         }
         //模拟网络请求
@@ -184,7 +188,7 @@ class FlowViewModel : ViewModel() {
             }
         }.start()
 
-        awaitClose { log("awaitClose") }
+        awaitClose { log("awaitClose2") }
     }
 
 }
