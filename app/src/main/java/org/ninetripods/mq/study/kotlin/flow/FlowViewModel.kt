@@ -191,4 +191,8 @@ class FlowViewModel : ViewModel() {
         awaitClose { log("awaitClose2") }
     }
 
+    //---------------------------FlowCaseFragment中使用---------------------------
+
 }
+
+data class PersonModel(val name: String, val age: Int, val interest: String)

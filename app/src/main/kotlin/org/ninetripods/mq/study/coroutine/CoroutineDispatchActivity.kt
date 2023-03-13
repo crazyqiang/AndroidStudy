@@ -9,6 +9,7 @@ import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.flow.FRAGMENT_FLOW_BASE
 import org.ninetripods.mq.study.kotlin.flow.FRAGMENT_FLOW_COUNT_DOWN
+import org.ninetripods.mq.study.kotlin.flow.FRAGMENT_FLOW_MODEL
 import org.ninetripods.mq.study.kotlin.flow.FlowStudyActivity
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.Constant
@@ -21,6 +22,7 @@ class CoroutineDispatchActivity : BaseActivity() {
     private val mToolBar: Toolbar by id(R.id.toolbar)
     private val mTvBaseCoroutine: TextView by id(R.id.tv_coroutine_base)
     private val mTvFlowBase: TextView by id(R.id.tv_flow_base)
+    private val mTvFlowCase: TextView by id(R.id.tv_flow_model)
     private val mTvFlowCountDown: TextView by id(R.id.tv_time_countdown)
 
     override fun setContentView() {
@@ -34,6 +36,7 @@ class CoroutineDispatchActivity : BaseActivity() {
     override fun initEvents() {
         mTvBaseCoroutine.setOnClickListener(this)
         mTvFlowBase.setOnClickListener(this)
+        mTvFlowCase.setOnClickListener(this)
         mTvFlowCountDown.setOnClickListener(this)
     }
 
@@ -42,6 +45,7 @@ class CoroutineDispatchActivity : BaseActivity() {
             R.id.tv_coroutine_base -> CommonWebviewActivity.webviewEntrance(this, Constant.BLOG_KT_COROUTINE)
             //jumpTargetPage(FRAGMENT_BASE, CoroutineActivity::class.java)
             R.id.tv_flow_base -> jumpTargetPage(FRAGMENT_FLOW_BASE, FlowStudyActivity::class.java)
+            R.id.tv_flow_model -> jumpTargetPage(FRAGMENT_FLOW_MODEL, FlowStudyActivity::class.java)
             R.id.tv_time_countdown ->
                 jumpTargetPage(FRAGMENT_FLOW_COUNT_DOWN, FlowStudyActivity::class.java)
         }

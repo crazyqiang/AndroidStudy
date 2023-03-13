@@ -29,6 +29,9 @@ inline fun <T> Flow<T>.observeWithLifecycle(
     flowWithLifecycle(lifecycleOwner.lifecycle, minActiveState).collect { action(it) }
 }
 
+/**
+ * 封装Flow.flowWithLifecycle，用于UI层单个Flow去订阅数据时使用
+ */
 inline fun <T> Flow<T>.flowWithLifecycle2(
     lifecycleOwner: LifecycleOwner,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,

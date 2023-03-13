@@ -6,12 +6,14 @@ import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.CommonWebviewActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.flow.fragment.FlowBaseFragment
+import org.ninetripods.mq.study.kotlin.flow.fragment.FlowCaseFragment
 import org.ninetripods.mq.study.kotlin.flow.fragment.FlowCountDownFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.Constant
 
 const val FRAGMENT_FLOW_BASE = 0
-const val FRAGMENT_FLOW_COUNT_DOWN = 1
+const val FRAGMENT_FLOW_MODEL = 1
+const val FRAGMENT_FLOW_COUNT_DOWN = 2
 const val KEY_FRAGMENT_TYPE = "key_fragment_type"
 
 /**
@@ -30,6 +32,7 @@ class FlowStudyActivity : BaseActivity() {
         mCurPos = intent.getIntExtra(KEY_FRAGMENT_TYPE, FRAGMENT_FLOW_BASE)
         val titleName = when (mCurPos) {
             FRAGMENT_FLOW_BASE -> "Kotlin Flow"
+            FRAGMENT_FLOW_MODEL -> "Flow典型使用场景"
             FRAGMENT_FLOW_COUNT_DOWN -> "Kotlin Flow实现倒计时功能"
             else -> "Kotlin Flow"
         }
@@ -47,6 +50,7 @@ class FlowStudyActivity : BaseActivity() {
     private fun createTargetFragment(): Fragment {
         return when (mCurPos) {
             FRAGMENT_FLOW_BASE -> FlowBaseFragment()
+            FRAGMENT_FLOW_MODEL -> FlowCaseFragment()
             FRAGMENT_FLOW_COUNT_DOWN -> FlowCountDownFragment()
             else -> FlowBaseFragment()
         }
