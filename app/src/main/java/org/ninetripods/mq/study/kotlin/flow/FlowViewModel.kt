@@ -2,12 +2,10 @@ package org.ninetripods.mq.study.kotlin.flow
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import org.ninetripods.mq.study.kotlin.ktx.log
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -192,7 +190,67 @@ class FlowViewModel : ViewModel() {
     }
 
     //---------------------------FlowCaseFragment中使用---------------------------
+    private val _caseFlow1 = MutableStateFlow(0)
+    val caseFlow1 = _caseFlow1
 
+    private val _caseFlow2 = MutableStateFlow(0)
+    val caseFlow2 = _caseFlow2
+
+    fun requestCaseValue1() {
+        _caseFlow1.value = 100
+    }
+
+    fun requestCaseValue2() {
+        _caseFlow2.value = 1000
+    }
+
+    /**
+     * ------------- combine操作符 start -------------
+     */
+    private val _sexFlow = MutableStateFlow(1)
+    val sexFlow = _sexFlow //性别 1男 2女
+
+    private val _gradeFlow = MutableStateFlow("一")
+    val gradeFlow = _gradeFlow //年级
+
+    private val _combineFlow = combine(sexFlow, gradeFlow) { sex, grade ->
+        return@combine Student(sex, grade)
+    }
+    val combineFlow = _combineFlow
+
+    //------------ combine操作符 end -------------
+    //------------- zip合并操作符 start -------------
+    //分别请求电费、水费、网费，Flow之间是并行关系
+    suspend fun requestElectricCost(): Flow<ExpendModel> =
+        flow {
+            delay(500)
+            emit(ExpendModel("电费", 10f, 500))
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun requestWaterCost(): Flow<ExpendModel> =
+        flow {
+            delay(1000)
+            emit(ExpendModel("水费", 20f, 1000))
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun requestInternetCost(): Flow<ExpendModel> =
+        flow {
+            delay(2000)
+            emit(ExpendModel("网费", 30f, 2000))
+        }.flowOn(Dispatchers.IO)
+    //------------- zip合并操作符 start -------------
+}
+
+data class ExpendModel(val type: String, val cost: Float, val apiTime: Int) {
+    fun info(): String {
+        return "${type}: ${cost}, 接口请求耗时约$apiTime ms"
+    }
 }
 
 data class PersonModel(val name: String, val age: Int, val interest: String)
+data class Student(val sex: Int, val grade: String) {
+    fun info(): String {
+        val sexStr = if (sex == 1) "男" else "女"
+        return "${grade}年级${sexStr}生"
+    }
+}

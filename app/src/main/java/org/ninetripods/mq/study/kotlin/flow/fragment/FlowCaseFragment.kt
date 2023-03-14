@@ -4,7 +4,11 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +18,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.flow.FlowViewModel
 import org.ninetripods.mq.study.kotlin.flow.PersonModel
+import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.log
 import java.io.*
 import java.nio.charset.StandardCharsets
@@ -24,14 +29,85 @@ import java.nio.charset.StandardCharsets
 class FlowCaseFragment : BaseFragment() {
 
     private lateinit var mFlowModel: FlowViewModel
-    private lateinit var mSimpleFlow: Flow<String>
+    private val mTvCombineResult: TextView by id(R.id.tv_combine_result)
+    private val mBtnSex: Button by id(R.id.btn_sex)
+    private val mBtnGrade: Button by id(R.id.btn_grade)
+
+    private val mTvZipResult: TextView by id(R.id.tv_zip_result)
+    private val mBtnZip: Button by id(R.id.btn_zip)
+
 
     override fun getLayoutId(): Int = R.layout.activity_flow_case
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mFlowModel = ViewModelProvider(this).get(FlowViewModel::class.java)
+
+        // 1、通过Flow获取本地文件信息
         getFileInfo()
+
+        //2、多个Flow不能放到一个lifecycleScope.launch里去collect{}，因为进入collect{}相当于一个死循环，下一行代码永远不会执行；
+        //如果就想写到一个lifecycleScope.launch{}里去，可以在内部再开启launch{}子协程去执行。
+        lifecycleScope.launch {
+            launch {
+                mFlowModel.caseFlow1
+                    .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                    .collect {
+                        log("caseFlow:$it")
+                    }
+            }
+
+            launch {
+                mFlowModel.caseFlow2
+                    .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                    .collect {
+                        log("caseFlow1:$it")
+                    }
+            }
+        }
+        mFlowModel.requestCaseValue1()
+        mFlowModel.requestCaseValue2()
+
+        //3、combine操作符
+        lifecycleScope.launch {
+            mFlowModel.combineFlow.collect { student ->
+                mTvCombineResult.text = student.info()
+            }
+        }
+
+        mBtnSex.setOnClickListener {
+            val randomSex = arrayOf(1, 2)
+            mFlowModel.sexFlow.value = randomSex.random()
+        }
+
+        mBtnGrade.setOnClickListener {
+            val randomGrade = arrayOf("一", "二", "三", "四", "五", "六")
+            mFlowModel.gradeFlow.value = randomGrade.random()
+        }
+
+        //4、zip组合多个接口请求的数据
+        mBtnZip.setOnClickListener {
+            lifecycleScope.launch {
+                val electricFlow = mFlowModel.requestElectricCost()
+                val waterFlow = mFlowModel.requestWaterCost()
+                val internetFlow = mFlowModel.requestInternetCost()
+
+                val builder = StringBuilder()
+                var totalCost = 0f
+                val startTime = System.currentTimeMillis()
+                //NOTE:注意这里可以多个zip操作符来合并Flow，且多个Flow之间是并行关系
+                electricFlow.zip(waterFlow) { electric, water ->
+                    totalCost = electric.cost + water.cost
+                    builder.append("${electric.info()},\n").append("${water.info()},\n")
+                }.zip(internetFlow) { two, internet ->
+                    totalCost += internet.cost
+                    two.append(internet.info()).append(",\n\n总花费：$totalCost")
+                }.collect {
+                    log("zip:${Thread.currentThread().name}")
+                    mTvZipResult.text = it.append("，总耗时：${System.currentTimeMillis() - startTime} ms")
+                }
+            }
+        }
     }
 
     /**
