@@ -194,7 +194,6 @@ class FlowBaseFragment : BaseFragment() {
                     }.collect {
                         mTvCallbackFlow.text = it ?: "error"
                     }
-
             }
         }
     }

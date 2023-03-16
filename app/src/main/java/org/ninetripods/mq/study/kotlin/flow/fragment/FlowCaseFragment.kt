@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -88,23 +85,27 @@ class FlowCaseFragment : BaseFragment() {
         //4、zip组合多个接口请求的数据
         mBtnZip.setOnClickListener {
             lifecycleScope.launch {
-                val electricFlow = mFlowModel.requestElectricCost()
-                val waterFlow = mFlowModel.requestWaterCost()
-                val internetFlow = mFlowModel.requestInternetCost()
+                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    val electricFlow = mFlowModel.requestElectricCost()
+                    val waterFlow = mFlowModel.requestWaterCost()
+                    val internetFlow = mFlowModel.requestInternetCost()
 
-                val builder = StringBuilder()
-                var totalCost = 0f
-                val startTime = System.currentTimeMillis()
-                //NOTE:注意这里可以多个zip操作符来合并Flow，且多个Flow之间是并行关系
-                electricFlow.zip(waterFlow) { electric, water ->
-                    totalCost = electric.cost + water.cost
-                    builder.append("${electric.info()},\n").append("${water.info()},\n")
-                }.zip(internetFlow) { two, internet ->
-                    totalCost += internet.cost
-                    two.append(internet.info()).append(",\n\n总花费：$totalCost")
-                }.collect {
-                    log("zip:${Thread.currentThread().name}")
-                    mTvZipResult.text = it.append("，总耗时：${System.currentTimeMillis() - startTime} ms")
+                    val builder = StringBuilder()
+                    var totalCost = 0f
+                    val startTime = System.currentTimeMillis()
+                    //NOTE:注意这里可以多个zip操作符来合并Flow，且多个Flow之间是并行关系
+                    electricFlow.zip(waterFlow) { electric, water ->
+                        totalCost = electric.cost + water.cost
+                        builder.append("${electric.info()},\n").append("${water.info()},\n")
+                    }.zip(internetFlow) { two, internet ->
+                        totalCost += internet.cost
+                        two.append(internet.info()).append(",\n\n总花费：$totalCost")
+                    }.collect {
+                        val totalStr =
+                            it.append("，总耗时：${System.currentTimeMillis() - startTime} ms")
+                        log("zip:${totalStr}")
+                        mTvZipResult.text = totalStr
+                    }
                 }
             }
         }
