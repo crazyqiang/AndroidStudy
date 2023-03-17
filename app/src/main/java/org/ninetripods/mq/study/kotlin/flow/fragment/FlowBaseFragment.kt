@@ -67,6 +67,7 @@ class FlowBaseFragment : BaseFragment() {
                       sendNum++
                       emit("sendValue:$sendNum")
                   }.flowOn(Dispatchers.IO)
+                      .filter { it.isNotEmpty() }
                       .onEmpty { log("onEmpty") }
                       .onStart { log("onStart") }
                       .onEach { log("onEach: $it") }
@@ -75,7 +76,6 @@ class FlowBaseFragment : BaseFragment() {
               }
 
               launch(Dispatchers.IO) {
-                  //TODO SharedFlow
                   //extraBufferCapacity=1 缓存数量为1， onBufferOverflow = BufferOverflow.DROP_OLDEST丢弃的是最老的值
                   // 注意 这里设置的是Dispatchers.IO 即发送与接收不在一个线程中
                   mFlowModel.mSharedFlow.collect { value ->
