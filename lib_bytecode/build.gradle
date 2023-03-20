@@ -48,6 +48,7 @@ dependencies {
     implementation Deps.kotlinStdlib
     implementation gradleApi()
     implementation localGroovy()
+    //implementation project(':lib_bytecode_common')
 }
 
 group = 'com.performance.optimize'

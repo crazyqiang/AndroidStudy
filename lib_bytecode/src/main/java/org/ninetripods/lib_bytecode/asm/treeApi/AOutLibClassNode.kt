@@ -1,6 +1,6 @@
 package org.ninetripods.lib_bytecode.asm.treeApi
 
-import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.*
 
@@ -8,7 +8,7 @@ import org.objectweb.asm.tree.*
  *
  * Created by mq on 2023/2/24
  */
-class AOutLibClassNode(val api: Int, val classVisitor: ClassVisitor) : ClassNode(api) {
+class AOutLibClassNode(val api: Int, private val classWriter: ClassWriter) : ClassNode(api) {
     private val mThresholdTime = 500
 
     companion object {
@@ -19,7 +19,8 @@ class AOutLibClassNode(val api: Int, val classVisitor: ClassVisitor) : ClassNode
     override fun visitEnd() {
         //super.visitEnd()
         processTimeCost()
-        accept(classVisitor)
+        //允许classWriter访问ClassNode类中的信息
+        accept(classWriter)
     }
 
     private fun processTimeCost(clzName: String? = "", methodName: String? = "", access: Int = 0) {
@@ -27,7 +28,7 @@ class AOutLibClassNode(val api: Int, val classVisitor: ClassVisitor) : ClassNode
             if (methodNode.name.equals("<init>") || methodNode.name.equals("<clinit>")) continue
             val instructions = methodNode.instructions
 
-            //方法开头
+            //方法开头插入 timer -= System.currentTimeMillis();
             val clzName = name
             val methodName = methodNode.name
             val access = methodNode.access
@@ -44,8 +45,8 @@ class AOutLibClassNode(val api: Int, val classVisitor: ClassVisitor) : ClassNode
             //methodNode.maxStack += 4
         }
 
-//        val acc = Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC
-//        fields.add(FieldNode(acc, "timer", "J", null, null))
+        //val acc = Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC
+        //fields.add(FieldNode(acc, "timer", "J", null, 1))
     }
 
     /**
@@ -60,7 +61,7 @@ class AOutLibClassNode(val api: Int, val classVisitor: ClassVisitor) : ClassNode
         return InsnList().apply {
             if (isStaticMethod) {
                 add(FieldInsnNode(Opcodes.GETSTATIC, owner, "INSTANCE", descripter))
-                //调用
+                //操作数栈中传入下面两个参数
                 add(IntInsnNode(Opcodes.SIPUSH, mThresholdTime))
                 add(LdcInsnNode("$clzName&$methodName"))
                 add(
@@ -74,7 +75,7 @@ class AOutLibClassNode(val api: Int, val classVisitor: ClassVisitor) : ClassNode
                 )
             } else {
                 add(FieldInsnNode(Opcodes.GETSTATIC, owner, "INSTANCE", descripter))
-                //栈中传入对应的三个入参
+                //操作数栈中传入对应的三个入参
                 add(IntInsnNode(Opcodes.SIPUSH, mThresholdTime))
                 add(LdcInsnNode("$clzName&$methodName"))
                 add(VarInsnNode(Opcodes.ALOAD, 0))
