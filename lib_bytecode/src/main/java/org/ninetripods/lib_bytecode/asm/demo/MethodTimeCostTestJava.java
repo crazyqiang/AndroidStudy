@@ -3,7 +3,12 @@ package org.ninetripods.lib_bytecode.asm.demo;
 public class MethodTimeCostTestJava {
     //public static long timeCost = 0;
 
-    public void addTimeCostMonitor() throws InterruptedException {
+
+    public static void staticTimeCostMonitor() throws InterruptedException {
+        Thread.sleep(1000);
+    }
+
+    public void timeCostMonitor() throws InterruptedException {
         Thread.sleep(1000);
     }
 

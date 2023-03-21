@@ -2,7 +2,10 @@ package optimize2
 
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
-import org.ninetripods.lib_bytecode.asm.coreApi.ATimeCostClassVisitor
+import com.android.utils.FileUtils
+import groovy.io.FileType
+import org.ninetripods.lib_bytecode.BConstant
+import org.ninetripods.lib_bytecode.asm.treeApi.AOutLibClassNode
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
@@ -33,12 +36,21 @@ class ATransform extends Transform {
                          * 3、ClassWriter: 是 ClassVisitor 的一个子类，它并不会储存信息，而是马上会将传入的信息转译成字节码，并在之后随时输出它们。
                          */
                         ClassReader classReader = new ClassReader(file.bytes)
-//                        //ClassWriter.COMPUTE_MAXS 自动计算帧栈信息（操作数栈 & 局部变量表）
+                        /**
+                         * ClassWriter.COMPUTE_MAXS 自动计算帧栈信息（操作数栈 & 局部变量表）
+                         */
 //                        ClassVisitor classVisitor = new AClassVisitor(BConstant.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
-                        ClassVisitor classVisitor = new ATimeCostClassVisitor(BConstant.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
+//                          ClassVisitor classVisitor = new ATimeCostClassVisitor(BConstant.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
+                        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS)
+                        ClassVisitor classVisitor = new AOutLibClassNode(BConstant.ASM9, classWriter)
 //                        //访问者模式：将ClassVisitor传入ClassReader中，从而可以访问ClassReader中的私有信息；类似一个接口回调。
                         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
                         System.out.println("find class: " + file.name)
+                        //从ClassWriter中取出修改后的class并覆盖原文件，从而达到修改class的能力
+                        byte[] bytes = classWriter.toByteArray()
+                        FileOutputStream outputStream = new FileOutputStream(file.path)
+                        outputStream.write(bytes)
+                        outputStream.close()
                     }
                 }
                 //outputProvider 获取到输出目录，最后将修改的文件复制到输出目录，这一步必须做，否则编译会报错。

@@ -6,11 +6,10 @@ import org.gradle.api.Project
 
 class APlugin implements Plugin<Project> {
     @Override
-    void apply(Project target) {
+    void apply(Project project) {
         System.out.println("== APlugin start ==")
-        AppExtension appExtension = target.extensions.getByType(AppExtension)
-        BTransform transform = new BTransform()
-        //ATransform transform = new ATransform()
+        AppExtension appExtension = project.extensions.getByType(AppExtension)
+        ATransform transform = new ATransform()
         appExtension.registerTransform(transform)
     }
 }
