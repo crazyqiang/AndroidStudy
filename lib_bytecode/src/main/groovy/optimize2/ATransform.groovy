@@ -39,14 +39,16 @@ class ATransform extends Transform {
                         /**
                          * ClassWriter.COMPUTE_MAXS 自动计算帧栈信息（操作数栈 & 局部变量表）
                          */
+                        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS)
 //                        ClassVisitor classVisitor = new AClassVisitor(BConstant.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
 //                          ClassVisitor classVisitor = new ATimeCostClassVisitor(BConstant.ASM9, new ClassWriter(ClassWriter.COMPUTE_MAXS))
-                        ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS)
                         ClassVisitor classVisitor = new AOutLibClassNode(BConstant.ASM9, classWriter)
 //                        //访问者模式：将ClassVisitor传入ClassReader中，从而可以访问ClassReader中的私有信息；类似一个接口回调。
                         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES)
                         System.out.println("find class: " + file.name)
-                        //从ClassWriter中取出修改后的class并覆盖原文件，从而达到修改class的能力
+                        /**
+                         * 从ClassWriter中取出修改后的class并覆盖原文件，从而达到修改class的能力
+                         */
                         byte[] bytes = classWriter.toByteArray()
                         FileOutputStream outputStream = new FileOutputStream(file.path)
                         outputStream.write(bytes)

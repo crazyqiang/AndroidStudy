@@ -1,6 +1,7 @@
 package org.ninetripods.mq.study;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
@@ -19,12 +20,17 @@ public class MyApplication extends Application {
     private static MyApplication application;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        application = this;
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
         //为方法数超过 64K 的应用启用 MultiDex
         //https://developer.android.com/studio/build/multidex?hl=zh-cn
         MultiDex.install(this);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        application = this;
         //初始化Retrofit
         RetrofitUtil.INSTANCE.initRetrofit();
         //基于Lifecycle，监听Application的生命周期

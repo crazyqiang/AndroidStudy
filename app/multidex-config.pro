@@ -15,5 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# 这里声明的类一定会加载到主Dex中
+# WIKI: https://developer.android.com/studio/build/multidex?hl=zh-cn
 -keep class androidx.startup.AppInitializer
 -keep class * extends androidx.startup.Initializer
+-keep class org.ninetripods.mq.study.MyApplication
+

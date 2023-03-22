@@ -28,13 +28,13 @@ class AOutLibClassNode(val api: Int, private val classWriter: ClassWriter) : Cla
             if (methodNode.name.equals("<init>") || methodNode.name.equals("<clinit>")) continue
             val instructions = methodNode.instructions
 
-            //方法开头插入 timer -= System.currentTimeMillis();
+            //方法开头插入
             val clzName = name
             val methodName = methodNode.name
             val access = methodNode.access
             instructions.insert(createMethodStartInstructions(clzName, methodName, access))
 
-            //退出方法之前 插入timer += System.currentTimeMillis();
+            //退出方法之前
             methodNode.instructions.forEach { insnNode ->
                 val opcode = insnNode.opcode
                 if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {
@@ -42,11 +42,7 @@ class AOutLibClassNode(val api: Int, private val classWriter: ClassWriter) : Cla
                     methodNode.instructions.insertBefore(insnNode, endInstructions)
                 }
             }
-            //methodNode.maxStack += 4
         }
-
-        //val acc = Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC
-        //fields.add(FieldNode(acc, "timer", "J", null, 1))
     }
 
     /**
@@ -136,6 +132,5 @@ class AOutLibClassNode(val api: Int, private val classWriter: ClassWriter) : Cla
             }
         }
     }
-
 
 }

@@ -1,6 +1,5 @@
 package org.ninetripods.lib_bytecode.common
 
-import android.app.Application
 import android.util.Log
 import java.util.concurrent.ConcurrentHashMap
 
@@ -26,16 +25,6 @@ object TimeCostUtil {
     fun recordMethodStart(thresholdTime: Int, methodName: String, clz: Any?) {
         try {
             METHODS_MAP[methodName] = System.currentTimeMillis()
-            if (clz is Application) {
-                val methods = methodName.split("&".toRegex()).toTypedArray()
-                if (methods.size == 2) {
-                    if (methods[1] == "onCreate") {
-                        //TODO
-                    } else if (methods[1] == "attachBaseContext") {
-                        //TODO
-                    }
-                }
-            }
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -57,6 +46,10 @@ object TimeCostUtil {
      * @param clz 类名
      */
     fun recordMethodEnd(thresholdTime: Int, methodName: String, clz: Any?) {
+        Log.e(
+            TAG,
+            "\t methodName=>$methodName thresholdTime=>$thresholdTime method=>recordMethodEnd"
+        )
         synchronized(TimeCostUtil::class.java) {
             try {
                 if (METHODS_MAP.containsKey(methodName)) {
@@ -71,19 +64,6 @@ object TimeCostUtil {
                             TAG,
                             "\t methodName=>$methodName threadNam=>$threadName thresholdTime=>$thresholdTime costTime=>$costTime"
                         )
-                        val stackTraceElements = Thread.currentThread().stackTrace
-                        for (element in stackTraceElements) {
-                            if (element.toString().contains("TimeCostUtil")) continue
-
-                            if (element.toString()
-                                    .contains("dalvik.system.VMStack.getThreadStackTrace")
-                            ) continue
-
-                            if (element.toString()
-                                    .contains("java.lang.Thread.getStackTrace")
-                            ) continue
-                            Log.e(TAG, "at $element")
-                        }
                     }
                 }
             } catch (ex: Exception) {
@@ -103,4 +83,4 @@ object TimeCostUtil {
 
 }
 
-class StaticMethodObject {}
+class StaticMethodObject

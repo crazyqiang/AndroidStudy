@@ -1,3 +1,4 @@
+
 import LibsVersion.Companion.activity_ktx_version
 import LibsVersion.Companion.appcompat_version
 import LibsVersion.Companion.arouter_api_version
@@ -10,7 +11,6 @@ import LibsVersion.Companion.jetpack_version
 import LibsVersion.Companion.kotlin_version
 import LibsVersion.Companion.legacy_version
 import LibsVersion.Companion.material_version
-import LibsVersion.Companion.multidex_version
 import LibsVersion.Companion.okhttp_version
 import LibsVersion.Companion.recyclerview_version
 import LibsVersion.Companion.retrofit_version
@@ -22,7 +22,7 @@ import LibsVersion.Companion.retrofit_version
 object App {
     const val targetSdkVersion = 31
     const val compileSdkVersion = 31
-    const val minSdkVersion = 19
+    const val minSdkVersion = 21
     const val appId = "org.ninetripods.mq.study"
     const val versionCode = 20220930
     const val versionName = "1.6.0"
@@ -60,7 +60,7 @@ object Deps {
     const val androidx_recyclerView = "androidx.recyclerview:recyclerview:$recyclerview_version"
     const val androidx_constraintLayout = "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     const val androidx_legacy = "androidx.legacy:legacy-support-v4:$legacy_version"
-    const val androidx_multidex = "androidx.multidex:multidex:$multidex_version"
+    const val androidx_multidex = "androidx.multidex:multidex:2.0.1"
     const val androidx_viewpager2 = "androidx.viewpager2:viewpager2:1.1.0-beta01"
 
     //ARouter
