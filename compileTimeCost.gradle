@@ -1,0 +1,61 @@
+/**
+ * wiki: https://juejin.cn/post/6844903607679057934
+ * 1、初始化阶段
+ */
+long beginOfSetting = System.currentTimeMillis()
+gradle.projectsLoaded {
+    println '----------------------初始化阶段----------------------'
+    println '初始化阶段，耗时：' + (System.currentTimeMillis() - beginOfSetting) + 'ms'
+    println '----------------------初始化阶段----------------------'
+}
+
+/**
+ * 2、配置阶段
+ */
+def beginOfConfig
+def configHasBegin = false
+def beginOfProjectConfig = new HashMap()
+def configList = new ArrayList()
+gradle.beforeProject { project ->
+    if (!configHasBegin) {
+        configHasBegin = true
+        beginOfConfig = System.currentTimeMillis()
+    }
+    beginOfProjectConfig.put(project, System.currentTimeMillis())
+}
+gradle.afterProject { project ->
+    def begin = beginOfProjectConfig.get(project)
+    configList.add("$project 耗时：${System.currentTimeMillis() - begin} ms")
+}
+
+def beginOfProjectExecute
+gradle.taskGraph.whenReady {
+    println '----------------------配置阶段----------------------'
+    configList.forEach { configStr ->
+        println(configStr)
+    }
+    println '配置阶段，总共耗时：' + (System.currentTimeMillis() - beginOfConfig) + 'ms'
+    println '----------------------配置阶段----------------------'
+    beginOfProjectExecute = System.currentTimeMillis()
+}
+
+/**
+ * 3、执行阶段
+ */
+def taskList = new ArrayList()
+gradle.taskGraph.beforeTask { task ->
+    task.doFirst {
+        task.ext.beginOfTask = System.currentTimeMillis()
+    }
+    task.doLast {
+        taskList.add("$task 耗时：${System.currentTimeMillis() - task.beginOfTask} ms")
+    }
+}
+gradle.buildFinished {
+    println '----------------------执行阶段----------------------'
+    taskList.forEach { taskStr ->
+        println(taskStr)
+    }
+    println '执行阶段，总耗时：' + (System.currentTimeMillis() - beginOfProjectExecute) + 'ms'
+    println '----------------------执行阶段----------------------'
+}

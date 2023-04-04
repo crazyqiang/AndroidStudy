@@ -1,3 +1,6 @@
+//统计gradle编译耗时
+apply from: './compileTimeCost.gradle'
+
 include ':app'
 include ':multiprocess_sever'
 include ':plugin'
