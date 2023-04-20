@@ -16,6 +16,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity">
+
+        <!--存数据 可以分别在application activity service等里面取出来，注意取的方式是不一样的-->
+        <meta-data
+            android:name="com.nine.tripods.key"
+            android:value="${KEY_VALUE}" />
         <activity
             android:name=".viewpager2.ViewPager2DispatchActivity"
             android:exported="false"
@@ -36,10 +41,6 @@
         <activity
             android:name=".kotlin.flow.FlowStudyActivity"
             android:screenOrientation="portrait" />
-
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity
             android:name=".MainActivity"
