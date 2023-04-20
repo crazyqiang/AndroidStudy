@@ -28,13 +28,13 @@ gradle.afterProject { project ->
     configList.add("$project 耗时：${System.currentTimeMillis() - begin} ms")
 }
 
-def beginOfProjectExecute
+def beginOfProjectExecute = 0L
 gradle.taskGraph.whenReady {
     println '----------------------配置阶段----------------------'
     configList.forEach { configStr ->
         println(configStr)
     }
-    println '配置阶段，总共耗时：' + (System.currentTimeMillis() - beginOfConfig) + 'ms'
+    println "配置阶段，总共耗时：${(System.currentTimeMillis() - beginOfConfig)} ms"
     println '----------------------配置阶段----------------------'
     beginOfProjectExecute = System.currentTimeMillis()
 }
@@ -48,7 +48,13 @@ gradle.taskGraph.beforeTask { task ->
         task.ext.beginOfTask = System.currentTimeMillis()
     }
     task.doLast {
-        taskList.add("$task 耗时：${System.currentTimeMillis() - task.beginOfTask} ms")
+        /**
+         * 1、在Gradle中，task实例是通过实现task的实现类来创建的。当在Gradle文件中定义一个task时，Gradle会根据定义的task的名称和类型来创建对应的task实例。
+         * 2、对于task实例，Gradle会为其生成一个代理类，这个代理类是task实例的包装类，它实现了所有task的接口，并包含了task的所有属性和方法。这个代理类的名称通常是task的实现类名称加上'_Decorated'，例如，如果task的实现类名称为MyTask，那么代理类的名称就是MyTask_Decorated。
+         * 3、当在Gradle文件中引用task实例时，实际上是在引用这个代理类，而不是task实现类本身。代理类负责调用task实现类中的方法和属性，并将结果返回给Gradle。这样做的好处是，代理类可以提供一些附加功能，例如缓存task的输出结果或拦截task的方法调用。
+         * 因此，当在Gradle文件中使用task.class.name来引用task实现类时，实际上是引用了task的代理类名称，这个代理类包装了task实现类，并提供了额外的功能和接口。
+         */
+        taskList.add("$task : ${task.class.name - '_Decorated'} ：耗时${System.currentTimeMillis() - task.beginOfTask} ms")
     }
 }
 gradle.buildFinished {
@@ -56,6 +62,6 @@ gradle.buildFinished {
     taskList.forEach { taskStr ->
         println(taskStr)
     }
-    println '执行阶段，总耗时：' + (System.currentTimeMillis() - beginOfProjectExecute) + 'ms'
+    println "执行阶段，总耗时：${System.currentTimeMillis() - beginOfProjectExecute} ms"
     println '----------------------执行阶段----------------------'
 }
