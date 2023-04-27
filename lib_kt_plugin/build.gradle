@@ -1,0 +1,42 @@
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+sourceSets {
+    main {
+        java {
+            srcDirs += []
+        }
+        kotlin {
+            srcDirs += ['src/main/kotlin', 'src/main/java']
+        }
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    compileOnly gradleApi()
+    compileOnly localGroovy()
+
+    //版本不能太高 否则会跟项目的as版本冲突
+    compileOnly "com.android.tools.build:gradle:4.1.3"
+}
+
+/**
+ * 删除指定目录下的文件
+ */
+task deleteSource(type: Delete) {
+    doLast {
+        delete './src/main/kotlin'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+
+
