@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: '*/main']], 
+                          userRemoteConfigs: [[url: 'https://github.com/username/my-android-app.git']]])
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh './gradlew assembleDebug'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                sh './gradlew test'
+            }
+        }
+        
+        stage('Lint') {
+            steps {
+                sh './gradlew lint'
+            }
+        }
+        
+        stage('Publish') {
+            steps {
+                sh './gradlew assembleRelease'
+                archiveArtifacts artifacts: 'app/build/outputs/apk/release/*.apk', fingerprint: true
+            }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
