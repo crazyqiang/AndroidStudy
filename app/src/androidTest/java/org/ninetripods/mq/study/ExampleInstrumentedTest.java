@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // Context of the app under test. test 流水线
+        // Context of the app under test. test 流水线 00
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("org.ninetripods.mq.circleview", appContext.getPackageName());
