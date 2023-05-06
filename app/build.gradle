@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-//获取时间戳
+//获取时间戳  交付pipeline
 def getDate() {
     def date = new Date()
     def formattedDate = date.format('yyyyMMddHHmm')
