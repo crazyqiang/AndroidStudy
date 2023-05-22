@@ -1,37 +1,102 @@
-//apply plugin: 'groovy'
-//apply plugin: 'maven-publish'
-//apply plugin: 'maven'
-//apply plugin: 'kotlin'
-
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 
-//plugins {
-//    id 'org.jetbrains.kotlin.jvm'
-//    id 'groovy'
-//    id 'maven'
-//    id 'maven-publish'
+
+gradle.projectsEvaluated{
+    println("----------------------${toString()}---------------------")
+    println("----------------------${gradle.getParent().toString()}---------------------")
+}
+
+//gradle.projectsEvaluated {
+//    println("----------------------project属性 start----------------------")
+//    def projectInfo = "---rootProject-> name:${rootProject.name}\n" +
+//            "---getRootDir()-> name:${getRootDir().name}, path:${getRootDir().path}\n" +
+//            "---getBuildDir()-> name:${getBuildDir().name}, path:${getBuildDir().path}\n" +
+//            "---getParent()-> name:${getParent().name}\n"+
+//            "---getDisplayName()-> ${getDisplayName()}\n"+
+//            "---getGroup()-> ${getGroup()}\n"+
+//            "---getVersion()-> ${getVersion()}\n"+
+//            "---getState()-> ${getState()}\n"+
+//            "---getPath()-> ${getPath()}\n"+
+//            "---project.hasProperty(name)/findProperty(name)-> hasProperty:${project.hasProperty("byte")}, findProperty(name):${findProperty("byte")}\n" +
+//            "---getExtensions()-> ${getExtensions().findByName("")}\n"
+//    println(projectInfo)
+//    println("----------------------project属性 end----------------------")
 //}
 
-//compileKotlin.dependsOn = compileKotlin.taskDependencies.values - 'compileJava'
+gradle.taskGraph.whenReady{
+//    println("----------------------task名称 start----------------------")
+//    tasks.forEach{ task ->
+//        println("${task.name}")
+//    }
+//    println("----------------------task名称 end----------------------")
+    /**
+     执行结果：
+     assemble
+     build
+     buildDependents
+     buildEnvironment
+     buildNeeded
+     check
+     classes
+     clean
+     compileGroovy
+     compileJava
+     compileKotlin
+     compileTestGroovy
+     compileTestJava
+     compileTestKotlin
+     components
+     dependencies
+     dependencyInsight
+     dependentComponents
+     generateMetadataFileForMavenPublication
+     generatePomFileForMavenPublication
+     groovydoc
+     help
+     inspectClassesForKotlinIC
+     install
+     jar
+     javadoc
+     kaptGenerateStubsKotlin
+     kaptGenerateStubsTestKotlin
+     kaptKotlin
+     kaptTestKotlin
+     kotlinSourcesJar
+     mainClasses
+     model
+     outgoingVariants
+     processResources
+     processTestResources
+     projects
+     properties
+     publish
+     publishAllPublicationsToMavenRepository
+     publishMavenPublicationToMavenLocal
+     publishMavenPublicationToMavenRepository
+     publishToMavenLocal
+     tasks
+     test
+     testClasses
+     */
+}
+
+/**
+ * kotlin & groovy混编时，强制编译顺序为 kotlin -> groovy -> classes
+ */
 compileGroovy.dependsOn compileKotlin
 compileGroovy.classpath += files(compileKotlin.destinationDir)
 classes.dependsOn compileGroovy
 
-//tasks.compileGroovy{
-//    val compileKotlin = tasks.compileKotlin
-//    dependsOn(compileKotlin)
-//    classpath += files(compileKotlin.destinationDir)
-//
-//    tasks.classes.get().dependsOn(this)
-//}
-
 compileGroovy {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
+}
+compileKotlin {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
 }
 
 repositories {
@@ -69,17 +134,13 @@ publishing {
 sourceSets {
     main {
         groovy {
-            srcDirs +=  ['src/main/groovy','src/main/java']
+            srcDirs += ['src/main/groovy', 'src/main/java']
         }
         java {
-            srcDirs +=  ['src/main/java']
+            srcDirs += ['src/main/java']
         }
         kotlin {
-            srcDirs +=  ['src/main/java']
+            srcDirs += ['src/main/java']
         }
     }
-}
-
-compileKotlin {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8
 }
