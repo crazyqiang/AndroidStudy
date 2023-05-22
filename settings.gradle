@@ -12,3 +12,4 @@ include ':lib_viewpager2'
 //字节码插桩相关
 include ':lib_bytecode'
 include ':lib_bytecode_common'
+include ':lib_kt_plugin'

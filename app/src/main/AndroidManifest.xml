@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 全屏悬浮窗 需要申请此权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
@@ -21,6 +22,24 @@
         <meta-data
             android:name="com.nine.tripods.key"
             android:value="${KEY_VALUE}" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ResultApiActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activity.ResultApi2Activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".viewpager2.ViewPager2DispatchActivity"
             android:exported="false"
@@ -41,17 +60,6 @@
         <activity
             android:name=".kotlin.flow.FlowStudyActivity"
             android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".jetpack.lifecycle.LifecycleActivity"
             android:screenOrientation="portrait" />

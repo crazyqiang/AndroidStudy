@@ -42,7 +42,7 @@ public class WindowManagerActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_CODE:
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return;
