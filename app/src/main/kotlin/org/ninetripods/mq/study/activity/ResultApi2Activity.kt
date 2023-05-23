@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 /**
+ * Activity Result API使用示例
  * Created by mq on 2023/5/12
  */
 class ResultApi2Activity : AppCompatActivity() {
