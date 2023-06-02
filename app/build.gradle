@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 //apply plugin: 'com.performance.optimize'
 
 //获取时间戳
@@ -122,6 +123,16 @@ dependencies {
     implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
     implementation Deps.jetpack_datastore //datastore
     implementation Deps.jetpack_datastore_pf //datastore_preferences
+
+    /**
+     * Room相关
+     */
+    implementation "androidx.room:room-runtime:$room_version"
+    //annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // To use Kotlin annotation processing tool (kapt)
+    //ksp "androidx.room:room-compiler:$room_version" // To use Kotlin Symbol Processing (KSP)
+    implementation("androidx.room:room-ktx:$room_version") //Kotlin Extensions and Coroutines support for Room
+
     //okhttp
     implementation Deps.okhttp
     implementation Deps.okhttp_log_interceptor
