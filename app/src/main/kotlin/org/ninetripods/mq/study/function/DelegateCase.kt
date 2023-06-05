@@ -1,5 +1,6 @@
 package org.ninetripods.mq.study.function
 
+import kotlin.properties.Delegates
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -12,22 +13,51 @@ fun main() {
     /**
      * 1、类委托
      */
-    RealImp().sayHello() //方式1
-    RealImp2().sayHello() //方式2
-    RealImp3(DelegateImp()).sayHello() //方式3
+//    RealImp().sayHello() //方式1
+//    RealImp2().sayHello() //方式2
+//    RealImp3(DelegateImp()).sayHello() //方式3
 
     /**
      * 2、属性委托
      */
     val property = DelegateProperty()
     //p1
-    println(property.p1)
-    property.p1 = "小马快跑"
-    //p2
-    println(property.p2)
-    //p3
-    println(property.p3)
-    property.p3 = "小马快跑"
+//    println(property.p1)
+//    property.p1 = "小马快跑"
+//    //p2
+//    println(property.p2)
+//    //p3
+//    println(property.p3)
+//    property.p3 = "小马快跑"
+
+    /**
+     * by lazy延迟委托
+     */
+//    println("第1次：${property.lazyView}")
+//    println("第2次：${property.lazyView}")
+
+    /**
+     * 模拟通过Delegates.observable()来实现防抖动功能，实际在Activity中通过onClick()实现
+     *  override fun onClick(view: View) {
+     *     lastClickTime = System.currentTimeMillis()
+     *   }
+     */
+//    property.lastClickTime = System.currentTimeMillis()
+//    Thread.sleep(1000) //两次点击时间必须超过1s，否则下面的
+//    property.lastClickTime = System.currentTimeMillis()
+
+    /**
+     *Delegates.vetoable()中的lambda表达式的返回值决定是否生效本次赋值。
+     */
+//    property.age = "二年级"
+//    property.age = "三年级"
+
+    /**
+     * ::来实现属性之间的委托
+     */
+    property.oldName = "2023"
+    println("oldName: ${property.oldName}")
+    println("newName: ${property.newName}")
 }
 
 /**
@@ -78,6 +108,47 @@ class DelegateProperty {
     var p1: String by Delegate()
     val p2: String by DelegateR()
     var p3: String by DelegateRW()
+
+    //延迟属性，默认模式是LazyThreadSafetyMode.SYNCHRONIZED
+    val lazyView by lazy {
+        println("我只有第一次初始化的时候才执行哟~")
+        "Come on"
+    }
+
+    //lazy(LazyThreadSafetyMode.NONE
+    /**
+     * @mode:
+     * 1、LazyThreadSafetyMode.SYNCHRONIZED
+     * 2、LazyThreadSafetyMode.PUBLICATION
+     * 3、LazyThreadSafetyMode.NONE
+     *
+     */
+    val lazyMode by lazy(LazyThreadSafetyMode.NONE) {
+        "Lazy Mode"
+    }
+
+    /**
+     * Delegates.observable()
+     */
+    var lastClickTime by Delegates.observable(0L) { property, oldValue, newValue ->
+        // 在lastClickTime属性值发生变化时，判断两次点击时间的间隔是否大于1秒，如果是，则执行点击事件。
+        if (newValue - oldValue >= 1000) {
+            println("执行点击事件： $oldValue, $newValue")
+            //执行点击事件
+        }
+    }
+
+    /**
+     * Delegates.vetoable()中的lambda表达式的返回值决定是否生效本次赋值。
+     */
+    var age: String by Delegates.vetoable("一年级") { property, oldValue, newValue ->
+        println("$property, $oldValue, $newValue")
+        true
+    }
+
+    @Deprecated("Use [newName] instead", ReplaceWith("newName"))
+    var oldName by this::newName //this可以省略
+    var newName = ""
 }
 
 /**
@@ -127,6 +198,7 @@ class DelegateRW : ReadWriteProperty<Any, String> {
         println("setValue：$thisRef，${property.name}，$value")
     }
 }
+
 /**
  * ------------------------属性委托------------------------end
  */

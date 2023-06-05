@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 全屏悬浮窗 需要申请此权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
@@ -24,8 +24,8 @@
             android:value="${KEY_VALUE}" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,12 +34,15 @@
         </activity>
         <activity
             android:name=".activity.ResultApiActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.ResultApi2Activity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SharedPreferencesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".viewpager2.ViewPager2DispatchActivity"
             android:exported="false"
@@ -69,8 +72,9 @@
         <activity
             android:name=".jetpack.livedata.LiveDataActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".anim.AnimationActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".anim.AnimationActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".jetpack.viewmodel.ViewModelActivity" />
         <activity
             android:name=".jetpack.mvvm.MvvmExampleActivity"
