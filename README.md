@@ -2,7 +2,8 @@
 **欢迎`扫描下方二维`或搜索微信公众号 `代码说` 关注我的微信公众号查看最新文章，期待您的关注**~
 <img src="https://xmkp-1253152423.cos.ap-beijing.myqcloud.com/6871677331463_.pic.jpg" width="300">
 
-- 扫描二维码下载APK示例 \n
+- 扫描二维码下载APK示例
+
 ![apk](https://img-blog.csdnimg.cn/16b3a4447ccb43b9a72280e6b5821cf5.png)
 或者 [点击此处链接下载APK](https://www.pgyer.com/QO2p)
 
