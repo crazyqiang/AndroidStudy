@@ -1,10 +1,7 @@
 package org.ninetripods.mq.study.activity
 
-import android.graphics.BlurMaskFilter
-import android.graphics.Color
-import android.graphics.Typeface
+import android.graphics.*
 import android.os.Build
-import android.text.Layout
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
@@ -27,6 +24,9 @@ class SpanStudyActivity : BaseActivity() {
         const val TITLE_2 =
             "---> 2、影响度量的Span，实现UpdateLayout接口(UpdateLayout->UpdateAppearance)，继承MetricAffectingSpan(MetricAffectingSpan->CharacterStyle)\n"
         const val TITLE_3 = "---> 3、影响段落的Span \n"
+//        const val TITLE_1 = ""
+//        const val TITLE_2 = ""
+//        const val TITLE_3 = ""
 
         private const val SPAN_STR: String = TITLE_1 +
                 "北国风光，千里冰封，万里雪飘。\n\n" +
@@ -35,7 +35,8 @@ class SpanStudyActivity : BaseActivity() {
                 "须晴日，看红装素裹，_ 分外妖娆。\n\n江山如此多娇，引无数英雄竞折腰。\n\n" +
                 "惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。\n\n" +
                 TITLE_3 +
-                "一代天骄，成吉思汗，只识弯弓射大雕。\n\n" + " 俱往矣，数风流人物，还看今朝。"
+                "一代天骄，成吉思汗，只识弯弓射大雕。\n\n" + "俱往矣，数风流人物，还看今朝。"
+        private const val SPAN_STR2 = "锄禾日当午，\n\t汗滴禾下土。\n谁知盘中餐，\n\t粒粒皆辛苦。"
         const val SEG_1 = "北国风光"
         const val SEG_2 = "千里冰封"
         const val SEG_3 = "万里雪飘"
@@ -60,10 +61,10 @@ class SpanStudyActivity : BaseActivity() {
         const val SEG_22 = "只识弯弓射大雕"
         const val SEG_23 = "俱往矣"
         const val SEG_24 = "数风流人物"
-        const val SEG_25 = "还看今朝"
+        const val SEG_25 = "还看今朝。"
         const val ORIGIN_FLAGS = "01234"
 
-        val finalStr = SPAN_STR.replace(SEG_3, "万里雪飘 ")
+        val finalStr = SPAN_STR.replace(SEG_3, "万里雪飘")
         val index1 = finalStr.indexOf(SEG_1)
         val index2 = finalStr.indexOf(SEG_2)
         val index3 = finalStr.indexOf(SEG_3)
@@ -118,14 +119,13 @@ class SpanStudyActivity : BaseActivity() {
         processAppearance(spanBuilder)
         //2、影响度量的Span，实现UpdateLayout接口(UpdateLayout->UpdateAppearance)，
         // 继承MetricAffectingSpan(MetricAffectingSpan->CharacterStyle)
-        processMetrics(spanBuilder)
+//        processMetrics(spanBuilder)
         //3、影响段落的Span
-        processParagraph(spanBuilder)
+//        processParagraph(spanBuilder)
 
-        tvSpan.highlightColor = Color.TRANSPARENT
         tvSpan.movementMethod = LinkMovementMethod.getInstance()
         tvSpan.text = spanBuilder
-        tvSpan.setText(spanBuilder, TextView.BufferType.SPANNABLE)
+//        tvSpan.setText(spanBuilder, TextView.BufferType.SPANNABLE)
         tvSpan.setOnClickListener {
             //避免ClickSpan与TextView本身同时相应点击事件
             (it as? TextView)?.let { tv ->
@@ -250,6 +250,7 @@ class SpanStudyActivity : BaseActivity() {
             index12, index12 + SEG_12.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
+        //ImageSpan
         val imgDrawable =
             ResourcesCompat.getDrawable(resources, R.drawable.icon_flower, null)
         imgDrawable?.let {
@@ -259,6 +260,7 @@ class SpanStudyActivity : BaseActivity() {
                 index13, index13 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
+
         //自定义RelativeSizeSpan
         spanBuilder.setSpan(
             RelativeSizeColorSpan(0.8f, Color.RED),
@@ -266,6 +268,10 @@ class SpanStudyActivity : BaseActivity() {
         )
 
         spanBuilder.setSpan(
+            /**
+             * @param size 文本的绝对值大小，单位是像素px
+             * @param dip  如果为true，则size变以为dp为单位；否则还是以像素px为单位。
+             */
             AbsoluteSizeSpan(20, true),
             index15, index15 + SEG_15.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
@@ -296,64 +302,105 @@ class SpanStudyActivity : BaseActivity() {
     private fun processParagraph(spanBuilder: SpannableStringBuilder) {
         spanBuilder.setSpan(
             /**
-             * first: 每一个段落的首行缩进
-             * mRest: 每一个段落的其他行缩进
+             * first: 每个段落的首行缩进
+             * mRest: 每个段落的其他行缩进
              */
             LeadingMarginSpan.Standard(20.dp2px(), 5.dp2px()),
             0, SPAN_STR.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        //LineBackgroundSpan改变行的背景色，如果[start,end)不够一行按一行处理
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            spanBuilder.setSpan(
-                LineBackgroundSpan.Standard(Color.YELLOW),
-                index20, index20 + SEG_20.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-        //LineHeightSpan改变段落的行高
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            //注意，LineHeightSpan将改变整个段落的行高，即使它只覆盖段落的一部分。
-            spanBuilder.setSpan(
-                LineHeightSpan.Standard(30.dp2px()),
-                index21, index21 + SEG_21.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
 
-        //在文本的行首添加一个带有指定边距的 Drawable  TODO IconMarginSpan vs DrawableMarginSpan如何使用
-//        val imgDrawable =
-//            ResourcesCompat.getDrawable(resources, R.drawable.icon_flower, null).apply {
-//                this?.setBounds(0, 0, 20.dp2px(), 20.dp2px())
-//            }
+        //LineBackgroundSpan改变行的背景色，如果[start,end)不够一行按一行处理
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            spanBuilder.setSpan(
+//                LineBackgroundSpan.Standard(Color.YELLOW),
+//                0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//        }
+
+        //LineHeightSpan改变段落的行高
+//        spanBuilder.clear()
+//        spanBuilder.append(SPAN_STR2)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            //注意，LineHeightSpan将改变整个段落的行高，即使它只覆盖段落的一部分。
+//            spanBuilder.setSpan(
+//                LineHeightSpan.Standard(20.dp2px()),
+//                0, SPAN_STR2.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//            )
+//        }
+
+        //在文本的行首添加一个带有指定边距的 Drawable
+//        val imgDrawable = ResourcesCompat.getDrawable(resources, R.drawable.icon_arrow_pull, null)
 //        spanBuilder.setSpan(
-//            IconMarginSpan(BitmapFactory.decodeResource(resources, R.drawable.icon_flower), 10.sp2px()),
+//            IconMarginSpan(
+//                BitmapFactory.decodeResource(resources, R.drawable.icon_arrow_pull), 10.sp2px()
+//            ),
 //            //DrawableMarginSpan(imgDrawable!!, 10.sp2px()),
-//            index22, index22 + SEG_22.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//            0, SPAN_STR.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 //        )
 
-        //QuoteSpan给文本添加引用样式。
-        //注意：必须从一个段落的第一个字符连接到最后一个字符，否则不会显示该span。
-        spanBuilder.setSpan(
-            QuoteSpan(Color.RED),
-            index23 - 1, SPAN_STR.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        //QuoteSpan可以在文本开始的地方添加引用样式(一个垂直的线条)。
+//        val quoteSpan = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            /**
+//             * QuoteSpan(int color, int stripeWidth, int gapWidth)
+//             * @param color 垂直线条颜色。缺省情况下，条带颜色为0xff0000ff
+//             * @param stripeWidth 线条的宽度，以像素为单位。默认值是2px。
+//             * @param gapWidth 线条和段落之间的距离，以像素为单位。默认值是2px。
+//             */
+//            QuoteSpan(Color.RED, 20, 40)
+//        } else {
+//            QuoteSpan(Color.RED)
+//        }
+//        spanBuilder.setSpan(quoteSpan,
+//            0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
 
-        //给文本添加项目符号样式 TODO
-        spanBuilder.setSpan(
-            BulletSpan(20, 0xCE6454A),
-            index24, index24 + SEG_24.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
 
-        //AlignmentSpan
-        spanBuilder.setSpan(
-            AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE),
-            index25, index25 + SEG_25.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        //给文本添加圆点符号
+        //第一行设置圆点
+//        spanBuilder.setSpan( getBulletSpan(),
+//            0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+//        val index23 = SPAN_STR.indexOf(SEG_23)
+//        //最后一行设置圆点
+//        spanBuilder.setSpan( getBulletSpan(),
+//            index23, index23 + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+        /**
+         * AlignmentSpan文本对齐方式
+         */
+//        spanBuilder.setSpan(
+//            /**
+//             * AlignmentSpan.Standard(Layout.Alignment align)
+//             * align: Layout.Alignment类型的枚举值。包括三种情况：
+//             * 1、ALIGN_CENTER 居中、
+//             * 2、ALIGN_NORMAL 正常、
+//             * 3、ALIGN_OPPOSITE相反方向。
+//             */
+//            AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+//            0, SPAN_STR.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
 
-        //TabStopSpan
-        spanBuilder.setSpan(
-            TabStopSpan.Standard(20.dp2px()),
-            index25, index25 + SEG_25.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        //TabStopSpan 段落中第一行的左侧偏移量(与\t有关系)，默认实现为TabStopSpan.Standard
+//        spanBuilder.clear()
+//        spanBuilder.append(SPAN_STR2)
+//        spanBuilder.setSpan(
+//            TabStopSpan.Standard(40.dp2px()),
+//            0, SPAN_STR2.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
 
+    }
+
+    private fun getBulletSpan(): BulletSpan {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            /**
+             * BulletSpan(int gapWidth, int color, int bulletRadius)
+             * @param gapWidth: 项目符号和段落之间的距离，单位是px，默认2px
+             * @param color：项目符号颜色，默认是文本颜色
+             * @param bulletRadius：符号半径，单位是px,默认是4px
+             */
+            BulletSpan(20, Color.RED, 10)
+        } else {
+            BulletSpan(20, Color.RED)
+        }
     }
 
     private fun getSpanFlagStr(
