@@ -16,6 +16,7 @@ import org.ninetripods.mq.study.kotlin.ktx.showToast
 import org.ninetripods.mq.study.span.CenterImageSpan
 import org.ninetripods.mq.study.span.CustomClickSpan
 import org.ninetripods.mq.study.span.RelativeSizeColorSpan
+import org.ninetripods.mq.study.span.SpanFactory
 
 class SpanStudyActivity : BaseActivity() {
 
@@ -124,8 +125,12 @@ class SpanStudyActivity : BaseActivity() {
 //        processParagraph(spanBuilder)
 
         tvSpan.movementMethod = LinkMovementMethod.getInstance()
-        tvSpan.text = spanBuilder
-//        tvSpan.setText(spanBuilder, TextView.BufferType.SPANNABLE)
+        tvSpan.setSpannableFactory(SpanFactory())
+        /**
+         * SpannedString -> Spanned接口
+         * SpannableString、SpannableStringBuilder -> Spannable接口
+         */
+        tvSpan.setText(spanBuilder, TextView.BufferType.SPANNABLE)
         tvSpan.setOnClickListener {
             //避免ClickSpan与TextView本身同时相应点击事件
             (it as? TextView)?.let { tv ->
