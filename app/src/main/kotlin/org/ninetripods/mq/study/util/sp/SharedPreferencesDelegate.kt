@@ -32,6 +32,7 @@ class SharedPreferencesDelegate<T>(
             is Float -> sp.getFloat(finalKey, defaultValue)
             is Boolean -> sp.getBoolean(finalKey, defaultValue)
             is String -> sp.getString(finalKey, defaultValue)
+            is Set<*> -> sp.getStringSet(finalKey, defaultValue as? Set<String>)
             else -> throw IllegalStateException("Unsupported type")
         } as T
     }
@@ -45,6 +46,7 @@ class SharedPreferencesDelegate<T>(
                 is Float -> putFloat(finalKey, value)
                 is Boolean -> putBoolean(finalKey, value)
                 is String -> putString(finalKey, value)
+                is Set<*> -> putStringSet(finalKey, value.map { it.toString() }.toHashSet())
                 else -> throw IllegalStateException("Unsupported type")
             }
             apply()
