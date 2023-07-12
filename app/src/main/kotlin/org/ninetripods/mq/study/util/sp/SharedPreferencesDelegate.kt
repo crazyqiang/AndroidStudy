@@ -20,7 +20,7 @@ class SharedPreferencesDelegate<T>(
     private val key: String? = null,
 ) : ReadWriteProperty<Any?, T> {
 
-    private val sp: SharedPreferences by lazy {
+    private val sp: SharedPreferences by lazy(LazyThreadSafetyMode.NONE) {
         context.getSharedPreferences(spName, Context.MODE_PRIVATE)
     }
 
@@ -54,24 +54,24 @@ class SharedPreferencesDelegate<T>(
     }
 }
 
-class FirPreferences(context: Context) {
+class CommonPreferences(context: Context) {
     companion object {
-        const val SP_NAME = "FIR_SP_NAME"
+        /**
+         * 通过传入不同的SP文件名来存储到不同的XML中
+         */
+        const val FIR_SP_NAME = "FIR_SP_NAME" //文件名1
+        const val SEC_SP_NAME = "SEC_SP_NAME"//文件名2
     }
 
-    var isShow by SharedPreferencesDelegate(context, SP_NAME, false, "key_is_show")
+    var isShow by SharedPreferencesDelegate(context, FIR_SP_NAME, false, "key_is_show")
 
     //这里没有用key值，则会默认使用属性名来当做key值
-    var name by SharedPreferencesDelegate(context, SP_NAME, "")
-}
+    var name by SharedPreferencesDelegate(context, FIR_SP_NAME, "")
 
-class SecPreferences(context: Context) {
-    companion object {
-        const val SP_NAME = "SEC_SP_NAME"
-    }
-
-    var age by SharedPreferencesDelegate(context, SP_NAME, 0, "key_age")
+    var age by SharedPreferencesDelegate(context, SEC_SP_NAME, 0, "key_age")
 
     //这里没有用key值，则会默认使用属性名来当做key值
-    var cost by SharedPreferencesDelegate(context, SP_NAME, 0.0f)
+    var cost by SharedPreferencesDelegate(context, SEC_SP_NAME, 0.0f)
+
+    var setString by SharedPreferencesDelegate(context, SEC_SP_NAME, setOf("1", "2", "3"))
 }
