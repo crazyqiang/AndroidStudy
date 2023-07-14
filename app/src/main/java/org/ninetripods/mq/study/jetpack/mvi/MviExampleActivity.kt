@@ -18,6 +18,7 @@ import org.ninetripods.mq.study.jetpack.mvi.widget.RankAdapter
 import org.ninetripods.mq.study.kotlin.ktx.flowWithLifecycle2
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.showToast
+import org.ninetripods.mq.study.kotlin.ktx.visible
 import org.ninetripods.mq.study.util.Constant
 
 /**
@@ -73,7 +74,7 @@ class MviExampleActivity : BaseMviActivity() {
             when (state) {
                 is BannerUiState.INIT -> {}
                 is BannerUiState.SUCCESS -> {
-                    mViewPager2.visibility = View.VISIBLE
+                    mViewPager2.visible()
                     mBtnQuest.visibility = View.GONE
                     val imgs = mutableListOf<String>()
                     for (model in state.models) {
