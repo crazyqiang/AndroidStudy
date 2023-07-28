@@ -6,6 +6,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.base.adapter.BaseVHolder
 import org.ninetripods.mq.study.chatgpt.MessageModel
 import org.ninetripods.mq.study.chatgpt.widget.ChatAutoFillView
+import org.ninetripods.mq.study.chatgpt.widget.SegModel
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
@@ -22,17 +23,20 @@ class ChatReplyTxHolder(
 
     override fun onBindView(item: MessageModel, position: Int) {
         log("position:$position, item:${item.content}")
-        //TODO 打字机效果待优化
-//        answerText.setEndCallback {
-//            isDrawEnd = true
-//        }
-//        answerText.reset()
-//        answerText.fillText(
-//            income = SegModel(item.content, true),
-//            autoFillAnim = item.autoFillAnim && !isDrawEnd,
-//            type = ChatAutoFillView.TYPE_MARKDOWN
-//        )
-        answerText.stop()
-        answerText.text = item.content
+        //TODO 打字机效果待优化  如打字机效果正在展示时，此时进行上下滑动
+        if (isDrawEnd) {
+            answerText.stop()
+            answerText.text = item.content
+        } else {
+            answerText.setEndCallback {
+                isDrawEnd = true
+            }
+            answerText.reset()
+            answerText.fillText(
+                income = SegModel(item.content, true),
+                autoFillAnim = item.autoFillAnim && !isDrawEnd,
+                type = ChatAutoFillView.TYPE_MARKDOWN
+            )
+        }
     }
 }
