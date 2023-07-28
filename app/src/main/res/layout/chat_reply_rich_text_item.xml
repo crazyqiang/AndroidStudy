@@ -26,10 +26,25 @@
         android:textSize="16sp"
         tools:text="Sure, choose your writing content." />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="方式2"
+        android:textColor="#C0C2C2"
+        android:textSize="12sp" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp" />
+
     <View
         android:id="@+id/chatReplyMarkdownLine"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:layout_marginTop="15dp"
         android:background="#F0F0F0" />
 
@@ -37,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Other language"
+        android:text="方式3"
         android:textColor="#C0C2C2"
         android:textSize="12sp" />
 
@@ -45,6 +60,6 @@
         android:id="@+id/rv_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="5dp" />
 
 </LinearLayout>

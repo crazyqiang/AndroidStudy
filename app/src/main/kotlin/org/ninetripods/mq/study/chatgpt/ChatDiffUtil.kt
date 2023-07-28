@@ -1,6 +1,7 @@
 package org.ninetripods.mq.study.chatgpt
 
 import androidx.recyclerview.widget.DiffUtil
+import org.ninetripods.mq.study.kotlin.ktx.log
 
 class ChatDiffUtil(private val oldModels: List<Any>, private val newModels: List<Any>) :
     DiffUtil.Callback() {
@@ -20,7 +21,9 @@ class ChatDiffUtil(private val oldModels: List<Any>, private val newModels: List
      * 例如，如果你的项目有唯一的id，这个方法应该检查它们的id是否相等。
      */
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldModels[oldItemPosition]::class.java == newModels[newItemPosition]::class.java
+        val areItemsSame = oldModels[oldItemPosition]::class.java == newModels[newItemPosition]::class.java
+        log("areItemsSame:$areItemsSame")
+        return areItemsSame
     }
 
     /**
@@ -28,7 +31,9 @@ class ChatDiffUtil(private val oldModels: List<Any>, private val newModels: List
      * 该方法只有当areItemsTheSame (int, int)返回true时才会被调用。
      */
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldModels[oldItemPosition] == newModels[newItemPosition]
+        val areContentSame = oldModels[oldItemPosition] == newModels[newItemPosition]
+        log("areContentSame:$areContentSame, $oldItemPosition, $newItemPosition")
+        return areContentSame
     }
 
     /**

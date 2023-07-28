@@ -26,7 +26,7 @@ fun Context.log(message: String) {
 }
 
 fun log(message: String) {
-    Log.e("TTT", message)
+    Log.e("Tag", message)
 }
 
 fun Number.dp2px(): Int {

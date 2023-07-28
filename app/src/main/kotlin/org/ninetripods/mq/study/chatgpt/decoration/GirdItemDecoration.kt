@@ -5,7 +5,8 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class GirdItemDecoration(val rowSpace: Int, val columnSpace: Int) : RecyclerView.ItemDecoration() {
+class GirdItemDecoration(private val rowSpace: Int, private val columnSpace: Int) :
+    RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -13,7 +14,7 @@ class GirdItemDecoration(val rowSpace: Int, val columnSpace: Int) : RecyclerView
         parent: RecyclerView,
         state: RecyclerView.State,
     ) {
-        var layoutManager = parent.layoutManager
+        val layoutManager = parent.layoutManager
         if (layoutManager is GridLayoutManager) {
             val position = parent.getChildLayoutPosition(view)
             val spanCount = layoutManager.spanCount

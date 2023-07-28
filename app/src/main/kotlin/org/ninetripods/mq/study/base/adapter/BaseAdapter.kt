@@ -4,13 +4,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import org.ninetripods.mq.study.base.iInterface.ItemClick
 import org.ninetripods.mq.study.chatgpt.ChatDiffUtil
 
 /**
  * Created by mq on 2023/7/20
  * RecyclerView.Adapter基类
  */
-open class BaseAdapter<T : Any>(private val vhFactory: IVHFactory) :
+open class BaseAdapter<T : Any>(
+    private val vhFactory: IVHFactory,
+    private val itemClick: ItemClick<T>? = null,
+) :
     RecyclerView.Adapter<BaseVHolder<T>>() {
     private val models = mutableListOf<T>()
 
@@ -21,17 +25,16 @@ open class BaseAdapter<T : Any>(private val vhFactory: IVHFactory) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseVHolder<T> {
-        return vhFactory.getVH(parent.context, parent, viewType) as BaseVHolder<T>
+        val holder = vhFactory.getVH(parent.context, parent, viewType) as BaseVHolder<T>
+        //绑定点击事件
+        holder.bindItemClick(itemClick)
+        return holder
     }
 
     override fun getItemCount(): Int = models.size
 
     override fun onBindViewHolder(holder: BaseVHolder<T>, position: Int) {
         holder.onBindViewHolder(models[position], position)
-    }
-
-    fun submit(item: T) {
-
     }
 
     fun submitList(newList: List<T>) {
@@ -44,6 +47,11 @@ open class BaseAdapter<T : Any>(private val vhFactory: IVHFactory) :
         models.addAll(newList)
         //将数据传给adapter，最终通过adapter.notifyItemXXX更新数据
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun addModel(model: T) {
+        models.add(model)
+        notifyItemInserted(itemCount)
     }
 }
 
