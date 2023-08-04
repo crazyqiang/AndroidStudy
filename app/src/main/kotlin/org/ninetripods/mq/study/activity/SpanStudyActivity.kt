@@ -13,10 +13,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.dp2px
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.kotlin.ktx.showToast
-import org.ninetripods.mq.study.span.CenterImageSpan
-import org.ninetripods.mq.study.span.CustomClickSpan
-import org.ninetripods.mq.study.span.RelativeSizeColorSpan
-import org.ninetripods.mq.study.span.SpanFactory
+import org.ninetripods.mq.study.span.*
 
 class SpanStudyActivity : BaseActivity() {
 
@@ -38,6 +35,8 @@ class SpanStudyActivity : BaseActivity() {
                 TITLE_3 +
                 "一代天骄，成吉思汗，只识弯弓射大雕。\n\n" + "俱往矣，数风流人物，还看今朝。"
         private const val SPAN_STR2 = "锄禾日当午，\n\t汗滴禾下土。\n谁知盘中餐，\n\t粒粒皆辛苦。"
+        private const val SPAN_STR3 =
+            "悯农锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。"
         const val SEG_1 = "北国风光"
         const val SEG_2 = "千里冰封"
         const val SEG_3 = "万里雪飘"
@@ -123,6 +122,9 @@ class SpanStudyActivity : BaseActivity() {
 //        processMetrics(spanBuilder)
         //3、影响段落的Span
 //        processParagraph(spanBuilder)
+
+        //4、处理TagSpan
+        //processCustomSpan()
 
         tvSpan.movementMethod = LinkMovementMethod.getInstance()
         tvSpan.setSpannableFactory(SpanFactory())
@@ -436,6 +438,20 @@ class SpanStudyActivity : BaseActivity() {
             Spanned.SPAN_INCLUSIVE_EXCLUSIVE -> "-> SPAN_INCLUSIVE_EXCLUSIVE"
             else -> "   -> setSpan()之后不再insert"
         }
+    }
+
+    private fun processCustomSpan() {
+        val imgDrawable = ResourcesCompat.getDrawable(resources, R.drawable.icon_flower, null)
+        val builder = SpannableStringBuilder(SPAN_STR3)
+        //1、设置Tag
+        //builder.setSpan(TagSpan(), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        //2、设置文本环绕Span效果
+        builder.setSpan(
+            TextAroundSpan(TextAroundSpan.ImgInfo(imgDrawable!!, 90.dp2px(), 90.dp2px()), 4, 100),
+            0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        tvSpan.text = builder
     }
 
 }

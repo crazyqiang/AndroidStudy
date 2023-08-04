@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference
 /**
  * Created by mq on 2023/7/2
  */
-class CenterImageSpan(drawable: Drawable, verticalAlignment: Int = ALIGN_CENTER) :
+class CenterImageSpan(drawable: Drawable, verticalAlignment: Int = ALIGN_BASELINE) :
     ImageSpan(drawable, verticalAlignment) {
 
     private var mDrawableRef: WeakReference<Drawable>? = null
@@ -42,7 +42,8 @@ class CenterImageSpan(drawable: Drawable, verticalAlignment: Int = ALIGN_CENTER)
                 val imgHeight = d.bounds.height() //图片高度
                 val textHeight = fm.bottom - fm.top //文字行高度
                 val halfDiffer = (imgHeight - textHeight) / 2
-                if (imgHeight > textHeight && verticalAlignment == ALIGN_CENTER) {
+                if (imgHeight > textHeight) {
+                    //图片大于文字 且居中排版
                     fm.ascent = fmInt.ascent - halfDiffer
                     fm.descent = fmInt.descent + halfDiffer
                     fm.top = fmInt.top - halfDiffer
