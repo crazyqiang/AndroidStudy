@@ -85,7 +85,7 @@ internal class LibsVersion {
         const val activity_ktx_version = "1.3.1"
         const val fragment_ktx_version = "1.3.6"
         const val datastore_version = "1.0.0"
-        const val kotlin_version = "1.5.0"
+        const val kotlin_version = "1.6.10"
         const val coroutines_version = "1.5.2"
         const val arouter_api_version = "1.5.1"
         const val arouter_compiler_version = "1.5.1"

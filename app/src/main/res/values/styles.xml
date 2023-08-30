@@ -1,5 +1,7 @@
 <resources>
 
+    <style name="AppComposeTheme" parent="android:Theme.Material.Light.NoActionBar" />
+
     <style name="textAppearanceSpan" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/result_points</item>
         <item name="android:textSize">20sp</item>

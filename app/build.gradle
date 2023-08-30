@@ -42,6 +42,17 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        //开启 Compose 功能
+        compose = true
+    }
+
+    composeOptions {
+        //配置Kotlin编译器扩展版本, 需要与 Kotlin 版本控制相关联
+        //对应关系：https://developer.android.com/jetpack/androidx/releases/compose-kotlin?hl=zh-cn
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion kotlin_version  //在AGP7.0+版本上不用配置这个了
+    }
 
     buildTypes {
         release {
@@ -86,6 +97,11 @@ android {
             flavor -> flavor.manifestPlaceholders = [KEY_VALUE: "${flavor.name}"]
         }
     }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
     //修改APK生成名字  通过android.applicationVariants索引来遍历所有的 build variant
     applicationVariants.each { variant ->
         variant.outputs.each {
@@ -123,6 +139,26 @@ dependencies {
     implementation Deps.jetpack_lifecycle_runtime //lifecycleScope
     implementation Deps.jetpack_datastore //datastore
     implementation Deps.jetpack_datastore_pf //datastore_preferences
+
+    /**
+     * Compose 相关配置
+     */
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation "androidx.compose.runtime:runtime:$compose_version"
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    implementation "androidx.compose.foundation:foundation-layout:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
+    implementation "com.google.android.material:compose-theme-adapter:$compose_version"
+
+    // Import the Compose BOM
+//    implementation platform('androidx.compose:compose-bom:2022.10.00')
+//    // Import other Compose libraries without version numbers
+//    // ..
+//    implementation 'androidx.compose.ui:ui'
+//    implementation 'androidx.compose.foundation:foundation'
 
     /**
      * Room相关
