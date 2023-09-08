@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study;
+package org.ninetripods.mq.study;//开放京东方
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
