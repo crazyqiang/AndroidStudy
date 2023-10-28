@@ -1,13 +1,12 @@
 package org.ninetripods.mq.study.jetpack.datastore
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.BookProto
 import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.BookModel
 
-class BookViewModel(private val bookRepo: BookRepo) : ViewModel() {
+class BookViewModel(private val bookRepo: BookRepo = BookRepo()) : ViewModel() {
 
     val bookSpFlow = bookRepo.bookFlow
 
@@ -46,13 +45,4 @@ class BookViewModel(private val bookRepo: BookRepo) : ViewModel() {
      */
     val bookPtFlow = bookRepo.bookProtoFlow
 
-}
-
-class BookRepoFactory(private val bookRepo: BookRepo) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(BookViewModel::class.java)) {
-            return BookViewModel(bookRepo) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }

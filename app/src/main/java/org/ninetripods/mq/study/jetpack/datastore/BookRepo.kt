@@ -10,13 +10,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import org.ninetripods.mq.study.BookProto
+import org.ninetripods.mq.study.MyApplication
 import org.ninetripods.mq.study.jetpack.datastore.ktx.*
 import org.ninetripods.mq.study.jetpack.datastore.preferences.PreferenceKeys
 import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.BookModel
 import org.ninetripods.mq.study.jetpack.datastore.sharedPreferences.Type
 import java.io.IOException
 
-class BookRepo private constructor(val context: Context) {
+class BookRepo(val context: Context = MyApplication.getApplication()) {
 
     //获取SharedPreference
     private val mBookSp =

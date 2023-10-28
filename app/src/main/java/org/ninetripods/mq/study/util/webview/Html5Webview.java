@@ -73,10 +73,10 @@ public class Html5Webview extends WebView {
         //开启 DOM storage API 功能 较大存储空间，使用简单
         settings.setDomStorageEnabled(true);
         //开启 Application Caches 功能 方便构建离线APP 不推荐使用
-        settings.setAppCacheEnabled(true);
-        final String cachePath = context.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
-        settings.setAppCachePath(cachePath);
-        settings.setAppCacheMaxSize(5 * 1024 * 1024);
+//        settings.setAppCacheEnabled(true);
+//        final String cachePath = context.getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+//        settings.setAppCachePath(cachePath);
+//        settings.setAppCacheMaxSize(5 * 1024 * 1024);
         //设置数据库缓存路径 存储管理复杂数据 方便对数据进行增加、删除、修改、查询 不推荐使用
         settings.setDatabaseEnabled(true);
         final String dbPath = context.getApplicationContext().getDir("db", Context.MODE_PRIVATE).getPath();

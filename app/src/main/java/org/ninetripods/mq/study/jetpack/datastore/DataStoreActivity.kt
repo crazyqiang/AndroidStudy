@@ -5,10 +5,9 @@ package org.ninetripods.mq.study.jetpack.datastore
  */
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.BookProto
@@ -34,7 +33,7 @@ class DataStoreActivity : BaseActivity() {
     private val mBtnGetPt: Button by id(R.id.btn_pt_get)
     private val mTvContentPt: TextView by id(R.id.tv_pt_content)
 
-    private lateinit var mBookViewModel: BookViewModel
+    private val mBookViewModel: BookViewModel by viewModels()
 
     override fun setContentView() {
         setContentView(R.layout.activity_data_store)
@@ -42,12 +41,6 @@ class DataStoreActivity : BaseActivity() {
 
     override fun initViews() {
         initToolBar(mToolBar, "Jetpack DataStore", true, true, TYPE_BLOG)
-
-        //创建ViewModel
-        mBookViewModel = ViewModelProvider(
-            this,
-            BookRepoFactory(BookRepo.getInstance(this))
-        ).get(BookViewModel::class.java)
     }
 
     override fun initEvents() {

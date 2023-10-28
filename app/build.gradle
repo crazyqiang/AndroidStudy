@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 //apply plugin: 'com.performance.optimize'
 
 //获取时间戳
@@ -144,14 +145,23 @@ dependencies {
      * Compose 相关配置
      */
     implementation 'androidx.activity:activity-compose:1.3.1'
+    //Compose Runtime: Compose 编程模型和状态管理的基本构建块，以及 Compose 编译器插件的目标核心运行时。
+    //https://developer.android.com/jetpack/androidx/releases/compose-runtime?hl=zh-cn
     implementation "androidx.compose.runtime:runtime:$compose_version"
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    //Compose中使用ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha01"
+    //StateFlow<T>.collectAsStateWithLifecycle()
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha01"
+
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation "androidx.compose.foundation:foundation-layout:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+
     implementation "androidx.compose.ui:ui-tooling:$compose_version"
     implementation "com.google.android.material:compose-theme-adapter:$compose_version"
+
 
     // Import the Compose BOM
 //    implementation platform('androidx.compose:compose-bom:2022.10.00')
