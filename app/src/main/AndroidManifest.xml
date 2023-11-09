@@ -17,11 +17,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tool:ignore="LockedOrientationActivity">
-        <activity
-            android:name=".ComposeStudyActivity"
-            android:exported="false"
-            android:label="@string/title_activity_compose_study"
-            android:theme="@style/AppComposeTheme" />
         <!-- 存数据 可以分别在application activity service等里面取出来，注意取的方式是不一样的 -->
         <meta-data
             android:name="com.nine.tripods.key"
@@ -36,6 +31,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ComposeStudyActivity"
+            android:exported="false"
+            android:label="@string/title_activity_compose_study"
+            android:theme="@style/AppComposeTheme" />
         <activity
             android:name=".activity.ResultApiActivity"
             android:exported="true"
