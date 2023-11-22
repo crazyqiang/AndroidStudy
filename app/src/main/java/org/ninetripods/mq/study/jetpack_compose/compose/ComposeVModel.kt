@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.compose
+package org.ninetripods.mq.study.jetpack_compose.compose
 
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.channels.Channel

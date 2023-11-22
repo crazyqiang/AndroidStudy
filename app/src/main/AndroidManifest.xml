@@ -32,10 +32,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ComposeStudyActivity"
+            android:name=".jetpack_compose.compose.ComposeExampleActivity"
             android:exported="false"
-            android:label="@string/title_activity_compose_study"
-            android:theme="@style/AppComposeTheme" />
+            android:theme="@style/AppComposeTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.ResultApiActivity"
             android:exported="true"

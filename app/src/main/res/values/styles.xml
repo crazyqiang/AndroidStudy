@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppComposeTheme" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="AppComposeTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <style name="textAppearanceSpan" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/result_points</item>

@@ -9,11 +9,12 @@ object KConsts {
 
     const val FRAGMENT_HOME = 0 //Home
     const val FRAGMENT_JETPACK = 1 //Jetpack
-    const val FRAGMENT_POP = 2 //Pop
-    const val FRAGMENT_PROCESS = 3 //多进程
-    const val FRAGMENT_RECYCLERVIEW = 4 //RecyclerView
-    const val FRAGMENT_MULTI_THREAD = 5 //多线程
-    const val FRAGMENT_NESTED_SCROLLER = 6 //嵌套滑动
+    const val FRAGMENT_JETPACK_COMPOSE = 2 //Jetpack Compose
+    const val FRAGMENT_POP = 3 //Pop
+    const val FRAGMENT_PROCESS = 4 //多进程
+    const val FRAGMENT_RECYCLERVIEW = 5 //RecyclerView
+    const val FRAGMENT_MULTI_THREAD = 6 //多线程
+    const val FRAGMENT_NESTED_SCROLLER = 7 //嵌套滑动
 
     const val LIFE_TAG: String = "SERVICE"
     const val LIFE_APPLICATION_TAG: String = "Lifecycle_App_Study"

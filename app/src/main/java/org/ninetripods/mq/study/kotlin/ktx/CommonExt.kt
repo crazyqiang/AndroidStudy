@@ -21,10 +21,6 @@ fun showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(MyApplication.getApplication(), message, duration).show()
 }
 
-fun Context.log(message: String) {
-    Log.e("TTT", message)
-}
-
 fun log(message: String) {
     Log.e("Tag", message)
 }

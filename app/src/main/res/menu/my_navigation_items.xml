@@ -11,6 +11,11 @@
         android:enabled="true"
         android:title="Kotlin/Jetpack系列" />
     <item
+        android:id="@+id/my_navigation_7"
+        android:checkable="false"
+        android:enabled="true"
+        android:title="Jetpack Compose" />
+    <item
         android:id="@+id/my_navigation_1"
         android:checkable="false"
         android:enabled="true"

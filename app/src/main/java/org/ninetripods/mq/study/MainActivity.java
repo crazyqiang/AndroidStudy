@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import org.ninetripods.mq.study.jetpack.JetpackAndKtFragment;
 import org.ninetripods.mq.study.jetpack.KConsts;
+import org.ninetripods.mq.study.jetpack_compose.JetpackComposeFragment;
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
 import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
 import org.ninetripods.mq.study.util.fragment.NestedScrollFragment;
@@ -47,7 +48,7 @@ public class MainActivity extends BaseActivity {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
         //NOTE: 切换初始化展示的Fragment
-        selectItem(KConsts.FRAGMENT_JETPACK);
+        selectItem(KConsts.FRAGMENT_JETPACK_COMPOSE);
     }
 
     @Override
@@ -61,6 +62,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.my_navigation_6:
                         selectItem(KConsts.FRAGMENT_JETPACK);
+                        break;
+                    case R.id.my_navigation_7:
+                        selectItem(KConsts.FRAGMENT_JETPACK_COMPOSE);
                         break;
                     case R.id.my_navigation_1:
                         selectItem(KConsts.FRAGMENT_POP);
@@ -111,11 +115,11 @@ public class MainActivity extends BaseActivity {
 
     private Fragment getFragment(int pos) {
         switch (pos) {
-            case KConsts.FRAGMENT_HOME:
-                currentFragment = new HomeFragment();
-                break;
             case KConsts.FRAGMENT_JETPACK:
                 currentFragment = JetpackAndKtFragment.newInstance("");
+                break;
+            case KConsts.FRAGMENT_JETPACK_COMPOSE:
+                currentFragment = new JetpackComposeFragment();
                 break;
             case KConsts.FRAGMENT_POP:
                 currentFragment = new PopFragment();
@@ -132,6 +136,7 @@ public class MainActivity extends BaseActivity {
             case KConsts.FRAGMENT_NESTED_SCROLLER:
                 currentFragment = new NestedScrollFragment();
                 break;
+            case KConsts.FRAGMENT_HOME:
             default:
                 currentFragment = new HomeFragment();
                 break;

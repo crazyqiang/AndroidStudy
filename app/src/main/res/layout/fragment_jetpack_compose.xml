@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="30dp"
+    android:layout_marginEnd="30dp">
+
+    <TextView
+        android:id="@+id/tv_remember_state"
+        style="@style/btn_style_done"
+        android:layout_marginTop="80dp"
+        android:text="remember、state状态" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_lifecycle"-->
+<!--        style="@style/btn_style_done"-->
+<!--        android:layout_below="@+id/tv_kt"-->
+<!--        android:layout_marginTop="@dimen/margin_btn"-->
+<!--        android:text="Lifecycle" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_livedata"-->
+<!--        style="@style/btn_style_done"-->
+<!--        android:layout_below="@+id/tv_lifecycle"-->
+<!--        android:layout_marginTop="@dimen/margin_btn"-->
+<!--        android:text="LiveData" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_viewmodel"-->
+<!--        style="@style/btn_style_done"-->
+<!--        android:layout_below="@+id/tv_livedata"-->
+<!--        android:layout_marginTop="@dimen/margin_btn"-->
+<!--        android:text="ViewModel" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_mvvm"-->
+<!--        style="@style/btn_style_done"-->
+<!--        android:layout_below="@+id/tv_viewmodel"-->
+<!--        android:layout_marginTop="@dimen/margin_btn"-->
+<!--        android:text="Jetpack MVVM" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_mvi"-->
+<!--        style="@style/btn_style_done"-->
+<!--        android:layout_below="@+id/tv_mvvm"-->
+<!--        android:layout_marginTop="@dimen/margin_btn"-->
+<!--        android:text="Jetpack MVI" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_datastore"-->
+<!--        style="@style/btn_style_done"-->
+<!--        android:layout_below="@+id/tv_mvi"-->
+<!--        android:layout_marginTop="@dimen/margin_btn"-->
+<!--        android:text="DataStore" />-->
+
+</RelativeLayout>

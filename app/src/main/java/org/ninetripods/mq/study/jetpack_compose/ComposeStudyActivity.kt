@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study
+package org.ninetripods.mq.study.jetpack_compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

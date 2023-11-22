@@ -1,4 +1,4 @@
-package org.ninetripods.mq.study.jetpack.compose
+package org.ninetripods.mq.study.jetpack_compose.compose
 
 import android.content.res.Resources
 import android.graphics.BitmapShader
@@ -37,6 +37,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseMvvmActivity
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseViewModel
 import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
+import org.ninetripods.mq.study.jetpack_compose.SideEffectStudy
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
@@ -51,17 +52,32 @@ class ComposeExampleActivity : BaseMvvmActivity() {
     override fun init() {}
 
     override fun setContentView() {
-        setContent { GreetingScreen() }
+        setContent {
+            //RememberScreen() //1、remember相关用法
+            //2、测试DisposableEffect相关用法
+//            HomeScreen(
+//                onStart = { log("HomeScreen: onStart()") },
+//                onStop = { log("HomeScreen: onStop()") })
+            // LaunchedEffectScreen() //3、测试LaunchedEffectScreen相关用法
+
+//            var num by remember { mutableStateOf(0) }
+//            ComposeEffect(onClick = {
+//                //4、测试rememberUpdatedState相关用法
+//                log("最新Num:$num")
+//            })
+            //ShowText()
+            SideEffectStudy()
+        }
     }
 
     @Composable
-    fun GreetingScreen() {
-        var resId = remember { mutableStateOf(R.drawable.icon_flower) }
-        log("resId: ${resId.value}")
+    fun RememberScreen() {
+        var resId by remember { mutableStateOf(R.drawable.icon_flower) }
+        log("resId: $resId")
 
-        Greeting(resId = resId.value,
+        Greeting(resId = resId,
             onClickAction = {
-                resId.value = R.drawable.icon_qrcode_we_chat
+                resId = R.drawable.icon_qrcode_we_chat
                 mVModel.getWanInfo()
             })
     }
@@ -130,12 +146,12 @@ class ComposeExampleActivity : BaseMvvmActivity() {
 
         Column(modifier = Modifier.background(bitmap)) {
             Text(
-                text = "$state",
+                text = "flow: $state",
                 color = Color.Red,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                text = "$liveDataState",
+                text = "liveData: $liveDataState",
                 color = Color.Red,
                 modifier = Modifier.fillMaxWidth()
             )
