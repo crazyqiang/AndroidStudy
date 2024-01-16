@@ -37,7 +37,7 @@ import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseMvvmActivity
 import org.ninetripods.mq.study.jetpack.mvvm.base.BaseViewModel
 import org.ninetripods.mq.study.jetpack.mvvm.model.WanModel
-import org.ninetripods.mq.study.jetpack_compose.SideEffectStudy
+import org.ninetripods.mq.study.jetpack_compose.NestedBoxSample
 import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
@@ -65,10 +65,31 @@ class ComposeExampleActivity : BaseMvvmActivity() {
 //                //4、测试rememberUpdatedState相关用法
 //                log("最新Num:$num")
 //            })
-            //ShowText()
-            SideEffectStudy()
+//            ShowText()
+//            ButtonSample()
+//            SliderSample()
+            // DialogSample()
+//            ModifierDemo()
+//            NestedScrollerSample()
+//            Column {
+////                DragSample()
+////                ClickSample()
+////                ScrollSample()
+//                Spacer(modifier = Modifier.height(100.dp))
+//                //.............Swipe滑动.............
+//                Text(text = "Modifier.swipeable()")
+//                SwipeableSample()
+//                //.............Transform变换.............
+//                Spacer(modifier = Modifier.height(20.dp))
+//                Text(text = "Modifier.transformable()")
+//                TransformableSample()
+//            }
+            NestedBoxSample()
+            //AnimationScreen()
+            //SideEffectStudy()
         }
     }
+
 
     @Composable
     fun RememberScreen() {

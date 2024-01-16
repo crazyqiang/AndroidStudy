@@ -1,7 +1,13 @@
 package org.ninetripods.mq.study.jetpack_compose
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -22,10 +28,14 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.ninetripods.mq.study.kotlin.ktx.log
@@ -36,11 +46,11 @@ import org.ninetripods.mq.study.kotlin.ktx.log
 @Composable
 fun SideEffectStudy() {
     SideEffect {
+        //如果下面的异常代码执行，SideEffect内部的lambda就不再执行了
         log("SideEffect launch")
     }
-    throw IllegalArgumentException("exception throw")
+    //throw IllegalArgumentException("exception throw")
 }
-
 
 
 @Composable
@@ -192,10 +202,21 @@ fun HomeScreen(
 fun ShowText() {
     val list = remember { mutableStateListOf<String>() }
     val showText by remember { derivedStateOf { list.size.toString() } }
-    Column {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Button(onClick = { list.add("") }) {
             Text(text = "点我加1")
         }
         Text(text = showText)
+        Spacer(modifier = Modifier.size(20.dp))
+        AsyncImage(
+            model = "https://www.niegobrand.com/uploads/image/20190825/1566745207.png",
+            modifier = Modifier
+                .padding(10.dp)
+                .size(100.dp)
+                .border(BorderStroke(2.dp,Color.Yellow))
+                .padding(10.dp),
+            contentScale = ContentScale.FillBounds,
+            contentDescription = "Translated description of what the image contains"
+        )
     }
 }
