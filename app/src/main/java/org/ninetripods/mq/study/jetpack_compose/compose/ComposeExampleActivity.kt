@@ -76,12 +76,10 @@ class ComposeExampleActivity : BaseMvvmActivity() {
 ////                ClickSample()
 ////                ScrollSample()
 //                Spacer(modifier = Modifier.height(100.dp))
-//                //.............Swipe滑动.............
 //                Text(text = "Modifier.swipeable()")
-//                SwipeableSample()
-//                //.............Transform变换.............
+//                SwipeableSample() //Swipe滑动
 //                Spacer(modifier = Modifier.height(20.dp))
-//                Text(text = "Modifier.transformable()")
+//                Text(text = "Modifier.transformable()")//Transform变换
 //                TransformableSample()
 //            }
             NestedBoxSample()

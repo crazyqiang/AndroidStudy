@@ -40,6 +40,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
@@ -270,6 +271,17 @@ fun TransformableSample() {
     }
 }
 
+
+/**
+ * 1、awaitPointerEvent()类似于View体系中的onTouchEvent()，
+ * 方法返回PointerEvent类型，包含所有手指交互信息changes以及事件信息internalPointerEvent
+ *
+ * 2、手势事件分发：PointerEventPass有三个值：Initial, Main, Final ，
+ * 其中Initial类似于View体系中的onInterceptTouchEvent()、Main相当于View体系中的onTouchEvent()。 手势分发顺序Initial -> Main -> Final
+ *
+ * 3、手势事件消费：
+ *
+ */
 @Composable
 fun NestedBoxSample() {
     Box(
@@ -279,7 +291,11 @@ fun NestedBoxSample() {
             .background(Color.Red)
             .pointerInput(Unit) {
                 awaitPointerEventScope {
-                    awaitPointerEvent(PointerEventPass.Initial)
+                    //单指交互信息封装在PointerInputChange里了。
+                    val event: PointerEvent = awaitPointerEvent()
+                    awaitFirstDown(false)
+                    log("x:${event.changes[0].position.x},y:${event.changes[0].position.y}")
+                    awaitPointerEvent(PointerEventPass.Main)
                     log("first layer")
                 }
             }) {
@@ -289,11 +305,11 @@ fun NestedBoxSample() {
                 .size(200.dp)
                 .background(Color.Blue)
                 .pointerInput(Unit) {
-//                    awaitPointerEventScope {
-//                        awaitPointerEvent(PointerEventPass.Final)
-//                        log("second layer")
-//                    }
-                    awaitPointerEventScope { awaitFirstDown() }
+                    awaitPointerEventScope {
+                        awaitPointerEvent(PointerEventPass.Main)
+                        log("second layer")
+                    }
+//                    awaitPointerEventScope { awaitFirstDown() }
                 }) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -302,7 +318,7 @@ fun NestedBoxSample() {
                     .background(Color.Green)
                     .pointerInput(Unit) {
                         awaitPointerEventScope {
-                            awaitPointerEvent(PointerEventPass.Initial)
+                            awaitPointerEvent(PointerEventPass.Main)
                             log("third layer")
                         }
                     }) {
