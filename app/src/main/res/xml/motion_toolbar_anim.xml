@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <!--转场-->
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="1000">
+        <!--设置关键帧时使用-->
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <!--动画开始状态-->
+    <ConstraintSet android:id="@+id/start">
+    </ConstraintSet>
+
+    <!--动画结束状态-->
+    <ConstraintSet android:id="@+id/end">
+    </ConstraintSet>
+
+</MotionScene>

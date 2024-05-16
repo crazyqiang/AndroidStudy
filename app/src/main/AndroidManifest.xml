@@ -47,6 +47,8 @@
             android:name=".activity.SharedPreferencesActivity"
             android:exported="true"
             android:screenOrientation="portrait"/>
+        <activity android:name=".anim.MotionLayoutActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".viewpager2.ViewPager2DispatchActivity"
             android:exported="false"

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <StateSet>
+        <State
+            android:id="@+id/state1"
+            motion:constraints="@xml/motion_layout_anim">
+        </State>
+        <State ></State>
+    </StateSet>
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="1000">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:onTouchUp="neverCompleteToStart"
+            motion:touchAnchorId="@+id/ll_pop_dialog"
+            motion:touchAnchorSide="top" />
+        <!--        <KeyFrameSet>-->
+        <!--            <KeyAttribute-->
+        <!--                android:alpha="0.5"-->
+        <!--                motion:framePosition="43"-->
+        <!--                motion:motionTarget="@+id/iv_target" />-->
+        <!--        </KeyFrameSet>-->
+
+        <!--        <KeyFrameSet>-->
+        <!--            <KeyPosition-->
+        <!--                motion:framePosition="50"-->
+        <!--                motion:keyPositionType="deltaRelative"-->
+        <!--                motion:motionTarget="@id/iv_target"-->
+        <!--                motion:percentX="0.8"-->
+        <!--                motion:percentY="0.8" />-->
+        <!--        </KeyFrameSet>-->
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/ll_pop_dialog"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <!--自定义属性-->
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="#D81B60" />
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/ll_pop_dialog"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="200dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="#9999FF" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--    <StateSet></StateSet>-->
+
+    <!--    <ViewTransition></ViewTransition>-->
+
+</MotionScene>

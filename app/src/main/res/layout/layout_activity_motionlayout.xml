@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroud_gray"
+    app:layoutDescription="@xml/motion_layout_anim"
+    app:motionDebug="SHOW_ALL"
+    app:showPaths="true">
+    <!--motionDebug取值:1、NO_DEBUG 2、SHOW_ALL 3、SHOW_PATH 4、SHOW_PROGRESS-->
+    <!--通过layoutDescription来描述运动场景-->
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <Button
+        android:id="@+id/btn_clk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="点击"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/ll_pop_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@color/cffd28c"
+        android:gravity="center"
+        android:text="Pop Dialog"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_target" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
