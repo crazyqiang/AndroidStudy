@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.ninetripods.mq.study.CommonWebviewActivity;
 import org.ninetripods.mq.study.R;
+import org.ninetripods.mq.study.activity.DanMuAnimActivity;
 import org.ninetripods.mq.study.anim.AnimationActivity;
 import org.ninetripods.mq.study.bezier.BezierDemoActivity;
 import org.ninetripods.mq.study.bezier.QQTrackPointActivity;
@@ -73,7 +74,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
     private void initBeans() {
         List<NameBean> beans = new ArrayList<>();
         String[][] array = {
-                {"自定义View", "饼形图", "AliPay", "", ""},
+                {"自定义View", "饼形图", "AliPay", "弹幕View", ""},
                 {"自定义ViewGroup", "五环图", "流式布局", "", ""},
                 {"动画+Path", "补间动画", "PathMeasure", "Path+SVG", "ViewPropertyAnimator"},
                 {"贝塞尔曲线", "基本用法示例", "仿QQ小红点", "", ""},
@@ -100,6 +101,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         NavitateUtil.startActivity(getActivity(), ALiPayActivity.class);
                         break;
                     case R.id.tv_view_three:
+                        NavitateUtil.startActivity(getActivity(), DanMuAnimActivity.class);
                         break;
                     case R.id.tv_view_four:
                         break;
