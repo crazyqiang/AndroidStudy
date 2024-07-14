@@ -33,7 +33,15 @@
         </activity>
         <activity
             android:name=".activity.DanMuAnimActivity"
-            android:exported="true"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.HorizontalSlideActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.MatrixStudyActivity"
+            android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".jetpack_compose.compose.ComposeExampleActivity"

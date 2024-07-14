@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.ninetripods.mq.study.CommonWebviewActivity;
 import org.ninetripods.mq.study.R;
 import org.ninetripods.mq.study.activity.DanMuAnimActivity;
+import org.ninetripods.mq.study.activity.HorizontalSlideActivity;
+import org.ninetripods.mq.study.activity.MatrixStudyActivity;
 import org.ninetripods.mq.study.anim.AnimationActivity;
 import org.ninetripods.mq.study.bezier.BezierDemoActivity;
 import org.ninetripods.mq.study.bezier.QQTrackPointActivity;
@@ -42,6 +44,15 @@ import java.util.List;
 public class HomeFragment extends Fragment implements MyOnclickListener {
     private RecyclerView recycle_view;
     private MainAdapter mAdapter;
+    private List<NameBean> beans = new ArrayList<>();
+    private static final int POS_CUSTOM_VIEW = 0;
+    private static final int POS_CUSTOM_VIEWGROUP = 1;
+    private static final int POS_ANIM = 2;
+    private static final int POS_BEZIER = 3;
+    private static final int POS_PROCESS = 4;
+    private static final int POS_TOUCH_EVENT = 5;
+    private static final int POS_POP_WINDOW = 6;
+    private static final int POS_CUSTOM_VIEW2 = 7;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -72,15 +83,15 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
     }
 
     private void initBeans() {
-        List<NameBean> beans = new ArrayList<>();
         String[][] array = {
-                {"自定义View", "饼形图", "AliPay", "弹幕View", ""},
+                {"自定义View", "饼形图", "AliPay", "弹幕View", "Matrix示例"},
                 {"自定义ViewGroup", "五环图", "流式布局", "", ""},
                 {"动画+Path", "补间动画", "PathMeasure", "Path+SVG", "ViewPropertyAnimator"},
                 {"贝塞尔曲线", "基本用法示例", "仿QQ小红点", "", ""},
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
                 {"事件滑动", "NestedScroll", "ScrollView+ListView", "", "", ""},
-                {"弹窗", "PopupWindow", "", "", "", ""}
+                {"弹窗", "PopupWindow", "", "", "", ""},
+                {"自定义View2", "横向滑动", "", "", ""},
         };
         for (String[] anArray : array) {
             beans.add(new NameBean(anArray[0], anArray[1], anArray[2], anArray[3], anArray[4]));
@@ -91,7 +102,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
     @Override
     public void onItemClick(View view, int position) {
         switch (position) {
-            case 0:
+            case POS_CUSTOM_VIEW:
                 //自定义View
                 switch (view.getId()) {
                     case R.id.tv_view_one:
@@ -104,10 +115,11 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         NavitateUtil.startActivity(getActivity(), DanMuAnimActivity.class);
                         break;
                     case R.id.tv_view_four:
+                        NavitateUtil.startActivity(getActivity(), MatrixStudyActivity.class);
                         break;
                 }
                 break;
-            case 1:
+            case POS_CUSTOM_VIEWGROUP:
                 //自定义ViewGroup
                 switch (view.getId()) {
                     case R.id.tv_view_one:
@@ -120,7 +132,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         break;
                 }
                 break;
-            case 2:
+            case POS_ANIM:
                 //属性动画+Path
                 switch (view.getId()) {
                     case R.id.tv_view_two:
@@ -137,7 +149,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         break;
                 }
                 break;
-            case 3:
+            case POS_BEZIER:
                 //贝塞尔曲线
                 switch (view.getId()) {
                     case R.id.tv_view_one:
@@ -150,7 +162,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         break;
                 }
                 break;
-            case 4:
+            case POS_PROCESS:
                 switch (view.getId()) {
                     case R.id.tv_title:
                         CommonWebviewActivity.webviewEntrance(getActivity(), Constant.PROCESS_URL);
@@ -173,7 +185,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         break;
                 }
                 break;
-            case 5:
+            case POS_TOUCH_EVENT:
                 //嵌套滑动
                 switch (view.getId()) {
                     case R.id.tv_view_one:
@@ -184,7 +196,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         break;
                 }
                 break;
-            case 6:
+            case POS_POP_WINDOW:
                 //弹窗
                 switch (view.getId()) {
                     case R.id.tv_title:
@@ -195,6 +207,23 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                         break;
                 }
                 break;
+            case POS_CUSTOM_VIEW2:
+                switch (view.getId()) {
+                    case R.id.tv_title:
+                        break;
+                    case R.id.tv_view_one:
+                        NavitateUtil.startActivity(getActivity(), HorizontalSlideActivity.class);
+                        break;
+                    case R.id.tv_view_two:
+                        break;
+                    case R.id.tv_view_three:
+                        break;
+                    case R.id.tv_view_four:
+                        break;
+                }
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + position);
         }
     }
 }
