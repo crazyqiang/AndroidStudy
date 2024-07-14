@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment implements MyOnclickListener {
                 {"进程间通信", "Intent", "AIDL", "Messenger", "Binder"},
                 {"事件滑动", "NestedScroll", "ScrollView+ListView", "", "", ""},
                 {"弹窗", "PopupWindow", "", "", "", ""},
-                {"自定义View2", "横向滑动", "", "", ""},
+                {"自定义View2", "左滑查看更多", "", "", ""},
         };
         for (String[] anArray : array) {
             beans.add(new NameBean(anArray[0], anArray[1], anArray[2], anArray[3], anArray[4]));

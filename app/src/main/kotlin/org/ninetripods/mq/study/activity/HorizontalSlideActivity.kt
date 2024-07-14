@@ -17,7 +17,7 @@ class HorizontalSlideActivity : BaseActivity() {
 
     override fun setContentView() {
         setContentView(R.layout.activity_horizontal_scorll)
-        initToolBar(mToolBar, "横向滑动", true, false)
+        initToolBar(mToolBar, "左滑查看更多", true, false)
         val list = mutableListOf<ItemPicInfo>()
         (0..7).forEach { _ ->
             list.add(ItemPicInfo("https://img.china.alibaba.com/img/ibank/2013/101/139/834931101_1920026967.jpg", TYPE_DATA))
