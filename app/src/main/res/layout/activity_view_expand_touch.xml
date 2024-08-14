@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_view_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/m_toolbar" />
+
+    <TextView
+        android:id="@+id/tv_view_delegate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@color/gray_holo_light"
+        android:text="TouchDelegate" />
+
+    <!--自定义View中通过getLocationOnScreen去扩大子View点击区域-->
+    <org.ninetripods.mq.study.widget.ParentInnerTouchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp" />
+
+
+</LinearLayout>
