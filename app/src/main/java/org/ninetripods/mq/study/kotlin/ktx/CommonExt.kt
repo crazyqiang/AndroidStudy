@@ -22,7 +22,7 @@ fun showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 }
 
 fun log(message: String) {
-    Log.e("Tag", message)
+    Log.e("TTT", message)
 }
 
 fun Number.dp2px(): Int {
