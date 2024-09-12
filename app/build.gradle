@@ -82,18 +82,18 @@ android {
         huidu {
             dimension "api"
         }
-        xiaomi {
-            dimension "api"
-        }
-        huawei {
-            dimension "api"
-        }
-        oppo {
-            dimension "api"
-        }
-        vivi {
-            dimension "api"
-        }
+//        xiaomi {
+//            dimension "api"
+//        }
+//        huawei {
+//            dimension "api"
+//        }
+//        oppo {
+//            dimension "api"
+//        }
+//        vivi {
+//            dimension "api"
+//        }
         productFlavors.findAll {
             flavor -> flavor.manifestPlaceholders = [KEY_VALUE: "${flavor.name}"]
         }

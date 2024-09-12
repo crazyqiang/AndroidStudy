@@ -10,6 +10,7 @@ android {
         targetSdkVersion App.targetSdkVersion
         versionCode App.versionCode
         versionName App.versionName
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
