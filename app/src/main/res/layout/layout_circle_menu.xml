@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    app:layoutDescription="@xml/layout_circle_menu_scene">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/background"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:background="#0178d9"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:roundPercent="1" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableTop="@drawable/power"
+        android:text="Logout"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintCircle="@id/imageButton"
+        app:layout_constraintCircleAngle="270"
+        app:layout_constraintCircleRadius="180dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableTop="@drawable/search"
+        android:text="Search"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintCircle="@id/imageButton"
+        app:layout_constraintCircleAngle="330"
+        app:layout_constraintCircleRadius="200dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableTop="@drawable/cart"
+        android:text="Wishlist"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintCircle="@id/imageButton"
+        app:layout_constraintCircleAngle="300"
+        app:layout_constraintCircleRadius="200dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableTop="@drawable/list"
+        android:text="Dashboard"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintCircle="@id/imageButton"
+        app:layout_constraintCircleAngle="360"
+        app:layout_constraintCircleRadius="200dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableTop="@drawable/mail"
+        android:text="mail"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintCircle="@id/imageButton"
+        app:layout_constraintCircleAngle="390"
+        app:layout_constraintCircleRadius="200dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:drawableTop="@drawable/exit"
+        android:text="back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintCircle="@id/imageButton"
+        app:layout_constraintCircleAngle="420"
+        app:layout_constraintCircleRadius="200dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="64dp"
+        android:background="#0000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/add_circle" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
