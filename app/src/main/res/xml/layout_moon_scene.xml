@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="3000">
+
+        <OnSwipe
+            motion:dragDirection="dragRight"
+            motion:touchAnchorId="@id/moon"
+            motion:touchAnchorSide="bottom" />
+
+        <KeyFrameSet>
+            <KeyPosition
+                motion:framePosition="25"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@id/moon"
+                motion:percentY="0.6" />
+            <KeyPosition
+                motion:framePosition="50"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@id/moon"
+                motion:percentY="0.5" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@id/moon"
+                motion:percentY="0.6" />
+
+            <KeyAttribute
+                android:rotation="-360"
+                android:scaleX="2.0"
+                android:scaleY="2.0"
+                motion:framePosition="50"
+                motion:motionTarget="@id/moon" />
+
+            <KeyAttribute
+                android:rotation="-720"
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                motion:framePosition="100"
+                motion:motionTarget="@id/moon" />
+
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@id/moon">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#FFFFFF" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                motion:framePosition="50"
+                motion:motionTarget="@id/moon">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="@color/yellow" />
+            </KeyAttribute>
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@id/moon">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#FFFFFF" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                android:alpha="0.0"
+                motion:framePosition="85"
+                motion:motionTarget="@id/credits" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="40"
+                motion:motionTarget="@id/swipe_hint"
+                motion:transitionEasing="accelerate" />
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/moon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@id/credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:alpha="0.0"
+            motion:layout_constraintBottom_toBottomOf="@id/moon"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/moon" />
+        <!-- Added a hint that flies out and fades after the user swipes to the right -->
+        <Constraint
+            android:id="@id/swipe_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/moon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent" />
+
+        <Constraint
+            android:id="@id/credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:alpha="1.0"
+            motion:layout_constraintBottom_toBottomOf="@id/moon"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/moon" />
+        <!-- Added a hint that flies out and fades after the user swipes to the right -->
+        <Constraint
+            android:id="@id/swipe_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+</MotionScene>

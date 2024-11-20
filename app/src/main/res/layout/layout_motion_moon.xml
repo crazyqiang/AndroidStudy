@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    app:layoutDescription="@xml/layout_moon_scene"
+    app:showPaths="true">
+
+    <ImageView
+        android:id="@+id/moon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_moon" />
+
+    <TextView
+        android:id="@+id/credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Virginia P @ Google"
+        android:textSize="24sp" />
+
+    <!-- Added a hint that flies out and fades after the user swipes to the right -->
+    <TextView
+        android:id="@+id/swipe_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Swipe towards the right" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
