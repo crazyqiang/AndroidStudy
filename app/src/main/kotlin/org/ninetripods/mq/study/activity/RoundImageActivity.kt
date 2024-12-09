@@ -35,9 +35,15 @@ class RoundImageActivity : BaseActivity() {
     private val mToolBar: Toolbar by id(R.id.toolbar)
     private val mIvTarget: AppCompatImageView by id(R.id.iv_round_img)
     private val mIvTarget2: AppCompatImageView by id(R.id.iv_round_img2)
+    private val mIvGlide1: AppCompatImageView by id(R.id.iv_glide1)
+    private val mIvGlide2: AppCompatImageView by id(R.id.iv_glide2)
+    private val mIvClipPath: RoundImgView by id(R.id.iv_custom_img)
+    private val mIvClipPath2: RoundImgView by id(R.id.iv_custom_img2)
 
-    private val mIvCustomImg: RoundImgView by id(R.id.iv_custom_img)
-    private val mIvCustomImg2: RoundImgView by id(R.id.iv_custom_img2)
+    private val mIvBitmapShader: AppCompatImageView by id(R.id.iv_bitmap_shader)
+    private val mIvBitmapDrawable: AppCompatImageView by id(R.id.iv_bitmap_drawable)
+
+
 
     override fun setContentView() {
         setContentView(R.layout.activity_image_round)
@@ -52,44 +58,44 @@ class RoundImageActivity : BaseActivity() {
         /**
          * 方式一：ViewOutlineProvider可以设置圆角矩形、椭圆、圆形等
          */
-//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
-//        mIvTarget.clipToRoundView(RoundImgView.SHAPE_ROUND_RECT)
-//        mIvTarget.setImageBitmap(bitmap)
-//
-//        mIvTarget2.clipToRoundView(RoundImgView.SHAPE_CIRCLE)
-//        mIvTarget2.setImageBitmap(bitmap)
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
+        mIvTarget.clipToRoundView(RoundImgView.SHAPE_ROUND_RECT)
+        mIvTarget.setImageBitmap(bitmap)
+
+        mIvTarget2.clipToRoundView(RoundImgView.SHAPE_CIRCLE)
+        mIvTarget2.setImageBitmap(bitmap)
 
         /**
          * 方式二：Glide
          */
-//        //1、图片设置的不是CenterCrop
-//        Glide.with(this)
-//            .load(R.drawable.icon_cat_w)
-//            .transform(RoundedCorners(16.dp2px()))
-//            .into(mIvTarget)
-//
-//        //2、如果图片设置的是CenterCrop，则需要用下面的方式处理CenterCrop与圆角矩形冲突问题
-//        val requestOptions = RequestOptions()
-//            .transform(CenterCrop(), RoundedCorners(16.dp2px()))
-//
-//        Glide.with(this)
-//            .load(R.drawable.icon_cat_w)
-//            .apply(requestOptions)
-//            .into(mIvTarget)
+        //1、图片设置的不是CenterCrop
+        Glide.with(this)
+            .load(R.drawable.icon_cat_w)
+            .transform(RoundedCorners(16.dp2px()))
+            .into(mIvGlide1)
+
+        //2、如果图片设置的是CenterCrop，则需要用下面的方式处理CenterCrop与圆角矩形冲突问题
+        val requestOptions = RequestOptions()
+            .transform(CenterCrop(), RoundedCorners(16.dp2px()))
+
+        Glide.with(this)
+            .load(R.drawable.icon_cat_w)
+            .apply(requestOptions)
+            .into(mIvGlide2)
 
         /**
          * 方式三：Canvas.clipPath()
          */
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
-        mIvCustomImg.setCornerRadius(15.dp2px().toFloat())
+        val bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
+        mIvClipPath.setCornerRadius(15.dp2px().toFloat())
             .setShapeType(RoundImgView.SHAPE_ROUND_RECT)
             .setStrokeWidth(10f)
-            .setImageBitmap(bitmap)
+            .setImageBitmap(bitmap1)
 
-        mIvCustomImg2.setCornerRadius(15.dp2px().toFloat())
+        mIvClipPath2.setCornerRadius(15.dp2px().toFloat())
             .setShapeType(RoundImgView.SHAPE_CIRCLE)
             .setStrokeWidth(10f)
-            .setImageBitmap(bitmap)
+            .setImageBitmap(bitmap1)
 
         /**
          * 方式四：CardView
@@ -98,22 +104,24 @@ class RoundImageActivity : BaseActivity() {
         /**
          * 方式五：BitmapShader
          */
-//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
-//        mIvTarget.post {
-//            val targetBitmap =
-//                getBitmapByShader(bitmap, 200.dp2px(), 200.dp2px(), 20.dp2px(), 5.dp2px(), RoundImgView.SHAPE_ROUND_RECT)
-//            mIvTarget.setImageBitmap(targetBitmap)
-//        }
-//        val roundDrawable = RoundDrawable(bitmap, 200.dp2px().toFloat())
-//        mIvTarget.setImageDrawable(roundDrawable)
+        val bitmap3 = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
+        mIvBitmapShader.post {
+            val targetBitmap =
+                getBitmapByShader(bitmap3, 200.dp2px(), 200.dp2px(), 20.dp2px(), 5.dp2px(), RoundImgView.SHAPE_ROUND_RECT)
+            mIvBitmapShader.setImageBitmap(targetBitmap)
+        }
+        val roundDrawable = RoundDrawable(bitmap3, 200.dp2px().toFloat())
+        mIvBitmapShader.setImageDrawable(roundDrawable)
 
-        //方式六：RoundedBitmapDrawable
-//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
-//        val roundBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap).apply {
-//            paint.isAntiAlias = true
-//            cornerRadius = 20.dp2px().toFloat()
-//        }
-//        mIvTarget.setImageDrawable(roundBitmapDrawable)
+        /**
+         * 方式六：RoundedBitmapDrawable
+         */
+        val bitmap4 = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
+        val roundBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, bitmap4).apply {
+            paint.isAntiAlias = true
+            cornerRadius = 20.dp2px().toFloat()
+        }
+        mIvBitmapDrawable.setImageDrawable(roundBitmapDrawable)
     }
 
 
