@@ -18,6 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipChildren="false"
             android:orientation="vertical">
 
             <!--方式一：ViewOutlineProvider可以设置圆角矩形、椭圆、圆形等-->
@@ -78,6 +79,7 @@
                     android:scaleType="centerCrop" />
             </LinearLayout>
 
+            <!--3、ClipPath-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,6 +108,7 @@
                     android:scaleType="centerCrop" />
             </LinearLayout>
 
+            <!--4、CardView-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,6 +131,7 @@
                     android:src="@drawable/icon_cat_w" />
             </androidx.cardview.widget.CardView>
 
+            <!--5、BitmapShader-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,6 +145,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center" />
 
+            <!--6、BitmapDrawable-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,6 +158,151 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center" />
+            <!--7、ImageFilterView-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="7、ImageFilterView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_filter_view1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/iv_filter_view2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:scaleType="centerCrop" />
+            </LinearLayout>
+
+            <!--8、ShapeableImageView-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="8、ShapeableImageView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w"
+                    app:shapeAppearance="@style/roundedCornerStyle" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w"
+                    app:shapeAppearance="@style/circleCornerStyle" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view3"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w"
+                    app:shapeAppearance="@style/roundedCornerStyle"
+                    app:strokeColor="@color/red"
+                    app:strokeWidth="4dp" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w"
+                    app:shapeAppearance="@style/circleCornerStyle"
+                    app:strokeColor="@color/red"
+                    app:strokeWidth="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view5"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view6"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view7"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_shapeAble_view8"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_cat_w" />
+            </LinearLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_shape_able_1"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="shapeable" />-->
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

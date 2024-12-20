@@ -1,5 +1,6 @@
 package org.ninetripods.mq.study.activity
 
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapShader
@@ -14,17 +15,21 @@ import android.graphics.Shader
 import android.graphics.drawable.Drawable
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.RelativeCornerSize
+import com.google.android.material.shape.RoundedCornerTreatment
+import com.google.android.material.shape.ShapeAppearanceModel
 import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.kotlin.ktx.clipToRoundView
 import org.ninetripods.mq.study.kotlin.ktx.dp2px
 import org.ninetripods.mq.study.kotlin.ktx.id
-import org.ninetripods.mq.study.widget.RoundedCornersTransformation
 import org.ninetripods.mq.study.widget.roundImage.RoundImgView
 
 /**
@@ -39,10 +44,18 @@ class RoundImageActivity : BaseActivity() {
     private val mIvGlide2: AppCompatImageView by id(R.id.iv_glide2)
     private val mIvClipPath: RoundImgView by id(R.id.iv_custom_img)
     private val mIvClipPath2: RoundImgView by id(R.id.iv_custom_img2)
-
     private val mIvBitmapShader: AppCompatImageView by id(R.id.iv_bitmap_shader)
     private val mIvBitmapDrawable: AppCompatImageView by id(R.id.iv_bitmap_drawable)
 
+    //ImageFilterView使用
+    private val mIvFilterView1: ImageFilterView by id(R.id.iv_filter_view1)
+    private val mIvFilterView2: ImageFilterView by id(R.id.iv_filter_view2)
+
+    //ShapeableImageView使用
+    private val mIvShapeAble5: ShapeableImageView by id(R.id.iv_shapeAble_view5)
+    private val mIvShapeAble6: ShapeableImageView by id(R.id.iv_shapeAble_view6)
+    private val mIvShapeAble7: ShapeableImageView by id(R.id.iv_shapeAble_view7)
+    private val mIvShapeAble8: ShapeableImageView by id(R.id.iv_shapeAble_view8)
 
 
     override fun setContentView() {
@@ -122,6 +135,59 @@ class RoundImageActivity : BaseActivity() {
             cornerRadius = 20.dp2px().toFloat()
         }
         mIvBitmapDrawable.setImageDrawable(roundBitmapDrawable)
+
+        /**
+         * 方式7：ImageFilterView
+         */
+        val bitmap5 = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
+        val bitmap6 = BitmapFactory.decodeResource(resources, R.drawable.icon_cat_w)
+        mIvFilterView1.run {
+            round = 10.dp2px().toFloat()
+            setImageBitmap(bitmap5)
+        }
+
+        mIvFilterView2.run {
+            roundPercent = 1f
+            setImageBitmap(bitmap6)
+        }
+
+        /**
+         * 方式8：ShapeableImageView
+         */
+        // 代码设置圆角 圆角矩形等效果
+        val shapeAppearanceModel5 = ShapeAppearanceModel.builder()
+            .setAllCorners(RoundedCornerTreatment())
+            .setAllCornerSizes(20f)
+            .build()
+        mIvShapeAble5.shapeAppearanceModel = shapeAppearanceModel5
+
+        val shapeAppearanceModel6 = ShapeAppearanceModel.builder()
+            .setAllCorners(RoundedCornerTreatment())
+            .setAllCornerSizes(RelativeCornerSize(0.5f))
+            .build()
+        mIvShapeAble6.shapeAppearanceModel = shapeAppearanceModel6
+
+        val shapeAppearanceModel7 = ShapeAppearanceModel.builder()
+            .setAllCorners(RoundedCornerTreatment())
+            .setAllCornerSizes(20f)
+            .build()
+        mIvShapeAble7.run {
+            shapeAppearanceModel = shapeAppearanceModel7
+            strokeWidth = 4.dp2px().toFloat()
+            strokeColor = ColorStateList.valueOf(Color.RED)
+            setPadding(2.dp2px(), 2.dp2px(), 2.dp2px(), 2.dp2px())
+        }
+
+        val shapeAppearanceModel8 = ShapeAppearanceModel.builder()
+            .setAllCorners(RoundedCornerTreatment())
+            .setAllCornerSizes(RelativeCornerSize(0.5f))
+            .build()
+        mIvShapeAble8.run {
+            shapeAppearanceModel = shapeAppearanceModel8
+            strokeWidth = 4.dp2px().toFloat()
+            strokeColor = ColorStateList.valueOf(Color.RED)
+            setPadding(2.dp2px(), 2.dp2px(), 2.dp2px(), 2.dp2px())
+        }
     }
 
 
@@ -187,7 +253,12 @@ class RoundImageActivity : BaseActivity() {
                         drawRoundRect(rect, radius.toFloat(), radius.toFloat(), strokePaint)
                     } else {
                         //绘制圆形
-                        drawCircle(outWidth / 2f, outHeight / 2f, (outWidth - border) / 2f, strokePaint)
+                        drawCircle(
+                            outWidth / 2f,
+                            outHeight / 2f,
+                            (outWidth - border) / 2f,
+                            strokePaint
+                        )
                     }
                 }
             }
