@@ -1,5 +1,23 @@
 <resources>
 
+    <style name="roundedCornerStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="circleCornerStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="roundedCornerStyle1">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSizeTopLeft">2%</item>
+        <item name="cornerSizeTopRight">2%</item>
+        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cornerSizeBottomRight">20%</item>
+    </style>
+
     <style name="AppComposeTheme" parent="Theme.AppCompat.Light.NoActionBar" />
 
     <style name="textAppearanceSpan" parent="@android:style/TextAppearance">

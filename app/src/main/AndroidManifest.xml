@@ -32,6 +32,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".anim.ConstraintLayoutActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".anim.CLDispatcherActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".activity.DanMuAnimActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
@@ -58,8 +66,6 @@
         <activity
             android:name=".activity.SharedPreferencesActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".anim.MotionLayoutActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".viewpager2.ViewPager2DispatchActivity"
