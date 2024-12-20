@@ -15,6 +15,7 @@ object KConsts {
     const val FRAGMENT_RECYCLERVIEW = 5 //RecyclerView
     const val FRAGMENT_MULTI_THREAD = 6 //多线程
     const val FRAGMENT_NESTED_SCROLLER = 7 //嵌套滑动
+    const val FRAGMENT_VIEW = 8 //View相关
 
     const val LIFE_TAG: String = "SERVICE"
     const val LIFE_APPLICATION_TAG: String = "Lifecycle_App_Study"

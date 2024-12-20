@@ -81,6 +81,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.my_navigation_5:
                         selectItem(KConsts.FRAGMENT_NESTED_SCROLLER);
                         break;
+                    case R.id.my_navigation_8:
+                        selectItem(KConsts.FRAGMENT_VIEW);
+                        break;
                 }
                 drawer_layout.closeDrawer(GravityCompat.START);
                 return true;
@@ -135,6 +138,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case KConsts.FRAGMENT_NESTED_SCROLLER:
                 currentFragment = new NestedScrollFragment();
+                break;
+            case KConsts.FRAGMENT_VIEW:
+                currentFragment = new ViewFragment();
                 break;
             case KConsts.FRAGMENT_HOME:
             default:

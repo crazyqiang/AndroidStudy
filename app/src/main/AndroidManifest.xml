@@ -32,41 +32,47 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.RoundImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ShapeAbleViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".anim.ConstraintLayoutActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".anim.CLDispatcherActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DanMuAnimActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.HorizontalSlideActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MatrixStudyActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".jetpack_compose.compose.ComposeExampleActivity"
             android:exported="false"
-            android:theme="@style/AppComposeTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppComposeTheme" />
         <activity
             android:name=".activity.ResultApiActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ResultApi2Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SharedPreferencesActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".viewpager2.ViewPager2DispatchActivity"
             android:exported="false"
