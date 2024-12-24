@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.mq.study.activity.RoundImageActivity
+import org.ninetripods.mq.study.activity.ShadowActivity
 import org.ninetripods.mq.study.activity.ShapeAbleViewActivity
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
@@ -31,6 +32,7 @@ class ViewFragment : BaseFragment() {
         val dataList = mutableListOf<ViewItem>().apply {
             add(ViewItem("图片设置圆角矩形、圆形等", RoundImageActivity::class.java))
             add(ViewItem("ShapeableImageView", ShapeAbleViewActivity::class.java))
+            add(ViewItem("设置阴影", ShadowActivity::class.java))
         }
 
         // 设置适配器

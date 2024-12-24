@@ -35,6 +35,9 @@
             android:name=".activity.RoundImageActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.ShadowActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.ShapeAbleViewActivity"
             android:screenOrientation="portrait" />
         <activity
