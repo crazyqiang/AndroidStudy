@@ -38,6 +38,12 @@
             android:name=".activity.ShadowActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.XFerModeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.XFerModeDemosActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.ShapeAbleViewActivity"
             android:screenOrientation="portrait" />
         <activity

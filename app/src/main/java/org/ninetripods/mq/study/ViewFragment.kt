@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.ninetripods.mq.study.activity.RoundImageActivity
 import org.ninetripods.mq.study.activity.ShadowActivity
 import org.ninetripods.mq.study.activity.ShapeAbleViewActivity
+import org.ninetripods.mq.study.activity.XFerModeActivity
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.NavitateUtil
@@ -33,6 +34,7 @@ class ViewFragment : BaseFragment() {
             add(ViewItem("图片设置圆角矩形、圆形等", RoundImageActivity::class.java))
             add(ViewItem("ShapeableImageView", ShapeAbleViewActivity::class.java))
             add(ViewItem("设置阴影", ShadowActivity::class.java))
+            add(ViewItem("PorterDuffXfermode", XFerModeActivity::class.java))
         }
 
         // 设置适配器
