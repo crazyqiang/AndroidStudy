@@ -8,6 +8,9 @@ import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.widget.xfermode.EraseView
 
+/**
+ * 刮刮卡效果
+ */
 class XFerModeGGKFragment : BaseFragment() {
 
     private val mEraseView: EraseView by id(R.id.erase_view)

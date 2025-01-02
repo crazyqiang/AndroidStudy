@@ -9,8 +9,10 @@ import org.ninetripods.mq.study.BaseActivity
 import org.ninetripods.mq.study.R
 import org.ninetripods.mq.study.activity.XFerModeActivity.Companion.FRAGMENT_X_BASIC
 import org.ninetripods.mq.study.activity.XFerModeActivity.Companion.FRAGMENT_X_GGK
+import org.ninetripods.mq.study.activity.XFerModeActivity.Companion.FRAGMENT_X_IMG
 import org.ninetripods.mq.study.fragment.XFerModeBasicFragment
 import org.ninetripods.mq.study.fragment.XFerModeGGKFragment
+import org.ninetripods.mq.study.fragment.XFerModeIMGFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 
 class XFerModeDemosActivity : BaseActivity() {
@@ -46,6 +48,7 @@ class XFerModeDemosActivity : BaseActivity() {
     private fun getFragment(position: Int): Fragment {
         return when (position) {
             FRAGMENT_X_BASIC -> XFerModeBasicFragment()
+            FRAGMENT_X_IMG -> XFerModeIMGFragment()
             FRAGMENT_X_GGK -> XFerModeGGKFragment()
             else -> XFerModeBasicFragment()
         }
