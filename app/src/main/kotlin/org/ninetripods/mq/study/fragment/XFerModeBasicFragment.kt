@@ -105,21 +105,22 @@ class XfermodeView @JvmOverloads constructor(
     }
 
     companion object {
+        //先绘制DST  后绘制SRC
         private val sModes = arrayOf<Xfermode>(
             PorterDuffXfermode(PorterDuff.Mode.CLEAR),  // 清空所有，要闭硬件加速，否则无效
-            PorterDuffXfermode(PorterDuff.Mode.SRC),  // 显示前者图像，不显示后者
-            PorterDuffXfermode(PorterDuff.Mode.DST),  // 显示后者图像，不显示前者
-            PorterDuffXfermode(PorterDuff.Mode.SRC_OVER),  // 后者叠于前者
-            PorterDuffXfermode(PorterDuff.Mode.DST_OVER),  // 前者叠于后者
-            PorterDuffXfermode(PorterDuff.Mode.SRC_IN),  // 显示相交的区域，但图像为后者
-            PorterDuffXfermode(PorterDuff.Mode.DST_IN),  // 显示相交的区域，但图像为前者
-            PorterDuffXfermode(PorterDuff.Mode.SRC_OUT),  // 显示后者不重叠的图像
-            PorterDuffXfermode(PorterDuff.Mode.DST_OUT),  // 显示前者不重叠的图像
-            PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP),  // 显示前者图像，与后者重合的图像
-            PorterDuffXfermode(PorterDuff.Mode.DST_ATOP),  // 显示后者图像，与前者重合的图像
+            PorterDuffXfermode(PorterDuff.Mode.SRC),  // 显示SRC图像，不显示DST
+            PorterDuffXfermode(PorterDuff.Mode.DST),  // 显示DST图像，不显示SRC
+            PorterDuffXfermode(PorterDuff.Mode.SRC_OVER),  // DST叠于SRC
+            PorterDuffXfermode(PorterDuff.Mode.DST_OVER),  // SRC叠于DST
+            PorterDuffXfermode(PorterDuff.Mode.SRC_IN),  // 显示相交的区域，但图像为DST
+            PorterDuffXfermode(PorterDuff.Mode.DST_IN),  // 显示相交的区域，但图像为SRC
+            PorterDuffXfermode(PorterDuff.Mode.SRC_OUT),  // 显示DST不重叠的图像
+            PorterDuffXfermode(PorterDuff.Mode.DST_OUT),  // 显示SRC不重叠的图像
+            PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP),  // 显示SRC图像，与DST重合的图像
+            PorterDuffXfermode(PorterDuff.Mode.DST_ATOP),  // 显示DST图像，与SRC重合的图像
             PorterDuffXfermode(PorterDuff.Mode.XOR),  // 显示持有不重合的图像
-            PorterDuffXfermode(PorterDuff.Mode.DARKEN),  // 后者叠于前者上，后者与前者重叠的部份透明。要闭硬件加速，否则无效
-            PorterDuffXfermode(PorterDuff.Mode.LIGHTEN),  // 前者叠于前者，前者与后者重叠部份透明。要闭硬件加速，否则无效
+            PorterDuffXfermode(PorterDuff.Mode.DARKEN),  // DST叠于SRC上，DST与SRC重叠的部份透明。要闭硬件加速，否则无效
+            PorterDuffXfermode(PorterDuff.Mode.LIGHTEN),  // SRC叠于SRC，SRC与DST重叠部份透明。要闭硬件加速，否则无效
             PorterDuffXfermode(PorterDuff.Mode.MULTIPLY),  // 显示重合的图像，且颜色会合并
             PorterDuffXfermode(PorterDuff.Mode.SCREEN) // 显示持有图像，重合的会变白
         )
