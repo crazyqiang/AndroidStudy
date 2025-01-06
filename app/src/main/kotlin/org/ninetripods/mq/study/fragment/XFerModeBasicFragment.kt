@@ -39,7 +39,7 @@ class XfermodeView @JvmOverloads constructor(
     internal var mTextSize = 25f
 
     init {
-        setLayerType(LAYER_TYPE_SOFTWARE, null)
+        setLayerType(LAYER_TYPE_SOFTWARE, null) //关闭硬件加速器
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             textSize = mTextSize
             textAlign = Paint.Align.CENTER
@@ -61,8 +61,9 @@ class XfermodeView @JvmOverloads constructor(
         //设置背景色
         //canvas.drawARGB(255, 139, 197, 186);
 
-        for (row in 0..3) {
+        for (row in 0..4) {
             for (column in 0..3) {
+                if (row == 4 && column in 2..3) return
                 canvas.save()
                 //保存当前图层
                 val layer = canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), null)
@@ -86,18 +87,19 @@ class XfermodeView @JvmOverloads constructor(
                 canvas.drawRect(2f, 2f, mItemSize - 2, mItemSize - 2, mPaint)
                 mPaint.style = Paint.Style.FILL
 
-                //画圆
+                //1、画圆(DST)
                 mPaint.color = mCircleColor
                 val left = mCircleRadius + 3
                 val top = mCircleRadius + 3
                 canvas.drawCircle(left, top, mCircleRadius, mPaint)
+                //2、设置xfermode
                 mPaint.xfermode = sModes[index]
-
-                //画矩形
+                //3、画矩形(SRC)
                 mPaint.color = mRectColor
                 val rectRight = mCircleRadius + mRectSize
                 val rectBottom = mCircleRadius + mRectSize
                 canvas.drawRect(left, top, rectRight, rectBottom, mPaint)
+                //4、清空xfermode
                 mPaint.xfermode = null
                 canvas.restoreToCount(layer)
             }
@@ -105,24 +107,37 @@ class XfermodeView @JvmOverloads constructor(
     }
 
     companion object {
-        //先绘制DST  后绘制SRC
+        /**
+         * NOTE：先绘制DST(下层)  后绘制SRC(上层)
+         */
         private val sModes = arrayOf<Xfermode>(
-            PorterDuffXfermode(PorterDuff.Mode.CLEAR),  // 清空所有，要闭硬件加速，否则无效
-            PorterDuffXfermode(PorterDuff.Mode.SRC),  // 显示SRC图像，不显示DST
-            PorterDuffXfermode(PorterDuff.Mode.DST),  // 显示DST图像，不显示SRC
-            PorterDuffXfermode(PorterDuff.Mode.SRC_OVER),  // DST叠于SRC
-            PorterDuffXfermode(PorterDuff.Mode.DST_OVER),  // SRC叠于DST
-            PorterDuffXfermode(PorterDuff.Mode.SRC_IN),  // 显示相交的区域，但图像为DST
-            PorterDuffXfermode(PorterDuff.Mode.DST_IN),  // 显示相交的区域，但图像为SRC
-            PorterDuffXfermode(PorterDuff.Mode.SRC_OUT),  // 显示DST不重叠的图像
-            PorterDuffXfermode(PorterDuff.Mode.DST_OUT),  // 显示SRC不重叠的图像
-            PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP),  // 显示SRC图像，与DST重合的图像
-            PorterDuffXfermode(PorterDuff.Mode.DST_ATOP),  // 显示DST图像，与SRC重合的图像
-            PorterDuffXfermode(PorterDuff.Mode.XOR),  // 显示持有不重合的图像
-            PorterDuffXfermode(PorterDuff.Mode.DARKEN),  // DST叠于SRC上，DST与SRC重叠的部份透明。要闭硬件加速，否则无效
-            PorterDuffXfermode(PorterDuff.Mode.LIGHTEN),  // SRC叠于SRC，SRC与DST重叠部份透明。要闭硬件加速，否则无效
-            PorterDuffXfermode(PorterDuff.Mode.MULTIPLY),  // 显示重合的图像，且颜色会合并
-            PorterDuffXfermode(PorterDuff.Mode.SCREEN) // 显示持有图像，重合的会变白
+            //Alpha合成效果：
+            /**
+             * IN：取指定层的交集部分，如：SRC_IN 表示取交集部分的SRC图像
+             * OUT：取指定层的非交集部分，如：DST_OUT 表示取非交集的DST图像部分
+             * OVER：取指定层在上层显示，如：SRC_OVER表示SRC图像覆盖DST图像
+             * XOR：取上下两层的非交集部分显示
+             * ATOP：取指定层的交集部分和非指定层的非交集部分，如： DST_ATOP表示取交集部分的DST + 非交集部分的SRC
+             */
+            PorterDuffXfermode(PorterDuff.Mode.CLEAR),  // DST区域被清空，不绘制任何东西，要闭硬件加速，否则无效
+            PorterDuffXfermode(PorterDuff.Mode.SRC),  // 显示SRC图像，完全覆盖DST图像
+            PorterDuffXfermode(PorterDuff.Mode.DST),  // 显示DST图像，不显示SRC图像。
+            PorterDuffXfermode(PorterDuff.Mode.SRC_OVER),  // SRC图像覆盖DST图像
+            PorterDuffXfermode(PorterDuff.Mode.DST_OVER),  // DST图像覆盖SRC图像
+            PorterDuffXfermode(PorterDuff.Mode.SRC_IN),  // 取交集部分的SRC图像
+            PorterDuffXfermode(PorterDuff.Mode.DST_IN),  // 取交集部分的DST图像
+            PorterDuffXfermode(PorterDuff.Mode.SRC_OUT),  // SRC图像的非交集区域显示，DST图像被移除
+            PorterDuffXfermode(PorterDuff.Mode.DST_OUT),  // DST图像的非交集区域显示，SRC图像被移除
+            PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP),  //取交集部分的SRC + 非交集部分的DST
+            PorterDuffXfermode(PorterDuff.Mode.DST_ATOP),  //取交集部分的DST + 非交集部分的SRC
+            PorterDuffXfermode(PorterDuff.Mode.XOR),  // 显示SRC图像与DST图像不重叠的部分，交集区域被移除。
+            //混合特效：注意要闭硬件加速，否则无效
+            PorterDuffXfermode(PorterDuff.Mode.DARKEN),  // 相交区域变暗。
+            PorterDuffXfermode(PorterDuff.Mode.LIGHTEN),  // 相交区域变亮。
+            PorterDuffXfermode(PorterDuff.Mode.MULTIPLY),  // 显示重合的图像，SRC图像和DST图像的颜色值相乘，颜色合并
+            PorterDuffXfermode(PorterDuff.Mode.SCREEN), // SRC图像和DST图像的颜色值叠加，得到更亮的颜色
+            PorterDuffXfermode(PorterDuff.Mode.ADD), //饱和度叠加，SRC图像和DST图像的颜色值相加，颜色变得更亮
+            PorterDuffXfermode(PorterDuff.Mode.OVERLAY), //结合 MULTIPLY 和 SCREEN 模式，根据背景的亮度进行混合
         )
 
         private val sLabels = arrayOf(
@@ -141,7 +156,9 @@ class XfermodeView @JvmOverloads constructor(
             "Darken",
             "Lighten",
             "Multiply",
-            "Screen"
+            "Screen",
+            "Add",
+            "Overlay"
         )
     }
 }
