@@ -37,7 +37,7 @@ class XFerModeIMGFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
         context?.let { recyclerView.createDivider(it, 5.dp2px().toFloat()) }
 
         // 准备数据

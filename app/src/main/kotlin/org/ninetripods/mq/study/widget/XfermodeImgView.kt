@@ -58,7 +58,7 @@ class XfermodeImgView @JvmOverloads constructor(
         super.onDraw(canvas)
         if (!::imageBitmap.isInitialized) return
 
-        canvas.drawRect(mRectF, mStrokePaint) //绘制边框
+        //canvas.drawRect(mRectF, mStrokePaint) //绘制边框
 
         if (mCurShape == SHAPE_ORIGIN) {
             //展示原图
