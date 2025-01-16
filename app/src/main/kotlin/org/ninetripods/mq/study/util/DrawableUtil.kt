@@ -13,23 +13,30 @@ import androidx.recyclerview.widget.RecyclerView
  * @param heightDp 分割线的高度（单位：dp）
  * @param color 分割线的颜色
  * @param drawable 传入的drawable
+ * @param orientation 布局方向[DividerItemDecoration.VERTICAL]、[DividerItemDecoration.HORIZONTAL]
  */
 fun RecyclerView.createDivider(
     context: Context,
-    heightDp: Float = 0.5f,
+    dividerDp: Float = 0.5f,
     color: Int = Color.TRANSPARENT,
-    drawable: Drawable? = null
+    drawable: Drawable? = null,
+    orientation: Int = DividerItemDecoration.VERTICAL,
 ) {
     //优先使用传入的drawable，没有传入的话创建动态分割线Drawable
     val shapeDrawable = drawable ?: ShapeDrawable(RectShape()).apply {
         // 设置分割线的高度
-        intrinsicHeight = (heightDp * context.resources.displayMetrics.density + 0.5f).toInt() // 将 dp 转换为 px
+        val dividerPx = (dividerDp * context.resources.displayMetrics.density + 0.5f).toInt()
+        if (orientation == DividerItemDecoration.HORIZONTAL) {
+            intrinsicWidth = dividerPx
+        } else {
+            intrinsicHeight = dividerPx
+        }
         // 设置分割线的颜色
         paint.color = color
     }
     //将动态分割线添加到 RecyclerView
-    val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-            setDrawable(shapeDrawable)
+    val dividerItemDecoration = DividerItemDecoration(context, orientation).apply {
+        setDrawable(shapeDrawable)
     }
     this.addItemDecoration(dividerItemDecoration)
 }
