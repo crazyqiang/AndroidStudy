@@ -1,6 +1,7 @@
 package org.ninetripods.mq.study.nestedScroll.util.view
 
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
@@ -10,11 +11,11 @@ import android.widget.LinearLayout
 import android.widget.OverScroller
 import androidx.core.view.NestedScrollingParent
 import androidx.core.view.NestedScrollingParentHelper
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.ninetripods.sydialoglib.manager.ScreenUtil
 import org.ninetripods.mq.study.R
-import java.util.*
+import org.ninetripods.mq.study.kotlin.ktx.log
 
 /**
  * Created by mq on 2018/4/6 下午5:22
@@ -27,9 +28,9 @@ class NestedParentView @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyleAttr), NestedScrollingParent {
 
     private val TOP_CHILD_FLING_THRESHOLD = 3
-    private var mTop: View? = null
-    private var mNav: View? = null
-    private var mViewPager: ViewPager? = null
+    private lateinit var mTop: View
+    private lateinit var mNav: View
+    private lateinit var mViewPager: ViewPager
     private var mTopViewHeight = 0
     private val mScroller: OverScroller
     private var mOffsetAnimator: ValueAnimator? = null
@@ -40,26 +41,27 @@ class NestedParentView @JvmOverloads constructor(
         mTop = findViewById(R.id.id_nested_layout_top)
         mNav = findViewById(R.id.id_nested_layout_indicator)
         val view = findViewById<View>(R.id.id_nested_layout_viewpager) as? ViewPager
-                ?: throw RuntimeException(
-                        "id_stickynavlayout_viewpager show used by ViewPager !")
+            ?: throw RuntimeException("id_stickynavlayout_viewpager show used by ViewPager !")
         mViewPager = view
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         //不限制顶部的高度
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        getChildAt(0).measure(widthMeasureSpec,
-                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED))
-        val params = mViewPager!!.layoutParams
-        params.height = measuredHeight - mNav!!.measuredHeight
-        setMeasuredDimension(measuredWidth,
-                mTop!!.measuredHeight + mNav!!.measuredHeight + mViewPager!!.measuredHeight)
+        getChildAt(0).measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED))
+        //设置vp的高度（屏幕高度 - 导航栏高度）
+        val params = mViewPager.layoutParams
+        params.height = measuredHeight - mNav.measuredHeight
+        val activity = context as Activity
+        log("height -> top:${mTop.measuredHeight}, nav:${mNav.measuredHeight}, pager:${mViewPager.measuredHeight}," +
+                "${ScreenUtil.getMetrics(activity).heightPixels},${ScreenUtil.getScreenHeight(activity)},${ScreenUtil.getStatusBarHeight(activity)},${ScreenUtil.getNavigationBarHeight(activity)}")
+        setMeasuredDimension(measuredWidth, mTop.measuredHeight + mNav.measuredHeight + mViewPager.measuredHeight)
     }
 
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        mTopViewHeight = mTop!!.measuredHeight
+        mTopViewHeight = mTop.measuredHeight
     }
 
     /**
@@ -91,14 +93,14 @@ class NestedParentView @JvmOverloads constructor(
      *
      * @param target   targetView
      * @param dx       x轴滑动
-     * @param dy       y轴滑动
+     * @param dy       y轴滑动 往上滑为正，往下滑为负
      * @param consumed 父View消费的x轴 y轴距离
      */
     override fun onNestedPreScroll(target: View, dx: Int, dy: Int, consumed: IntArray) {
-        Log.e(TAG, "onNestedPreScroll---" + dx + "," + dy + "," + Arrays.toString(consumed))
+        Log.e(TAG, "onNestedPreScroll---" + dx + "," + dy + "," + consumed.contentToString() + ", scrollY: " + scrollY)
         //往上滑并且滑动距离不超过topView的高度
         val hiddenTop = dy > 0 && scrollY < mTopViewHeight
-        val showTop = dy < 0 && scrollY >= 0 && !ViewCompat.canScrollVertically(target, -1)
+        val showTop = dy < 0 && scrollY >= 0 && !target.canScrollVertically( -1)
         if (hiddenTop || showTop) {
             scrollBy(0, dy)
             //完全消费y轴的滑动
@@ -173,9 +175,9 @@ class NestedParentView @JvmOverloads constructor(
     private fun computeDuration(velocityY: Float): Int {
         var velocityY = velocityY
         val distance: Int = if (velocityY > 0) {
-            Math.abs(mTop!!.height - scrollY)
+            Math.abs(mTop.height - scrollY)
         } else {
-            Math.abs(mTop!!.height - (mTop!!.height - scrollY))
+            Math.abs(mTop.height - (mTop.height - scrollY))
         }
         velocityY = Math.abs(velocityY)
         val duration: Int = if (velocityY > 0) {
@@ -189,27 +191,27 @@ class NestedParentView @JvmOverloads constructor(
 
     private fun animateScroll(velocityY: Float, duration: Int, consumed: Boolean) {
         val currentOffset = scrollY
-        val topHeight = mTop!!.height
+        val topHeight = mTop.height
         if (mOffsetAnimator == null) {
             mOffsetAnimator = ValueAnimator()
-            mOffsetAnimator!!.interpolator = LinearInterpolator()
-            mOffsetAnimator!!.addUpdateListener { animation ->
+            mOffsetAnimator?.interpolator = LinearInterpolator()
+            mOffsetAnimator?.addUpdateListener { animation ->
                 if (animation.animatedValue is Int) {
                     scrollTo(0, animation.animatedValue as Int)
                 }
             }
         } else {
-            mOffsetAnimator!!.cancel()
+            mOffsetAnimator?.cancel()
         }
-        mOffsetAnimator!!.duration = Math.min(duration, 600).toLong()
+        mOffsetAnimator?.duration = Math.min(duration, 600).toLong()
         if (velocityY >= 0) {
-            mOffsetAnimator!!.setIntValues(currentOffset, topHeight)
-            mOffsetAnimator!!.start()
+            mOffsetAnimator?.setIntValues(currentOffset, topHeight)
+            mOffsetAnimator?.start()
         } else {
             //如果子View没有消耗down事件 那么就让自身滑倒0位置
             if (!consumed) {
-                mOffsetAnimator!!.setIntValues(currentOffset, 0)
-                mOffsetAnimator!!.start()
+                mOffsetAnimator?.setIntValues(currentOffset, 0)
+                mOffsetAnimator?.start()
             }
         }
     }

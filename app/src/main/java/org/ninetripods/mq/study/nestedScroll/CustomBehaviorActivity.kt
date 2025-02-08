@@ -37,8 +37,7 @@ class CustomBehaviorActivity : BaseActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val textView = TextView(parent.context).apply {
-                layoutParams = ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, 200)
+                layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200)
                 gravity = Gravity.CENTER
             }
             return MyViewHolder(textView)

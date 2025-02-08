@@ -54,8 +54,6 @@ class ScrollListViewActivity : BaseActivity() {
         lv_listView = findViewById<View>(R.id.lv_listView) as CustomListView
         val adapter = ArrayAdapter(
             this, android.R.layout.simple_list_item_1, data)
-        lv_listView!!.adapter = adapter
+        lv_listView?.adapter = adapter
     }
-
-    override fun initEvents() {}
 }
