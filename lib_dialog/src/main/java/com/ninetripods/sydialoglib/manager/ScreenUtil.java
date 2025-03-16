@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
+import android.view.WindowManager;
 
 /**
  * Created by mq on 2018/10/26 下午6:05
@@ -58,6 +60,16 @@ public class ScreenUtil {
             return point.y - getStatusBarHeight(activity);
         }
         return 0;
+    }
+
+    public static DisplayMetrics getMetrics(Context context) {
+        try {
+            DisplayMetrics metrics = new DisplayMetrics();
+            ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
+            return metrics;
+        }catch (Exception e){
+            return context.getResources().getDisplayMetrics();
+        }
     }
 
     /**
