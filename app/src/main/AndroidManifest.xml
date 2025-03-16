@@ -44,6 +44,9 @@
             android:name=".activity.XFerModeDemosActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.CommonFragmentsActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.ShapeAbleViewActivity"
             android:screenOrientation="portrait" />
         <activity

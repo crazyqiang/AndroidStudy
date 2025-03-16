@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@+id/start"
+        motion:duration="1000"
+        motion:motionInterpolator="linear">
+        <KeyFrameSet>
+            <KeyPosition
+                motion:framePosition="25"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/iv_filter_bottom"
+                motion:percentY="0.32" />
+
+            <KeyPosition
+                motion:framePosition="50"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/iv_filter_bottom"
+                motion:percentY="0.25" />
+
+            <KeyPosition
+                motion:curveFit="spline"
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/iv_filter_bottom"
+                motion:percentY="0.32" />
+
+            <KeyAttribute
+                motion:framePosition="0"
+                motion:motionTarget="@+id/iv_filter_bottom">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#00000000" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                android:rotation="-360"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                motion:curveFit="spline"
+                motion:framePosition="50"
+                motion:motionTarget="@+id/iv_filter_bottom">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#FFB612" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                motion:framePosition="100"
+                motion:motionTarget="@+id/iv_filter_bottom">
+                <CustomAttribute
+                    motion:attributeName="colorFilter"
+                    motion:customColorValue="#00000000" />
+            </KeyAttribute>
+            <!--            <KeyAttribute-->
+            <!--                android:rotationY="180"-->
+            <!--                motion:framePosition="50"-->
+            <!--                motion:motionTarget="@+id/iv_filter_bottom" />-->
+
+            <!-- KeyCycle在动画过程中做周期性-->
+            <!--            <KeyCycle-->
+            <!--                android:translationY="50dp"-->
+            <!--                motion:framePosition="60"-->
+            <!--                motion:motionTarget="@+id/iv_filter_bottom"-->
+            <!--                motion:wavePeriod="1"-->
+            <!--                motion:waveShape="sin" />-->
+            <!--            <KeyCycle-->
+            <!--                android:translationY="30dp"-->
+            <!--                motion:framePosition="50"-->
+            <!--                motion:motionTarget="@id/iv_filter_bottom"-->
+            <!--                motion:wavePeriod="0.8"-->
+            <!--                motion:wavePhase="0.3"-->
+            <!--                motion:waveShape="bounce" />-->
+            <!--            <KeyTimeCycle-->
+            <!--                android:translationY="50dp"-->
+            <!--                motion:motionTarget="@+id/iv_filter_bottom"-->
+            <!--                motion:wavePeriod="0.5"-->
+            <!--                motion:waveShape="sin" />-->
+
+            <!--5、KeyTrigger：在动画特定位置执行事件函数-->
+            <!--            <KeyTrigger-->
+            <!--                motion:framePosition="10"-->
+            <!--                motion:motionTarget="@+id/tv_content"-->
+            <!--                motion:onPositiveCross="forwardText"-->
+            <!--                motion:triggerSlack="10"-->
+            <!--                />-->
+            <!--            <KeyTrigger-->
+            <!--                motion:framePosition="90"-->
+            <!--                motion:motionTarget="@+id/tv_content"-->
+            <!--                motion:onNegativeCross="retreatText" />-->
+        </KeyFrameSet>
+        <OnSwipe
+            motion:dragDirection="dragRight"
+            motion:touchAnchorId="@+id/iv_filter_bottom"
+            motion:touchAnchorSide="right" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/iv_filter_bottom"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="30dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="crossfade"
+                motion:customFloatValue="0" />
+        </Constraint>
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/iv_filter_bottom"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="30dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
+
+            <!--CustomAttribute 则提供灵活的属性定制，这里是为了在动画end时完全显示altSrc图片-->
+            <CustomAttribute
+                motion:attributeName="crossfade"
+                motion:customFloatValue="1" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

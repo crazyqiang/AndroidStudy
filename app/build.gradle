@@ -25,9 +25,9 @@ android {
         buildConfigField "boolean", "IS_SHOW_LOG", "false"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         vectorDrawables.useSupportLibrary = true
-        ndk {
-            abiFilters "armeabi-v7a"
-        }
+//        ndk {
+//            abiFilters "armeabi-v8a"
+//        }
     }
     sourceSets {
         main {
