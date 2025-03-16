@@ -62,5 +62,13 @@
         android:layout_marginTop="20dp"
         android:text="自定义Behavior" />
 
+    <TextView
+        android:id="@+id/tv_custom_fragment"
+        style="@style/btn_style_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="自定义Fragment" />
+
 
 </LinearLayout>

@@ -12,12 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.ninetripods.mq.study.activity.CommonFragmentsActivity;
+import org.ninetripods.mq.study.fragment.DemoFragment;
 import org.ninetripods.mq.study.nestedScroll.CoordinatorLayoutToolbarActivity;
 import org.ninetripods.mq.study.nestedScroll.CustomBehaviorActivity;
 import org.ninetripods.mq.study.nestedScroll.NestedScrollActivity;
 import org.ninetripods.mq.study.nestedScroll.tradition.ScrollListViewActivity;
 import org.ninetripods.mq.study.nestedScroll.tradition.ScrollViewPagerActivity;
 import org.ninetripods.mq.study.R;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +30,7 @@ public class NestedScrollFragment extends Fragment {
 
     private TextView tv_scroll_listView, tv_nested_child_parent;
     private TextView tv_scroll_viewpager, tv_coordinate_toolbar;
-    private TextView mTvBehavior;
+    private TextView mTvBehavior, mTvCustom;
 
 
     public NestedScrollFragment() {
@@ -47,10 +51,13 @@ public class NestedScrollFragment extends Fragment {
         tv_coordinate_toolbar = view.findViewById(R.id.tv_coordinate_toolbar);
         tv_nested_child_parent = view.findViewById(R.id.tv_nested_child_parent);
         mTvBehavior = view.findViewById(R.id.tv_custom_behavior);
+        mTvCustom = view.findViewById(R.id.tv_custom_fragment);
         tv_scroll_listView.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrollListViewActivity.class)));
         tv_scroll_viewpager.setOnClickListener(v -> startActivity(new Intent(getActivity(), ScrollViewPagerActivity.class)));
         tv_coordinate_toolbar.setOnClickListener(v -> startActivity(new Intent(getActivity(), CoordinatorLayoutToolbarActivity.class)));
         tv_nested_child_parent.setOnClickListener(v -> startActivity(new Intent(getActivity(), NestedScrollActivity.class)));
         mTvBehavior.setOnClickListener(v -> startActivity(new Intent(getActivity(), CustomBehaviorActivity.class)));
+        mTvCustom.setOnClickListener(v -> CommonFragmentsActivity.Companion.start(
+                Objects.requireNonNull(getActivity()), DemoFragment.class.getCanonicalName(), "DemoFragment"));
     }
 }
