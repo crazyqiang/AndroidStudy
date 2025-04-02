@@ -7,7 +7,7 @@ import android.view.KeyEvent
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.appcompat.widget.Toolbar
-import org.ninetripods.mq.study.util.WebViewPool.getCachedWebView
+import org.ninetripods.mq.study.util.WebViewPool
 import org.ninetripods.mq.study.util.webview.Html5Webview
 
 
@@ -31,15 +31,12 @@ class CommonWebviewActivity : BaseActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         initToolBar(toolbar, "AndroidStudy", true)
         mContainer = findViewById(R.id.rl_container)
-        mWebView = getCachedWebView(this)
+        mWebView = WebViewPool.getCachedWebView(this)
         if (mWebView == null) {
             //没有缓存
             mWebView = Html5Webview(this)
         }
-        val params = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
+        val params = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         params.addRule(RelativeLayout.BELOW, R.id.toolbar)
         mContainer?.addView(mWebView, params)
 

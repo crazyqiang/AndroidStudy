@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import org.ninetripods.mq.study.jetpack.JetpackAndKtFragment;
 import org.ninetripods.mq.study.jetpack.KConsts;
 import org.ninetripods.mq.study.jetpack_compose.JetpackComposeFragment;
+import org.ninetripods.mq.study.util.WebViewPool;
 import org.ninetripods.mq.study.util.fragment.HomeFragment;
 import org.ninetripods.mq.study.util.fragment.MultiThreadFragment;
 import org.ninetripods.mq.study.util.fragment.NestedScrollFragment;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
         //NOTE: 切换初始化展示的Fragment
-        selectItem(KConsts.FRAGMENT_HOME);
+        selectItem(KConsts.FRAGMENT_NESTED_SCROLLER);
     }
 
     @Override
@@ -164,5 +165,11 @@ public class MainActivity extends BaseActivity {
             toast("再点一次退出应用");
         }
         back_pressed = System.currentTimeMillis();
+    }
+
+    @Override
+    protected void onDestroy() {
+        WebViewPool.INSTANCE.releaseAll();
+        super.onDestroy();
     }
 }

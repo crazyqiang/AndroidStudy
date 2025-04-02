@@ -58,6 +58,6 @@ public class NestedScrollFragment extends Fragment {
         tv_nested_child_parent.setOnClickListener(v -> startActivity(new Intent(getActivity(), NestedScrollActivity.class)));
         mTvBehavior.setOnClickListener(v -> startActivity(new Intent(getActivity(), CustomBehaviorActivity.class)));
         mTvCustom.setOnClickListener(v -> CommonFragmentsActivity.Companion.start(
-                Objects.requireNonNull(getActivity()), DemoFragment.class.getCanonicalName(), "DemoFragment"));
+                requireActivity(), DemoFragment.class.getCanonicalName(), "DemoFragment"));
     }
 }
