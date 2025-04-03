@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.ninetripods.mq.study.activity.CommonFragmentsActivity
 import org.ninetripods.mq.study.activity.RoundImageActivity
 import org.ninetripods.mq.study.activity.ShadowActivity
 import org.ninetripods.mq.study.activity.ShapeAbleViewActivity
 import org.ninetripods.mq.study.activity.XFerModeActivity
+import org.ninetripods.mq.study.fragment.MutableContextWrapperFragment
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.NavitateUtil
@@ -19,7 +21,11 @@ import org.ninetripods.mq.study.util.NavitateUtil
  * View相关
  */
 class ViewFragment : BaseFragment() {
-    data class ViewItem(val titleName: String, val clz: Class<*>)
+    companion object {
+        const val TYPE_DEFAULT = 0 //默认
+        const val TYPE_CONTEXT_WRAPPER = 1 //MutableContextWrapper示例
+    }
+    data class ViewItem(val titleName: String, val clz: Class<*>, var type: Int = TYPE_DEFAULT)
 
     private val recyclerView: RecyclerView by id(R.id.rv_view)
 
@@ -35,11 +41,19 @@ class ViewFragment : BaseFragment() {
             add(ViewItem("ShapeableImageView", ShapeAbleViewActivity::class.java))
             add(ViewItem("设置阴影", ShadowActivity::class.java))
             add(ViewItem("PorterDuffXfermode", XFerModeActivity::class.java))
+            add(ViewItem("MutableContextWrapper示例", CommonFragmentsActivity::class.java, TYPE_CONTEXT_WRAPPER))
         }
 
         // 设置适配器
         val adapter = MyAdapter(dataList) { _, item ->
-            NavitateUtil.startActivity(activity, item.clz)
+            if (item.type == TYPE_CONTEXT_WRAPPER) {
+                //MutableContextWrapper示例
+                MutableContextWrapperFragment::class.java.canonicalName?.let {
+                    CommonFragmentsActivity.start(requireActivity(), it, "MutableContextWrapper示例")
+                }
+            } else {
+                NavitateUtil.startActivity(activity, item.clz)
+            }
         }
         recyclerView.adapter = adapter
     }
