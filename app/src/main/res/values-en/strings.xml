@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_text_1">I am a button1</string>
+    <string name="button_text_2">I am a button2</string>
+    <string name="button_text_3">I am a button3</string>
+    <string name="button_text_4">I am a button4</string>
+</resources>

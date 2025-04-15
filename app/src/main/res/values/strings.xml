@@ -100,5 +100,8 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_compose_study">ComposeStudyActivity</string>
-
+    <string name="button_text_1">我是一个按钮1</string>
+    <string name="button_text_2">我是一个按钮2</string>
+    <string name="button_text_3">我是一个按钮3</string>
+    <string name="button_text_4">我是一个按钮4</string>
 </resources>

@@ -5,7 +5,6 @@
     android:background="@color/yellow_100"
     android:gravity="center"
     android:layout_gravity="center"
-    android:textSize="14sp"
-    android:text="我是一个按钮"/>
+    android:textSize="14sp"/>
 
 
