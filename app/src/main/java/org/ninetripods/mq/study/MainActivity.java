@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0);
         drawerToggle.syncState();
         //NOTE: 切换初始化展示的Fragment
-        selectItem(KConsts.FRAGMENT_NESTED_SCROLLER);
+        selectItem(KConsts.FRAGMENT_VIEW);
     }
 
     @Override
