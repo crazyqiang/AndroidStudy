@@ -28,7 +28,7 @@ class GestureImageView @JvmOverloads constructor(
      * 5. onScale(...)
      * 6. onScaleEnd(detector)     //3、缩放结束（手指离开）时调用
      */
-    private val mScaleGestureDetector = object : ScaleGestureDetector.OnScaleGestureListener {
+    private val mScaleGestureListener = object : ScaleGestureDetector.OnScaleGestureListener {
 
         /**
          * 当两个手指在屏幕上移动时持续调用。在这个方法中可以通过detector.getScaleFactor()获取缩放因子，更新视图的缩放逻辑
@@ -65,7 +65,7 @@ class GestureImageView @JvmOverloads constructor(
         }
     }
 
-    private val mGestureDetector = object : GestureDetector.SimpleOnGestureListener() {
+    private val mGestureDetectorListener = object : GestureDetector.SimpleOnGestureListener() {
 
         //-----------------GestureDetector.OnGestureListener start-----------------
         override fun onDown(e: MotionEvent?): Boolean {
@@ -176,7 +176,7 @@ class GestureImageView @JvmOverloads constructor(
         //-----------------GestureDetector.OnContextClickListener end-----------------
     }
 
-    private val mRotationGestureDetector = object : RotationGestureDetector.OnRotationGestureListener {
+    private val mRotationGestureListener = object : RotationGestureDetector.OnRotationGestureListener {
         override fun onRotation(rotationDetector: RotationGestureDetector, angle: Float) {
             currentRotation += angle
             val px = width / 2f
@@ -186,7 +186,6 @@ class GestureImageView @JvmOverloads constructor(
         }
     }
 
-    private val matrixValues = FloatArray(9)
     private val matrix = Matrix()
     private var currentScale = 1f //当前缩放了多少倍
     private var currentRotation = 0f
@@ -197,10 +196,9 @@ class GestureImageView @JvmOverloads constructor(
 
     init {
         scaleType = ScaleType.MATRIX
-        imageMatrix = matrix
-        scaleGestureDetector = ScaleGestureDetector(context, mScaleGestureDetector)
-        gestureDetector = GestureDetector(context, mGestureDetector)
-        rotationGestureDetector = RotationGestureDetector(mRotationGestureDetector)
+        scaleGestureDetector = ScaleGestureDetector(context, mScaleGestureListener)
+        gestureDetector = GestureDetector(context, mGestureDetectorListener)
+        rotationGestureDetector = RotationGestureDetector(mRotationGestureListener)
         setImgToCenter(this)
     }
 
