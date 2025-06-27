@@ -41,7 +41,7 @@ object Deps {
     //Jetpack相关
     const val jetpack_livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$jetpack_version"
     const val jetpack_viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$jetpack_version"
-    const val jetpack_activity_ktx = "androidx.activity:activity-ktx:$activity_ktx_version"
+    const val jetpack_activity_ktx = "androidx.activity:activity-ktx:$activity_ktx_version" //https://developer.android.com/jetpack/androidx/releases/activity?hl=zh-cn
     const val jetpack_fragment_ktx = "androidx.fragment:fragment-ktx:$fragment_ktx_version"
 
     //将 Kotlin 协程与生命周期感知型组件一起使用: https://developer.android.com/topic/libraries/architecture/coroutines
