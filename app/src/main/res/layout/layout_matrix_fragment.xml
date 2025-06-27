@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!--手势相关处理-->
+    <org.ninetripods.mq.study.widget.matrix.GestureImageView
+        android:id="@+id/iv_gesture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/black"
+        android:scaleType="matrix"
+        android:src="@drawable/icon_flower"
+        android:visibility="visible" />
+
+</RelativeLayout>
+
+
+

@@ -12,7 +12,9 @@ import org.ninetripods.mq.study.activity.RoundImageActivity
 import org.ninetripods.mq.study.activity.ShadowActivity
 import org.ninetripods.mq.study.activity.ShapeAbleViewActivity
 import org.ninetripods.mq.study.activity.XFerModeActivity
+import org.ninetripods.mq.study.fragment.ColorMatrixFragment
 import org.ninetripods.mq.study.fragment.Inspector3DModeFragment
+import org.ninetripods.mq.study.fragment.MatrixFragment
 import org.ninetripods.mq.study.fragment.MutableContextWrapperFragment
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
@@ -26,6 +28,8 @@ class ViewFragment : BaseFragment() {
         const val TYPE_DEFAULT = 0 //默认
         const val TYPE_CONTEXT_WRAPPER = 1 //MutableContextWrapper示例
         const val TYPE_INSPECTOR_3D = 2 //Inspector 3DMode
+        const val TYPE_MATRIX = 3 //Matrix
+        const val TYPE_COLOR_MATRIX = 4 //ColorMatrix
     }
     data class ViewItem(val titleName: String, val clz: Class<*>, var type: Int = TYPE_DEFAULT)
 
@@ -45,11 +49,23 @@ class ViewFragment : BaseFragment() {
             add(ViewItem("PorterDuffXfermode", XFerModeActivity::class.java))
             add(ViewItem("MutableContextWrapper示例", CommonFragmentsActivity::class.java, TYPE_CONTEXT_WRAPPER))
             add(ViewItem("Inspector 3DMode", CommonFragmentsActivity::class.java, TYPE_INSPECTOR_3D))
+            add(ViewItem("Matrix示例", CommonFragmentsActivity::class.java, TYPE_MATRIX))
+            add(ViewItem("ColorMatrix示例", CommonFragmentsActivity::class.java, TYPE_COLOR_MATRIX))
         }
 
         // 设置适配器
         val adapter = MyAdapter(dataList) { _, item ->
             when (item.type) {
+                TYPE_COLOR_MATRIX -> {
+                    ColorMatrixFragment::class.java.canonicalName?.let {
+                        CommonFragmentsActivity.start(requireActivity(), it, "ColorMatrix示例")
+                    }
+                }
+                TYPE_MATRIX -> {
+                    MatrixFragment::class.java.canonicalName?.let {
+                        CommonFragmentsActivity.start(requireActivity(), it, "Matrix 示例")
+                    }
+                }
                 TYPE_INSPECTOR_3D -> {
                     Inspector3DModeFragment::class.java.canonicalName?.let {
                         CommonFragmentsActivity.start(requireActivity(), it, "Inspector 3DMode")
