@@ -1,0 +1,26 @@
+name: CI Build and Test  # Action 的名称
+
+on:
+  push:
+    branches: [ main ]   # 触发条件：推送代码到 main 分支时运行
+  pull_request:
+    branches: [ main ]   # 触发条件：向 main 分支提 PR 时运行
+
+jobs:
+  build:                 # 任务名称（自定义）
+    runs-on: ubuntu-latest  # 运行环境（可选：ubuntu-latest, windows-latest, macos-latest）
+
+    steps:
+      - name: Checkout code  # 步骤1：拉取代码
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js  # 步骤2：安装 Node.js（示例）
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies  # 步骤3：安装依赖
+        run: npm install
+
+      - name: Run tests            # 步骤4：运行测试
+        run: npm test
