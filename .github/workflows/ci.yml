@@ -2,7 +2,7 @@ name: CI Build and Test  # Action 的名称
 
 on:
   push:
-    branches: [ main ]   # 触发条件：推送代码到 main 分支时运行
+    branches: [ CHRIS-1-ABC ]   # 触发条件：推送代码到 main 分支时运行
   pull_request:
     branches: [ main ]   # 触发条件：向 main 分支提 PR 时运行
 
