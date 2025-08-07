@@ -43,3 +43,4 @@
 
 # 自定义View、ViewGroup：
  ![image](https://github.com/crazyqiang/AndroidStudy/blob/master/pic/initpintu.jpg) 
+ //333
