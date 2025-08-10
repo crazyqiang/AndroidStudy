@@ -1,6 +1,9 @@
 buildscript {
     repositories {
         maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
             url = uri("$rootDir/repo")
         }
         google()
@@ -25,6 +28,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
         google()
         mavenCentral()
         jcenter()
