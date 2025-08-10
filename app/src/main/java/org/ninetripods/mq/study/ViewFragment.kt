@@ -17,6 +17,7 @@ import org.ninetripods.mq.study.fragment.Inspector3DModeFragment
 import org.ninetripods.mq.study.fragment.MatrixFragment
 import org.ninetripods.mq.study.fragment.MutableContextWrapperFragment
 import org.ninetripods.mq.study.fragment.SetPolyToPolyFragment
+import org.ninetripods.mq.study.fragment.SetPolyToPolyFragment2
 import org.ninetripods.mq.study.kotlin.base.BaseFragment
 import org.ninetripods.mq.study.kotlin.ktx.id
 import org.ninetripods.mq.study.util.NavitateUtil
@@ -32,6 +33,7 @@ class ViewFragment : BaseFragment() {
         const val TYPE_MATRIX = 3 //Matrix
         const val TYPE_COLOR_MATRIX = 4 //ColorMatrix
         const val TYPE_SET_POLY_TO_POLY = 5 //SetPolyToPoly
+        const val TYPE_SET_POLY_TO_POLY2 = 6 //SetPolyToPoly
     }
     data class ViewItem(val titleName: String, val clz: Class<*>, var type: Int = TYPE_DEFAULT)
 
@@ -54,11 +56,17 @@ class ViewFragment : BaseFragment() {
             add(ViewItem("Matrix示例", CommonFragmentsActivity::class.java, TYPE_MATRIX))
             add(ViewItem("ColorMatrix示例", CommonFragmentsActivity::class.java, TYPE_COLOR_MATRIX))
             add(ViewItem("SetPolyToPoly示例", CommonFragmentsActivity::class.java, TYPE_SET_POLY_TO_POLY))
+            add(ViewItem("SetPolyToPoly示例2", CommonFragmentsActivity::class.java, TYPE_SET_POLY_TO_POLY2))
         }
 
         // 设置适配器
         val adapter = MyAdapter(dataList) { _, item ->
             when (item.type) {
+                TYPE_SET_POLY_TO_POLY2 -> {
+                    SetPolyToPolyFragment2::class.java.canonicalName?.let {
+                        CommonFragmentsActivity.start(requireActivity(), it, "SetPolyToPoly示例2")
+                    }
+                }
                 TYPE_SET_POLY_TO_POLY -> {
                     SetPolyToPolyFragment::class.java.canonicalName?.let {
                         CommonFragmentsActivity.start(requireActivity(), it, "SetPolyToPoly示例")
